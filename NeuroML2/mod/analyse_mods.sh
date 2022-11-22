@@ -15,7 +15,6 @@ parallel_run() {
         "pynml-modchananalysis Ca_HVA -stepV 5 -temperature 6.3"\
         "pynml-modchananalysis Ca_LVA -stepV 5 -temperature 6.3"\
         "pynml-modchananalysis Ih -stepV 5 -temperature 6.3"\
-        "pynml-modchananalysis SK -stepV 5 -temperature 6.3"\
         "pynml-modchananalysis Im -stepV 5 -temperature 6.3"
 
 }
@@ -30,7 +29,6 @@ serial_run () {
     pynml-modchananalysis Ca_HVA -stepV 5 -temperature 6.3
     pynml-modchananalysis Ca_LVA -stepV 5 -temperature 6.3
     pynml-modchananalysis Ih -stepV 5 -temperature 6.3
-    pynml-modchananalysis SK -stepV 5 -temperature 6.3
     pynml-modchananalysis Im -stepV 5 -temperature 6.3
 }
 
