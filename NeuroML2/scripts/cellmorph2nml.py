@@ -1,22 +1,30 @@
 #!/usr/bin/env python3
 """
-Enter one line description here.
+Convert cell morphology to NeuroML.
 
-File:
+We only export morphologies here. We add the biophysics manually.
+
+File: NeuroML2/scripts/cell2nml.py
 
 Copyright 2022 Ankur Sinha
 Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
 """
 
 import os
+import sys
 
 import pyneuroml
 from pyneuroml.neuron import export_to_neuroml2
+from neuron import h
 
-cells = ["HL23PV", "HL23PYR", "HL23SST", "HL23VIP"]
 
+def main(acell):
+    """Main runner method.
 
-for acell in cells:
+    :param acell: name of cell
+    :returns: None
+
+    """
     loader_hoc_file = f"{acell}.hoc"
     loader_hoc_file_txt = f"""
     /*load_file("nrngui.hoc")*/
@@ -41,3 +49,10 @@ for acell in cells:
                        includeBiophysicalProperties=False, validate=False)
 
     os.remove(loader_hoc_file)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("This script only accepts one argument.")
+        sys.exit(1)
+    main(sys.argv[1])
