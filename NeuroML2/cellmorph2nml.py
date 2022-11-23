@@ -35,17 +35,17 @@ def main(acell):
     objref newcell
 
     strdef morphology_file
-    morphology_file = "../../L23Net/morphologies/{acell}.swc"
+    morphology_file = "../L23Net/morphologies/{acell}.swc"
 
-    load_file("../../L23Net/models/biophys_{acell}.hoc")
-    load_file("../../L23Net/models/NeuronTemplate.hoc")
+    load_file("../L23Net/models/biophys_{acell}.hoc")
+    load_file("../L23Net/models/NeuronTemplate.hoc")
     newcell = new NeuronTemplate(morphology_file)
     """
 
     with open(loader_hoc_file, 'w') as f:
         print(loader_hoc_file_txt, file=f)
 
-    export_to_neuroml2(loader_hoc_file, f"{acell}.cell.nml",
+    export_to_neuroml2(loader_hoc_file, f"{acell}.morph.cell.nml",
                        includeBiophysicalProperties=False, validate=False)
 
     os.remove(loader_hoc_file)
