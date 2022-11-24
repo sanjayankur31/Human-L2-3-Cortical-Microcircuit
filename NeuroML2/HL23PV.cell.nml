@@ -248,6 +248,15 @@
                 <parent segment="11"/>
                 <distal x="621.147" y="541.242" z="30.4746" diameter="0.5354"/>
             </segment>
+            <segment id="4483" name="Seg0_axon_0">
+                <parent segment="2"/>
+                <proximal x="621.806" y="557.609" z="30.8661" diameter="0.230699"/>
+                <distal x="636.806" y="557.609" z="30.8661" diameter="0.230699"/>
+            </segment>
+            <segment id="4484" name="Seg1_axon_0">
+                <parent segment="4483"/>
+                <distal x="651.806" y="557.609" z="30.8661" diameter="0.230699"/>
+            </segment>
             <segment id="3817" name="Seg0_dend_44">
                 <parent segment="2681"/>
                 <proximal x="622.508" y="563.557" z="39.5164" diameter="0.9266"/>
@@ -2131,6 +2140,15 @@
             <segment id="19" name="Seg6_dend_1">
                 <parent segment="18"/>
                 <distal x="619.494" y="534.01" z="29.972" diameter="0.4942"/>
+            </segment>
+            <segment id="4485" name="Seg0_axon_1">
+                <parent segment="4484"/>
+                <proximal x="651.806" y="557.609" z="30.8661" diameter="0.2288"/>
+                <distal x="666.806" y="557.609" z="30.8661" diameter="0.2288"/>
+            </segment>
+            <segment id="4486" name="Seg1_axon_1">
+                <parent segment="4485"/>
+                <distal x="681.806" y="557.609" z="30.8661" diameter="0.2288"/>
             </segment>
             <segment id="4096" name="Seg0_dend_46">
                 <parent segment="3825"/>
@@ -18090,6 +18108,8 @@
                 <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
              neuroLexId = sao864921383 form a non-overlapping set of all of the segments.
              These segmentGroups correspond to the 'cables' of NeuroML v1.8.1, and map to/from NEURON sections.</notes>
+                <member segment="4483"/>
+                <member segment="4484"/>
             </segmentGroup>
             <segmentGroup id="dend_44" neuroLexId="sao864921383">
                 <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
@@ -18625,6 +18645,8 @@
                 <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
              neuroLexId = sao864921383 form a non-overlapping set of all of the segments.
              These segmentGroups correspond to the 'cables' of NeuroML v1.8.1, and map to/from NEURON sections.</notes>
+                <member segment="4485"/>
+                <member segment="4486"/>
             </segmentGroup>
             <segmentGroup id="dend_46" neuroLexId="sao864921383">
                 <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
@@ -22765,14 +22787,6 @@
                 <member segment="3326"/>
             </segmentGroup>
             <segmentGroup id="all">
-                <include segmentGroup="dend_19"/>
-                <include segmentGroup="dend_11"/>
-                <include segmentGroup="dend_31"/>
-                <include segmentGroup="dend_14"/>
-                <include segmentGroup="dend_6"/>
-                <include segmentGroup="dend_15"/>
-                <include segmentGroup="dend_10"/>
-                <include segmentGroup="dend_30"/>
                 <include segmentGroup="dend_7"/>
                 <include segmentGroup="dend_5"/>
                 <include segmentGroup="dend_13"/>
@@ -22781,12 +22795,11 @@
                 <include segmentGroup="dend_3"/>
                 <include segmentGroup="dend_0"/>
                 <include segmentGroup="dend_8"/>
-                <include segmentGroup="dend_34"/>
                 <include segmentGroup="dend_42"/>
                 <include segmentGroup="dend_25"/>
                 <include segmentGroup="dend_2"/>
-                <include segmentGroup="axon_0"/>
                 <include segmentGroup="dend_4"/>
+                <include segmentGroup="axon_0"/>
                 <include segmentGroup="dend_38"/>
                 <include segmentGroup="dend_21"/>
                 <include segmentGroup="dend_48"/>
@@ -22799,24 +22812,33 @@
                 <include segmentGroup="axon_1"/>
                 <include segmentGroup="dend_29"/>
                 <include segmentGroup="dend_18"/>
+                <include segmentGroup="dend_10"/>
                 <include segmentGroup="dend_41"/>
                 <include segmentGroup="dend_46"/>
                 <include segmentGroup="dend_17"/>
+                <include segmentGroup="dend_32"/>
                 <include segmentGroup="dend_28"/>
                 <include segmentGroup="dend_40"/>
-                <include segmentGroup="dend_32"/>
-                <include segmentGroup="dend_45"/>
                 <include segmentGroup="soma_0"/>
+                <include segmentGroup="dend_45"/>
                 <include segmentGroup="dend_16"/>
                 <include segmentGroup="dend_24"/>
                 <include segmentGroup="dend_36"/>
-                <include segmentGroup="dend_27"/>
                 <include segmentGroup="dend_39"/>
+                <include segmentGroup="dend_27"/>
                 <include segmentGroup="dend_12"/>
                 <include segmentGroup="dend_23"/>
                 <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_34"/>
                 <include segmentGroup="dend_22"/>
                 <include segmentGroup="dend_9"/>
+                <include segmentGroup="dend_19"/>
+                <include segmentGroup="dend_11"/>
+                <include segmentGroup="dend_31"/>
+                <include segmentGroup="dend_14"/>
+                <include segmentGroup="dend_6"/>
+                <include segmentGroup="dend_15"/>
+                <include segmentGroup="dend_30"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">
@@ -22844,18 +22866,18 @@
                 <channelDensity id="Kv3_1_axonal" ionChannel="Kv3_1" condDensity="2.988867483754507 S_per_cm2" erev="-85 mV" segmentGroup="axon_1" ion="K"/>
                 <channelDensity id="Im_axonal" ionChannel="Im" condDensity="0.029587905136596156 S_per_cm2" erev="-85 mV" segmentGroup="axon_1" ion="K"/>
                 <channelDensity id="SK_axonal" ionChannel="SK" condDensity="0.5121938998281017 S_per_cm2" erev="-85 mV" segmentGroup="axon_1" ion="K"/>
-                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.00017953651378188165 S_per_cm2" segmentGroup="soma_0" ion="Ca"/>
-                <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.09250008555398015 S_per_cm2" segmentGroup="soma_0" ion="Ca"/>
-                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_0" ion="Ca"/>
-                <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_0" ion="Ca"/>
-                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_1" ion="Ca"/>
-                <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_1" ion="Ca"/>
+                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.00017953651378188165 S_per_cm2" segmentGroup="soma_0" ion="ca"/>
+                <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.09250008555398015 S_per_cm2" segmentGroup="soma_0" ion="ca"/>
+                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_0" ion="ca"/>
+                <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_0" ion="ca"/>
+                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_1" ion="ca"/>
+                <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_1" ion="ca"/>
                 <specificCapacitance value="2 uF_per_cm2"/>
             </membraneProperties>
             <intracellularProperties>
-                <species id="Ca_dynamics" concentrationModel="CaDynamics_E2_NML2_PV_somatic" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_0"/>
-                <species id="Ca_dynamics" concentrationModel="CaDynamics_E2_NML2_PV_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_0"/>
-                <species id="Ca_dynamics" concentrationModel="CaDynamics_E2_NML2_PV_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_1"/>
+                <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_somatic" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_0"/>
+                <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_0"/>
+                <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_1"/>
                 <resistivity value="0.1 kohm_cm"/>
             </intracellularProperties>
         </biophysicalProperties>

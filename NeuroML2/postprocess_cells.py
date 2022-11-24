@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Add biophysics to cells.
-We add the different biophysics manually to ensure correctness.
+Post process and add biophysics to cells.
 
-File: addcellbiophysics.py
+We make any updates to the morphology, and add biophysics.
+
+File: NeuroML2/postprocess_cells.py
 
 Copyright 2022 Ankur Sinha
 Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
@@ -42,8 +43,8 @@ def load_and_clean_cell(cellname: str):
 
 
 # "HL23PV" "HL23PYR" "HL23SST" "HL23VIP"
-def add_HL23PV_biophysics():
-    """Add biophysics to the HL23PV cell."""
+def postprocess_HL23PV():
+    """Post process HL23PV and add biophysics"""
     cellname = "HL23PV"
     celldoc = load_and_clean_cell(cellname)
     cell = celldoc.cells[0]  # type: neuroml.Cell
@@ -55,7 +56,7 @@ def add_HL23PV_biophysics():
         print(cell.get_all_segments_in_group(sg.id))
         print()
     """
-
+    # biophysics
     # include calcium dynamics component
     celldoc.add(neuroml.IncludeType(href="CaDynamics_E2_NML2.nml"), validate=False)
 
@@ -150,7 +151,7 @@ def add_HL23PV_biophysics():
             ion_channel="Ca_HVA",
             cond_density="0.00017953651378188165 S_per_cm2",
             segment_groups=sgid,
-            ion="Ca",
+            ion="ca",
             ion_chan_def_file="Ca_HVA.channel.nml")
         cell.add_channel_density_v(
             "ChannelDensityNernst",
@@ -159,12 +160,12 @@ def add_HL23PV_biophysics():
             ion_channel="Ca_LVA",
             cond_density="0.09250008555398015 S_per_cm2",
             segment_groups=sgid,
-            ion="Ca",
+            ion="ca",
             ion_chan_def_file="Ca_LVA.channel.nml")
         # internal and external concentrations are set to defaults that NEURON
         # starts with
         cell.add_intracellular_property("Species", validate=False,
-                                        id="Ca_dynamics",
+                                        id="ca",
                                         concentration_model="CaDynamics_E2_NML2_PV_somatic",
                                         ion="ca",
                                         initial_concentration="5.0E-11 mol_per_cm3",
@@ -241,7 +242,7 @@ def add_HL23PV_biophysics():
             ion_channel="Ca_HVA",
             cond_density="0.002961469262723619 S_per_cm2",
             segment_groups=sgid,
-            ion="Ca",
+            ion="ca",
             ion_chan_def_file="Ca_HVA.channel.nml")
         cell.add_channel_density_v(
             "ChannelDensityNernst",
@@ -250,12 +251,12 @@ def add_HL23PV_biophysics():
             ion_channel="Ca_LVA",
             cond_density="5.9457835817342756e-05 S_per_cm2",
             segment_groups=sgid,
-            ion="Ca",
+            ion="ca",
             ion_chan_def_file="Ca_LVA.channel.nml")
         # internal and external concentrations are set to defaults that NEURON
         # starts with
         cell.add_intracellular_property("Species", validate=False,
-                                        id="Ca_dynamics",
+                                        id="ca",
                                         concentration_model="CaDynamics_E2_NML2_PV_axonal",
                                         ion="ca",
                                         initial_concentration="5.0E-11 mol_per_cm3",
@@ -270,4 +271,4 @@ def add_HL23PV_biophysics():
 
 
 if __name__ == "__main__":
-    add_HL23PV_biophysics()
+    postprocess_HL23PV()

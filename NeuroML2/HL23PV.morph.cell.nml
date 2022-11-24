@@ -249,7 +249,16 @@
         <parent segment="11"/>
         <distal x="621.147" y="541.242" z="30.4746" diameter="0.5354"/>
       </segment>
-<!-- Section: NeuronTemplate[0].axon[0] (segmentGroup: axon_0) which has 0 3D points, so -1 segment(s)-->
+<!-- Section: NeuronTemplate[0].axon[0] (segmentGroup: axon_0) which has 3 3D points, so 2 segment(s)-->
+      <segment id="4483" name = "Seg0_axon_0">
+        <parent segment="2"/>
+        <proximal x="621.806" y="557.609" z="30.8661" diameter="0.230699"/>
+        <distal x="636.806" y="557.609" z="30.8661" diameter="0.230699"/>
+      </segment>
+      <segment id="4484" name = "Seg1_axon_0">
+        <parent segment="4483"/>
+        <distal x="651.806" y="557.609" z="30.8661" diameter="0.230699"/>
+      </segment>
 <!-- Section: NeuronTemplate[0].dend[44] (segmentGroup: dend_44) which has 10 3D points, so 9 segment(s)-->
       <segment id="3817" name = "Seg0_dend_44">
         <parent segment="2681"/>
@@ -2146,7 +2155,16 @@
         <parent segment="18"/>
         <distal x="619.494" y="534.01" z="29.972" diameter="0.4942"/>
       </segment>
-<!-- Section: NeuronTemplate[0].axon[1] (segmentGroup: axon_1) which has 0 3D points, so -1 segment(s)-->
+<!-- Section: NeuronTemplate[0].axon[1] (segmentGroup: axon_1) which has 3 3D points, so 2 segment(s)-->
+      <segment id="4485" name = "Seg0_axon_1">
+        <parent segment="4484"/>
+        <proximal x="651.806" y="557.609" z="30.8661" diameter="0.2288"/>
+        <distal x="666.806" y="557.609" z="30.8661" diameter="0.2288"/>
+      </segment>
+      <segment id="4486" name = "Seg1_axon_1">
+        <parent segment="4485"/>
+        <distal x="681.806" y="557.609" z="30.8661" diameter="0.2288"/>
+      </segment>
 <!-- Section: NeuronTemplate[0].dend[46] (segmentGroup: dend_46) which has 10 3D points, so 9 segment(s)-->
       <segment id="4096" name = "Seg0_dend_46">
         <parent segment="3825"/>
@@ -18161,12 +18179,14 @@
       </segmentGroup>
 
 
-<!-- Section: NeuronTemplate[0].axon[0] (segmentGroup: axon_0) which has 0 3D points, so -1 segment(s)-->
+<!-- Section: NeuronTemplate[0].axon[0] (segmentGroup: axon_0) which has 3 3D points, so 2 segment(s)-->
 
       <segmentGroup id = "axon_0"  neuroLexId="sao864921383">
          <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
              neuroLexId = sao864921383 form a non-overlapping set of all of the segments.
              These segmentGroups correspond to the 'cables' of NeuroML v1.8.1, and map to/from NEURON sections.</notes>
+        <member segment = "4483"/>
+        <member segment = "4484"/>
       </segmentGroup>
 
 
@@ -18756,12 +18776,14 @@
       </segmentGroup>
 
 
-<!-- Section: NeuronTemplate[0].axon[1] (segmentGroup: axon_1) which has 0 3D points, so -1 segment(s)-->
+<!-- Section: NeuronTemplate[0].axon[1] (segmentGroup: axon_1) which has 3 3D points, so 2 segment(s)-->
 
       <segmentGroup id = "axon_1"  neuroLexId="sao864921383">
          <notes>This group contains an unbranched set of segments, and all of the segmentGroups marked with
              neuroLexId = sao864921383 form a non-overlapping set of all of the segments.
              These segmentGroups correspond to the 'cables' of NeuroML v1.8.1, and map to/from NEURON sections.</notes>
+        <member segment = "4485"/>
+        <member segment = "4486"/>
       </segmentGroup>
 
 

@@ -21,9 +21,9 @@ function convert_morphologies() {
     done
 }
 
-function addbiophy () {
-    python addcellbiophysics.py
+function postprocess () {
+    python postprocess_cells.py
 }
 
 convert_morphologies
-addbiophy
+postprocess

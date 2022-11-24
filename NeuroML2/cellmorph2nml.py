@@ -25,7 +25,7 @@ def main(acell):
     :returns: None
 
     """
-    loader_hoc_file = f"{acell}.hoc"
+    loader_hoc_file = f"{acell}_loader.hoc"
     loader_hoc_file_txt = f"""
     /*load_file("nrngui.hoc")*/
     load_file("stdrun.hoc")
@@ -40,6 +40,8 @@ def main(acell):
     load_file("../L23Net/models/biophys_{acell}.hoc")
     load_file("../L23Net/models/NeuronTemplate.hoc")
     newcell = new NeuronTemplate(morphology_file)
+
+    define_shape()
     """
 
     with open(loader_hoc_file, 'w') as f:
