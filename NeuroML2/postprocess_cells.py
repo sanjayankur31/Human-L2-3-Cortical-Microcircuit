@@ -37,14 +37,9 @@ def load_and_setup_cell(cellname: str):
     cell.notes += ". Reference: Yao, H. K.; Guet-McCreight, A.; Mazza, F.; Moradi Chameh, H.; Prevot, T. D.; Griffiths, J. D.; Tripathy, S. J.; Valiante, T. A.; Sibille, E. & Hay, E.  Reduced inhibition in depression impairs stimulus processing in human cortical microcircuits Cell Reports, Elsevier, 2022, 38"
 
     # create default groups if they don't exist
-    cell.setup_nml_cell(
-        use_convention=True,
-        default_groups=["all", "soma_group", "dendrite_group", "axon_group"]
+    [default_all, default_soma_group, default_dendrite_group, default_axon_group] = cell.setup_default_segment_groups(
+        use_convention=True, default_groups=["all", "soma_group", "dendrite_group", "axon_group"]
     )
-
-    default_soma_group = cell.get_segment_group("soma_group")
-    default_axon_group = cell.get_segment_group("axon_group")
-    default_dendrite_group = cell.get_segment_group("dendrite_group")
 
     # populate default groups
     for sg in cell.morphology.segment_groups:
@@ -56,7 +51,6 @@ def load_and_setup_cell(cellname: str):
             default_dendrite_group.includes.append(neuroml.Include(segment_groups=sg.id))
 
     cell.optimise_segment_groups()
-    cell.reorder_segment_groups()
 
     return celldoc
 
@@ -90,7 +84,9 @@ def postprocess_HL23PV():
                              ion="pas",
                              ion_chan_def_file="pas.channel.nml")
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
-    cell.set_specific_capacitance("2 uF_per_cm2")
+    cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
+    cell.set_init_memb_potential("-80mV")
+
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
                              ion_channel="Ih",
@@ -297,14 +293,17 @@ def analyse_HL23PV():
 
     """
     cellname = "HL23PV"
+    """
+
     # hyper-polarising inputs
+    # start_amp_nA=-0.1,
+    # end_amp_nA=0,
+    # step_nA=0.01,
     generate_current_vs_frequency_curve(
         nml2_file=f"{cellname}.cell.nml",
         cell_id=cellname,
-        start_amp_nA=-0.1,
-        end_amp_nA=0,
-        step_nA=0.01,
-        pre_zero_pulse=200,
+        custom_amps_nA=[0.0],
+        pre_zero_pulse=0,
         post_zero_pulse=200,
         plot_voltage_traces=True,
         plot_iv=False,
@@ -312,25 +311,29 @@ def analyse_HL23PV():
         simulator="jNeuroML_NEURON",
         analysis_delay=200.
     )
-
+    """
     # depolarising inputs
     generate_current_vs_frequency_curve(
         nml2_file=f"{cellname}.cell.nml",
         cell_id=cellname,
         plot_voltage_traces=True,
-        spike_threshold_mV=-20.0,
-        start_amp_nA=0.0,
-        end_amp_nA=0.25,
-        step_nA=0.01,
-        pre_zero_pulse=200,
-        post_zero_pulse=200,
+        spike_threshold_mV=-10.0,
+        custom_amps_nA=[0.0002],
+        pre_zero_pulse=0,
+        post_zero_pulse=0,
         plot_iv=True,
         simulator="jNeuroML_NEURON",
-        analysis_delay=200.,
+        analysis_delay=700.,
+        analysis_duration=2000.
     )
+    """
+        start_amp_nA=0.0,
+        end_amp_nA=0.1,
+        step_nA=0.01,
+    """
 
 
 if __name__ == "__main__":
     cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
-    # postprocess_HL23PV()
+    postprocess_HL23PV()
     analyse_HL23PV()
