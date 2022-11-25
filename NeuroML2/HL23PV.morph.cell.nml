@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd"
     id = "NeuroML2_file_exported_from_NEURON">
 
-  <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.0.2 (Fedora 37) master (f0ca745418e942ad4763bdc47459c409f0b11512) 2022-07-22
+  <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.2.1 HEAD (c1590692) 2022-08-09
           Authors: Michael Hines, Sushil Kambampati and Padraig Gleeson,
           Yale University and UCL 
   </notes>
