@@ -22894,60 +22894,6 @@
                 <member segment="3325"/>
                 <member segment="3326"/>
             </segmentGroup>
-            <segmentGroup id="all">
-                <include segmentGroup="soma_0"/>
-                <include segmentGroup="dend_32"/>
-                <include segmentGroup="dend_27"/>
-                <include segmentGroup="dend_22"/>
-                <include segmentGroup="dend_14"/>
-                <include segmentGroup="dend_7"/>
-                <include segmentGroup="dend_0"/>
-                <include segmentGroup="axon_0"/>
-                <include segmentGroup="dend_44"/>
-                <include segmentGroup="dend_33"/>
-                <include segmentGroup="dend_29"/>
-                <include segmentGroup="dend_28"/>
-                <include segmentGroup="dend_24"/>
-                <include segmentGroup="dend_23"/>
-                <include segmentGroup="dend_19"/>
-                <include segmentGroup="dend_15"/>
-                <include segmentGroup="dend_13"/>
-                <include segmentGroup="dend_8"/>
-                <include segmentGroup="dend_4"/>
-                <include segmentGroup="dend_1"/>
-                <include segmentGroup="axon_1"/>
-                <include segmentGroup="dend_46"/>
-                <include segmentGroup="dend_45"/>
-                <include segmentGroup="dend_39"/>
-                <include segmentGroup="dend_34"/>
-                <include segmentGroup="dend_31"/>
-                <include segmentGroup="dend_30"/>
-                <include segmentGroup="dend_26"/>
-                <include segmentGroup="dend_25"/>
-                <include segmentGroup="dend_21"/>
-                <include segmentGroup="dend_20"/>
-                <include segmentGroup="dend_18"/>
-                <include segmentGroup="dend_17"/>
-                <include segmentGroup="dend_16"/>
-                <include segmentGroup="dend_12"/>
-                <include segmentGroup="dend_9"/>
-                <include segmentGroup="dend_6"/>
-                <include segmentGroup="dend_5"/>
-                <include segmentGroup="dend_3"/>
-                <include segmentGroup="dend_2"/>
-                <include segmentGroup="dend_48"/>
-                <include segmentGroup="dend_47"/>
-                <include segmentGroup="dend_41"/>
-                <include segmentGroup="dend_40"/>
-                <include segmentGroup="dend_36"/>
-                <include segmentGroup="dend_35"/>
-                <include segmentGroup="dend_11"/>
-                <include segmentGroup="dend_10"/>
-                <include segmentGroup="dend_43"/>
-                <include segmentGroup="dend_42"/>
-                <include segmentGroup="dend_38"/>
-                <include segmentGroup="dend_37"/>
-            </segmentGroup>
             <segmentGroup id="soma_group" neuroLexId="GO:0043025">
                 <notes>Default soma segment group for the cell</notes>
                 <include segmentGroup="soma_0"/>
@@ -22959,47 +22905,89 @@
             </segmentGroup>
             <segmentGroup id="dendrite_group" neuroLexId="GO:0030425">
                 <notes>Default dendrite segment group for the cell</notes>
+                <include segmentGroup="dend_25"/>
+                <include segmentGroup="dend_17"/>
+                <include segmentGroup="dend_21"/>
+                <include segmentGroup="dend_13"/>
+                <include segmentGroup="dend_26"/>
+                <include segmentGroup="dend_20"/>
+                <include segmentGroup="dend_16"/>
+                <include segmentGroup="dend_18"/>
+                <include segmentGroup="dend_12"/>
+                <include segmentGroup="dend_9"/>
                 <include segmentGroup="dend_6"/>
                 <include segmentGroup="dend_5"/>
                 <include segmentGroup="dend_3"/>
+                <include segmentGroup="dend_27"/>
                 <include segmentGroup="dend_2"/>
                 <include segmentGroup="dend_48"/>
                 <include segmentGroup="dend_47"/>
                 <include segmentGroup="dend_41"/>
                 <include segmentGroup="dend_40"/>
-                <include segmentGroup="dend_27"/>
                 <include segmentGroup="dend_36"/>
+                <include segmentGroup="dend_32"/>
                 <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_22"/>
                 <include segmentGroup="dend_11"/>
-                <include segmentGroup="dend_0"/>
+                <include segmentGroup="dend_14"/>
                 <include segmentGroup="dend_10"/>
-                <include segmentGroup="dend_43"/>
-                <include segmentGroup="dend_44"/>
-                <include segmentGroup="dend_42"/>
-                <include segmentGroup="dend_38"/>
-                <include segmentGroup="dend_37"/>
                 <include segmentGroup="dend_7"/>
+                <include segmentGroup="dend_43"/>
+                <include segmentGroup="dend_0"/>
+                <include segmentGroup="dend_42"/>
+                <include segmentGroup="dend_29"/>
+                <include segmentGroup="dend_38"/>
+                <include segmentGroup="dend_28"/>
+                <include segmentGroup="dend_37"/>
+                <include segmentGroup="dend_24"/>
+                <include segmentGroup="dend_23"/>
+                <include segmentGroup="dend_44"/>
+                <include segmentGroup="dend_4"/>
+                <include segmentGroup="dend_1"/>
+                <include segmentGroup="dend_33"/>
+                <include segmentGroup="dend_8"/>
+                <include segmentGroup="dend_46"/>
+                <include segmentGroup="dend_45"/>
+                <include segmentGroup="dend_15"/>
+                <include segmentGroup="dend_39"/>
+                <include segmentGroup="dend_19"/>
+                <include segmentGroup="dend_34"/>
+                <include segmentGroup="dend_31"/>
+                <include segmentGroup="dend_30"/>
+            </segmentGroup>
+            <segmentGroup id="all">
+                <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_22"/>
+                <include segmentGroup="dend_11"/>
+                <include segmentGroup="dend_14"/>
+                <include segmentGroup="dend_10"/>
+                <include segmentGroup="dend_7"/>
+                <include segmentGroup="dend_43"/>
+                <include segmentGroup="dend_0"/>
+                <include segmentGroup="dend_42"/>
+                <include segmentGroup="axon_0"/>
+                <include segmentGroup="dend_38"/>
+                <include segmentGroup="dend_44"/>
+                <include segmentGroup="dend_37"/>
                 <include segmentGroup="dend_33"/>
                 <include segmentGroup="dend_29"/>
-                <include segmentGroup="dend_22"/>
                 <include segmentGroup="dend_28"/>
-                <include segmentGroup="dend_32"/>
                 <include segmentGroup="dend_24"/>
                 <include segmentGroup="dend_23"/>
                 <include segmentGroup="dend_19"/>
-                <include segmentGroup="dend_13"/>
-                <include segmentGroup="dend_34"/>
-                <include segmentGroup="dend_8"/>
-                <include segmentGroup="dend_14"/>
                 <include segmentGroup="dend_15"/>
+                <include segmentGroup="dend_13"/>
+                <include segmentGroup="dend_8"/>
                 <include segmentGroup="dend_4"/>
-                <include segmentGroup="dend_31"/>
-                <include segmentGroup="dend_39"/>
-                <include segmentGroup="dend_45"/>
-                <include segmentGroup="dend_30"/>
-                <include segmentGroup="dend_46"/>
-                <include segmentGroup="dend_26"/>
                 <include segmentGroup="dend_1"/>
+                <include segmentGroup="axon_1"/>
+                <include segmentGroup="dend_46"/>
+                <include segmentGroup="dend_45"/>
+                <include segmentGroup="dend_39"/>
+                <include segmentGroup="dend_34"/>
+                <include segmentGroup="dend_31"/>
+                <include segmentGroup="dend_30"/>
+                <include segmentGroup="dend_26"/>
                 <include segmentGroup="dend_25"/>
                 <include segmentGroup="dend_21"/>
                 <include segmentGroup="dend_20"/>
@@ -23008,8 +22996,19 @@
                 <include segmentGroup="dend_16"/>
                 <include segmentGroup="dend_12"/>
                 <include segmentGroup="dend_9"/>
+                <include segmentGroup="dend_6"/>
+                <include segmentGroup="dend_5"/>
+                <include segmentGroup="dend_3"/>
+                <include segmentGroup="dend_2"/>
+                <include segmentGroup="dend_48"/>
+                <include segmentGroup="dend_47"/>
+                <include segmentGroup="soma_0"/>
+                <include segmentGroup="dend_41"/>
+                <include segmentGroup="dend_32"/>
+                <include segmentGroup="dend_40"/>
+                <include segmentGroup="dend_27"/>
+                <include segmentGroup="dend_36"/>
             </segmentGroup>
-            <segmentGroup id="all"/>
         </morphology>
         <biophysicalProperties id="biophys">
             <membraneProperties>
@@ -23034,6 +23033,7 @@
                 <channelDensityNernst id="Ca_HVA_axonal" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
                 <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
                 <specificCapacitance value="2 uF_per_cm2"/>
+                <initMembPotential value="-80mV"/>
             </membraneProperties>
             <intracellularProperties>
                 <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_somatic" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_group"/>
