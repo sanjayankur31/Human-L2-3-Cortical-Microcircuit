@@ -26,8 +26,8 @@ function postprocess () {
 }
 
 function clean() {
-    echo "Removing: *.cell.nml *.hoc *.mod LEMS* *.dat *.nrn.py x86_64 iv*nml"
-    rm *.cell.nml *.hoc iv*nml
+    echo "Removing: *.hoc *.mod LEMS* *.dat *.nrn.py x86_64 iv*nml"
+    rm *.hoc iv*nml
     rm -f *.mod LEMS* *.dat *nrn.py
     rm -rf x86_64
 }
