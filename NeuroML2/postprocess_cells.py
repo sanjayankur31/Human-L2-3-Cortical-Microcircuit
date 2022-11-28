@@ -81,7 +81,7 @@ def postprocess_HL23PV():
                              cond_density="0.00011830111773572024 S_per_cm2",
                              erev="-83.92924122901199 mV",
                              group_id="all",
-                             ion="pas",
+                             ion="non_specific",
                              ion_chan_def_file="pas.channel.nml")
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
