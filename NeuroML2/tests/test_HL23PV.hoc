@@ -19,6 +19,8 @@ step_amp = 0.2
 tstop = 300
 //tstop = 800
 
+celsius = 34
+
 //=================== creating cell object ===========================
 load_file("import3d.hoc")
 objref HL23PV
