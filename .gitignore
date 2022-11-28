@@ -1,2 +1,3 @@
 *.dat
 x86_64/
+/NeuroML2/report.*txt
