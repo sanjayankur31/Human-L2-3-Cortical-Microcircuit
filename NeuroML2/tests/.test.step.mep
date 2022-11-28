@@ -1,0 +1,6 @@
+system: Testing a detailed cell
+
+experiments:
+  stepPV:
+    expected:
+      spike times: [84.562, 104.875, 127.987, 153.425, 180.187, 207.77499999999998, 235.987]
