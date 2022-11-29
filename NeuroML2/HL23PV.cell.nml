@@ -6,7 +6,7 @@
     <include href="CaDynamics_E2_NML2.nml"/>
     <include href="pas.channel.nml"/>
     <include href="Ih.channel.nml"/>
-    <include href="NaTg.channel.nml"/>
+    <include href="NaTg/NaTg.channel.nml"/>
     <include href="Nap.channel.nml"/>
     <include href="K_P.channel.nml"/>
     <include href="K_T.channel.nml"/>
