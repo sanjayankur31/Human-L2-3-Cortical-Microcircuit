@@ -2,3 +2,8 @@
 x86_64/
 /NeuroML2/report.*txt
 /NeuroML2/*.mod
+/NeuroML2/HL23PV.hoc
+*.gv
+/NeuroML2/IClamp_HL23PV.gv.png
+/NeuroML2/IClamp_HL23PV.net.png
+*_nrn.py
