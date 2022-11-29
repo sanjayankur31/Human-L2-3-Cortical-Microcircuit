@@ -37,7 +37,6 @@ def main(acell):
     strdef morphology_file
     morphology_file = "../L23Net/morphologies/{acell}.swc"
 
-    load_file("../L23Net/models/biophys_{acell}.hoc")
     load_file("../L23Net/models/NeuronTemplate.hoc")
     newcell = new NeuronTemplate(morphology_file)
 
