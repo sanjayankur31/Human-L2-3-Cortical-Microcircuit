@@ -63,6 +63,6 @@ if __name__ == "__main__":
     else:
 
         #sim, net = generate('cADpyr229_L23_PC_c292d67a2e_0_0', 3000, config="IClamp")
-        sim, net = generate('HL23PV', 300, config="IClamp",parameters={'stim_amp':'200pA'})
+        sim, net = generate('HL23PV', 300, config="IClamp",parameters={'stim_amp':'400pA'})
 
         check_to_generate_or_run(sys.argv, sim)
