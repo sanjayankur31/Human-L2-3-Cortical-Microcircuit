@@ -35,47 +35,33 @@ Comment from original mod file:
         </annotation>
 
         <gate id="m" type="gateHHrates" instances="3">
-            <forwardRate type="Na_m_rate" multiplier="0.182" shiftConstant="-38"/>
-            <reverseRate type="Na_m_rate" multiplier="0.124" shiftConstant="-38"/>
+            <forwardRate type="Na_shift_slope_rate" multiplier="0.182" vHalf="-38" vShift="0" slope="6"/>
+            <reverseRate type="Na_shift_slope_rate" multiplier="-0.124" vHalf="-38" vShift="0" slope="-6"/>
         </gate>
 
         <gate id="h" type="gateHHrates" instances="1">
-            <forwardRate type="Na_h_rate" multiplier="-0.015" shiftConstant="-66"/>
-            <reverseRate type="Na_h_rate" multiplier="-0.015" shiftConstant="-66"/>
+            <forwardRate type="Na_shift_slope_rate" multiplier="-0.015" vHalf="-66" vShift="0" slope="-6"/>
+            <reverseRate type="Na_shift_slope_rate" multiplier="0.015" vHalf="-66" vShift="0" slope="6"/>
         </gate>
 
     </ionChannel>
 
-    <ComponentType name="Na_m_rate" extends="baseVoltageDepRate">
+    <ComponentType name="Na_shift_slope_rate" extends="baseVoltageDepRate">
         <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
         <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
+
         <Parameter name="multiplier" dimension="none"/>
-        <Parameter name="shiftConstant" dimension="none"/>
-        <Requirement name="vShift_m" dimension="voltage"/>
-        <Requirement name="slope_m" dimension="none"/>
+        <Parameter name="vHalf" dimension="none"/>
+        <Parameter name="vShift" dimension="none"/>
+        <Parameter name="slope" dimension="none"/>
 
         <Dynamics>
             <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
-            <DerivedVariable name="VT" dimension="none" value="shiftConstant + (vShift_m / VOLT_SCALE)"/>
-            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(multiplier * (V - VT) / (1 - (exp (-1*( V - VT) / slope_m)))) / TIME_SCALE"/>
+            <DerivedVariable name="VT" dimension="none" value="vHalf + vShift"/>
+            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(multiplier * (V - VT) / (1 - (exp (-1*( V - VT) / slope)))) / TIME_SCALE"/>
         </Dynamics>
 
     </ComponentType>
 
-    <ComponentType name="Na_h_rate" extends="baseVoltageDepRate">
-        <Constant name="TIME_SCALE" dimension="time" value="1 ms"/>
-        <Constant name="VOLT_SCALE" dimension="voltage" value="1 mV"/>
-        <Parameter name="multiplier" dimension="none"/>
-        <Parameter name="shiftConstant" dimension="none"/>
-        <Requirement name="vShift_h" dimension="voltage"/>
-        <Requirement name="slope_h" dimension="none"/>
-
-        <Dynamics>
-            <DerivedVariable name="V" dimension="none" value="v / VOLT_SCALE"/>
-            <DerivedVariable name="VT" dimension="none" value="shiftConstant + (vShift_h / VOLT_SCALE)"/>
-            <DerivedVariable name="r" exposure="r" dimension="per_time" value="(multiplier * (V - VT) / (1 - (exp (-1*( V - VT) / slope_h)))) / TIME_SCALE"/>
-        </Dynamics>
-
-    </ComponentType>
 
 </neuroml>

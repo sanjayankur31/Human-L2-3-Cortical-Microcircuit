@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="NaTg_cell">
 
+    <include href="../pas.channel.nml"/>
     <include href="NaTg.channel.nml"/>
 
     <cell id="NaTg_cell">
@@ -33,7 +34,9 @@
 
             <membraneProperties>
 
-                <channelDensityVShiftSlope condDensity="50.0 mS_per_cm2" id="Na_all" ionChannel="NaTg" ion="na" erev="50.0 mV" vShift_m="0mV" slope_m="9" vShift_h="9mV" slope_h="6"/>
+                <channelDensity id="pas" ionChannel="pas" condDensity="0.00011830111773572024 S_per_cm2" erev="-83.92924122901199 mV" ion="non_specific"/>
+
+                <channelDensity condDensity="0.49958525078702043 S_per_cm2" id="Na_all" ionChannel="NaTg" ion="na" erev="50.0 mV" />
 
                 <spikeThresh value="0 mV"/>
 
