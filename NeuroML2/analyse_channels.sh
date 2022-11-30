@@ -36,6 +36,7 @@ echo "Analysing mod files"
 
 #serial_run
 
-    pynml-channelanalysis Ca_HVA.channel.nml -stepTargetVoltage 5 -temperature 6.3
+    #pynml-channelanalysis Ca_HVA.channel.nml -stepTargetVoltage 5 -temperature 6.3
+    pynml-channelanalysis Kv3_1.channel.nml -stepTargetVoltage 5 -temperature 6.3
 ## if gnu parallel is available, use the parallel run, argument is number of parallel jobs:
 # parallel_run 6
