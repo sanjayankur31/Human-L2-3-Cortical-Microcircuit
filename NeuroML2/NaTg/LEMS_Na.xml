@@ -9,7 +9,6 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
-    <Include file="ionChannelVShiftSlope.xml"/>
 
     <!--   Channel/synapse files-->
     <Include file="NaTg.channel.nml"/>
