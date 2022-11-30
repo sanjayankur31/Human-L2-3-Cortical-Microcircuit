@@ -17,6 +17,7 @@ from neuroml.loaders import read_neuroml2_file
 from neuroml.writers import NeuroMLWriter
 from pyneuroml.analysis import generate_current_vs_frequency_curve
 from pyneuroml.pynml import write_neuroml2_file
+from neuroml.neuro_lex_ids import neuro_lex_ids
 
 
 def load_and_setup_cell(cellname: str):
@@ -54,6 +55,169 @@ def load_and_setup_cell(cellname: str):
     cell.optimise_segment_groups()
 
     return celldoc
+
+
+def postprocess_HL23PYR():
+    """Post process HL23PYR and add biophysics.
+
+    """
+    cellname = "HL23PYR"
+    celldoc = load_and_setup_cell(cellname)
+    cell = celldoc.cells[0]  # type: neuroml.Cell
+
+    # apical dendrites are in groups called apic_
+    # basal dendrites are in groups called dend_
+    # populate the complete dendrite group, and new groups for all apical and
+    # basal dendrites
+    default_dendrite_group = cell.get_segment_group("dendrite_group")
+    basal_group = cell.add_segment_group("basal_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Basal dendrites")
+    apical_group = cell.add_segment_group("apical_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Apical dendrite_group")
+    for sg in cell.morphology.segment_groups:
+        if "apic_" in sg.id:
+            apical_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            default_dendrite_group.includes.append(neuroml.Include(segment_groups=sg.id))
+        if "dend_" in sg.id:
+            basal_group.includes.append(neuroml.Include(segment_groups=sg.id))
+
+    cell.optimise_segment_groups()
+    cell.reorder_segment_groups()
+
+    # biophysics
+    # include calcium dynamics component
+    celldoc.add(neuroml.IncludeType(href="CaDynamics_E2_NML2.nml"), validate=False)
+    # all
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="pas",
+                             ion_channel="pas",
+                             cond_density="0.0000954 S_per_cm2",
+                             erev="-80 mV",
+                             group_id="all",
+                             ion="non_specific",
+                             ion_chan_def_file="channels/pas.channel.nml")
+    cell.set_resistivity("0.1 kohm_cm", group_id="all")
+    cell.set_specific_capacitance("1 uF_per_cm2", group_id="all")
+    cell.set_init_memb_potential("-80mV")
+
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Ih",
+                             ion_channel="Ih",
+                             cond_density="2.7671764064314368e-05 S_per_cm2",
+                             erev="-45 mV",
+                             group_id="all",
+                             ion="hcn",
+                             ion_chan_def_file="channels/Ih.channel.nml")
+
+    # somatic
+    soma_group = cell.get_segment_group("soma_group")
+    sgid = soma_group.id
+    print(f"Adding channels to {sgid}")
+    # K
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="SK_somatic",
+                             ion_channel="SK",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="K_T_somatic",
+                             ion_channel="K_T",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/K_T.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="K_P_somatic",
+                             ion_channel="K_P",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/K_P.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Kv3_1_somatic",
+                             ion_channel="Kv3_1",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/Kv3_1.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Ih_somatic",
+                             ion_channel="Ih",
+                             cond_density="0.000148 S_per_cm2",
+                             erev="-45 mV",
+                             group_id=sgid,
+                             ion="hcn",
+                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Im_somatic",
+                             ion_channel="Im",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/Im.channel.nml")
+
+    # Na
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="NaTg_somatic",
+                             ion_channel="NaTg_PYR_somatic",
+                             cond_density="0.00001 S_per_cm2",
+                             erev="50 mV",
+                             group_id=sgid,
+                             ion="na",
+                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
+    # Ca
+    # internal and external concentrations are set to defaults that NEURON
+    # starts with
+    cell.add_intracellular_property("Species", validate=False,
+                                    id="ca",
+                                    concentration_model="CaDynamics_E2_NML2_PYR_somatic",
+                                    ion="ca",
+                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
+                                    segment_groups=sgid)
+    # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
+    cell.add_channel_density_v(
+        "ChannelDensityNernst",
+        nml_cell_doc=celldoc,
+        id="Ca_HVA_somatic",
+        ion_channel="Ca_HVA",
+        cond_density="0.0001 S_per_cm2",
+        segment_groups=sgid,
+        ion="ca",
+        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+    cell.add_channel_density_v(
+        "ChannelDensityNernst",
+        nml_cell_doc=celldoc,
+        id="Ca_LVA_somatic",
+        ion_channel="Ca_LVA",
+        cond_density="0.00001 S_per_cm2",
+        segment_groups=sgid,
+        ion="ca",
+        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+
+    cell.set_specific_capacitance("2 uF_per_cm2",
+                                  group_id="apical_dendrite_group")
+    cell.set_specific_capacitance("2 uF_per_cm2",
+                                  group_id="basal_dendrite_group")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Ih_basal",
+                             ion_channel="Ih",
+                             cond_density="0.000000709 S_per_cm2",
+                             erev="-45 mV",
+                             group_id=sgid,
+                             ion="hcn",
+                             ion_chan_def_file="channels/Ih.channel.nml")
+
+    # L1 validation
+    cell.validate(recursive=True)
+    cell.summary(morph=True, biophys=True)
+    # use pynml writer to also run L2 validation
+    write_neuroml2_file(celldoc, f"{cellname}.cell.nml")
 
 
 def postprocess_HL23PV():
@@ -342,5 +506,6 @@ def simulate_test_network(cells: list = []):
 if __name__ == "__main__":
     cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
     # postprocess_HL23PV()
-    analyse_HL23PV(True, True)
-    simulate_test_network(["HP23PV"])
+    # analyse_HL23PV(True, True)
+    # simulate_test_network(["HP23PV"])
+    postprocess_HL23PYR()
