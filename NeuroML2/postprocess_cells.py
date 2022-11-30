@@ -289,54 +289,58 @@ def postprocess_HL23PV():
     write_neuroml2_file(celldoc, f"{cellname}.cell.nml")
 
 
-def analyse_HL23PV():
+def analyse_HL23PV(hyperpolarising: bool = True, depolarising: bool = True):
     """Generate various curves for HL23PV cells
 
     :returns: None
 
     """
     cellname = "HL23PV"
-    """
+    if hyperpolarising:
+        # hyper-polarising inputs
+        generate_current_vs_frequency_curve(
+            nml2_file=f"{cellname}.cell.nml",
+            cell_id=cellname,
+            custom_amps_nA=list(numpy.arange(-0.05, -0.1, -0.01)),
+            pre_zero_pulse=200,
+            post_zero_pulse=300,
+            plot_voltage_traces=True,
+            plot_iv=True,
+            plot_if=False,
+            simulator="jNeuroML_NEURON",
+            analysis_delay=300.,
+            analysis_duration=400.
+        )
 
-    # hyper-polarising inputs
-    # start_amp_nA=-0.1,
-    # end_amp_nA=0,
-    # step_nA=0.01,
-    generate_current_vs_frequency_curve(
-        nml2_file=f"{cellname}.cell.nml",
-        cell_id=cellname,
-        custom_amps_nA=[0.0],
-        pre_zero_pulse=0,
-        post_zero_pulse=200,
-        plot_voltage_traces=True,
-        plot_iv=False,
-        plot_if=False,
-        simulator="jNeuroML_NEURON",
-        analysis_delay=200.
-    )
+    if depolarising:
+        # depolarising inputs
+        generate_current_vs_frequency_curve(
+            nml2_file=f"{cellname}.cell.nml",
+            cell_id=cellname,
+            plot_voltage_traces=True,
+            spike_threshold_mV=-10.0,
+            custom_amps_nA=list(numpy.arange(0, 0.3, 0.01)),
+            pre_zero_pulse=200,
+            post_zero_pulse=300,
+            plot_iv=True,
+            simulator="jNeuroML_NEURON",
+            analysis_delay=300.,
+            analysis_duration=400.
+        )
+
+
+def simulate_test_network(cells: list = []):
+    """TODO: Docstring for create_test_network.
+
+    :param cells: TODO
+    :returns: TODO
+
     """
-    # depolarising inputs
-    generate_current_vs_frequency_curve(
-        nml2_file=f"{cellname}.cell.nml",
-        cell_id=cellname,
-        plot_voltage_traces=True,
-        spike_threshold_mV=-10.0,
-        custom_amps_nA=list(numpy.arange(0, 0.3, 0.01)),
-        pre_zero_pulse=0,
-        post_zero_pulse=0,
-        plot_iv=True,
-        simulator="jNeuroML_NEURON",
-        analysis_delay=300.,
-        analysis_duration=400.
-    )
-    """
-        start_amp_nA=0.0,
-        end_amp_nA=0.1,
-        step_nA=0.01,
-    """
+    pass
 
 
 if __name__ == "__main__":
     cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
-    postprocess_HL23PV()
-    analyse_HL23PV()
+    # postprocess_HL23PV()
+    analyse_HL23PV(True, True)
+    simulate_test_network(["HP23PV"])
