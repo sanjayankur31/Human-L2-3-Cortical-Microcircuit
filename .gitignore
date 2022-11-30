@@ -8,3 +8,9 @@ x86_64/
 /NeuroML2/IClamp_HL23PV.net.png
 *_nrn.py
 /NeuroML2/NaTg/report.txt
+/NeuroML2/IClamp_HL23PV.json
+/NeuroML2/NaTg/*.mod
+/NeuroML2/NaTg/LEMS_Test_NaTg.xml
+/NeuroML2/NaTg/LEMS_Test_NaTg_PV_somatic.xml
+/NeuroML2/NaTg/*.hoc
+/NeuroML2/Sim_IClamp_HL23PV.json

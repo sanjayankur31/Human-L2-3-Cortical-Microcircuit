@@ -3,9 +3,9 @@
     Generated network: IClamp_HL23PV
     Generation seed: 1234
     NeuroMLlite parameters: 
-        stim_amp = 400pA</notes>
+        stim_amp = 200pA</notes>
     <include href="HL23PV.cell.nml"/>
-    <pulseGenerator id="iclamp_0" delay="50ms" duration="200ms" amplitude="400pA"/>
+    <pulseGenerator id="iclamp_0" delay="50ms" duration="200ms" amplitude="200pA"/>
     <network id="IClamp_HL23PV" type="networkWithTemperature" temperature="34.0degC">
         <notes>A network model: IClamp_HL23PV</notes>
         <property tag="recommended_dt_ms" value="0.01"/>

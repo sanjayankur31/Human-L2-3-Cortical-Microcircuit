@@ -4,9 +4,9 @@
     <include href="Na.cell.nml"/>
 
 
-    <pulseGenerator id="Input_1" delay="0.3s" duration="0.4s" amplitude="7.5E-10A"/>
+    <pulseGenerator id="Input_1" delay="0.3s" duration="0.4s" amplitude="4E-10A"/>
 
-    <network id="NaTg_network" type="networkWithTemperature" temperature="36.0 degC">
+    <network id="NaTg_network" type="networkWithTemperature" temperature="34 degC">
 
         <population id="NaTg_pop" component="NaTg_cell" type="populationList" size="1">
            <annotation>

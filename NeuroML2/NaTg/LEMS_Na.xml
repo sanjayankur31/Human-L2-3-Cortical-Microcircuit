@@ -22,9 +22,14 @@
 
     <Component type="Simulation" id="sim1" length="1000.0ms" step="0.01ms" target="NaTg_network">
 
-        <Display id="NaTg_test_display" title="Testing NaTg channel" xmin="-100" xmax="1100" ymin="-100" ymax="70" timeScale="1ms">
-            <Line id="v" timeScale="1 ms" quantity="NaTg_pop/0/NaTg_cell/v" scale="1 mV" color="#000000"/>
-        </Display>
+              <Display id="NaTg_test_display" title="Testing NaTg channel" xmin="-100" xmax="1100" ymin="-100" ymax="70" timeScale="1ms">
+                  <Line id="v" timeScale="1 ms" quantity="NaTg_pop/0/NaTg_cell/v" scale="1 mV" color="#000000"/>
+              </Display>
+
+              <Display id="NaTg_test_display_mh" title="Testing NaTg channel - m h " xmin="-100" xmax="1100" ymin="-.10" ymax="1.10" timeScale="1ms">
+                <Line id="m" timeScale="1 ms" quantity="NaTg_pop/0/NaTg_cell/biophys/membraneProperties/Na_all/NaTg_PV_somatic/m/q" scale="1" color="#ff0000"/>
+                <Line id="h" timeScale="1 ms" quantity="NaTg_pop/0/NaTg_cell/biophys/membraneProperties/Na_all/NaTg_PV_somatic/h/q" scale="1" color="#00ff00"/>
+            </Display>
 
         <OutputFile id="NaTg_output" fileName="NaTg.dat">
             <OutputColumn id="v" quantity="NaTg_pop/0/NaTg_cell/v"/>
