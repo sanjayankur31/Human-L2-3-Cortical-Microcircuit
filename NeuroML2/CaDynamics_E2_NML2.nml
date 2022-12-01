@@ -10,7 +10,8 @@
 
     <concentrationModel id="CaDynamics_E2_NML2_PV_somatic" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="531.0255920416845 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
     <concentrationModel id="CaDynamics_E2_NML2_PV_axonal" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="163.03538024059918 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
-    <concentrationModel id="CaDynamics_E2_NML2_PYR_somatic" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="80 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
+    <concentrationModel id="CaDynamics_E2_NML2_PYR_somatic" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="20 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
+    <concentrationModel id="CaDynamics_E2_NML2_PYR_axonal" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="226 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
 
 
     <!--
