@@ -75,9 +75,12 @@ def postprocess_HL23PYR():
     for sg in cell.morphology.segment_groups:
         if "apic_" in sg.id:
             apical_group.includes.append(neuroml.Include(segment_groups=sg.id))
-            default_dendrite_group.includes.append(neuroml.Include(segment_groups=sg.id))
         if "dend_" in sg.id:
             basal_group.includes.append(neuroml.Include(segment_groups=sg.id))
+    # optimise dendrite group
+    default_dendrite_group.includes = []
+    default_dendrite_group.includes.append(neuroml.Include(segment_groups=apical_group.id))
+    default_dendrite_group.includes.append(neuroml.Include(segment_groups=basal_group.id))
 
     cell.optimise_segment_groups()
     cell.reorder_segment_groups()
