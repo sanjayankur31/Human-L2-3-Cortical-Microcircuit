@@ -115,7 +115,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="SK_somatic",
                              ion_channel="SK",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.000853 S_per_cm2",
                              erev="-85 mV",
                              group_id=sgid,
                              ion="k",
@@ -123,7 +123,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="K_T_somatic",
                              ion_channel="K_T",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.0605 S_per_cm2",
                              erev="-85 mV",
                              group_id=sgid,
                              ion="k",
@@ -131,7 +131,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="K_P_somatic",
                              ion_channel="K_P",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.000208 S_per_cm2",
                              erev="-85 mV",
                              group_id=sgid,
                              ion="k",
@@ -139,7 +139,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Kv3_1_somatic",
                              ion_channel="Kv3_1",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.0424 S_per_cm2",
                              erev="-85 mV",
                              group_id=sgid,
                              ion="k",
@@ -155,7 +155,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Im_somatic",
                              ion_channel="Im",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.000306 S_per_cm2",
                              erev="-85 mV",
                              group_id=sgid,
                              ion="k",
@@ -165,7 +165,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="NaTg_somatic",
                              ion_channel="NaTg_PYR_somatic",
-                             cond_density="0.00001 S_per_cm2",
+                             cond_density="0.272 S_per_cm2",
                              erev="50 mV",
                              group_id=sgid,
                              ion="na",
@@ -186,7 +186,7 @@ def postprocess_HL23PYR():
         nml_cell_doc=celldoc,
         id="Ca_HVA_somatic",
         ion_channel="Ca_HVA",
-        cond_density="0.0001 S_per_cm2",
+        cond_density="0.00155 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_HVA.channel.nml")
@@ -195,13 +195,17 @@ def postprocess_HL23PYR():
         nml_cell_doc=celldoc,
         id="Ca_LVA_somatic",
         ion_channel="Ca_LVA",
-        cond_density="0.00001 S_per_cm2",
+        cond_density="0.00296 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
 
+    # Apical
     cell.set_specific_capacitance("2 uF_per_cm2",
                                   group_id="apical_dendrite_group")
+    # TODO: non homoegenous Ih: Line #37
+
+    # Basal
     cell.set_specific_capacitance("2 uF_per_cm2",
                                   group_id="basal_dendrite_group")
     cell.add_channel_density(nml_cell_doc=celldoc,
@@ -213,6 +217,92 @@ def postprocess_HL23PYR():
                              ion="hcn",
                              ion_chan_def_file="channels/Ih.channel.nml")
 
+    # Axonal
+    axon_group = cell.get_segment_group("axon_group")
+    sgid = axon_group.id
+    print(f"Adding channels to {sgid}")
+    # K
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="SK_axonal",
+                             ion_channel="SK",
+                             cond_density="0.0145 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="K_T_axonal",
+                             ion_channel="K_T",
+                             cond_density="0.0424 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/K_T.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="K_P_axonal",
+                             ion_channel="K_P",
+                             cond_density="0.338 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/K_P.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Im_axonal",
+                             ion_channel="Im",
+                             cond_density="0.000 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/Im.channel.nml")
+    # Na
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="NaTg_axonal",
+                             ion_channel="NaTg_PYR_axonal",
+                             cond_density="1.38 S_per_cm2",
+                             erev="50 mV",
+                             group_id=sgid,
+                             ion="na",
+                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Nap_axonal",
+                             ion_channel="Nap",
+                             cond_density="0.00842 S_per_cm2",
+                             erev="50 mV",
+                             group_id=sgid,
+                             ion="na",
+                             ion_chan_def_file="channels/Nap.channel.nml")
+
+    # Ca
+    cell.add_channel_density_v(
+        "ChannelDensityNernst",
+        nml_cell_doc=celldoc,
+        id="Ca_HVA_axonal",
+        ion_channel="Ca_HVA",
+        cond_density="0.0003060000 S_per_cm2",
+        segment_groups=sgid,
+        ion="ca",
+        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+    cell.add_channel_density_v(
+        "ChannelDensityNernst",
+        nml_cell_doc=celldoc,
+        id="Ca_LVA_axonal",
+        ion_channel="Ca_LVA",
+        cond_density="0.0439000000 S_per_cm2",
+        segment_groups=sgid,
+        ion="ca",
+        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+    cell.add_intracellular_property("Species", validate=False,
+                                    id="ca",
+                                    concentration_model="CaDynamics_E2_NML2_PYR_axonal",
+                                    ion="ca",
+                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
+                                    segment_groups=sgid)
+
+    # mylein
+    cell.set_specific_capacitance("0.02 uF_per_cm2",
+                                  group_id="myelin_0")
+    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_0")
     # L1 validation
     cell.validate(recursive=True)
     cell.summary(morph=True, biophys=True)
