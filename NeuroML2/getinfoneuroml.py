@@ -19,6 +19,7 @@ from neuron import h
 
 
 load_hoc_or_python_file("HL23PYR.hoc")
+h("celsius = 34")
 h("objectvar mycell")
 h("strdef reference")
 h('reference = "acell"')
