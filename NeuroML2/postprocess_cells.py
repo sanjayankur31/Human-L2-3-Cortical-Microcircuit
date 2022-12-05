@@ -81,7 +81,11 @@ def postprocess_HL23PYR():
             basal_group.add(neuroml.Include(segment_groups=sg.id))
         if "myelin_" in sg.id and sg.id != "myelin_group":
             myelin_group.add(neuroml.Include(segment_groups=sg.id))
-            # TODO: add to axon group
+
+    # add myelin group to axon group
+    # default_axon_group = cell.get_segment_group("axon_group")
+    # default_axon_group.add(neuroml.Include(segment_groups=myelin_group.id))
+
     # optimise dendrite group
     default_dendrite_group.includes = []
     default_dendrite_group.includes.append(neuroml.Include(segment_groups=apical_group.id))
@@ -110,7 +114,7 @@ def postprocess_HL23PYR():
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
                              ion_channel="Ih",
-                             cond_density="2.7671764064314368e-05 S_per_cm2",
+                             cond_density="0.000148 S_per_cm2",
                              erev="-45 mV",
                              group_id="all",
                              ion="hcn",
@@ -239,12 +243,16 @@ def postprocess_HL23PYR():
         segment_groups=sg.id,
         validate=False
     )
-    # 0.00148 S/cm2 = 0.00148 * 1e-8 mS/um2
-    # TODO: 1E9 multiplier?
+    # TODO: clarify unit conversions
+    # 606.3464 is the value of getLongestBranch("apic")
+    # run test_HL23PYR.hoc, and then run:
+    # > access HL23PYR.apic
+    # > HL23PYR.soma distance()
+    # > HL23PYR.getLongestBranch("apic")
     inhomogeneous_value = varparam.add(
         "InhomogeneousValue",
         inhomogeneous_parameters="PathLengthOverApicDends",
-        value="1E9 * (1.48 * 1E-8) * ((2.087 * exp(p * 3.6161)) - 0.8696)"
+        value="1E9 * (0.148 * 1E-8) * ((2.087 * exp( 3.6161 * (p/606.3464))) - 0.8696)"
     )
 
     # Basal
@@ -296,6 +304,14 @@ def postprocess_HL23PYR():
                              group_id=sgid,
                              ion="k",
                              ion_chan_def_file="channels/Im.channel.nml")
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Kv3_1_axonal",
+                             ion_channel="Kv3_1",
+                             cond_density="0.941 S_per_cm2",
+                             erev="-85 mV",
+                             group_id=sgid,
+                             ion="k",
+                             ion_chan_def_file="channels/Kv3_1.channel.nml")
     # Na
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="NaTg_axonal",
@@ -598,6 +614,7 @@ def analyse_HL23PYR(hyperpolarising: bool = True, depolarising: bool = True):
             nml2_file=f"{cellname}.cell.nml",
             cell_id=cellname,
             custom_amps_nA=list(numpy.arange(-0.05, -0.1, -0.01)),
+            temperature="34 degC",
             pre_zero_pulse=200,
             post_zero_pulse=300,
             plot_voltage_traces=True,
@@ -617,12 +634,13 @@ def analyse_HL23PYR(hyperpolarising: bool = True, depolarising: bool = True):
             spike_threshold_mV=-10.0,
             # custom_amps_nA=list(numpy.arange(0, 0.3, 0.05)),
             custom_amps_nA=[0.2],
+            temperature="34 degC",
             pre_zero_pulse=200,
             post_zero_pulse=300,
             plot_iv=True,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=50.,
+            analysis_duration=200.
         )
 
 
@@ -679,7 +697,8 @@ def simulate_test_network(cells: list = []):
     net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument",
                                                         id="HL23")
 
-    network = net_doc.add("Network", id="HL23Net", validate=False)  # type: neuroml.Network
+    network = net_doc.add("Network", id="HL23Net",
+                          type="networkWithTemperature", temperature="34 degC", validate=False)  # type: neuroml.Network
     counter = 0
     for cell in cells:
         net_doc.add("IncludeType", href=f"{cell}.cell.nml")
@@ -701,5 +720,5 @@ if __name__ == "__main__":
     # postprocess_HL23PV()
     # analyse_HL23PV(True, True)
     postprocess_HL23PYR()
-    # analyse_HL23PYR(False, True)
+    analyse_HL23PYR(False, True)
     simulate_test_network(["HL23PV", "HL23PYR"])
