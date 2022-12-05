@@ -9,7 +9,7 @@
         </population>
         <population id="HL23PYR_pop" component="HL23PYR" type="populationList">
             <instance id="0">
-                <location x="50." y="0." z="0."/>
+                <location x="500." y="0." z="0."/>
             </instance>
         </population>
     </network>
