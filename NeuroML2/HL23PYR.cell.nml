@@ -30036,97 +30036,104 @@
             </segmentGroup>
             <segmentGroup id="basal_dendrite_group" neuroLexId="GO:0030425">
                 <notes>Basal dendrites</notes>
-                <include segmentGroup="dend_22"/>
+                <include segmentGroup="dend_19"/>
+                <include segmentGroup="dend_20"/>
+                <include segmentGroup="dend_27"/>
                 <include segmentGroup="dend_23"/>
-                <include segmentGroup="dend_21"/>
+                <include segmentGroup="dend_24"/>
+                <include segmentGroup="dend_0"/>
                 <include segmentGroup="dend_12"/>
                 <include segmentGroup="dend_7"/>
-                <include segmentGroup="dend_0"/>
-                <include segmentGroup="dend_27"/>
-                <include segmentGroup="dend_24"/>
                 <include segmentGroup="dend_16"/>
-                <include segmentGroup="dend_13"/>
-                <include segmentGroup="dend_9"/>
                 <include segmentGroup="dend_8"/>
-                <include segmentGroup="dend_4"/>
+                <include segmentGroup="dend_9"/>
+                <include segmentGroup="dend_13"/>
                 <include segmentGroup="dend_1"/>
-                <include segmentGroup="dend_29"/>
-                <include segmentGroup="dend_28"/>
+                <include segmentGroup="dend_4"/>
                 <include segmentGroup="dend_26"/>
                 <include segmentGroup="dend_25"/>
-                <include segmentGroup="dend_18"/>
-                <include segmentGroup="dend_17"/>
+                <include segmentGroup="dend_29"/>
+                <include segmentGroup="dend_28"/>
+                <include segmentGroup="dend_22"/>
                 <include segmentGroup="dend_15"/>
-                <include segmentGroup="dend_14"/>
-                <include segmentGroup="dend_11"/>
+                <include segmentGroup="dend_17"/>
+                <include segmentGroup="dend_18"/>
+                <include segmentGroup="dend_21"/>
                 <include segmentGroup="dend_10"/>
-                <include segmentGroup="dend_6"/>
-                <include segmentGroup="dend_5"/>
+                <include segmentGroup="dend_11"/>
+                <include segmentGroup="dend_14"/>
                 <include segmentGroup="dend_3"/>
+                <include segmentGroup="dend_5"/>
+                <include segmentGroup="dend_6"/>
                 <include segmentGroup="dend_2"/>
-                <include segmentGroup="dend_20"/>
-                <include segmentGroup="dend_19"/>
             </segmentGroup>
             <segmentGroup id="apical_dendrite_group" neuroLexId="GO:0030425">
                 <notes>Apical dendrite_group</notes>
-                <include segmentGroup="apic_43"/>
-                <include segmentGroup="apic_6"/>
-                <include segmentGroup="apic_42"/>
-                <include segmentGroup="apic_27"/>
-                <include segmentGroup="apic_26"/>
                 <include segmentGroup="apic_0"/>
-                <include segmentGroup="apic_52"/>
-                <include segmentGroup="apic_23"/>
-                <include segmentGroup="apic_8"/>
+                <include segmentGroup="apic_42"/>
+                <include segmentGroup="apic_43"/>
+                <include segmentGroup="apic_4"/>
                 <include segmentGroup="apic_22"/>
                 <include segmentGroup="apic_51"/>
-                <include segmentGroup="apic_10"/>
-                <include segmentGroup="apic_9"/>
-                <include segmentGroup="apic_53"/>
-                <include segmentGroup="apic_50"/>
-                <include segmentGroup="apic_1"/>
-                <include segmentGroup="apic_11"/>
-                <include segmentGroup="apic_49"/>
-                <include segmentGroup="apic_12"/>
-                <include segmentGroup="apic_14"/>
-                <include segmentGroup="apic_13"/>
-                <include segmentGroup="apic_48"/>
-                <include segmentGroup="apic_15"/>
-                <include segmentGroup="apic_31"/>
-                <include segmentGroup="apic_16"/>
-                <include segmentGroup="apic_55"/>
-                <include segmentGroup="apic_47"/>
-                <include segmentGroup="apic_54"/>
-                <include segmentGroup="apic_32"/>
-                <include segmentGroup="apic_3"/>
-                <include segmentGroup="apic_30"/>
-                <include segmentGroup="apic_2"/>
-                <include segmentGroup="apic_17"/>
-                <include segmentGroup="apic_38"/>
-                <include segmentGroup="apic_33"/>
-                <include segmentGroup="apic_29"/>
-                <include segmentGroup="apic_18"/>
-                <include segmentGroup="apic_44"/>
-                <include segmentGroup="apic_39"/>
-                <include segmentGroup="apic_35"/>
-                <include segmentGroup="apic_34"/>
-                <include segmentGroup="apic_24"/>
-                <include segmentGroup="apic_19"/>
-                <include segmentGroup="apic_46"/>
-                <include segmentGroup="apic_45"/>
-                <include segmentGroup="apic_41"/>
-                <include segmentGroup="apic_40"/>
-                <include segmentGroup="apic_57"/>
-                <include segmentGroup="apic_37"/>
-                <include segmentGroup="apic_56"/>
-                <include segmentGroup="apic_36"/>
-                <include segmentGroup="apic_5"/>
-                <include segmentGroup="apic_28"/>
-                <include segmentGroup="apic_4"/>
-                <include segmentGroup="apic_25"/>
-                <include segmentGroup="apic_21"/>
-                <include segmentGroup="apic_20"/>
+                <include segmentGroup="apic_23"/>
+                <include segmentGroup="apic_8"/>
+                <include segmentGroup="apic_26"/>
                 <include segmentGroup="apic_7"/>
+                <include segmentGroup="apic_50"/>
+                <include segmentGroup="apic_9"/>
+                <include segmentGroup="apic_10"/>
+                <include segmentGroup="apic_12"/>
+                <include segmentGroup="apic_1"/>
+                <include segmentGroup="apic_49"/>
+                <include segmentGroup="apic_53"/>
+                <include segmentGroup="apic_11"/>
+                <include segmentGroup="apic_48"/>
+                <include segmentGroup="apic_3"/>
+                <include segmentGroup="apic_13"/>
+                <include segmentGroup="apic_14"/>
+                <include segmentGroup="apic_16"/>
+                <include segmentGroup="apic_31"/>
+                <include segmentGroup="apic_15"/>
+                <include segmentGroup="apic_30"/>
+                <include segmentGroup="apic_32"/>
+                <include segmentGroup="apic_47"/>
+                <include segmentGroup="apic_33"/>
+                <include segmentGroup="apic_55"/>
+                <include segmentGroup="apic_38"/>
+                <include segmentGroup="apic_17"/>
+                <include segmentGroup="apic_2"/>
+                <include segmentGroup="apic_44"/>
+                <include segmentGroup="apic_54"/>
+                <include segmentGroup="apic_18"/>
+                <include segmentGroup="apic_5"/>
+                <include segmentGroup="apic_29"/>
+                <include segmentGroup="apic_56"/>
+                <include segmentGroup="apic_34"/>
+                <include segmentGroup="apic_35"/>
+                <include segmentGroup="apic_39"/>
+                <include segmentGroup="apic_46"/>
+                <include segmentGroup="apic_19"/>
+                <include segmentGroup="apic_24"/>
+                <include segmentGroup="apic_40"/>
+                <include segmentGroup="apic_41"/>
+                <include segmentGroup="apic_45"/>
+                <include segmentGroup="apic_28"/>
+                <include segmentGroup="apic_36"/>
+                <include segmentGroup="apic_37"/>
+                <include segmentGroup="apic_6"/>
+                <include segmentGroup="apic_20"/>
+                <include segmentGroup="apic_57"/>
+                <include segmentGroup="apic_21"/>
+                <include segmentGroup="apic_25"/>
+                <include segmentGroup="apic_52"/>
+                <include segmentGroup="apic_27"/>
+                <inhomogeneousParameter id="PathLengthOverApicDends" variable="p" metric="Path Length from root">
+                    <proximal translationStart="0.0"/>
+                </inhomogeneousParameter>
+            </segmentGroup>
+            <segmentGroup id="myelin_group">
+                <notes>Myelin group</notes>
+                <include segmentGroup="myelin_0"/>
             </segmentGroup>
             <segmentGroup id="soma_group" neuroLexId="GO:0043025">
                 <notes>Default soma segment group for the cell</notes>
@@ -30134,15 +30141,27 @@
             </segmentGroup>
             <segmentGroup id="axon_group" neuroLexId="GO:0030424">
                 <notes>Default axon segment group for the cell</notes>
-                <include segmentGroup="axon_1"/>
                 <include segmentGroup="axon_0"/>
+                <include segmentGroup="axon_1"/>
             </segmentGroup>
             <segmentGroup id="dendrite_group" neuroLexId="GO:0030425">
                 <notes>Default dendrite segment group for the cell</notes>
-                <include segmentGroup="basal_dendrite_group"/>
                 <include segmentGroup="apical_dendrite_group"/>
+                <include segmentGroup="basal_dendrite_group"/>
             </segmentGroup>
             <segmentGroup id="all">
+                <include segmentGroup="soma_0"/>
+                <include segmentGroup="axon_0"/>
+                <include segmentGroup="apic_0"/>
+                <include segmentGroup="dend_23"/>
+                <include segmentGroup="dend_12"/>
+                <include segmentGroup="dend_7"/>
+                <include segmentGroup="dend_0"/>
+                <include segmentGroup="axon_1"/>
+                <include segmentGroup="apic_53"/>
+                <include segmentGroup="apic_1"/>
+                <include segmentGroup="dend_27"/>
+                <include segmentGroup="dend_24"/>
                 <include segmentGroup="dend_16"/>
                 <include segmentGroup="dend_13"/>
                 <include segmentGroup="dend_9"/>
@@ -30223,18 +30242,6 @@
                 <include segmentGroup="apic_26"/>
                 <include segmentGroup="apic_23"/>
                 <include segmentGroup="apic_22"/>
-                <include segmentGroup="soma_0"/>
-                <include segmentGroup="axon_0"/>
-                <include segmentGroup="apic_0"/>
-                <include segmentGroup="dend_23"/>
-                <include segmentGroup="dend_12"/>
-                <include segmentGroup="dend_7"/>
-                <include segmentGroup="dend_0"/>
-                <include segmentGroup="axon_1"/>
-                <include segmentGroup="apic_53"/>
-                <include segmentGroup="apic_1"/>
-                <include segmentGroup="dend_27"/>
-                <include segmentGroup="dend_24"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">
@@ -30259,17 +30266,22 @@
                 <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.00296 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
                 <channelDensityNernst id="Ca_HVA_axonal" ionChannel="Ca_HVA" condDensity="0.0003060000 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
                 <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="0.0439000000 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
+                <channelDensityNonUniform id="Ih_apical" ionChannel="Ih" erev="-45 mV" ion="hcn">
+                    <variableParameter parameter="condDensity" segmentGroup="apical_dendrite_group">
+                        <inhomogeneousValue inhomogeneousParameter="PathLengthOverApicDends" value="1E9 * (1.48 * 1E-8) * ((2.087 * exp(p * 3.6161)) - 0.8696)"/>
+                    </variableParameter>
+                </channelDensityNonUniform>
                 <specificCapacitance value="1 uF_per_cm2"/>
                 <specificCapacitance value="2 uF_per_cm2" segmentGroup="apical_dendrite_group"/>
                 <specificCapacitance value="2 uF_per_cm2" segmentGroup="basal_dendrite_group"/>
-                <specificCapacitance value="0.02 uF_per_cm2" segmentGroup="myelin_0"/>
+                <specificCapacitance value="0.02 uF_per_cm2" segmentGroup="myelin_group"/>
                 <initMembPotential value="-80mV"/>
             </membraneProperties>
             <intracellularProperties>
                 <species id="ca" concentrationModel="CaDynamics_E2_NML2_PYR_somatic" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_group"/>
                 <species id="ca" concentrationModel="CaDynamics_E2_NML2_PYR_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_group"/>
                 <resistivity value="0.1 kohm_cm"/>
-                <resistivity value="0.1 kohm_cm" segmentGroup="myelin_0"/>
+                <resistivity value="0.1 kohm_cm" segmentGroup="myelin_group"/>
             </intracellularProperties>
         </biophysicalProperties>
     </cell>

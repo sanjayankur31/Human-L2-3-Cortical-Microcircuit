@@ -32,25 +32,25 @@ def load_and_setup_cell(cellname: str):
 
     """
     celldoc = read_neuroml2_file(f"{cellname}.morph.cell.nml")  # type: neuroml.NeuroMLDocument
-    celldoc.networks = []
     cell = celldoc.cells[0]  # type: neuroml.Cell
+    celldoc.networks = []
     cell.id = cellname
     cell.notes = cell.notes.replace("NeuronTemplate_0_0", cellname)
     cell.notes += ". Reference: Yao, H. K.; Guet-McCreight, A.; Mazza, F.; Moradi Chameh, H.; Prevot, T. D.; Griffiths, J. D.; Tripathy, S. J.; Valiante, T. A.; Sibille, E. & Hay, E.  Reduced inhibition in depression impairs stimulus processing in human cortical microcircuits Cell Reports, Elsevier, 2022, 38"
 
     # create default groups if they don't exist
-    [default_all, default_soma_group, default_dendrite_group, default_axon_group] = cell.setup_default_segment_groups(
+    [default_all_group, default_soma_group, default_dendrite_group, default_axon_group] = cell.setup_default_segment_groups(
         use_convention=True, default_groups=["all", "soma_group", "dendrite_group", "axon_group"]
     )
 
     # populate default groups
     for sg in cell.morphology.segment_groups:
         if "soma" in sg.id and sg.id != "soma_group":
-            default_soma_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            default_soma_group.add(neuroml.Include(segment_groups=sg.id))
         if "axon" in sg.id and sg.id != "axon_group":
-            default_axon_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            default_axon_group.add(neuroml.Include(segment_groups=sg.id))
         if "dend" in sg.id and sg.id != "dendrite_group":
-            default_dendrite_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            default_dendrite_group.add(neuroml.Include(segment_groups=sg.id))
 
     cell.optimise_segment_groups()
 
@@ -72,11 +72,16 @@ def postprocess_HL23PYR():
     default_dendrite_group = cell.get_segment_group("dendrite_group")
     basal_group = cell.add_segment_group("basal_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Basal dendrites")
     apical_group = cell.add_segment_group("apical_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Apical dendrite_group")
+    # create new global myelin group
+    myelin_group = cell.add_segment_group("myelin_group", notes="Myelin group")
     for sg in cell.morphology.segment_groups:
         if "apic_" in sg.id:
-            apical_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            apical_group.add(neuroml.Include(segment_groups=sg.id))
         if "dend_" in sg.id:
-            basal_group.includes.append(neuroml.Include(segment_groups=sg.id))
+            basal_group.add(neuroml.Include(segment_groups=sg.id))
+        if "myelin_" in sg.id and sg.id != "myelin_group":
+            myelin_group.add(neuroml.Include(segment_groups=sg.id))
+            # TODO: add to axon group
     # optimise dendrite group
     default_dendrite_group.includes = []
     default_dendrite_group.includes.append(neuroml.Include(segment_groups=apical_group.id))
@@ -87,6 +92,7 @@ def postprocess_HL23PYR():
 
     # biophysics
     # include calcium dynamics component
+
     celldoc.add(neuroml.IncludeType(href="CaDynamics_E2_NML2.nml"), validate=False)
     # all
     cell.add_channel_density(nml_cell_doc=celldoc,
@@ -204,9 +210,42 @@ def postprocess_HL23PYR():
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
 
     # Apical
+    sg = cell.get_segment_group("apical_dendrite_group")
     cell.set_specific_capacitance("2 uF_per_cm2",
-                                  group_id="apical_dendrite_group")
-    # TODO: non homoegenous Ih: Line #37
+                                  group_id=sg.id)
+    # Add parameter that we use to distribute Ih
+    sg.add(
+        "InhomogeneousParameter",
+        id="PathLengthOverApicDends",
+        variable="p",
+        metric="Path Length from root",
+        proximal=sg.component_factory(
+            "ProximalDetails",
+            translation_start="0")
+    )
+    # distribute Ih
+    cdnonuniform = cell.add_channel_density_v(
+        "ChannelDensityNonUniform",
+        nml_cell_doc=celldoc,
+        id="Ih_apical",
+        ion_channel="Ih",
+        ion="hcn",
+        erev="-45 mV",
+        validate=False
+    )
+    varparam = cdnonuniform.add(
+        "VariableParameter",
+        parameter="condDensity",
+        segment_groups=sg.id,
+        validate=False
+    )
+    # 0.00148 S/cm2 = 0.00148 * 1e-8 mS/um2
+    # TODO: 1E9 multiplier?
+    inhomogeneous_value = varparam.add(
+        "InhomogeneousValue",
+        inhomogeneous_parameters="PathLengthOverApicDends",
+        value="1E9 * (1.48 * 1E-8) * ((2.087 * exp(p * 3.6161)) - 0.8696)"
+    )
 
     # Basal
     cell.set_specific_capacitance("2 uF_per_cm2",
@@ -302,13 +341,13 @@ def postprocess_HL23PYR():
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
 
-    # mylein
+    # myelin
     cell.set_specific_capacitance("0.02 uF_per_cm2",
-                                  group_id="myelin_0")
-    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_0")
+                                  group_id="myelin_group")
+    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
     # L1 validation
-    cell.validate(recursive=True)
-    cell.summary(morph=True, biophys=True)
+    # cell.validate(recursive=True)
+    # cell.summary(morph=False, biophys=True)
     # use pynml writer to also run L2 validation
     write_neuroml2_file(celldoc, f"{cellname}.cell.nml")
 
@@ -546,6 +585,47 @@ def postprocess_HL23PV():
     write_neuroml2_file(celldoc, f"{cellname}.cell.nml")
 
 
+def analyse_HL23PYR(hyperpolarising: bool = True, depolarising: bool = True):
+    """Generate various curves for HL23PYR cells
+
+    :returns: None
+
+    """
+    cellname = "HL23PYR"
+    if hyperpolarising:
+        # hyper-polarising inputs
+        generate_current_vs_frequency_curve(
+            nml2_file=f"{cellname}.cell.nml",
+            cell_id=cellname,
+            custom_amps_nA=list(numpy.arange(-0.05, -0.1, -0.01)),
+            pre_zero_pulse=200,
+            post_zero_pulse=300,
+            plot_voltage_traces=True,
+            plot_iv=True,
+            plot_if=False,
+            simulator="jNeuroML_NEURON",
+            analysis_delay=300.,
+            analysis_duration=400.
+        )
+
+    if depolarising:
+        # depolarising inputs
+        generate_current_vs_frequency_curve(
+            nml2_file=f"{cellname}.cell.nml",
+            cell_id=cellname,
+            plot_voltage_traces=True,
+            spike_threshold_mV=-10.0,
+            # custom_amps_nA=list(numpy.arange(0, 0.3, 0.05)),
+            custom_amps_nA=[0.2],
+            pre_zero_pulse=200,
+            post_zero_pulse=300,
+            plot_iv=True,
+            simulator="jNeuroML_NEURON",
+            analysis_delay=300.,
+            analysis_duration=400.
+        )
+
+
 def analyse_HL23PV(hyperpolarising: bool = True, depolarising: bool = True):
     """Generate various curves for HL23PV cells
 
@@ -587,18 +667,39 @@ def analyse_HL23PV(hyperpolarising: bool = True, depolarising: bool = True):
 
 
 def simulate_test_network(cells: list = []):
-    """TODO: Docstring for create_test_network.
+    """Create and simulate a test network
 
-    :param cells: TODO
-    :returns: TODO
+    WIP: does not simulate it yet.
+
+    :param cells: list of cell names to simulate
+    :type cells: list of strings
+    :returns: None
 
     """
-    pass
+    net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument",
+                                                        id="HL23")
+
+    network = net_doc.add("Network", id="HL23Net", validate=False)  # type: neuroml.Network
+    counter = 0
+    for cell in cells:
+        net_doc.add("IncludeType", href=f"{cell}.cell.nml")
+        pop = network.add("Population", id=f"{cell}_pop",
+                          type="populationList", component=f"{cell}",
+                          validate=False)  # type: neuroml.Population
+        pop.add(
+            "Instance", id="0",
+            location=pop.component_factory("Location", x=f"{counter}", y="0", z="0")
+        )
+        counter += 500
+
+    net_doc.validate(True)
+    write_neuroml2_file(net_doc, "HL23.net.nml")
 
 
 if __name__ == "__main__":
     cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
     # postprocess_HL23PV()
     # analyse_HL23PV(True, True)
-    # simulate_test_network(["HP23PV"])
     postprocess_HL23PYR()
+    # analyse_HL23PYR(False, True)
+    simulate_test_network(["HL23PV", "HL23PYR"])
