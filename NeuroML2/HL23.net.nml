@@ -1,0 +1,16 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23">
+    <include href="HL23PV.cell.nml"/>
+    <include href="HL23PYR.cell.nml"/>
+    <network id="HL23Net">
+        <population id="HL23PV_pop" component="HL23PV" type="populationList">
+            <instance id="0">
+                <location x="0." y="0." z="0."/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop" component="HL23PYR" type="populationList">
+            <instance id="0">
+                <location x="50." y="0." z="0."/>
+            </instance>
+        </population>
+    </network>
+</neuroml>
