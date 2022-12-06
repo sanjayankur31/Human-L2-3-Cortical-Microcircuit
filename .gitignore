@@ -15,3 +15,13 @@ x86_64/
 /NeuroML2/NaTg/*.hoc
 /NeuroML2/Sim_IClamp_HL23PV.json
 /NeuroML2/*.hoc
+/NeuroML2/IClamp_HL23PYR.json
+/NeuroML2/Network.gv.png
+/NeuroML2/Network.json
+/NeuroML2/Sim_IClamp_HL23PYR.json
+/NeuroML2/AMPA_syn.synapse.nml
+*code.gen.c
+*code.gen.so
+*_netpyne.py
+/NeuroML2/Sim_TestNetwork.json
+/NeuroML2/TestNetwork.json

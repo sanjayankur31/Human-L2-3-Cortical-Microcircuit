@@ -1,0 +1,33 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.7.3 (libNeuroML v0.4.2)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="Sim_IClamp_HL23PYR" reportFile="report.Sim_IClamp_HL23PYR.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="PyNN.xml"/>
+    <Include file="IClamp_HL23PYR.net.nml"/>
+    <Include file="HL23PYR.cell.nml"/>
+   
+    <Simulation id="Sim_IClamp_HL23PYR" length="300.0ms" step="0.01ms" target="IClamp_HL23PYR" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <Display id="pop_HL23PYR_v" title="Plots of pop_HL23PYR_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="pop_HL23PYR_0__v" quantity="pop_HL23PYR[0]/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Sim_IClamp_HL23PYR_pop_HL23PYR_v_dat" fileName="Sim_IClamp_HL23PYR.pop_HL23PYR.v.dat">
+            <OutputColumn id="pop_HL23PYR_0__v" quantity="pop_HL23PYR[0]/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

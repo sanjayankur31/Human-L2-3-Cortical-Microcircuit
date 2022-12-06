@@ -1,0 +1,43 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.7.3 (libNeuroML v0.4.2)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="Sim_TestNetwork" reportFile="report.Sim_TestNetwork.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="PyNN.xml"/>
+    <Include file="TestNetwork.net.nml"/>
+    <Include file="HL23PV.cell.nml"/>
+    <Include file="HL23PYR.cell.nml"/>
+    <Include file="synapses/AMPA_syn.synapse.nml"/>
+   
+    <Simulation id="Sim_TestNetwork" length="300.0ms" step="0.01ms" target="TestNetwork" seed="1111">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <Display id="Pop_HL23PV_v" title="Plots of Pop_HL23PV_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23PV_0__v" quantity="Pop_HL23PV[0]/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="Pop_HL23PYR_v" title="Plots of Pop_HL23PYR_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23PYR_0__v" quantity="Pop_HL23PYR[0]/v" scale="1mV" color="#0534e4" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Sim_TestNetwork_Pop_HL23PV_v_dat" fileName="Sim_TestNetwork.Pop_HL23PV.v.dat">
+            <OutputColumn id="Pop_HL23PV_0__v" quantity="Pop_HL23PV[0]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Sim_TestNetwork_Pop_HL23PYR_v_dat" fileName="Sim_TestNetwork.Pop_HL23PYR.v.dat">
+            <OutputColumn id="Pop_HL23PYR_0__v" quantity="Pop_HL23PYR[0]/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>
