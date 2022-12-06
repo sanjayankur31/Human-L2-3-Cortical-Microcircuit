@@ -4,7 +4,7 @@ from neuromllite.utils import create_new_model
 import sys
 
 
-colors = {'HL23PV':'0 0.8 0', 'FS':'0.8 0 0', 'LTS':'0 0 0.8', 'IB':'0.8 0 0', 'IBR':'0.8 0 0'}
+colors = {'HL23PV':'0 0.8 0', 'HL23PYR':'0.8 0 0'}
 
 def generate(cell, duration=300, config='IClamp',parameters = None):
 
@@ -57,7 +57,8 @@ if __name__ == "__main__":
 
     if '-all' in sys.argv:
         for cell in colors:
-            generate(cell, 300, config="IClamp")
+            sim, net = generate(cell, 300, config="IClamp",parameters={'stim_amp':'200pA'})
+            check_to_generate_or_run(sys.argv, sim)
 
 
     else:

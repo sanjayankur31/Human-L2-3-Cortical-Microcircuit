@@ -14,3 +14,4 @@ x86_64/
 /NeuroML2/NaTg/LEMS_Test_NaTg_PV_somatic.xml
 /NeuroML2/NaTg/*.hoc
 /NeuroML2/Sim_IClamp_HL23PV.json
+/NeuroML2/*.hoc
