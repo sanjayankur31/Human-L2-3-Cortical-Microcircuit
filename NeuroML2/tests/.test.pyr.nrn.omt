@@ -1,0 +1,16 @@
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation
+
+target: test_HL23PYR.hoc
+engine: NEURON
+mep: .test.pyr.mep
+experiments:
+  step:
+    observables:
+      spike times:
+        file:
+          path: Soma.pyr.v.dat
+          columns: [0,1]
+          scaling: [1000,1000]
+        spike detection:
+          method: threshold
+        tolerance: 0
