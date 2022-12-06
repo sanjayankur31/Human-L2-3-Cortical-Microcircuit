@@ -2,13 +2,13 @@
 
 target: test_HL23PV.hoc
 engine: NEURON
-mep: .test.step.mep
+mep: .test.pv.mep
 experiments:
   stepPV:
     observables:
       spike times:
         file:
-          path: Soma.si.dat
+          path: Soma.pv.v.dat
           columns: [0,1]
           scaling: [1000,1000]
         spike detection:
