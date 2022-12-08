@@ -4,7 +4,7 @@ from neuromllite.utils import create_new_model
 import sys
 
 
-colors = {'HL23PV':'0 0.9 0', 'HL23PYR':'0.9 0 0'}
+colors = {'HL23PV':'0 0.9 0', 'HL23PYR':'0.9 0 0', 'HL23VIP':'0 0 0.9'}
 
 def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
@@ -45,6 +45,9 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
         net.parameters = parameters
 
+        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=100, height=100, depth=100)
+        net.regions.append(r1)
+
         ampa = Synapse(id="AMPA_syn", neuroml2_source_file="synapses/AMPA_syn.synapse.nml")
         net.synapses.append(ampa)
 
@@ -82,6 +85,7 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
                 size='num_%s'%cell,
                 component=cell,
                 properties={"color": colors[cell]},
+                random_layout=RandomLayout(region=r1.id),
             )
             net.populations.append(pE)
 
@@ -124,7 +128,14 @@ if __name__ == "__main__":
                 sim, net = generate({cell:1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
                 check_to_generate_or_run(sys.argv, sim)
 
-        sim, net = generate({'HL23PV':1, 'HL23PYR':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
+        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
+        check_to_generate_or_run(sys.argv, sim)
+
+    elif '-vip' in sys.argv:
+
+        #sim, net = generate('cADpyr229_L23_PC_c292d67a2e_0_0', 3000, config="IClamp")
+        sim, net = generate({'HL23VIP':1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
+
         check_to_generate_or_run(sys.argv, sim)
 
     else:

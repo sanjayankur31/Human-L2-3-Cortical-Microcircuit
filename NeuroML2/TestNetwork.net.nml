@@ -5,22 +5,46 @@
     NeuroMLlite parameters: 
         average_rate = 100 Hz
         num_HL23PV = 1
-        num_HL23PYR = 1</notes>
+        num_HL23PYR = 1
+        num_HL23VIP = 1</notes>
     <include href="HL23PV.cell.nml"/>
     <include href="HL23PYR.cell.nml"/>
+    <include href="HL23VIP.cell.nml"/>
     <include href="synapses/AMPA_syn.synapse.nml"/>
     <poissonFiringSynapse id="pfs0" averageRate="100 Hz" synapse="AMPA_syn" spikeTarget="./AMPA_syn"/>
     <network id="TestNetwork" type="networkWithTemperature" temperature="34.0degC">
         <notes>Network example</notes>
         <property tag="recommended_dt_ms" value="0.01"/>
         <property tag="recommended_duration_ms" value="300.0"/>
-        <population id="Pop_HL23PV" component="HL23PV" size="1"/>
-        <population id="Pop_HL23PYR" component="HL23PYR" size="1"/>
+        <population id="Pop_HL23PV" component="HL23PV" size="1" type="populationList">
+            <property tag="color" value="0 0.9 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="966.453535692138757" y="44.073259917535268" z="7.491470058587191"/>
+            </instance>
+        </population>
+        <population id="Pop_HL23PYR" component="HL23PYR" size="1" type="populationList">
+            <property tag="color" value="0.9 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="910.975962449124154" y="93.926899736376399" z="582.227573058949133"/>
+            </instance>
+        </population>
+        <population id="Pop_HL23VIP" component="HL23VIP" size="1" type="populationList">
+            <property tag="color" value="0 0 0.9"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="671.563481487985086" y="8.393822683708397" z="766.480932791796249"/>
+            </instance>
+        </population>
         <inputList id="stim_HL23PV" population="Pop_HL23PV" component="pfs0">
-            <inputW id="0" target="../Pop_HL23PV[0]" destination="synapses" weight="0.1"/>
+            <inputW id="0" target="../Pop_HL23PV/0/HL23PV" destination="synapses" weight="0.1"/>
         </inputList>
         <inputList id="stim_HL23PYR" population="Pop_HL23PYR" component="pfs0">
-            <inputW id="0" target="../Pop_HL23PYR[0]" destination="synapses" weight="0.1"/>
+            <inputW id="0" target="../Pop_HL23PYR/0/HL23PYR" destination="synapses" weight="0.1"/>
+        </inputList>
+        <inputList id="stim_HL23VIP" population="Pop_HL23VIP" component="pfs0">
+            <inputW id="0" target="../Pop_HL23VIP/0/HL23VIP" destination="synapses" weight="0.1"/>
         </inputList>
     </network>
 </neuroml>
