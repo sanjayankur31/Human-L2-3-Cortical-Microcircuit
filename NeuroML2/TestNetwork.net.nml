@@ -22,28 +22,28 @@
             <property tag="color" value="0 0.9 0"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="96.645353569213881" y="44.073259917535268" z="0.749147005858719"/>
+                <location x="966.453535692138757" y="440.732599175352675" z="7.491470058587191"/>
             </instance>
         </population>
         <population id="Pop_HL23PYR" component="HL23PYR" size="1" type="populationList">
             <property tag="color" value="0.2 0.2 0.2"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="91.09759624491241" y="93.926899736376399" z="58.222757305894909"/>
+                <location x="910.975962449124154" y="939.268997363764015" z="582.227573058949133"/>
             </instance>
         </population>
         <population id="Pop_HL23VIP" component="HL23VIP" size="1" type="populationList">
             <property tag="color" value="0.9 0.9 0"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="67.1563481487985" y="8.393822683708397" z="76.648093279179633"/>
+                <location x="671.563481487985086" y="83.93822683708396" z="766.480932791796249"/>
             </instance>
         </population>
         <population id="Pop_HL23SST" component="HL23SST" size="1" type="populationList">
             <property tag="color" value="0.9 0 0"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="23.680977536311776" y="3.081402172660996" z="78.877271723628354"/>
+                <location x="236.809775363117751" y="30.814021726609965" z="788.772717236283484"/>
             </instance>
         </population>
         <inputList id="stim_HL23PV" population="Pop_HL23PV" component="pfs0">

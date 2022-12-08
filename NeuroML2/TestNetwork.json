@@ -1,0 +1,122 @@
+{
+    "TestNetwork": {
+        "version": "NeuroMLlite v0.5.3",
+        "notes": "Network example",
+        "parameters": {
+            "average_rate": "100 Hz",
+            "num_HL23PV": 1,
+            "num_HL23PYR": 1,
+            "num_HL23VIP": 1,
+            "num_HL23SST": 1
+        },
+        "cells": {
+            "HL23PV": {
+                "neuroml2_source_file": "HL23PV.cell.nml"
+            },
+            "HL23PYR": {
+                "neuroml2_source_file": "HL23PYR.cell.nml"
+            },
+            "HL23VIP": {
+                "neuroml2_source_file": "HL23VIP.cell.nml"
+            },
+            "HL23SST": {
+                "neuroml2_source_file": "HL23SST.cell.nml"
+            }
+        },
+        "synapses": {
+            "AMPA_syn": {
+                "neuroml2_source_file": "synapses/AMPA_syn.synapse.nml"
+            }
+        },
+        "input_sources": {
+            "pfs0": {
+                "parameters": {
+                    "average_rate": "average_rate",
+                    "synapse": "AMPA_syn",
+                    "spike_target": "./AMPA_syn"
+                },
+                "neuroml2_input": "PoissonFiringSynapse"
+            }
+        },
+        "regions": {
+            "L23": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "width": 1000.0,
+                "height": 1000.0,
+                "depth": 1000.0
+            }
+        },
+        "populations": {
+            "Pop_HL23PV": {
+                "size": "num_HL23PV",
+                "component": "HL23PV",
+                "properties": {
+                    "color": "0 0.9 0"
+                },
+                "random_layout": {
+                    "region": "L23"
+                }
+            },
+            "Pop_HL23PYR": {
+                "size": "num_HL23PYR",
+                "component": "HL23PYR",
+                "properties": {
+                    "color": "0.2 0.2 0.2"
+                },
+                "random_layout": {
+                    "region": "L23"
+                }
+            },
+            "Pop_HL23VIP": {
+                "size": "num_HL23VIP",
+                "component": "HL23VIP",
+                "properties": {
+                    "color": "0.9 0.9 0"
+                },
+                "random_layout": {
+                    "region": "L23"
+                }
+            },
+            "Pop_HL23SST": {
+                "size": "num_HL23SST",
+                "component": "HL23SST",
+                "properties": {
+                    "color": "0.9 0 0"
+                },
+                "random_layout": {
+                    "region": "L23"
+                }
+            }
+        },
+        "inputs": {
+            "stim_HL23PV": {
+                "input_source": "pfs0",
+                "population": "Pop_HL23PV",
+                "percentage": 100.0,
+                "weight": 0.1
+            },
+            "stim_HL23PYR": {
+                "input_source": "pfs0",
+                "population": "Pop_HL23PYR",
+                "percentage": 100.0,
+                "weight": 0.1
+            },
+            "stim_HL23VIP": {
+                "input_source": "pfs0",
+                "population": "Pop_HL23VIP",
+                "percentage": 100.0,
+                "weight": 0.1
+            },
+            "stim_HL23SST": {
+                "input_source": "pfs0",
+                "population": "Pop_HL23SST",
+                "percentage": 100.0,
+                "weight": 0.1
+            }
+        },
+        "seed": 1234,
+        "temperature": 34.0
+    }
+}

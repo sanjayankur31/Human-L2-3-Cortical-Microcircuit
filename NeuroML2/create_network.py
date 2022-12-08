@@ -45,7 +45,7 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
         net.parameters = parameters
 
-        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=100, height=100, depth=100)
+        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=1000, height=1000, depth=1000)
         net.regions.append(r1)
 
         ampa = Synapse(id="AMPA_syn", neuroml2_source_file="synapses/AMPA_syn.synapse.nml")
@@ -110,6 +110,7 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
             seed="1111",
             dt="0.01",
             record_traces={"all": "*"},
+            record_spikes={"all": "*"},
         )
 
         sim.to_json_file()
@@ -129,6 +130,12 @@ if __name__ == "__main__":
                 check_to_generate_or_run(sys.argv, sim)
 
         sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1, 'HL23SST':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
+
+        check_to_generate_or_run(sys.argv, sim)
+
+    elif '-net2' in sys.argv:
+
+        sim, net = generate({'HL23PV':5, 'HL23PYR':5, 'HL23VIP':5, 'HL23SST':5}, 300, config="LargeNetwork", parameters={'average_rate':'50 Hz'})
         check_to_generate_or_run(sys.argv, sim)
 
     elif '-vip' in sys.argv:
