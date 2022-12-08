@@ -6,10 +6,12 @@
         average_rate = 100 Hz
         num_HL23PV = 1
         num_HL23PYR = 1
+        num_HL23SST = 1
         num_HL23VIP = 1</notes>
     <include href="HL23PV.cell.nml"/>
     <include href="HL23PYR.cell.nml"/>
     <include href="HL23VIP.cell.nml"/>
+    <include href="HL23SST.cell.nml"/>
     <include href="synapses/AMPA_syn.synapse.nml"/>
     <poissonFiringSynapse id="pfs0" averageRate="100 Hz" synapse="AMPA_syn" spikeTarget="./AMPA_syn"/>
     <network id="TestNetwork" type="networkWithTemperature" temperature="34.0degC">
@@ -20,21 +22,28 @@
             <property tag="color" value="0 0.9 0"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="966.453535692138757" y="44.073259917535268" z="7.491470058587191"/>
+                <location x="96.645353569213881" y="44.073259917535268" z="0.749147005858719"/>
             </instance>
         </population>
         <population id="Pop_HL23PYR" component="HL23PYR" size="1" type="populationList">
-            <property tag="color" value="0.9 0 0"/>
+            <property tag="color" value="0.2 0.2 0.2"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="910.975962449124154" y="93.926899736376399" z="582.227573058949133"/>
+                <location x="91.09759624491241" y="93.926899736376399" z="58.222757305894909"/>
             </instance>
         </population>
         <population id="Pop_HL23VIP" component="HL23VIP" size="1" type="populationList">
-            <property tag="color" value="0 0 0.9"/>
+            <property tag="color" value="0.9 0.9 0"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="671.563481487985086" y="8.393822683708397" z="766.480932791796249"/>
+                <location x="67.1563481487985" y="8.393822683708397" z="76.648093279179633"/>
+            </instance>
+        </population>
+        <population id="Pop_HL23SST" component="HL23SST" size="1" type="populationList">
+            <property tag="color" value="0.9 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="23.680977536311776" y="3.081402172660996" z="78.877271723628354"/>
             </instance>
         </population>
         <inputList id="stim_HL23PV" population="Pop_HL23PV" component="pfs0">
@@ -45,6 +54,9 @@
         </inputList>
         <inputList id="stim_HL23VIP" population="Pop_HL23VIP" component="pfs0">
             <inputW id="0" target="../Pop_HL23VIP/0/HL23VIP" destination="synapses" weight="0.1"/>
+        </inputList>
+        <inputList id="stim_HL23SST" population="Pop_HL23SST" component="pfs0">
+            <inputW id="0" target="../Pop_HL23SST/0/HL23SST" destination="synapses" weight="0.1"/>
         </inputList>
     </network>
 </neuroml>

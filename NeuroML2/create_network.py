@@ -4,7 +4,7 @@ from neuromllite.utils import create_new_model
 import sys
 
 
-colors = {'HL23PV':'0 0.9 0', 'HL23PYR':'0.9 0 0', 'HL23VIP':'0 0 0.9'}
+colors = {'HL23PYR':'0.2 0.2 0.2', 'HL23PV':'0 0.9 0', 'HL23VIP':'0.9 0.9 0', 'HL23SST':'0.9 0 0'}
 
 def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
@@ -128,19 +128,23 @@ if __name__ == "__main__":
                 sim, net = generate({cell:1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
                 check_to_generate_or_run(sys.argv, sim)
 
-        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
+        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1, 'HL23SST':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
         check_to_generate_or_run(sys.argv, sim)
 
     elif '-vip' in sys.argv:
 
-        #sim, net = generate('cADpyr229_L23_PC_c292d67a2e_0_0', 3000, config="IClamp")
         sim, net = generate({'HL23VIP':1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
+
+        check_to_generate_or_run(sys.argv, sim)
+
+    elif '-sst' in sys.argv:
+
+        sim, net = generate({'HL23SST':1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
 
         check_to_generate_or_run(sys.argv, sim)
 
     else:
 
-        #sim, net = generate('cADpyr229_L23_PC_c292d67a2e_0_0', 3000, config="IClamp")
         sim, net = generate({'HL23PV':1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
 
         check_to_generate_or_run(sys.argv, sim)
