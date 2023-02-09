@@ -14,7 +14,8 @@
     <concentrationModel id="CaDynamics_E2_NML2_PYR_axonal" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="226 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
     <concentrationModel id="CaDynamics_E2_NML2_SST_somatic" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="465 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
     <concentrationModel id="CaDynamics_E2_NML2_SST_axonal" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="469 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
-
+    <concentrationModel id="CaDynamics_E2_NML2_VIP_somatic" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="25.159166441555044 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
+    <concentrationModel id="CaDynamics_E2_NML2_VIP_axonal" type="concentrationModelHayEtAl" minCai="1e-4 mM" decay="75.78875619470153 ms" depth="0.1 um" gamma="5e-4" ion="ca"/>
 
     <!--
     This is a new, custom ComponentType to handle the calcium mechanism with parameters
