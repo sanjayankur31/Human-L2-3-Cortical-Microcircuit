@@ -102,7 +102,7 @@ print "spike count = ", apcvec.size()
 
 objref f_Soma_si
 f_Soma_si = new File()
-{ f_Soma_si.wopen("Soma.pv.v.dat") }
+{ f_Soma_si.wopen("Soma.sst.v.dat") }
 for i=0, Soma_v.size()-1 {
    f_Soma_si.printf("%f\t%f\n", v_time.x[i]/1000, Soma_v.x[i]/1000)
 }
@@ -111,7 +111,7 @@ for i=0, Soma_v.size()-1 {
 
 objref f_Soma_ca
 f_Soma_ca = new File()
-{ f_Soma_ca.wopen("Soma.pv.ca.dat") }
+{ f_Soma_ca.wopen("Soma.sst.ca.dat") }
 for i=0, Soma_ca.size()-1 {
    f_Soma_ca.printf("%f\t%f\n", v_time.x[i]/1000, Soma_ca.x[i])
 }
