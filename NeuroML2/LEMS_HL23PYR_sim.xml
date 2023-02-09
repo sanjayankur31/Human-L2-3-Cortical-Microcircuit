@@ -1,0 +1,40 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.7.6 (libNeuroML v0.4.2)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="HL23PYR_sim"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="HL23PYR.net.nml"/>
+    <Include file="HL23PYR.cell.nml"/>
+    <Include file="CaDynamics_E2_NML2.nml"/>
+    <Include file="channels/pas.channel.nml"/>
+    <Include file="channels/Ih.channel.nml"/>
+    <Include file="channels/SK.channel.nml"/>
+    <Include file="channels/K_T.channel.nml"/>
+    <Include file="channels/K_P.channel.nml"/>
+    <Include file="channels/Kv3_1.channel.nml"/>
+    <Include file="channels/Im.channel.nml"/>
+    <Include file="channels/NaTg/NaTg.channel.nml"/>
+    <Include file="channels/Ca_HVA.channel.nml"/>
+    <Include file="channels/Ca_LVA.channel.nml"/>
+    <Include file="channels/Nap.channel.nml"/>
+   
+    <Simulation id="HL23PYR_sim" length="300.0ms" step="0.01ms" target="HL23PYRNet" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="HL23PYR_net_output" fileName="HL23PYR_net.dat">
+            <OutputColumn id="HL23PYR_pop_0_v" quantity="HL23PYR_pop/0/HL23PYR/0/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

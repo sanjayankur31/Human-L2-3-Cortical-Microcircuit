@@ -1,0 +1,16 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23PV">
+    <include href="HL23PV.cell.nml"/>
+    <pulseGenerator id="pg_HL23PV" delay="50ms" duration="200ms" amplitude="0.2nA">
+        <notes>Simple pulse generator</notes>
+    </pulseGenerator>
+    <network id="HL23PVNet" type="networkWithTemperature" temperature="34 degC">
+        <population id="HL23PV_pop" component="HL23PV" type="populationList">
+            <property tag="color" value="0.8249648621074325 0.027813322534632867 0.6404955383058488"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="0." y="0." z="0."/>
+            </instance>
+        </population>
+        <explicitInput target="HL23PV_pop/0/HL23PV" input="pg_HL23PV"/>
+    </network>
+</neuroml>
