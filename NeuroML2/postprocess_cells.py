@@ -16,7 +16,7 @@ import neuroml
 from neuroml.loaders import read_neuroml2_file
 from neuroml.writers import NeuroMLWriter
 from pyneuroml.analysis import generate_current_vs_frequency_curve
-from pyneuroml.pynml import write_neuroml2_file
+from pyneuroml.pynml import write_neuroml2_file, get_next_hex_color
 from neuroml.neuro_lex_ids import neuro_lex_ids
 
 
@@ -705,6 +705,8 @@ def simulate_test_network(cells: list = []):
         pop = network.add("Population", id=f"{cell}_pop",
                           type="populationList", component=f"{cell}",
                           validate=False)  # type: neuroml.Population
+        pop.add("Property", tag="color", value=get_next_hex_color())
+        pop.add("Property", tag="region", value="L23")
         pop.add(
             "Instance", id="0",
             location=pop.component_factory("Location", x=f"{counter}", y="0", z="0")
@@ -717,8 +719,8 @@ def simulate_test_network(cells: list = []):
 
 if __name__ == "__main__":
     cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
-    # postprocess_HL23PV()
-    # analyse_HL23PV(True, True)
+    postprocess_HL23PV()
+    analyse_HL23PV(True, True)
     postprocess_HL23PYR()
     analyse_HL23PYR(False, True)
     simulate_test_network(["HL23PV", "HL23PYR"])
