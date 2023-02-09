@@ -1,0 +1,6 @@
+system: Testing a detailed cell
+
+experiments:
+  stepVIP:
+    expected:
+      spike times: [69.68750000,    121.18750000,    159.82500000,    194.32500000,    227.42500000]

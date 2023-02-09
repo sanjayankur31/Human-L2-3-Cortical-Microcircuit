@@ -98,6 +98,7 @@ run()
 nrnpython("end_time = time.time()")
 nrnpython("print('Finished simulation in %s s'%(end_time-start_time))")
 
+print "spikes = ", apcvec.printf("%.8f\t")
 print "spike count = ", apcvec.size()
 
 objref f_Soma_si
