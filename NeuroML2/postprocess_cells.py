@@ -12,12 +12,18 @@ Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
 
 
 import numpy
+import random
 import neuroml
 from neuroml.loaders import read_neuroml2_file
 from neuroml.writers import NeuroMLWriter
 from pyneuroml.analysis import generate_current_vs_frequency_curve
-from pyneuroml.pynml import write_neuroml2_file, get_next_hex_color
+from pyneuroml.pynml import write_neuroml2_file, run_lems_with_jneuroml_neuron
+from pyneuroml.plot.PlotMorphology import plot_2D
+from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 from neuroml.neuro_lex_ids import neuro_lex_ids
+
+
+random.seed(1412)
 
 
 def load_and_setup_cell(cellname: str):
@@ -1276,26 +1282,68 @@ def simulate_test_network(cells: list = []):
 
     network = net_doc.add("Network", id="HL23Net",
                           type="networkWithTemperature", temperature="34 degC", validate=False)  # type: neuroml.Network
-    counter = 0
+
     for cell in cells:
+        # a document for the cell with input for OMV test
+        cell_net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument", id=f"{cell}")
+        cell_network = cell_net_doc.add("Network", id=f"{cell}Net",
+                                        type="networkWithTemperature", temperature="34 degC", validate=False)  # type: neuroml.Network
+        cell_net_doc.add("IncludeType", href=f"{cell}.cell.nml")
+        cell_pop = cell_network.add("Population", id=f"{cell}_pop",
+                                    type="populationList", component=f"{cell}",
+                                    validate=False)  # type: neuroml.Population
+        cell_pop.add("Property", tag="color", value=f"{random.random()} {random.random()} {random.random()}")
+        cell_pop.add("Property", tag="region", value="L23")
+        cell_pop.add(
+            "Instance", id="0",
+            location=cell_pop.component_factory(
+                "Location", x="0", y="0", z="0",
+            ))
+        # to match the test_*hoc NEURON files
+        cell_net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
+        cell_network.add("ExplicitInput", target=f"{cell}_pop/0/{cell}", input=f"pg_{cell}")
+        cell_net_doc.validate(True)
+        write_neuroml2_file(cell_net_doc, f"{cell}.net.nml")
+        cell_net_sim = LEMSSimulation(f"{cell}_sim", duration=300., dt=0.01,
+                                      target=cell_network.id)
+        cell_net_sim.include_neuroml2_file(f"{cell}.net.nml")
+        cell_net_sim.create_output_file(id=f"{cell}_net_output",
+                                        file_name=f"{cell}_net.dat")
+        cell_net_sim.add_column_to_output_file(output_file_id=f"{cell}_net_output",
+                                               column_id=f"{cell}_pop_0_v",
+                                               quantity=f"{cell}_pop/0/{cell}/0/v")
+        # Save LEMS simulation to file
+        cell_sim_file = cell_net_sim.save_to_file()
+
+        # Run the simulation using the NEURON simulator
+        run_lems_with_jneuroml_neuron(cell_sim_file, max_memory="8G", nogui=True,
+                                      plot=False, skip_run=False)
+
+        # network with all 4 cells
         net_doc.add("IncludeType", href=f"{cell}.cell.nml")
         pop = network.add("Population", id=f"{cell}_pop",
                           type="populationList", component=f"{cell}",
                           validate=False)  # type: neuroml.Population
-        pop.add("Property", tag="color", value=get_next_hex_color())
+        pop.add("Property", tag="color", value=f"{random.random()} {random.random()} {random.random()}")
         pop.add("Property", tag="region", value="L23")
         pop.add(
             "Instance", id="0",
-            location=pop.component_factory("Location", x=f"{counter}", y="0", z="0")
+            location=pop.component_factory(
+                "Location",
+                x=f"{random.randint(0, 200)}",
+                y=f"{random.randint(0, 200)}",
+                z=f"{random.randint(0, 200)}")
         )
-        counter += 500
+        net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
+        network.add("ExplicitInput", target="pop0[0]", input=f"pg_{cell}")
 
     net_doc.validate(True)
     write_neuroml2_file(net_doc, "HL23.net.nml")
+    # plot_2D("HL23.net.nml", plane2d="xy")
 
 
 if __name__ == "__main__":
-    cellnames = ["HL23PV" "HL23PYR" "HL23SST" "HL23VIP"]
+    cellnames = ["HL23PV", "HL23PYR", "HL23SST", "HL23VIP"]
     """
     postprocess_HL23PV()
     analyse_HL23PV(True, True)
@@ -1304,6 +1352,6 @@ if __name__ == "__main__":
     postprocess_HL23SST()
     analyse_HL23SST(True, True)
     """
-    postprocess_HL23VIP()
-    analyse_HL23VIP(True, True)
-    # simulate_test_network(["HL23PV", "HL23PYR"])
+    # postprocess_HL23VIP()
+    # analyse_HL23VIP(True, True)
+    simulate_test_network(cellnames)
