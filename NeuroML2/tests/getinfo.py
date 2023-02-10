@@ -15,7 +15,6 @@ import yaml
 from pyneuroml.neuron import morphinfo, getinfo, load_hoc_or_python_file
 from neuron import h
 
-print(len(sys.argv))
 if len(sys.argv) != 2:
     print("Error: only takes one argument")
     sys.exit(-1)
