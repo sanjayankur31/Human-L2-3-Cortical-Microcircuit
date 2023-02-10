@@ -1301,7 +1301,11 @@ def simulate_test_network(cells: list = []):
             ))
         # to match the test_*hoc NEURON files
         cell_net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
-        cell_network.add("ExplicitInput", target=f"{cell}_pop/0/{cell}", input=f"pg_{cell}")
+        cell_inputs = cell_network.add("InputList", id=f"stim_iclamp_{cell}",
+                                       populations=f"{cell}_pop", component=f"pg_{cell}",
+                                       validate=False)
+        cell_inputs.add("Input", id=0, target=f"../{cell}_pop/0",
+                        destination="synapses")
         cell_net_doc.validate(True)
         write_neuroml2_file(cell_net_doc, f"{cell}.net.nml")
         cell_net_sim = LEMSSimulation(f"{cell}_sim", duration=300., dt=0.01,

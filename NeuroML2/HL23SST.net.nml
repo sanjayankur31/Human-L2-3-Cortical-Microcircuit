@@ -11,6 +11,8 @@
                 <location x="0." y="0." z="0."/>
             </instance>
         </population>
-        <explicitInput target="HL23SST_pop/0/HL23SST" input="pg_HL23SST"/>
+        <inputList id="stim_iclamp_HL23SST" population="HL23SST_pop" component="pg_HL23SST">
+            <input id="0" target="../HL23SST_pop/0" destination="synapses"/>
+        </inputList>
     </network>
 </neuroml>
