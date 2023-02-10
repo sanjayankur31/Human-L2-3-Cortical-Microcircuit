@@ -12,19 +12,6 @@ mechanisms:
     CaDynamics_E2_PYR_axonal:
         num_params: 5
         parameters:
-            Faraday_CaDynamics_E2_PYR_axonal:
-                ave_all_segs: 0.0964853
-                values:
-                    HL23PYR_0_.axon_0:
-                        id: HL23PYR[0].axon_0
-                        nseg: 5
-                        values:
-                            '*': 0.0964853
-                    HL23PYR_0_.axon_1:
-                        id: HL23PYR[0].axon_1
-                        nseg: 7
-                        values:
-                            '*': 0.0964853
             decay_CaDynamics_E2_PYR_axonal:
                 ave_all_segs: 226.0
                 values:
@@ -81,14 +68,6 @@ mechanisms:
     CaDynamics_E2_PYR_somatic:
         num_params: 5
         parameters:
-            Faraday_CaDynamics_E2_PYR_somatic:
-                ave_all_segs: 0.0964853
-                values:
-                    HL23PYR_0_.soma_0:
-                        id: HL23PYR[0].soma_0
-                        nseg: 1
-                        values:
-                            '*': 0.0964853
             decay_CaDynamics_E2_PYR_somatic:
                 ave_all_segs: 20.0
                 values:
@@ -125,24 +104,6 @@ mechanisms:
     Ca_HVA:
         num_params: 16
         parameters:
-            conductance_Ca_HVA:
-                ave_all_segs: 1.0e-05
-                values:
-                    HL23PYR_0_.axon_0:
-                        id: HL23PYR[0].axon_0
-                        nseg: 5
-                        values:
-                            '*': 1.0e-05
-                    HL23PYR_0_.axon_1:
-                        id: HL23PYR[0].axon_1
-                        nseg: 7
-                        values:
-                            '*': 1.0e-05
-                    HL23PYR_0_.soma_0:
-                        id: HL23PYR[0].soma_0
-                        nseg: 1
-                        values:
-                            '*': 1.0e-05
             gmax_Ca_HVA:
                 ave_all_segs: 0.00040169227230769233
                 values:
@@ -161,6 +122,24 @@ mechanisms:
                         nseg: 1
                         values:
                             '*': 0.0015499999
+            conductance_Ca_HVA:
+                ave_all_segs: 1.0e-05
+                values:
+                    HL23PYR_0_.axon_0:
+                        id: HL23PYR[0].axon_0
+                        nseg: 5
+                        values:
+                            '*': 1.0e-05
+                    HL23PYR_0_.axon_1:
+                        id: HL23PYR[0].axon_1
+                        nseg: 7
+                        values:
+                            '*': 1.0e-05
+                    HL23PYR_0_.soma_0:
+                        id: HL23PYR[0].soma_0
+                        nseg: 1
+                        values:
+                            '*': 1.0e-05
             h_forwardRate_midpoint_Ca_HVA:
                 ave_all_segs: -13.0
                 values:
@@ -417,24 +396,6 @@ mechanisms:
     Ca_LVA:
         num_params: 16
         parameters:
-            conductance_Ca_LVA:
-                ave_all_segs: 1.0e-05
-                values:
-                    HL23PYR_0_.axon_0:
-                        id: HL23PYR[0].axon_0
-                        nseg: 5
-                        values:
-                            '*': 1.0e-05
-                    HL23PYR_0_.axon_1:
-                        id: HL23PYR[0].axon_1
-                        nseg: 7
-                        values:
-                            '*': 1.0e-05
-                    HL23PYR_0_.soma_0:
-                        id: HL23PYR[0].soma_0
-                        nseg: 1
-                        values:
-                            '*': 1.0e-05
             gmax_Ca_LVA:
                 ave_all_segs: 0.04075076738461539
                 values:
@@ -453,6 +414,24 @@ mechanisms:
                         nseg: 1
                         values:
                             '*': 0.00296
+            conductance_Ca_LVA:
+                ave_all_segs: 1.0e-05
+                values:
+                    HL23PYR_0_.axon_0:
+                        id: HL23PYR[0].axon_0
+                        nseg: 5
+                        values:
+                            '*': 1.0e-05
+                    HL23PYR_0_.axon_1:
+                        id: HL23PYR[0].axon_1
+                        nseg: 7
+                        values:
+                            '*': 1.0e-05
+                    HL23PYR_0_.soma_0:
+                        id: HL23PYR[0].soma_0
+                        nseg: 1
+                        values:
+                            '*': 1.0e-05
             h_instances_Ca_LVA:
                 ave_all_segs: 1.0
                 values:
