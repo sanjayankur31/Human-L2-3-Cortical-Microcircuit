@@ -1,3 +1,7 @@
+"""
+Create a test network using NeuroMLlite.
+"""
+
 from neuromllite import *
 from neuromllite.NetworkGenerator import *
 from neuromllite.utils import create_new_model
