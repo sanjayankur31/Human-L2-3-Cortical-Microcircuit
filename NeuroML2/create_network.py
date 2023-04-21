@@ -77,7 +77,7 @@ for ctype in cell_types:
         netdoc.add(neuroml.IncludeType, href=f"{temp_cell_dir}/{rotated_cell.id}.cell.nml")
 
         pop = network.add(neuroml.Population, id=f"{ctype}_pop_{gid}", type="populationList",
-                          component=nml_cell.id)
+                          component=rotated_cell.id)
         pop.add(neuroml.Property(tag="color", value=pop_colors[ctype]))
         pop.add(neuroml.Property(tag="region", value="L23"))
 
@@ -87,5 +87,4 @@ for ctype in cell_types:
 print(netdoc.summary())
 netdoc.validate(recursive=True)
 
-# temporarily turn off level 2 validation:
 write_neuroml2_file(netdoc, "L23Net.net.nml", validate=True)
