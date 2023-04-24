@@ -63,11 +63,11 @@ for ctype in cell_types:
         x = acell[1]
         y = acell[2]
         z = acell[3]
-        # only one rotation cell
-        xrot = acell[3]
-        yrot = acell[4]
-        zrot = acell[5]
+        xrot = acell[4]
+        yrot = acell[5]
+        zrot = acell[6]
 
+        rotated_cell = None
         rotated_cell = rotate_cell(nml_cell, xrot, yrot, zrot,
                                    order="xyz", relative_to_soma=True)
         rotated_cell.id = rotated_cell.id + f"_{gid}"
