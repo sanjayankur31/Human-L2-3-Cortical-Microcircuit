@@ -19,14 +19,16 @@ import pyneuroml
 from pyneuroml.utils import rotate_cell
 from pyneuroml.utils.plot import get_next_hex_color
 from pyneuroml.pynml import write_neuroml2_file
+from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
 import h5py
 
 # set the scale of the network
-network_scale = 0.1
+network_scale = 0.01
 
 cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
 # confirmed from cell_data.keys()
-cell_types = ['HL23PV', 'HL23PYR', 'HL23SST', 'HL23VIP']
+# cell_types = ['HL23PV', 'HL23PYR', 'HL23SST', 'HL23VIP']
+cell_types = ['HL23PV']
 pop_colors = {
     'HL23PV': "0 0 1",
     'HL23PYR': "1 0 0",
@@ -45,6 +47,7 @@ temp_cell_dir = "rotated_cells"
 cellfilesdir = pathlib.Path(temp_cell_dir)
 cellfilesdir.mkdir(exist_ok=True)
 
+# create the cell populations
 for ctype in cell_types:
     celldataset = cell_data[ctype]
     # ['gid', 'x', 'y', 'z', 'x_rot', 'y_rot', 'z_rot']
@@ -86,5 +89,41 @@ for ctype in cell_types:
 
 print(netdoc.summary())
 netdoc.validate(recursive=True)
+
+# create connections
+connectivity_data = h5py.File('../L23Net/Circuit_output/synapse_connections.h5', 'r')
+for pretype in cell_types:
+    for posttype in cell_types:
+        conndataset = connectivity_data[f"{pretype}:{posttype}"]
+        anml_cell = neuroml.loaders.read_neuroml2_file(f"{posttype}.cell.nml").cells[0]  # type: neuroml.Cell
+        for conn in conndataset:
+            precell = conn[0]
+            postcell = conn[1]
+            weight = conn[2]
+            delay = conn[3]
+            section = conn[4]
+            sectionx = conn[5]
+
+            section = (section.decode("utf-8")).split(".")[1]
+            neuroml_seggrp_id = get_segment_group_name(section)
+            [ord_segs, cumul_lengths] = anml_cell.get_ordered_segments_in_groups(group_list=[neuroml_seggrp_id], include_cumulative_lengths=True)
+
+            list_ord_segs = ord_segs[neuroml_seggrp_id]
+            list_cumul_lengths = cumul_lengths[neuroml_seggrp_id]
+            total_len = list_cumul_lengths[-1]
+
+            section_loc = total_len * sectionx
+            ind = 0
+            for leng in list_cumul_lengths:
+                if leng > section_loc:
+                    break
+                ind += 1
+
+            post_seg = list_ord_segs[ind]
+            frac_along = ((section_loc - list_cumul_lengths[ind - 1]) / (list_cumul_lengths[ind] - list_cumul_lengths[ind - 1]))
+            print(f"New connection on {neuroml_seggrp_id}: segment {post_seg.id} ({list_cumul_lengths[ind-1]} - {list_cumul_lengths[ind]}) at {frac_along}")
+
+            break
+
 
 write_neuroml2_file(netdoc, "L23Net.net.nml", validate=True)
