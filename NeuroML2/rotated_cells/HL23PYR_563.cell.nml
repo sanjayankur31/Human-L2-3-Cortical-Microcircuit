@@ -423,7 +423,7 @@
             </segment>
             <segment id="1148" name="Seg3_dend_24">
                 <parent segment="1147"/>
-                <distal x="505.44714831937654" y="569.5378954784038" z="22.757099999999966" diameter="0.7466"/>
+                <distal x="505.4471483193766" y="569.5378954784038" z="22.757099999999966" diameter="0.7466"/>
             </segment>
             <segment id="1149" name="Seg4_dend_24">
                 <parent segment="1148"/>
@@ -1656,7 +1656,7 @@
             </segment>
             <segment id="5616" name="Seg117_apic_54">
                 <parent segment="5615"/>
-                <distal x="642.5501026490351" y="518.9692943741657" z="30.62309999999995" diameter="0.4484"/>
+                <distal x="642.5501026490351" y="518.9692943741658" z="30.62309999999995" diameter="0.4484"/>
             </segment>
             <segment id="5617" name="Seg118_apic_54">
                 <parent segment="5616"/>
@@ -2199,7 +2199,7 @@
             </segment>
             <segment id="1510" name="Seg27_dend_29">
                 <parent segment="1509"/>
-                <distal x="484.7425903705441" y="563.1357190122762" z="3.7190999999999548" diameter="0.7442"/>
+                <distal x="484.74259037054406" y="563.1357190122762" z="3.7190999999999548" diameter="0.7442"/>
             </segment>
             <segment id="1511" name="Seg28_dend_29">
                 <parent segment="1510"/>
@@ -2403,7 +2403,7 @@
             </segment>
             <segment id="1561" name="Seg78_dend_29">
                 <parent segment="1560"/>
-                <distal x="432.0033289157388" y="569.1397103257012" z="-8.987900000000039" diameter="0.5942"/>
+                <distal x="432.0033289157388" y="569.1397103257011" z="-8.987900000000039" diameter="0.5942"/>
             </segment>
             <segment id="1562" name="Seg79_dend_29">
                 <parent segment="1561"/>
@@ -2499,7 +2499,7 @@
             </segment>
             <segment id="1585" name="Seg102_dend_29">
                 <parent segment="1584"/>
-                <distal x="410.56905618373537" y="576.0640324629285" z="-22.96589999999999" diameter="0.5238"/>
+                <distal x="410.56905618373537" y="576.0640324629286" z="-22.96589999999999" diameter="0.5238"/>
             </segment>
             <segment id="1586" name="Seg103_dend_29">
                 <parent segment="1585"/>
@@ -2760,7 +2760,7 @@
             </segment>
             <segment id="1423" name="Seg40_dend_28">
                 <parent segment="1422"/>
-                <distal x="464.5420057008539" y="546.2578149373421" z="41.928100000000015" diameter="0.6738"/>
+                <distal x="464.54200570085396" y="546.2578149373421" z="41.928100000000015" diameter="0.6738"/>
             </segment>
             <segment id="1424" name="Seg41_dend_28">
                 <parent segment="1423"/>
@@ -3145,7 +3145,7 @@
             </segment>
             <segment id="1298" name="Seg36_dend_26">
                 <parent segment="1297"/>
-                <distal x="518.2263904595327" y="551.7690778091479" z="-15.481900000000067" diameter="0.5618"/>
+                <distal x="518.2263904595326" y="551.7690778091479" z="-15.481900000000067" diameter="0.5618"/>
             </segment>
             <segment id="1299" name="Seg37_dend_26">
                 <parent segment="1298"/>
@@ -3169,7 +3169,7 @@
             </segment>
             <segment id="1304" name="Seg42_dend_26">
                 <parent segment="1303"/>
-                <distal x="520.0620790955659" y="549.72313317609" z="-21.72690000000007" diameter="0.5524"/>
+                <distal x="520.0620790955659" y="549.7231331760901" z="-21.72690000000007" diameter="0.5524"/>
             </segment>
             <segment id="1305" name="Seg43_dend_26">
                 <parent segment="1304"/>
@@ -3349,7 +3349,7 @@
             </segment>
             <segment id="1349" name="Seg87_dend_26">
                 <parent segment="1348"/>
-                <distal x="524.845205017591" y="536.1886727988142" z="-63.96990000000001" diameter="0.4824"/>
+                <distal x="524.845205017591" y="536.1886727988141" z="-63.96990000000001" diameter="0.4824"/>
             </segment>
             <segment id="1350" name="Seg88_dend_26">
                 <parent segment="1349"/>
@@ -3373,7 +3373,7 @@
             </segment>
             <segment id="1355" name="Seg93_dend_26">
                 <parent segment="1354"/>
-                <distal x="524.2265068222712" y="534.066293343319" z="-70.51790000000001" diameter="0.473"/>
+                <distal x="524.2265068222712" y="534.0662933433189" z="-70.51790000000001" diameter="0.473"/>
             </segment>
             <segment id="1356" name="Seg94_dend_26">
                 <parent segment="1355"/>
@@ -4761,7 +4761,7 @@
             </segment>
             <segment id="705" name="Seg87_dend_15">
                 <parent segment="704"/>
-                <distal x="411.7397038621384" y="599.9219848441169" z="-26.61890000000001" diameter="0.4972"/>
+                <distal x="411.73970386213847" y="599.9219848441169" z="-26.61890000000001" diameter="0.4972"/>
             </segment>
             <segment id="706" name="Seg88_dend_15">
                 <parent segment="705"/>
@@ -5230,7 +5230,7 @@
             </segment>
             <segment id="599" name="Seg95_dend_14">
                 <parent segment="598"/>
-                <distal x="413.5418861824354" y="542.9722881505048" z="-20.94890000000005" diameter="0.4718"/>
+                <distal x="413.54188618243546" y="542.9722881505048" z="-20.94890000000005" diameter="0.4718"/>
             </segment>
             <segment id="600" name="Seg96_dend_14">
                 <parent segment="599"/>
@@ -5625,7 +5625,7 @@
             </segment>
             <segment id="304" name="Seg15_dend_6">
                 <parent segment="303"/>
-                <distal x="539.692229612167" y="585.0505348560265" z="-13.516900000000035" diameter="0.6088"/>
+                <distal x="539.6922296121671" y="585.0505348560265" z="-13.516900000000035" diameter="0.6088"/>
             </segment>
             <segment id="305" name="Seg16_dend_6">
                 <parent segment="304"/>
@@ -6087,7 +6087,7 @@
             </segment>
             <segment id="186" name="Seg47_dend_3">
                 <parent segment="185"/>
-                <distal x="499.24189504079584" y="539.4789093438274" z="-40.86690000000006" diameter="0.4908"/>
+                <distal x="499.24189504079584" y="539.4789093438272" z="-40.86690000000006" diameter="0.4908"/>
             </segment>
             <segment id="187" name="Seg48_dend_3">
                 <parent segment="186"/>
@@ -6099,7 +6099,7 @@
             </segment>
             <segment id="189" name="Seg50_dend_3">
                 <parent segment="188"/>
-                <distal x="499.10354312613725" y="536.4491635396862" z="-38.22690000000007" diameter="0.4852"/>
+                <distal x="499.10354312613725" y="536.4491635396863" z="-38.22690000000007" diameter="0.4852"/>
             </segment>
             <segment id="190" name="Seg51_dend_3">
                 <parent segment="189"/>
@@ -6127,7 +6127,7 @@
             </segment>
             <segment id="196" name="Seg57_dend_3">
                 <parent segment="195"/>
-                <distal x="499.99382011293307" y="524.9755042220675" z="-35.71990000000001" diameter="0.4724"/>
+                <distal x="499.99382011293307" y="524.9755042220673" z="-35.71990000000001" diameter="0.4724"/>
             </segment>
             <segment id="197" name="Seg58_dend_3">
                 <parent segment="196"/>
@@ -6199,7 +6199,7 @@
             </segment>
             <segment id="214" name="Seg75_dend_3">
                 <parent segment="213"/>
-                <distal x="494.2003971275283" y="518.7337743278647" z="-52.169900000000055" diameter="0.4398"/>
+                <distal x="494.20039712752833" y="518.7337743278647" z="-52.169900000000055" diameter="0.4398"/>
             </segment>
             <segment id="215" name="Seg76_dend_3">
                 <parent segment="214"/>
@@ -7174,7 +7174,7 @@
             </segment>
             <segment id="5692" name="Seg59_apic_56">
                 <parent segment="5691"/>
-                <distal x="593.3905387069285" y="584.3352311978043" z="27.810099999999963" diameter="0.5176"/>
+                <distal x="593.3905387069285" y="584.3352311978044" z="27.810099999999963" diameter="0.5176"/>
             </segment>
             <segment id="5693" name="Seg60_apic_56">
                 <parent segment="5692"/>
@@ -7186,7 +7186,7 @@
             </segment>
             <segment id="5695" name="Seg62_apic_56">
                 <parent segment="5694"/>
-                <distal x="595.0373569026631" y="584.1988183311179" z="24.92609999999995" diameter="0.5094"/>
+                <distal x="595.037356902663" y="584.1988183311179" z="24.92609999999995" diameter="0.5094"/>
             </segment>
             <segment id="5696" name="Seg63_apic_56">
                 <parent segment="5695"/>
@@ -7672,11 +7672,11 @@
             </segment>
             <segment id="1820" name="Seg86_apic_4">
                 <parent segment="1819"/>
-                <distal x="576.8564036346318" y="525.1526352749231" z="52.706100000000035" diameter="0.5948"/>
+                <distal x="576.8564036346318" y="525.152635274923" z="52.706100000000035" diameter="0.5948"/>
             </segment>
             <segment id="1821" name="Seg87_apic_4">
                 <parent segment="1820"/>
-                <distal x="578.0021582460874" y="525.1734107491197" z="52.61110000000001" diameter="0.5948"/>
+                <distal x="578.0021582460874" y="525.1734107491196" z="52.61110000000001" diameter="0.5948"/>
             </segment>
             <segment id="1822" name="Seg88_apic_4">
                 <parent segment="1821"/>
@@ -7688,7 +7688,7 @@
             </segment>
             <segment id="1824" name="Seg90_apic_4">
                 <parent segment="1823"/>
-                <distal x="581.4453367107982" y="524.9651433485208" z="52.58710000000001" diameter="0.5948"/>
+                <distal x="581.4453367107982" y="524.9651433485209" z="52.58710000000001" diameter="0.5948"/>
             </segment>
             <segment id="1825" name="Seg91_apic_4">
                 <parent segment="1824"/>
@@ -7804,7 +7804,7 @@
             </segment>
             <segment id="1853" name="Seg119_apic_4">
                 <parent segment="1852"/>
-                <distal x="611.7718903251163" y="518.3290419600628" z="58.49510000000002" diameter="0.5948"/>
+                <distal x="611.7718903251163" y="518.3290419600629" z="58.49510000000002" diameter="0.5948"/>
             </segment>
             <segment id="1854" name="Seg120_apic_4">
                 <parent segment="1853"/>
@@ -7816,7 +7816,7 @@
             </segment>
             <segment id="1856" name="Seg122_apic_4">
                 <parent segment="1855"/>
-                <distal x="614.8606935721447" y="517.4062320169289" z="58.9671" diameter="0.5948"/>
+                <distal x="614.8606935721447" y="517.4062320169288" z="58.9671" diameter="0.5948"/>
             </segment>
             <segment id="1857" name="Seg123_apic_4">
                 <parent segment="1856"/>
@@ -8330,7 +8330,7 @@
             </segment>
             <segment id="954" name="Seg99_dend_19">
                 <parent segment="953"/>
-                <distal x="389.4660047531348" y="590.1677655292988" z="93.59509999999993" diameter="0.503"/>
+                <distal x="389.4660047531348" y="590.1677655292989" z="93.59509999999993" diameter="0.503"/>
             </segment>
             <segment id="955" name="Seg100_dend_19">
                 <parent segment="954"/>
@@ -10211,7 +10211,7 @@
             </segment>
             <segment id="5464" name="Seg157_apic_52">
                 <parent segment="5463"/>
-                <distal x="475.1058485600494" y="570.5216090925484" z="231.43310000000002" diameter="0.5492"/>
+                <distal x="475.1058485600494" y="570.5216090925485" z="231.43310000000002" diameter="0.5492"/>
             </segment>
             <segment id="5465" name="Seg158_apic_52">
                 <parent segment="5464"/>
@@ -10903,7 +10903,7 @@
             </segment>
             <segment id="2073" name="Seg50_apic_9">
                 <parent segment="2072"/>
-                <distal x="562.8912798898843" y="530.11629719269" z="58.313100000000006" diameter="0.6864"/>
+                <distal x="562.8912798898843" y="530.1162971926899" z="58.313100000000006" diameter="0.6864"/>
             </segment>
             <segment id="2074" name="Seg51_apic_9">
                 <parent segment="2073"/>
@@ -10955,7 +10955,7 @@
             </segment>
             <segment id="2086" name="Seg63_apic_9">
                 <parent segment="2085"/>
-                <distal x="565.8776541171538" y="515.364670369363" z="51.84909999999995" diameter="0.6864"/>
+                <distal x="565.8776541171538" y="515.3646703693629" z="51.84909999999995" diameter="0.6864"/>
             </segment>
             <segment id="2087" name="Seg64_apic_9">
                 <parent segment="2086"/>
@@ -10979,7 +10979,7 @@
             </segment>
             <segment id="2092" name="Seg69_apic_9">
                 <parent segment="2091"/>
-                <distal x="568.4566027102987" y="507.15070655376724" z="48.542099999999934" diameter="0.6864"/>
+                <distal x="568.4566027102989" y="507.15070655376724" z="48.542099999999934" diameter="0.6864"/>
             </segment>
             <segment id="2093" name="Seg70_apic_9">
                 <parent segment="2092"/>
@@ -11003,7 +11003,7 @@
             </segment>
             <segment id="2098" name="Seg75_apic_9">
                 <parent segment="2097"/>
-                <distal x="572.1004859029924" y="500.77883169874974" z="45.18609999999994" diameter="0.6864"/>
+                <distal x="572.1004859029925" y="500.77883169874974" z="45.18609999999994" diameter="0.6864"/>
             </segment>
             <segment id="2099" name="Seg76_apic_9">
                 <parent segment="2098"/>
@@ -11011,7 +11011,7 @@
             </segment>
             <segment id="2100" name="Seg77_apic_9">
                 <parent segment="2099"/>
-                <distal x="573.2161468182535" y="499.23301194141743" z="43.523099999999936" diameter="0.6864"/>
+                <distal x="573.2161468182535" y="499.2330119414174" z="43.523099999999936" diameter="0.6864"/>
             </segment>
             <segment id="2101" name="Seg78_apic_9">
                 <parent segment="2100"/>
@@ -11031,7 +11031,7 @@
             </segment>
             <segment id="2105" name="Seg82_apic_9">
                 <parent segment="2104"/>
-                <distal x="573.9360020561663" y="497.0837007874777" z="38.3281" diameter="0.6864"/>
+                <distal x="573.9360020561663" y="497.08370078747777" z="38.3281" diameter="0.6864"/>
             </segment>
             <segment id="2106" name="Seg83_apic_9">
                 <parent segment="2105"/>
@@ -11039,11 +11039,11 @@
             </segment>
             <segment id="2107" name="Seg84_apic_9">
                 <parent segment="2106"/>
-                <distal x="573.8765678081385" y="496.6080227764646" z="36.04009999999999" diameter="0.6864"/>
+                <distal x="573.8765678081385" y="496.6080227764647" z="36.04009999999999" diameter="0.6864"/>
             </segment>
             <segment id="2108" name="Seg85_apic_9">
                 <parent segment="2107"/>
-                <distal x="573.8586800403152" y="496.4447529759433" z="34.89609999999998" diameter="0.6864"/>
+                <distal x="573.8586800403152" y="496.44475297594323" z="34.89609999999998" diameter="0.6864"/>
             </segment>
             <segment id="2109" name="Seg86_apic_9">
                 <parent segment="2108"/>
@@ -11051,7 +11051,7 @@
             </segment>
             <segment id="2110" name="Seg87_apic_9">
                 <parent segment="2109"/>
-                <distal x="574.4100453436299" y="496.0585842274659" z="32.85510000000004" diameter="0.6864"/>
+                <distal x="574.4100453436299" y="496.0585842274658" z="32.85510000000004" diameter="0.6864"/>
             </segment>
             <segment id="2111" name="Seg88_apic_9">
                 <parent segment="2110"/>
@@ -11059,7 +11059,7 @@
             </segment>
             <segment id="2112" name="Seg89_apic_9">
                 <parent segment="2111"/>
-                <distal x="575.0075732895388" y="495.28974981495685" z="30.93810000000001" diameter="0.6864"/>
+                <distal x="575.0075732895388" y="495.2897498149568" z="30.93810000000001" diameter="0.6864"/>
             </segment>
             <segment id="2113" name="Seg90_apic_9">
                 <parent segment="2112"/>
@@ -12085,7 +12085,7 @@
             </segment>
             <segment id="2167" name="Seg27_apic_13">
                 <parent segment="2166"/>
-                <distal x="525.2169948691616" y="550.8308325970225" z="112.76409999999997" diameter="0.778"/>
+                <distal x="525.2169948691616" y="550.8308325970224" z="112.76409999999997" diameter="0.778"/>
             </segment>
             <segment id="2168" name="Seg28_apic_13">
                 <parent segment="2167"/>
@@ -12257,7 +12257,7 @@
             </segment>
             <segment id="2210" name="Seg70_apic_13">
                 <parent segment="2209"/>
-                <distal x="529.6360265681185" y="511.51296001719425" z="138.63510000000002" diameter="0.778"/>
+                <distal x="529.6360265681185" y="511.5129600171942" z="138.63510000000002" diameter="0.778"/>
             </segment>
             <segment id="2211" name="Seg71_apic_13">
                 <parent segment="2210"/>
@@ -12273,7 +12273,7 @@
             </segment>
             <segment id="2214" name="Seg74_apic_13">
                 <parent segment="2213"/>
-                <distal x="529.9394994951084" y="508.7276803647025" z="135.4581" diameter="0.778"/>
+                <distal x="529.9394994951084" y="508.72768036470256" z="135.4581" diameter="0.778"/>
             </segment>
             <segment id="2215" name="Seg75_apic_13">
                 <parent segment="2214"/>
@@ -13090,7 +13090,7 @@
             </segment>
             <segment id="4773" name="Seg1_apic_47">
                 <parent segment="4772"/>
-                <distal x="553.8266605941697" y="565.8603722557511" z="128.9271" diameter="1.0846"/>
+                <distal x="553.8266605941697" y="565.8603722557513" z="128.9271" diameter="1.0846"/>
             </segment>
             <segment id="4774" name="Seg2_apic_47">
                 <parent segment="4773"/>
@@ -13611,7 +13611,7 @@
             </segment>
             <segment id="3697" name="Seg33_apic_32">
                 <parent segment="3696"/>
-                <distal x="559.3936371500992" y="559.6374187097467" z="163.4171" diameter="1.0316"/>
+                <distal x="559.3936371500992" y="559.6374187097466" z="163.4171" diameter="1.0316"/>
             </segment>
             <segment id="3698" name="Seg34_apic_32">
                 <parent segment="3697"/>
@@ -14468,7 +14468,7 @@
             </segment>
             <segment id="3646" name="Seg75_apic_30">
                 <parent segment="3645"/>
-                <distal x="542.8974382620625" y="493.80972497826053" z="69.27109999999999" diameter="0.572"/>
+                <distal x="542.8974382620625" y="493.8097249782606" z="69.27109999999999" diameter="0.572"/>
             </segment>
             <segment id="2268" name="Seg0_apic_17">
                 <parent segment="2267"/>
@@ -14976,7 +14976,7 @@
             </segment>
             <segment id="3489" name="Seg9_apic_29">
                 <parent segment="3488"/>
-                <distal x="574.6904008598817" y="538.7791794835541" z="127.2411" diameter="0.6636"/>
+                <distal x="574.6904008598817" y="538.779179483554" z="127.2411" diameter="0.6636"/>
             </segment>
             <segment id="3490" name="Seg10_apic_29">
                 <parent segment="3489"/>
@@ -15100,7 +15100,7 @@
             </segment>
             <segment id="3520" name="Seg40_apic_29">
                 <parent segment="3519"/>
-                <distal x="602.8718739939907" y="523.7411207580569" z="121.12709999999997" diameter="0.6636"/>
+                <distal x="602.8718739939906" y="523.7411207580569" z="121.12709999999997" diameter="0.6636"/>
             </segment>
             <segment id="3521" name="Seg41_apic_29">
                 <parent segment="3520"/>
@@ -15184,7 +15184,7 @@
             </segment>
             <segment id="3541" name="Seg61_apic_29">
                 <parent segment="3540"/>
-                <distal x="623.4642835902328" y="514.2644775770252" z="117.45109999999998" diameter="0.6636"/>
+                <distal x="623.4642835902328" y="514.2644775770253" z="117.45109999999998" diameter="0.6636"/>
             </segment>
             <segment id="3542" name="Seg62_apic_29">
                 <parent segment="3541"/>
@@ -15200,7 +15200,7 @@
             </segment>
             <segment id="3545" name="Seg65_apic_29">
                 <parent segment="3544"/>
-                <distal x="625.9750650306357" y="511.9001794996823" z="115.05509999999997" diameter="0.6636"/>
+                <distal x="625.9750650306357" y="511.9001794996822" z="115.05509999999997" diameter="0.6636"/>
             </segment>
             <segment id="3546" name="Seg66_apic_29">
                 <parent segment="3545"/>
@@ -15244,7 +15244,7 @@
             </segment>
             <segment id="3556" name="Seg76_apic_29">
                 <parent segment="3555"/>
-                <distal x="629.5048454301392" y="505.24908365228384" z="104.53009999999999" diameter="0.6636"/>
+                <distal x="629.5048454301392" y="505.2490836522838" z="104.53009999999999" diameter="0.6636"/>
             </segment>
             <segment id="3557" name="Seg77_apic_29">
                 <parent segment="3556"/>
@@ -15657,7 +15657,7 @@
             </segment>
             <segment id="2362" name="Seg88_apic_18">
                 <parent segment="2361"/>
-                <distal x="611.9371366814851" y="540.0675698458629" z="214.99009999999998" diameter="1.246"/>
+                <distal x="611.9371366814851" y="540.067569845863" z="214.99009999999998" diameter="1.246"/>
             </segment>
             <segment id="2363" name="Seg89_apic_18">
                 <parent segment="2362"/>
@@ -16537,7 +16537,7 @@
             </segment>
             <segment id="3941" name="Seg4_apic_34">
                 <parent segment="3940"/>
-                <distal x="607.3752949906617" y="553.4079105460798" z="411.6371" diameter="0.525"/>
+                <distal x="607.3752949906617" y="553.40791054608" z="411.6371" diameter="0.525"/>
             </segment>
             <segment id="3942" name="Seg5_apic_34">
                 <parent segment="3941"/>
@@ -17019,7 +17019,7 @@
             </segment>
             <segment id="2376" name="Seg3_apic_19">
                 <parent segment="2375"/>
-                <distal x="616.2369456832657" y="534.3336938803222" z="229.13209999999998" diameter="1.2034"/>
+                <distal x="616.2369456832657" y="534.3336938803221" z="229.13209999999998" diameter="1.2034"/>
             </segment>
             <segment id="2377" name="Seg4_apic_19">
                 <parent segment="2376"/>
@@ -17265,7 +17265,7 @@
             </segment>
             <segment id="4706" name="Seg10_apic_45">
                 <parent segment="4705"/>
-                <distal x="745.9043018942368" y="562.4477653324823" z="340.90409999999997" diameter="0.4986"/>
+                <distal x="745.9043018942368" y="562.4477653324822" z="340.90409999999997" diameter="0.4986"/>
             </segment>
             <segment id="4707" name="Seg11_apic_45">
                 <parent segment="4706"/>
@@ -17530,7 +17530,7 @@
             </segment>
             <segment id="4367" name="Seg24_apic_41">
                 <parent segment="4366"/>
-                <distal x="654.0584083877559" y="571.9120031378295" z="392.90209999999996" diameter="0.6796"/>
+                <distal x="654.0584083877559" y="571.9120031378296" z="392.90209999999996" diameter="0.6796"/>
             </segment>
             <segment id="4311" name="Seg0_apic_40">
                 <parent segment="4310"/>
@@ -18040,7 +18040,7 @@
             </segment>
             <segment id="4176" name="Seg94_apic_37">
                 <parent segment="4175"/>
-                <distal x="611.5523634407896" y="570.3369614823534" z="516.9001" diameter="0.5048"/>
+                <distal x="611.5523634407896" y="570.3369614823536" z="516.9001" diameter="0.5048"/>
             </segment>
             <segment id="4177" name="Seg95_apic_37">
                 <parent segment="4176"/>
@@ -18056,7 +18056,7 @@
             </segment>
             <segment id="4180" name="Seg98_apic_37">
                 <parent segment="4179"/>
-                <distal x="611.3334498317716" y="571.3357847508985" z="521.3497" diameter="0.5"/>
+                <distal x="611.3334498317716" y="571.3357847508984" z="521.3497" diameter="0.5"/>
             </segment>
             <segment id="4181" name="Seg99_apic_37">
                 <parent segment="4180"/>
@@ -18557,7 +18557,7 @@
             </segment>
             <segment id="4022" name="Seg68_apic_36">
                 <parent segment="4021"/>
-                <distal x="609.2118421901712" y="531.6384472494349" z="485.4111" diameter="0.5184"/>
+                <distal x="609.2118421901711" y="531.6384472494349" z="485.4111" diameter="0.5184"/>
             </segment>
             <segment id="4023" name="Seg69_apic_36">
                 <parent segment="4022"/>
@@ -18585,7 +18585,7 @@
             </segment>
             <segment id="4029" name="Seg75_apic_36">
                 <parent segment="4028"/>
-                <distal x="610.9632446640302" y="531.8768913404924" z="493.11809999999997" diameter="0.5084"/>
+                <distal x="610.9632446640302" y="531.8768913404925" z="493.11809999999997" diameter="0.5084"/>
             </segment>
             <segment id="4030" name="Seg76_apic_36">
                 <parent segment="4029"/>
@@ -20205,7 +20205,7 @@
             </segment>
             <segment id="2478" name="Seg75_apic_20">
                 <parent segment="2477"/>
-                <distal x="634.812237871468" y="510.5747568232291" z="327.2741" diameter="0.7184"/>
+                <distal x="634.812237871468" y="510.57475682322905" z="327.2741" diameter="0.7184"/>
             </segment>
             <segment id="2479" name="Seg76_apic_20">
                 <parent segment="2478"/>
@@ -20365,7 +20365,7 @@
             </segment>
             <segment id="2518" name="Seg115_apic_20">
                 <parent segment="2517"/>
-                <distal x="647.938528977838" y="505.1479942200896" z="369.2271" diameter="0.6072"/>
+                <distal x="647.938528977838" y="505.14799422008963" z="369.2271" diameter="0.6072"/>
             </segment>
             <segment id="2519" name="Seg116_apic_20">
                 <parent segment="2518"/>
@@ -20397,7 +20397,7 @@
             </segment>
             <segment id="2526" name="Seg123_apic_20">
                 <parent segment="2525"/>
-                <distal x="649.6842754288234" y="500.3097871256308" z="376.2071" diameter="0.585"/>
+                <distal x="649.6842754288234" y="500.30978712563075" z="376.2071" diameter="0.585"/>
             </segment>
             <segment id="2527" name="Seg124_apic_20">
                 <parent segment="2526"/>
@@ -20445,7 +20445,7 @@
             </segment>
             <segment id="2538" name="Seg135_apic_20">
                 <parent segment="2537"/>
-                <distal x="653.341930750421" y="492.709999012901" z="387.5731" diameter="0.5518"/>
+                <distal x="653.341930750421" y="492.70999901290105" z="387.5731" diameter="0.5518"/>
             </segment>
             <segment id="2539" name="Seg136_apic_20">
                 <parent segment="2538"/>
@@ -20477,7 +20477,7 @@
             </segment>
             <segment id="2546" name="Seg143_apic_20">
                 <parent segment="2545"/>
-                <distal x="654.6612803036504" y="488.27813460089635" z="395.5821" diameter="0.5296"/>
+                <distal x="654.6612803036504" y="488.2781346008964" z="395.5821" diameter="0.5296"/>
             </segment>
             <segment id="2547" name="Seg144_apic_20">
                 <parent segment="2546"/>
@@ -20485,7 +20485,7 @@
             </segment>
             <segment id="2548" name="Seg145_apic_20">
                 <parent segment="2547"/>
-                <distal x="655.7863953420438" y="486.1155007552394" z="396.6411" diameter="0.524"/>
+                <distal x="655.7863953420438" y="486.11550075523934" z="396.6411" diameter="0.524"/>
             </segment>
             <segment id="2549" name="Seg146_apic_20">
                 <parent segment="2548"/>
@@ -20505,7 +20505,7 @@
             </segment>
             <segment id="2553" name="Seg150_apic_20">
                 <parent segment="2552"/>
-                <distal x="658.3965167886158" y="482.59326183174994" z="401.2811" diameter="0.5102"/>
+                <distal x="658.3965167886158" y="482.5932618317499" z="401.2811" diameter="0.5102"/>
             </segment>
             <segment id="2554" name="Seg151_apic_20">
                 <parent segment="2553"/>
@@ -20565,7 +20565,7 @@
             </segment>
             <segment id="2568" name="Seg165_apic_20">
                 <parent segment="2567"/>
-                <distal x="661.4985638672553" y="474.65552506854686" z="416.9191" diameter="0.4686"/>
+                <distal x="661.4985638672553" y="474.6555250685468" z="416.9191" diameter="0.4686"/>
             </segment>
             <segment id="2569" name="Seg166_apic_20">
                 <parent segment="2568"/>
@@ -20601,7 +20601,7 @@
             </segment>
             <segment id="2577" name="Seg174_apic_20">
                 <parent segment="2576"/>
-                <distal x="661.1694241093439" y="468.7814784208123" z="426.1931" diameter="0.4436"/>
+                <distal x="661.1694241093439" y="468.7814784208122" z="426.1931" diameter="0.4436"/>
             </segment>
             <segment id="2578" name="Seg175_apic_20">
                 <parent segment="2577"/>
@@ -20621,7 +20621,7 @@
             </segment>
             <segment id="4439" name="Seg0_apic_43">
                 <parent segment="4367"/>
-                <proximal x="654.0584083877559" y="571.9120031378295" z="392.90209999999996" diameter="0.6796"/>
+                <proximal x="654.0584083877559" y="571.9120031378296" z="392.90209999999996" diameter="0.6796"/>
                 <distal x="654.6699285373153" y="572.1406606692665" z="393.6511" diameter="0.6796"/>
             </segment>
             <segment id="4440" name="Seg1_apic_43">
@@ -21126,7 +21126,7 @@
             </segment>
             <segment id="4368" name="Seg0_apic_42">
                 <parent segment="4367"/>
-                <proximal x="654.0584083877559" y="571.9120031378295" z="392.90209999999996" diameter="0.6796"/>
+                <proximal x="654.0584083877559" y="571.9120031378296" z="392.90209999999996" diameter="0.6796"/>
                 <distal x="653.9639284240473" y="571.0222931983226" z="393.1641" diameter="0.6796"/>
             </segment>
             <segment id="4369" name="Seg1_apic_42">
@@ -21560,7 +21560,7 @@
             </segment>
             <segment id="3251" name="Seg37_apic_27">
                 <parent segment="3250"/>
-                <distal x="743.3085651992618" y="553.5028810978843" z="335.8951" diameter="0.5368"/>
+                <distal x="743.3085651992618" y="553.5028810978841" z="335.8951" diameter="0.5368"/>
             </segment>
             <segment id="3252" name="Seg38_apic_27">
                 <parent segment="3251"/>
@@ -21604,7 +21604,7 @@
             </segment>
             <segment id="3262" name="Seg48_apic_27">
                 <parent segment="3261"/>
-                <distal x="754.0044705351343" y="553.4200496663227" z="339.5451" diameter="0.5248"/>
+                <distal x="754.0044705351343" y="553.4200496663228" z="339.5451" diameter="0.5248"/>
             </segment>
             <segment id="3263" name="Seg49_apic_27">
                 <parent segment="3262"/>
@@ -22854,7 +22854,7 @@
             </segment>
             <segment id="2926" name="Seg91_apic_23">
                 <parent segment="2925"/>
-                <distal x="692.8417338549923" y="500.44915768746694" z="465.5901" diameter="0.4778"/>
+                <distal x="692.8417338549923" y="500.449157687467" z="465.5901" diameter="0.4778"/>
             </segment>
             <segment id="2927" name="Seg92_apic_23">
                 <parent segment="2926"/>
@@ -23015,7 +23015,7 @@
             </segment>
             <segment id="2725" name="Seg22_apic_22">
                 <parent segment="2724"/>
-                <distal x="677.1854920873641" y="530.9716597166844" z="402.4591" diameter="0.6722"/>
+                <distal x="677.1854920873641" y="530.9716597166843" z="402.4591" diameter="0.6722"/>
             </segment>
             <segment id="2726" name="Seg23_apic_22">
                 <parent segment="2725"/>
@@ -23307,7 +23307,7 @@
             </segment>
             <segment id="2798" name="Seg95_apic_22">
                 <parent segment="2797"/>
-                <distal x="709.3922900402425" y="546.1537427961721" z="472.2611" diameter="0.5116"/>
+                <distal x="709.3922900402425" y="546.1537427961722" z="472.2611" diameter="0.5116"/>
             </segment>
             <segment id="2799" name="Seg96_apic_22">
                 <parent segment="2798"/>

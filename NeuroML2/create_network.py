@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # set the scale of the network
-network_scale = 0.1
+network_scale = 0.05
 
 cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
 # confirmed from cell_data.keys()
