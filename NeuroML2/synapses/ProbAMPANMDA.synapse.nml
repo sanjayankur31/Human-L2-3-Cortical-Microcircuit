@@ -1,69 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.2.xsd" 
-         id="ProbAMPANMDA">
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ProbAMPANMDASynapse">
 
-    <ComponentType name="probAMPANMDASyn"
-        extends="baseConductanceBasedSynapse"
-        description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
-        >
+<probAMPANMDASyn id="probAMPANMDASyn"
+    tau_r_AMPA="0.2 ms"
+    tau_d_AMPA="1.7 ms"
+    tau_r_NMDA="0.29 ms"
+    tau_d_NMDA="43 ms"
+    Use="1"
+    Dep="100 ms"
+    Fac="10 ms"
+    mg="1 mM"
+    gmax="0.001 uS"
+    weight_factor_NMDA="1"
+    u0="0"
+/>
 
-        <Property name="weight" dimension="none" defaultValue="1" />
-
-        <Parameter name="tau_r_AMPA" dimension="time" />
-        <Parameter name="tau_d_AMPA" dimension="time" />
-        <Parameter name="tau_r_NMDA" dimension="time" />
-        <Parameter name="tau_d_NMDA" dimension="time" />
-
-        <Parameter name="Use" dimension="none" />
-        <Parameter name="Dep" dimension="time" />
-        <Parameter name="Fac" dimension="time" />
-
-        <Parameter name="mg" dimension="concentration" />
-
-        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
-        <Constant name="MSEC" dimension="time" value="1ms"/>
-        <Constant name="MMOL" dimension="concentration" value="1mM"/>
-
-        <DerivedParameter name="tp_AMPA" dimension="none" value="(tau_r_AMPA * tau_d_AMPA) / ((tau_d_AMPA - tau_r_AMPA) * log(tau_d_AMPA / tau_r_AMPA))" />
-        <DerivedParameter name="factor_AMPA" dimension="none" value="1 / (-exp(-tp_AMPA / tau_r_AMPA) + exp(-tp_AMPA / tau_d_AMPA))" />
-
-        <DerivedParameter name="tp_NMDA" dimension="none" value="(tau_r_NMDA * tau_d_NMDA) / ((tau_d_NMDA-tau_r_NMDA) * log(tau_d_NMDA / tau_r_NMDA))" />
-        <DerivedParameter name="factor_NMDA" dimension="none" value="1 / (-exp(-tp_NMDA / tau_r_NMDA) + exp(-tp_NMDA / tau_d_NMDA))" />
-
-        <Dynamics>
-
-            <StateVariable name="A_AMPA" dimension="none" />
-            <StateVariable name="B_AMPA" dimension="none" />
-            <StateVariable name="A_NMDA" dimension="none" />
-            <StateVariable name="B_NMDA" dimension="none" />
-
-            <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(-0.062 * v/MVOLT) * mg/(3.57 *  MMOL))" />
-
-            <DerivedVariable name="g_AMPA" dimension="conductance" value="gmax * (B_AMPA - A_AMPA)" />
-            <DerivedVariable name="g_NMDA" dimension="conductance" value="gmax * (B_NMDA - A_NMDA) * mggate" />
-
-
-            <DerivedVariable name="i_AMPA" dimension="current" value="g_AMPA * (v - erev)" />
-            <DerivedVariable name="i_NMDA" dimension="current" value="g_NMDA * (v - erev)" />
-            <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
-
-            <TimeDerivative variable="A_AMPA" value="-A_AMPA / tau_r_AMPA" />
-            <TimeDerivative variable="B_AMPA" value="-B_AMPA / tau_d_AMPA" />
-            <TimeDerivative variable="A_NMDA" value="-A_NMDA / tau_r_NMDA" />
-            <TimeDerivative variable="B_NMDA" value="-B_NMDA / tau_d_NMDA" />
-
-            <OnStart>
-                <StateAssignment variable="A_AMPA" value="0" />
-                <StateAssignment variable="B_AMPA" value="0" />
-                <StateAssignment variable="A_NMDA" value="0" />
-                <StateAssignment variable="B_NMDA" value="0" />
-            </OnStart>
-
-            <OnEvent port="in">
-            </OnEvent>
-        </Dynamics>
-
-    </ComponentType>
 </neuroml>

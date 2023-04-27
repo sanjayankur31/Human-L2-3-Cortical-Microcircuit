@@ -1,0 +1,111 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/LEMS/LEMS/raw/development/Schemas/LEMS/LEMS_v0.7.6.xsd"
+    >
+
+<!-- Note that order of different LEMS types matters for validation, since the schema defines what order they should appear in -->
+
+    <ComponentType name="probAMPANMDASyn"
+        extends="baseConductanceBasedSynapse"
+        description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
+        >
+
+        <Property name="weight" dimension="none" defaultValue="1" />
+
+        <Parameter name="tau_r_AMPA" dimension="time" />
+        <Parameter name="tau_d_AMPA" dimension="time" />
+        <Parameter name="tau_r_NMDA" dimension="time" />
+        <Parameter name="tau_d_NMDA" dimension="time" />
+
+        <Parameter name="Use" dimension="none" />
+        <Parameter name="Dep" dimension="time" />
+        <Parameter name="Fac" dimension="time" />
+
+        <Parameter name="mg" dimension="concentration" />
+
+        <Parameter name="gmax" dimension="conductance" />
+        <Parameter name="erev" dimension="voltage" />
+
+        <Parameter name="weight_factor_NMDA" dimension="none" />
+        <Parameter name="u0" dimension="none"/>
+
+        <Exposure name="i_AMPA" dimension="current"/>
+        <Exposure name="i_NMDA" dimension="current"/>
+        <Exposure name="i" dimension="current"/>
+
+        <DerivedParameter name="tp_AMPA" dimension="none" value="(tau_r_AMPA * tau_d_AMPA) / ((tau_d_AMPA - tau_r_AMPA) * log(tau_d_AMPA / tau_r_AMPA))" />
+        <DerivedParameter name="factor_AMPA" dimension="none" value="1 / (-exp(-tp_AMPA / tau_r_AMPA) + exp(-tp_AMPA / tau_d_AMPA))" />
+
+        <DerivedParameter name="tp_NMDA" dimension="none" value="(tau_r_NMDA * tau_d_NMDA) / ((tau_d_NMDA-tau_r_NMDA) * log(tau_d_NMDA / tau_r_NMDA))" />
+        <DerivedParameter name="factor_NMDA" dimension="none" value="1 / (-exp(-tp_NMDA / tau_r_NMDA) + exp(-tp_NMDA / tau_d_NMDA))" />
+
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MMOL" dimension="concentration" value="1mM"/>
+
+        <Dynamics>
+
+            <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(-0.062 * v/MVOLT) * mg/(3.57 *  MMOL))" />
+
+            <DerivedVariable name="g_AMPA" dimension="conductance" value="gmax * (B_AMPA - A_AMPA)" />
+            <DerivedVariable name="g_NMDA" dimension="conductance" value="gmax * (B_NMDA - A_NMDA) * mggate" />
+
+
+            <DerivedVariable name="i_AMPA" exposure="i_AMPA" dimension="current" value="g_AMPA * (v - erev)" />
+            <DerivedVariable name="i_NMDA" exposure="i_NMDA" dimension="current" value="g_NMDA * (v - erev)" />
+            <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
+
+            <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
+
+            <DerivedVariable name="Pv_tmp" dimension="none" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
+            <DerivedVariable name="Pr" dimension="none" value="u * Pv_tmp" />
+
+            <ConditionalDerivedVariable name="u1" dimension="none" >
+                <Case condition="Fac .gt. 0" value="u * exp(-(t - tsyn)/Fac)" />
+                <Case value="Use" />
+            </ConditionalDerivedVariable>
+            <ConditionalDerivedVariable name="u" dimension="none" >
+                <Case condition="Fac .gt. 0" value="u1 + Use * (1 - u1)" />
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="Pv" dimension="none">
+                <Case condition="random(1) .lt. Pr" value="Pv_tmp - (u * Pv_tmp)" />
+            </ConditionalDerivedVariable>
+
+            <ConditionalDerivedVariable name="A_AMPA" dimension="none">
+                <Case condition="random(1) .lt. Pr" value="A_AMPA + weight * factor_AMPA" />
+            </ConditionalDerivedVariable>
+            <ConditionalDerivedVariable name="B_AMPA" dimension="none">
+                <Case condition="random(1) .lt. Pr" value="B_AMPA + weight * factor_AMPA" />
+            </ConditionalDerivedVariable>
+            <ConditionalDerivedVariable name="A_NMDA" dimension="none">
+                <Case condition="random(1) .lt. Pr" value="A_NMDA + weight * weight_factor_NMDA * factor_NMDA" />
+            </ConditionalDerivedVariable>
+            <ConditionalDerivedVariable name="B_NMDA" dimension="none">
+                <Case condition="random(1) .lt. Pr" value="B_NMDA + weight * weight_factor_NMDA * factor_NMDA" />
+            </ConditionalDerivedVariable>
+
+
+            <TimeDerivative variable="A_AMPA" value="-A_AMPA / tau_r_AMPA" />
+            <TimeDerivative variable="B_AMPA" value="-B_AMPA / tau_d_AMPA" />
+            <TimeDerivative variable="A_NMDA" value="-A_NMDA / tau_r_NMDA" />
+            <TimeDerivative variable="B_NMDA" value="-B_NMDA / tau_d_NMDA" />
+
+            <OnStart>
+                <StateAssignment variable="A_AMPA" value="0" />
+                <StateAssignment variable="B_AMPA" value="0" />
+                <StateAssignment variable="A_NMDA" value="0" />
+                <StateAssignment variable="B_NMDA" value="0" />
+
+                <StateAssignment variable="u1" value="u0" />
+                <StateAssignment variable="u" value="u0" />
+            </OnStart>
+
+            <OnEvent port="in">
+            </OnEvent>
+        </Dynamics>
+
+    </ComponentType>
+
+</Lems>

@@ -1,0 +1,60 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="test_probAMPANMDA">
+    <include href="ProbAMPANMDA.synapse.nml"/>
+    <izhikevich2007Cell id="izh2007RS0" C="100pF" v0="-60mV" k="0.7nS_per_mV" vr="-60mV" vt="-40mV" vpeak="35mV" a="0.03per_ms" b="-2nS" c="-50.0mV" d="100pA"/>
+    <spikeArray id="spikeArray">
+        <spike id="0" time="30 ms"/>
+        <spike id="1" time="40 ms"/>
+        <spike id="2" time="50 ms"/>
+        <spike id="3" time="60 ms"/>
+        <spike id="4" time="70 ms"/>
+        <spike id="5" time="80 ms"/>
+        <spike id="6" time="90 ms"/>
+        <spike id="7" time="100 ms"/>
+        <spike id="8" time="110 ms"/>
+        <spike id="9" time="120 ms"/>
+        <spike id="10" time="130 ms"/>
+        <spike id="11" time="140 ms"/>
+        <spike id="12" time="150 ms"/>
+        <spike id="13" time="160 ms"/>
+        <spike id="14" time="170 ms"/>
+        <spike id="15" time="180 ms"/>
+        <spike id="16" time="190 ms"/>
+        <spike id="17" time="200 ms"/>
+        <spike id="18" time="210 ms"/>
+        <spike id="19" time="220 ms"/>
+        <spike id="20" time="230 ms"/>
+        <spike id="21" time="240 ms"/>
+        <spike id="22" time="250 ms"/>
+        <spike id="23" time="260 ms"/>
+        <spike id="24" time="270 ms"/>
+        <spike id="25" time="280 ms"/>
+        <spike id="26" time="290 ms"/>
+        <spike id="27" time="300 ms"/>
+        <spike id="28" time="310 ms"/>
+        <spike id="29" time="320 ms"/>
+        <spike id="30" time="330 ms"/>
+        <spike id="31" time="340 ms"/>
+        <spike id="32" time="350 ms"/>
+        <spike id="33" time="360 ms"/>
+        <spike id="34" time="370 ms"/>
+        <spike id="35" time="380 ms"/>
+        <spike id="36" time="390 ms"/>
+        <spike id="37" time="400 ms"/>
+        <spike id="38" time="410 ms"/>
+        <spike id="39" time="420 ms"/>
+        <spike id="40" time="430 ms"/>
+        <spike id="41" time="440 ms"/>
+        <spike id="42" time="450 ms"/>
+        <spike id="43" time="460 ms"/>
+        <spike id="44" time="470 ms"/>
+        <spike id="45" time="480 ms"/>
+        <spike id="46" time="490 ms"/>
+    </spikeArray>
+    <network id="IzNet">
+        <population id="IzhPop" component="izh2007RS0" size="1"/>
+        <population id="SpikePop" component="spikeArray" size="1"/>
+        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="IzhPop" synapse="probAMPANMDASyn">
+            <connection id="0" preCellId="../SpikePop[0]" postCellId="../IzhPop[0]"/>
+        </projection>
+    </network>
+</neuroml>
