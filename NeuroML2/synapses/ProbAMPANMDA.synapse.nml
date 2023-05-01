@@ -9,9 +9,10 @@
     Dep="100 ms"
     Fac="10 ms"
     mg="1 mM"
-    gmax="0.001 uS"
+    gbase="0.001 uS"
     weight_factor_NMDA="1"
     u0="0"
+    erev="0 mV"
 />
 
 </neuroml>
