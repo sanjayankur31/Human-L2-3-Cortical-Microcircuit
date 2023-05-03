@@ -14,8 +14,8 @@
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
     
-    <Include file="ProbAMPANMDA.synapse.xml"/>
     <Include file="testProbAMPANMDA.net.nml"/>
+    <Include file="ProbAMPANMDA.synapsedef.nml"/>
     <Include file="ProbAMPANMDA.synapse.nml"/>
    
     <Simulation id="test_probAMPANMDA" length="1000ms" step="0.1ms" target="IzNet" seed="123">  <!-- Note seed: ensures same random numbers used every run -->

@@ -1,6 +1,5 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ProbAMPANMDASynapse">
-
-<probAMPANMDASyn id="probAMPANMDASyn"
+<ProbAMPANMDASyn id="probAMPANMDASyn"
     tau_r_AMPA="0.2 ms"
     tau_d_AMPA="1.7 ms"
     tau_r_NMDA="0.29 ms"

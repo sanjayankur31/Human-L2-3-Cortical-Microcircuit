@@ -1,14 +1,11 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.6"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://github.com/LEMS/LEMS/raw/development/Schemas/LEMS/LEMS_v0.7.6.xsd"
-    >
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ProbAMPANMDASynDoc">
 
 <!-- Note that order of different LEMS types matters for validation, since the schema defines what order they should appear in -->
 
 <!-- docs on NET_RECEIVE and INITIAL blocks: https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html -->
 
-    <ComponentType name="probAMPANMDASyn"
+    <ComponentType name="ProbAMPANMDASyn"
         extends="baseConductanceBasedSynapse"
         description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
         >
@@ -32,10 +29,6 @@
         <Parameter name="weight_factor_NMDA" dimension="none" />
         <Parameter name="u0" dimension="none"/>
 
-        <Exposure name="i_AMPA" dimension="current"/>
-        <Exposure name="i_NMDA" dimension="current"/>
-        <Exposure name="i" dimension="current"/>
-
         <DerivedParameter name="tp_AMPA" dimension="none" value="(tau_r_AMPA * tau_d_AMPA) / ((tau_d_AMPA - tau_r_AMPA) * log(tau_d_AMPA / tau_r_AMPA))" />
         <DerivedParameter name="factor_AMPA" dimension="none" value="1 / (-exp(-tp_AMPA / tau_r_AMPA) + exp(-tp_AMPA / tau_d_AMPA))" />
 
@@ -45,6 +38,10 @@
         <Constant name="MVOLT" dimension="voltage" value="1mV"/>
         <Constant name="MSEC" dimension="time" value="1ms"/>
         <Constant name="MMOL" dimension="concentration" value="1mM"/>
+
+        <Exposure name="i_AMPA" dimension="current"/>
+        <Exposure name="i_NMDA" dimension="current"/>
+        <Exposure name="i" dimension="current"/>
 
         <Dynamics>
             <StateVariable name="Pv_tmp" dimension="none"/>
@@ -71,6 +68,9 @@
 
             <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
 
+            <DerivedVariable name="Pv_tmp" dimension="none" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
+            <DerivedVariable name="Pr" dimension="none" value="u * Pv_tmp" />
+
             <!-- calculate these at every step, but only assign to the primary variables in the OnEvent block. The OnEvent block does not support OnCondition -->
 
             <ConditionalDerivedVariable name="u1_every" dimension="none" >
@@ -81,6 +81,10 @@
                 <Case condition="Fac .gt. 0" value="u1_every + Use * (1 - u1_every)" />
             </ConditionalDerivedVariable>
 
+            <TimeDerivative variable="A_AMPA" value="-A_AMPA / tau_r_AMPA" />
+            <TimeDerivative variable="B_AMPA" value="-B_AMPA / tau_d_AMPA" />
+            <TimeDerivative variable="A_NMDA" value="-A_NMDA / tau_r_NMDA" />
+            <TimeDerivative variable="B_NMDA" value="-B_NMDA / tau_d_NMDA" />
             <OnStart>
                 <StateAssignment variable="A_AMPA" value="0" />
                 <StateAssignment variable="B_AMPA" value="0" />
@@ -95,12 +99,12 @@
                 <StateAssignment variable="tsyn" value="t" />
             </OnStart>
 
-            <TimeDerivative variable="A_AMPA" value="-A_AMPA / tau_r_AMPA" />
-            <TimeDerivative variable="B_AMPA" value="-B_AMPA / tau_d_AMPA" />
-            <TimeDerivative variable="A_NMDA" value="-A_NMDA / tau_r_NMDA" />
-            <TimeDerivative variable="B_NMDA" value="-B_NMDA / tau_d_NMDA" />
-            <DerivedVariable name="Pv_tmp" dimension="none" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
-            <DerivedVariable name="Pr" dimension="none" value="u * Pv_tmp" />
+            <OnEvent port="in">
+                <StateAssignment variable="u" value="u_every" />
+                <StateAssignment variable="u1" value="u1_every" />
+                <StateAssignment variable="tsyn" value="t" />
+            </OnEvent>
+
             <!-- No harm in these being calculated all the time, instead of just at a spike event -->
             <OnCondition test="random(1) .lt. Pr" >
                 <StateAssignment variable="Pv" value="Pv_tmp - (u * Pv_tmp)" />
@@ -110,13 +114,8 @@
                 <StateAssignment variable="B_NMDA" value="B_NMDA + weight * weight_factor_NMDA * factor_NMDA" />
             </OnCondition>
 
-            <OnEvent port="in">
-                <StateAssignment variable="u" value="u_every" />
-                <StateAssignment variable="u1" value="u1_every" />
-                <StateAssignment variable="tsyn" value="t" />
-            </OnEvent>
         </Dynamics>
 
     </ComponentType>
 
-</Lems>
+</neuroml>

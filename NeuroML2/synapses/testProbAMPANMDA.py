@@ -20,13 +20,14 @@ from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 newdoc = component_factory(neuroml.NeuroMLDocument, id="test_probAMPANMDA")
 
 # include the new synapse type
+newdoc.add(neuroml.IncludeType, href="ProbAMPANMDA.synapsedef.nml")
 newdoc.add(neuroml.IncludeType, href="ProbAMPANMDA.synapse.nml")
 
 # the syn component that I have
-syncomp = read_neuroml2_file("ProbAMPANMDA.synapse.nml")
+# syncomp = read_neuroml2_file("ProbAMPANMDA.synapse.nml")
 # does not recognise the new component type, so it won't show the created
 # component
-print(syncomp)
+# print(syncomp)
 
 # add a cell
 izh0 = newdoc.add(neuroml.Izhikevich2007Cell,
@@ -64,7 +65,6 @@ simulation = LEMSSimulation(
     sim_id=simulation_id, duration=1000, dt=0.1, simulation_seed=123
 )
 simulation.assign_simulation_target(net.id)
-simulation.include_lems_file("ProbAMPANMDA.synapse.xml")
 simulation.include_neuroml2_file(nml_file)
 
 lems_simulation_file = simulation.save_to_file()
