@@ -36,10 +36,10 @@ izh0 = newdoc.add(neuroml.Izhikevich2007Cell,
                   c="-50.0mV", d="100pA"
                   )
 
-net = newdoc.add(neuroml.Network, id="IzNet", validate=False)
+net = newdoc.add(neuroml.Network, id="TestNet", validate=False)
 
 # Create a population of defined cells and add it to the model
-pop = net.add(neuroml.Population, id="IzhPop", component=izh0.id, size=1)
+pop = net.add(neuroml.Population, id="TestPop", component=izh0.id, size=1)
 
 # set up a spike array
 spikearray = newdoc.add(neuroml.SpikeArray, id="spikeArray", validate=False)
@@ -51,9 +51,9 @@ for t in range(30, 500, 10):
 stimpop = net.add("Population", id="SpikePop", component=spikearray.id, size=1)
 
 proj = net.add(neuroml.Projection, id="proj", presynaptic_population="SpikePop",
-               postsynaptic_population="IzhPop", synapse="probAMPANMDASyn")
+               postsynaptic_population="TestPop", synapse="probAMPANMDASyn")
 proj.add(neuroml.Connection, id=0, pre_cell_id="../SpikePop[0]",
-         post_cell_id="../IzhPop[0]")
+         post_cell_id="../TestPop[0]")
 
 nml_file = "testProbAMPANMDA.net.nml"
 write_neuroml2_file(newdoc, nml_file, validate=False)
@@ -66,5 +66,13 @@ simulation = LEMSSimulation(
 )
 simulation.assign_simulation_target(net.id)
 simulation.include_neuroml2_file(nml_file)
+
+# record spikes
+simulation.create_event_output_file("output0", f"{simulation_id}.spikes.dat")
+simulation.add_selection_to_event_output_file("output0", 0, "TestPop[0]", "spike")
+
+# record other variables
+simulation.create_output_file("output1", f"{simulation_id}.output.dat")
+simulation.add_column_to_output_file("output1", "v", "TestPop[0]/v")
 
 lems_simulation_file = simulation.save_to_file()

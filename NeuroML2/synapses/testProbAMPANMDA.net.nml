@@ -51,11 +51,11 @@
         <spike id="45" time="480 ms"/>
         <spike id="46" time="490 ms"/>
     </spikeArray>
-    <network id="IzNet">
-        <population id="IzhPop" component="izh2007RS0" size="1"/>
+    <network id="TestNet">
+        <population id="TestPop" component="izh2007RS0" size="1"/>
         <population id="SpikePop" component="spikeArray" size="1"/>
-        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="IzhPop" synapse="probAMPANMDASyn">
-            <connection id="0" preCellId="../SpikePop[0]" postCellId="../IzhPop[0]"/>
+        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="TestPop" synapse="probAMPANMDASyn">
+            <connection id="0" preCellId="../SpikePop[0]" postCellId="../TestPop[0]"/>
         </projection>
     </network>
 </neuroml>

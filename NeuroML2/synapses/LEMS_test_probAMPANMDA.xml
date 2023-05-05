@@ -18,7 +18,15 @@
     <Include file="ProbAMPANMDA.synapsedef.nml"/>
     <Include file="ProbAMPANMDA.synapse.nml"/>
    
-    <Simulation id="test_probAMPANMDA" length="1000ms" step="0.1ms" target="IzNet" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+    <Simulation id="test_probAMPANMDA" length="1000ms" step="0.1ms" target="TestNet" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="output1" fileName="test_probAMPANMDA.output.dat">
+            <OutputColumn id="v" quantity="TestPop[0]/v"/> 
+        </OutputFile>
+        
+        <EventOutputFile id="output0" fileName="test_probAMPANMDA.spikes.dat" format="ID_TIME">
+            <EventSelection id="0" select="TestPop[0]" eventPort="spike"/> 
+        </EventOutputFile>
         
     </Simulation>
 
