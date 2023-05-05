@@ -5,6 +5,7 @@
 
 <!-- docs on NET_RECEIVE and INITIAL blocks: https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html -->
 
+<!-- baseConductanceBasedSynapse has v and gbase as requirements, which we need here -->
     <ComponentType name="ProbAMPANMDASyn"
         extends="baseConductanceBasedSynapse"
         description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
@@ -12,6 +13,7 @@
 
         <Property name="weight" dimension="none" defaultValue="1" />
 
+        <!-- NMODL PARAMTER -->
         <Parameter name="tau_r_AMPA" dimension="time" />
         <Parameter name="tau_d_AMPA" dimension="time" />
         <Parameter name="tau_r_NMDA" dimension="time" />
@@ -43,70 +45,90 @@
         <Exposure name="i_NMDA" dimension="current"/>
         <Exposure name="i" dimension="current"/>
 
+        <Exposure name="g_AMPA" dimension="conductance"/>
+        <Exposure name="g_NMDA" dimension="conductance"/>
+
         <Dynamics>
-            <StateVariable name="Pv_tmp" dimension="none"/>
-            <StateVariable name="Pv" dimension="none"/>
-            <StateVariable name="Pr" dimension="none"/>
+            <!-- NMODL STATE -->
             <StateVariable name="u" dimension="none"/>
-            <StateVariable name="u_every" dimension="none"/>
-            <StateVariable name="u1" dimension="none" />
-            <StateVariable name="u1_every" dimension="none" />
             <StateVariable name="tsyn" dimension="time"/>
             <StateVariable name="A_AMPA" dimension="none" />
             <StateVariable name="B_AMPA" dimension="none" />
             <StateVariable name="A_NMDA" dimension="none" />
             <StateVariable name="B_NMDA" dimension="none" />
 
+            <!-- NMODL rates() -->
+            <!-- NMODL ASSIGNED -->
             <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(-0.062 * v/MVOLT) * mg/(3.57 *  MMOL))" />
 
-            <DerivedVariable name="g_AMPA" dimension="conductance" value="gbase * (B_AMPA - A_AMPA)" />
-            <DerivedVariable name="g_NMDA" dimension="conductance" value="gbase * (B_NMDA - A_NMDA) * mggate" />
+            <DerivedVariable name="g_AMPA" exposure="g_AMPA" dimension="conductance" value="gbase * (B_AMPA - A_AMPA)" />
+            <DerivedVariable name="g_NMDA" exposure="g_NMDA" dimension="conductance" value="gbase * (B_NMDA - A_NMDA) * mggate" />
+            <!-- to keep LEMS happy, since g is an exposure of baseConductanceBasedSynapse -->
             <DerivedVariable name="g" exposure="g" dimension="conductance" value="g_AMPA + g_NMDA" />
 
             <DerivedVariable name="i_AMPA" exposure="i_AMPA" dimension="current" value="g_AMPA * (v - erev)" />
             <DerivedVariable name="i_NMDA" exposure="i_NMDA" dimension="current" value="g_NMDA * (v - erev)" />
             <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
 
-            <DerivedVariable name="Pv_tmp" dimension="none" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
+            <!--
+                Pv_tmp = 1 - (1-Pv) * exp(-(t-tsyn)/Dep)
+            -->
+
+            <!-- TODO: continue here
+
+                Doesn't currently work since Pv_tmp is a function of Pv and LEMS can't find Pv since it's defined later.
+                Got to uncouple these two
+            -->
+            <ConditionalDerivedVariable name="Pv_tmp" dimension="none" >
+                <Case test="random(1) .gt. Pr" value="(1 - (1 - Pv_tmp) * exp(- (t - tsyn ) / Dep)))" />
+                <Case test="random(1) .lt. Pr" value="(1 - (1 - (1 - u)(1 - (1 - Pv_tmp) * exp(- (t - tsyn ) / Dep)))) * exp(- (t - tsyn ) / Dep)))" />
+            </ConditionalDerivedVariable>
             <DerivedVariable name="Pr" dimension="none" value="u * Pv_tmp" />
 
-            <!-- calculate these at every step, but only assign to the primary variables in the OnEvent block. The OnEvent block does not support OnCondition -->
+            <ConditionalDerivedVariable name="Pv_tmp1" dimension="none" >
+                <Case test="random(1) .lt. Pr" value="(1 - (1 - Pv_tmp1) * exp(- (t - tsyn ) / Dep))) - Pr" />
+                <Case value="1" />
+            </ConditionalDerivedVariable>
 
-            <ConditionalDerivedVariable name="u1_every" dimension="none" >
-                <Case condition="Fac .gt. 0" value="u_every * exp(-(t - tsyn)/Fac)" />
+            <ConditionalDerivedVariable name="Pv" dimension="none" >
+                <Case test="random(1) .lt. Pr" value="Pv_tmp1" />
+            </ConditionalDerivedVariable>
+
+            <!-- calculate these at every step, but only assign to the primary variables in the OnEvent block. The OnEvent block does not support OnCondition -->
+            <ConditionalDerivedVariable name="u_every" dimension="none" >
+                <Case condition="Fac .gt. 0" value="u * exp(-(t - tsyn)/Fac) + Use * (1 - (u * exp(-(t - tsyn)/Fac)))" />
                 <Case value="Use" />
             </ConditionalDerivedVariable>
-            <ConditionalDerivedVariable name="u_every" dimension="none" >
-                <Case condition="Fac .gt. 0" value="u1_every + Use * (1 - u1_every)" />
-            </ConditionalDerivedVariable>
 
+            <!-- required for Pr -->
+
+
+            <!-- NMODL DERIVATIVE, rates() -->
             <TimeDerivative variable="A_AMPA" value="-A_AMPA / tau_r_AMPA" />
             <TimeDerivative variable="B_AMPA" value="-B_AMPA / tau_d_AMPA" />
             <TimeDerivative variable="A_NMDA" value="-A_NMDA / tau_r_NMDA" />
             <TimeDerivative variable="B_NMDA" value="-B_NMDA / tau_d_NMDA" />
+
+            <!-- NMODL INITIAL -->
             <OnStart>
                 <StateAssignment variable="A_AMPA" value="0" />
                 <StateAssignment variable="B_AMPA" value="0" />
                 <StateAssignment variable="A_NMDA" value="0" />
                 <StateAssignment variable="B_NMDA" value="0" />
 
-                <StateAssignment variable="u1" value="u0" />
                 <StateAssignment variable="u" value="u0" />
-                <StateAssignment variable="u1_every" value="u0" />
-                <StateAssignment variable="u_every" value="u0" />
-                <StateAssignment variable="Pv" value="1" />
                 <StateAssignment variable="tsyn" value="t" />
             </OnStart>
 
+            <!-- NMODL NET_RECEIVE -->
             <OnEvent port="in">
                 <StateAssignment variable="u" value="u_every" />
-                <StateAssignment variable="u1" value="u1_every" />
                 <StateAssignment variable="tsyn" value="t" />
             </OnEvent>
 
             <!-- No harm in these being calculated all the time, instead of just at a spike event -->
+            <!-- NMODL BREAKPOINT -->
             <OnCondition test="random(1) .lt. Pr" >
-                <StateAssignment variable="Pv" value="Pv_tmp - (u * Pv_tmp)" />
                 <StateAssignment variable="A_AMPA" value="A_AMPA + weight * factor_AMPA" />
                 <StateAssignment variable="B_AMPA" value="B_AMPA + weight * factor_AMPA" />
                 <StateAssignment variable="A_NMDA" value="A_NMDA + weight * weight_factor_NMDA * factor_NMDA" />
