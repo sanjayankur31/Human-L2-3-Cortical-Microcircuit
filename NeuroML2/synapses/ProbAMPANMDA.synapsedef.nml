@@ -73,8 +73,8 @@
 
             <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(-0.062 * v/MVOLT) * mg/(3.57 *  MMOL))" />
 
-            <DerivedVariable name="g_AMPA" dimension="conductance" value="gbase * (B_AMPA - A_AMPA)" />
-            <DerivedVariable name="g_NMDA" dimension="conductance" value="gbase * (B_NMDA - A_NMDA) * mggate" />
+            <DerivedVariable name="g_AMPA" dimension="conductance" exposure="g_AMPA" value="gbase * (B_AMPA - A_AMPA)" />
+            <DerivedVariable name="g_NMDA" dimension="conductance" exposure="g_NMDA" value="gbase * (B_NMDA - A_NMDA) * mggate" />
             <DerivedVariable name="g" exposure="g" dimension="conductance" value="g_AMPA + g_NMDA" />
 
             <DerivedVariable name="i_AMPA" exposure="i_AMPA" dimension="current" value="g_AMPA * (v - erev)" />
