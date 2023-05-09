@@ -13,8 +13,9 @@ import sys
 import neuroml
 from neuroml.utils import component_factory
 from neuroml.loaders import read_neuroml2_file
-from pyneuroml.pynml import write_neuroml2_file
+from pyneuroml.pynml import write_neuroml2_file, run_lems_with_jneuroml_neuron
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
+from pyneuroml.plot import generate_plot
 
 # a new document
 newdoc = component_factory(neuroml.NeuroMLDocument, id="test_probAMPANMDA")
@@ -68,13 +69,22 @@ simulation.assign_simulation_target(net.id)
 simulation.include_neuroml2_file(nml_file)
 
 # record spikes
-"""
 simulation.create_event_output_file("output0", f"{simulation_id}.spikes.dat")
 simulation.add_selection_to_event_output_file("output0", 0, "TestPop[0]", "spike")
 
 # record other variables
 simulation.create_output_file("output1", f"{simulation_id}.output.dat")
 simulation.add_column_to_output_file("output1", "v", "TestPop[0]/v")
-"""
+simulation.add_column_to_output_file("output1", "i", "TestPop[0]/i")
 
-lems_simulation_file = simulation.save_to_file()
+simulation.add_column_to_output_file("output1", "i_AMPA", "TestPop[0]/synapses:probAMPANMDASyn:0/i_AMPA")
+simulation.add_column_to_output_file("output1", "i_AMPA", "TestPop[0]/synapses:probAMPANMDASyn:0/i_NMDA")
+simulation.add_column_to_output_file("output1", "g_AMPA", "TestPop[0]/synapses:probAMPANMDASyn:0/g_AMPA")
+simulation.add_column_to_output_file("output1", "g_AMPA", "TestPop[0]/synapses:probAMPANMDASyn:0/g_NMDA")
+
+sim_filename = lems_simulation_file = simulation.save_to_file()
+data = run_lems_with_jneuroml_neuron(sim_filename, max_memory="8G", skip_run=False, nogui=True, compile_mods=True, load_saved_data=True)
+
+# print(data)
+
+# generate_plot()
