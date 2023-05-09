@@ -68,11 +68,13 @@ simulation.assign_simulation_target(net.id)
 simulation.include_neuroml2_file(nml_file)
 
 # record spikes
+"""
 simulation.create_event_output_file("output0", f"{simulation_id}.spikes.dat")
 simulation.add_selection_to_event_output_file("output0", 0, "TestPop[0]", "spike")
 
 # record other variables
 simulation.create_output_file("output1", f"{simulation_id}.output.dat")
 simulation.add_column_to_output_file("output1", "v", "TestPop[0]/v")
+"""
 
 lems_simulation_file = simulation.save_to_file()
