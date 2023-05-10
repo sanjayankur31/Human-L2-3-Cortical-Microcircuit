@@ -23,10 +23,6 @@ def main(simulation_id):
     # a new document
     newdoc = component_factory(neuroml.NeuroMLDocument, id="test_probAMPANMDA")
 
-    # include the new synapse type
-    newdoc.add(neuroml.IncludeType, href="ProbAMPANMDA.synapsedef.nml")
-    newdoc.add(neuroml.IncludeType, href="ProbAMPANMDA.synapse.nml")
-
     # the syn component that I have
     # syncomp = read_neuroml2_file("ProbAMPANMDA.synapse.nml")
     # does not recognise the new component type, so it won't show the created
@@ -67,6 +63,10 @@ def main(simulation_id):
     simulation = LEMSSimulation(
         sim_id=simulation_id, duration=1000, dt=0.1, simulation_seed=123
     )
+    # Include the new Component
+    simulation.include_lems_file("ProbAMPANMDA.synapse.xml",
+                                 include_included=True)
+
     simulation.assign_simulation_target(net.id)
     simulation.include_neuroml2_file(nml_file)
 
