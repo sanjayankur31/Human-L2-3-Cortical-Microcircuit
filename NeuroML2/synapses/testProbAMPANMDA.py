@@ -21,13 +21,7 @@ from pyneuroml.plot import generate_plot
 def main(simulation_id):
     """main method that creates sim and runs it."""
     # a new document
-    newdoc = component_factory(neuroml.NeuroMLDocument, id="test_probAMPANMDA")
-
-    # the syn component that I have
-    # syncomp = read_neuroml2_file("ProbAMPANMDA.synapse.nml")
-    # does not recognise the new component type, so it won't show the created
-    # component
-    # print(syncomp)
+    newdoc = component_factory(neuroml.NeuroMLDocument, id="test_probAMPANMDA")  # type: neuroml.NeuroMLDocument
 
     # add a cell
     izh0 = newdoc.add(neuroml.Izhikevich2007Cell,
@@ -55,8 +49,13 @@ def main(simulation_id):
     proj.add(neuroml.Connection, id=0, pre_cell_id="../SpikePop[0]",
              post_cell_id="../TestPop[0]")
 
+    # validate the current document
+    newdoc.validate(recursive=True)
+
     nml_file = "testProbAMPANMDA.net.nml"
-    write_neuroml2_file(newdoc, nml_file, validate=False)
+    # No longer valid NeuroML because it includes a new Component that the
+    # Schema does not know about
+    write_neuroml2_file(newdoc, nml_file, validate=True)
 
 
     # Create simulation, and record data
