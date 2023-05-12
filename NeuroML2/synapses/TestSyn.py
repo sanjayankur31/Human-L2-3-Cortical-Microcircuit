@@ -33,6 +33,10 @@ soma.diam = 17.841242
 soma.push()
 soma.insert("pas")
 soma.g_pas = 0.0003
+soma.e_pas = -70.0
+soma.Ra = 0.0354 * 1000
+"""
+
 syn = h.ExpSyn(0.5, sec=soma)
 
 stim1 = h.IClamp(0.5, sec=soma)
@@ -44,6 +48,7 @@ stim2 = h.IClamp(0.5, sec=soma)
 stim2.delay = 140.0
 stim2.dur = 5.0
 stim2.amp = 0.4
+"""
 
 
 def get_base_syn():

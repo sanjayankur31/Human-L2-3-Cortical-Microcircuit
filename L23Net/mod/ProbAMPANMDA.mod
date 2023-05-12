@@ -151,8 +151,7 @@ NET_RECEIVE (weight, Pv, Pv_tmp, Pr, u, tsyn (ms)){
             :printf("Pv = %g\n", Pv)
             :printf("Pr = %g\n", Pr)
                 
-		   :if (erand() < Pr){*/
-		   if (0.01 < Pr){
+		    if (erand() < Pr){
 		    tsyn = t
 	            Pv = Pv_tmp
                     A_AMPA = A_AMPA + weight*factor_AMPA

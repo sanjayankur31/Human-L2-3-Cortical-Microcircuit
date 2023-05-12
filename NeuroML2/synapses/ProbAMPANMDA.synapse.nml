@@ -52,6 +52,10 @@
         <Exposure name="i" dimension="current"/>
         <Exposure name="g_AMPA" dimension="conductance"/>
         <Exposure name="g_NMDA" dimension="conductance"/>
+        <Exposure name="A_AMPA" dimension="none"/>
+        <Exposure name="A_NMDA" dimension="none"/>
+        <Exposure name="B_AMPA" dimension="none"/>
+        <Exposure name="B_NMDA" dimension="none"/>
 
         <Dynamics>
             <!-- NMODL STATE -->
@@ -60,10 +64,10 @@
             <StateVariable name="Pr" dimension="none"/>
             <StateVariable name="u" dimension="none"/>
             <StateVariable name="tsyn" dimension="time"/>
-            <StateVariable name="A_AMPA" dimension="none" />
-            <StateVariable name="B_AMPA" dimension="none" />
-            <StateVariable name="A_NMDA" dimension="none" />
-            <StateVariable name="B_NMDA" dimension="none" />
+            <StateVariable name="A_AMPA" dimension="none" exposure="A_AMPA"/>
+            <StateVariable name="B_AMPA" dimension="none" exposure="B_AMPA"/>
+            <StateVariable name="A_NMDA" dimension="none" exposure="A_NMDA"/>
+            <StateVariable name="B_NMDA" dimension="none" exposure="B_NMDA"/>
             <StateVariable name="is_spiking" dimension="none" />
 
             <!-- NMODL rates() -->
@@ -71,7 +75,7 @@
             <!-- so that all conditions are tested against the same random value -->
             <StateVariable name="random_val" dimension="none" />
 
-            <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(0.062 * -(v/MVOLT)) * (mg/3.57 *  MMOL))" />
+            <DerivedVariable name="mggate" dimension="none" value="1/(1+exp(0.062 * -(v/MVOLT)) * (mg/(3.57 *  MMOL)))" />
 
             <DerivedVariable name="g_AMPA" dimension="conductance" exposure="g_AMPA" value="gbase * (B_AMPA - A_AMPA)" />
             <DerivedVariable name="g_NMDA" dimension="conductance" exposure="g_NMDA" value="gbase * (B_NMDA - A_NMDA) * mggate" />
@@ -79,7 +83,8 @@
 
             <DerivedVariable name="i_AMPA" exposure="i_AMPA" dimension="current" value="g_AMPA * (v - erev)" />
             <DerivedVariable name="i_NMDA" exposure="i_NMDA" dimension="current" value="g_NMDA * (v - erev)" />
-            <DerivedVariable name="i" exposure="i" dimension="current" value="i_AMPA + i_NMDA" />
+            <!-- mod file generator multiplies by -1 -->
+            <DerivedVariable name="i" exposure="i" dimension="current" value="-1 * (i_AMPA + i_NMDA)" />
 
 
             <!-- NMODL DERIVATIVE, rates() -->
@@ -112,8 +117,7 @@
             <!-- NMODL NET_RECEIVE -->
             <OnEvent port="in">
                 <StateAssignment variable="is_spiking" value="1" />
-                <!--<StateAssignment variable="random_val" value="random(1)" />-->
-                <StateAssignment variable="random_val" value="0" />
+                <StateAssignment variable="random_val" value="random(1)" />
                 <StateAssignment variable="u" value="(H(Fac/MSEC) * ((u * exp(- (t - tsyn)/Fac)) + Use * (1 - (u * exp(- (t - tsyn)/Fac))))) + (H(-Fac/MSEC) * Use)" />
                 <StateAssignment variable="Pv_tmp" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
                 <StateAssignment variable="Pr" value="u * Pv_tmp" />
