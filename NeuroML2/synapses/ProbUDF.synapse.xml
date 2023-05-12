@@ -1,0 +1,19 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 ../../LEMS/Schemas/LEMS/LEMS_v0.7.6.xsd"
+      description="Defines a Component of ProbUDFSyn ComponentType">
+
+    <Include file="ProbUDF.synapse.nml" />
+    <!-- from the mod file -->
+    <Component type="ProbUDFSyn" id="probUDFSyn"
+        tau_r="0.2 ms"
+        tau_d="1.7 ms"
+        Use="1"
+        Dep="100 ms"
+        Fac="10 ms"
+        gbase="0.001 uS"
+        u0="0"
+        erev="0 mV"
+    />
+
+</Lems>

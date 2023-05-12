@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ProbUDFSynDoc">
+
+    <!-- Note that order of different LEMS types matters for validation, since the schema defines what order they should appear in -->
+
+    <!-- docs on NET_RECEIVE and INITIAL blocks: https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html -->
+
+    <!-- other refs:
+        - https://github.com/NeuroML/jNeuroML/issues/39#issuecomment-213517949
+        - https://github.com/JustasB/Mig3DTest/blob/master/NeuroML2/Synapses/FI.synapse.nml
+        -  https://github.com/OpenSourceBrain/EbnerEtAl2019/blob/master/NeuroML2/fourPathwaySyn.synapse.nml
+    -->
+
+    <!-- baseConductanceBasedSynapse has v and gbase as requirements, which we need here -->
+    <ComponentType name="ProbUDFSyn"
+        extends="baseConductanceBasedSynapse"
+        description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
+        >
+
+        <Property name="weight" dimension="none" defaultValue="1" />
+
+        <!-- NMODL PARAMTER -->
+        <Parameter name="tau_r" dimension="time" />
+        <Parameter name="tau_d" dimension="time" />
+
+        <Parameter name="Use" dimension="none" />
+        <Parameter name="Dep" dimension="time" />
+        <Parameter name="Fac" dimension="time" />
+
+        <!-- gmax is defined as gbase, which is inherited from baseConductanceBasedSynapse -->
+        <Parameter name="erev" dimension="voltage" />
+        <Parameter name="u0" dimension="none"/>
+
+        <DerivedParameter name="tp" dimension="none" value="(tau_r * tau_d) / (tau_d - tau_r) * log(tau_d / tau_r)" />
+        <DerivedParameter name="factor" dimension="none" value="1 / (-exp(-tp / tau_r) + exp(-tp / tau_d))" />
+
+        <Constant name="MVOLT" dimension="voltage" value="1mV"/>
+        <Constant name="MSEC" dimension="time" value="1ms"/>
+        <Constant name="MMOL" dimension="concentration" value="1mM"/>
+
+        <Exposure name="i" dimension="current"/>
+        <Exposure name="g" dimension="conductance"/>
+        <Exposure name="A" dimension="none"/>
+        <Exposure name="B" dimension="none"/>
+
+        <Dynamics>
+            <!-- NMODL STATE -->
+            <StateVariable name="Pv_tmp" dimension="none"/>
+            <StateVariable name="Pv" dimension="none"/>
+            <StateVariable name="Pr" dimension="none"/>
+            <StateVariable name="u" dimension="none"/>
+            <StateVariable name="tsyn" dimension="time"/>
+            <StateVariable name="A" dimension="none" exposure="A"/>
+            <StateVariable name="B" dimension="none" exposure="B"/>
+            <StateVariable name="is_spiking" dimension="none" />
+
+            <!-- NMODL rates() -->
+            <!-- NMODL ASSIGNED -->
+            <!-- so that all conditions are tested against the same random value -->
+            <StateVariable name="random_val" dimension="none" />
+
+            <DerivedVariable name="g" dimension="conductance" exposure="g" value="gbase * (B - A)" />
+            <!-- mod file generator multiplies by -1 -->
+            <DerivedVariable name="i" exposure="i" dimension="current" value="-1 * g * (v - erev)" />
+
+
+            <!-- NMODL DERIVATIVE, rates() -->
+            <TimeDerivative variable="A" value="-A / tau_r" />
+            <TimeDerivative variable="B" value="-B / tau_d" />
+            <TimeDerivative variable="is_spiking" value="0" />
+            <TimeDerivative variable="tsyn" value="0" />
+            <TimeDerivative variable="Pv_tmp" value="0" />
+            <TimeDerivative variable="Pr" value="0" />
+            <TimeDerivative variable="Pv" value="0" />
+            <TimeDerivative variable="u" value="0" />
+            <TimeDerivative variable="random_val" value="0" />
+
+            <!-- NMODL INITIAL -->
+            <OnStart>
+                <StateAssignment variable="A" value="0" />
+                <StateAssignment variable="B" value="0" />
+
+                <StateAssignment variable="u" value="u0" />
+                <StateAssignment variable="Pv" value="1" />
+                <StateAssignment variable="tsyn" value="t" />
+
+                <StateAssignment variable="is_spiking" value="0" />
+            </OnStart>
+
+            <!-- NMODL NET_RECEIVE -->
+            <OnEvent port="in">
+                <StateAssignment variable="is_spiking" value="1" />
+                <StateAssignment variable="random_val" value="random(1)" />
+                <StateAssignment variable="u" value="(H(Fac/MSEC) * ((u * exp(- (t - tsyn)/Fac)) + Use * (1 - (u * exp(- (t - tsyn)/Fac))))) + (H(-Fac/MSEC) * Use)" />
+                <StateAssignment variable="Pv_tmp" value="(1 - (1 - Pv) * exp(- (t - tsyn ) / Dep))" />
+                <StateAssignment variable="Pr" value="u * Pv_tmp" />
+                <StateAssignment variable="Pv" value="(H(Pr - random_val) * (Pv_tmp - Pr)) + (H(random_val - Pr) * Pv)" />
+                <!-- "weight" is defined in the NET_RECEIVE function, so we cannot use OnCondition for these as "weight" is not defined outside NET_RECEIVE.
+                    So, use H(x) to implement conditional: 1 if x >0 ; 0 if x < 0; 0.5 if x == 0
+                -->
+                <StateAssignment variable="A" value="A + (H(Pr - random_val) * (weight * factor))" />
+                <StateAssignment variable="B" value="B + (H(Pr - random_val) * (weight * factor))" />
+                <StateAssignment variable="tsyn" value="(H(Pr - random_val) * t) + (H(random_val - Pr) * tsyn)" />
+            </OnEvent>
+
+            <!-- Note: error when using .le. in OnCondition test:
+                Exception in thread "main" java.lang.NumberFormatException: For input string: ".le."
+                at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054)
+                at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
+                at java.base/java.lang.Double.parseDouble(Double.java:651)
+                at org.lemsml.jlems.core.expression.ConstantNode.<init>(ConstantNode.java:19)
+            -->
+
+            <!-- reset at last -->
+            <OnCondition test="is_spiking .eq. 1" >
+                <StateAssignment variable="is_spiking" value="0" />
+            </OnCondition>
+        </Dynamics>
+
+    </ComponentType>
+
+</neuroml>
