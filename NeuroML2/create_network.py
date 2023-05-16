@@ -183,7 +183,7 @@ for pretype in cell_types:
                          post_segment_id=post_seg.id,
                          post_fraction_along=frac_along,
                          weight=weight,
-                         delay=delay
+                         delay=f"{delay} ms"
                          )
             except ValueError as e:
                 print(f"list of cumulative lengths: {list_cumul_lengths}")
