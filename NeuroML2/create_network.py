@@ -45,9 +45,7 @@ network = netdoc.add(neuroml.Network, id="L23Network", temperature="34.0 degC",
                      notes=f"L23 network at {network_scale} scale", validate=False)
 
 # synapse types
-# TODO: convert synapse mod files and create new components for each
-# placeholder
-syn0 = netdoc.add("ExpOneSynapse", id="syn0", gbase="65nS", erev="0mV", tau_decay="3ms")
+# LEMS component definitions will be included in simulation file later
 
 # make a directory for storing rotated cells
 # we include these cells in the network document to ensure that the network
@@ -171,18 +169,21 @@ for pretype in cell_types:
                 proj = network.add(neuroml.Projection, id=f"proj_{precell}_{postcell}",
                                    presynaptic_population=f"{pretype}_pop_{precell}",
                                    postsynaptic_population=f"{posttype}_pop_{postcell}",
-                                   synapse=syn0.id)
+                                   synapse=f"{pretype}_{posttype}_{mechanism}")
+
                 cur_precell = precell
                 cur_postcell = postcell
                 syn_count = 0
 
             try:
-                proj.add(neuroml.Connection, id=syn_count,
+                proj.add(neuroml.ConnectionWD, id=syn_count,
                          pre_cell_id=f"../{pretype}_pop_{precell}/0/{pretype}_{precell}",
                          pre_segment_id=0,
                          post_cell_id=f"../{posttype}_pop_{postcell}/0/{posttype}_{postcell}",
                          post_segment_id=post_seg.id,
-                         post_fraction_along=frac_along
+                         post_fraction_along=frac_along,
+                         weight=weight,
+                         delay=delay
                          )
             except ValueError as e:
                 print(f"list of cumulative lengths: {list_cumul_lengths}")
