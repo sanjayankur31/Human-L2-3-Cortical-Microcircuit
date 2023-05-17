@@ -1,16 +1,18 @@
+
 # Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation
 
-target: LEMS_HL23PV_sim.xml
-engine: jNeuroML_EDEN
-mep: tests/.test.pv.mep
+target: LEMS_HL23SST_sim.xml
+engine: jNeuroML_NEURON
+mep: tests/.test.sst.mep
 experiments:
-  stepPV:
+  stepSST:
     observables:
       spike times:
         file:
-          path: HL23PV_net.dat
+          path: HL23SST_net.dat
           columns: [0,1]
           scaling: [1000,1000]
         spike detection:
           method: threshold
-        tolerance: 0.041403658927998334
+        tolerance: 0.0711996958670504
+
