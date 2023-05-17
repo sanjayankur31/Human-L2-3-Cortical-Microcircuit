@@ -20,6 +20,7 @@ import pyneuroml
 from pyneuroml.utils import rotate_cell
 from pyneuroml.pynml import write_neuroml2_file
 from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
+import lems.api as lems
 import h5py
 
 
@@ -28,6 +29,7 @@ logger.setLevel(logging.INFO)
 
 # set the scale of the network
 network_scale = 0.05
+print(f"Creating network with scale {network_scale}")
 
 cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
 # confirmed from cell_data.keys()
@@ -43,9 +45,14 @@ pop_colors = {
 netdoc = component_factory(neuroml.NeuroMLDocument, id="L23Network")
 network = netdoc.add(neuroml.Network, id="L23Network", temperature="34.0 degC",
                      notes=f"L23 network at {network_scale} scale", validate=False)
+netdoc_file_name = "L23Net.net.nml"
 
 # synapse types
 # LEMS component definitions will be included in simulation file later
+synapse_components = lems.Model()
+synapse_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
+synapse_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
+synapse_components_file_name = "synapse_components.xml"
 
 # make a directory for storing rotated cells
 # we include these cells in the network document to ensure that the network
@@ -109,7 +116,58 @@ connectivity_data = h5py.File('../L23Net/Circuit_output/synapse_connections.h5',
 for pretype in cell_types:
     for posttype in cell_types:
         conndataset = connectivity_data[f"{pretype}:{posttype}"]
+        # string
         mechanism = (connectivity_data[f'synparams/{pretype}:{posttype}']['mechanism'][()].decode('utf-8'))
+
+        # all ints/floats
+        if "UDF" in mechanism:
+            tau_r = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r'][()])
+            tau_d = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d'][()])
+        elif "AMPANMDA" in mechanism:
+            tau_r_AMPA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_AMPA'][()])
+            tau_r_NMDA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_NMDA'][()])
+            tau_d_AMPA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_AMPA'][()])
+            tau_d_NMDA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_NMDA'][()])
+        else:
+            raise ValueError(f"Unknown mechanism found: {mechanism}")
+
+        # common to both synapses
+        Use = (connectivity_data[f'synparams/{pretype}:{posttype}']['Use'][()])
+        Dep = (connectivity_data[f'synparams/{pretype}:{posttype}']['Dep'][()])
+        Fac = (connectivity_data[f'synparams/{pretype}:{posttype}']['Fac'][()])
+        gbase = (connectivity_data[f'synparams/{pretype}:{posttype}']['gmax'][()])
+        u0 = (connectivity_data[f'synparams/{pretype}:{posttype}']['u0'][()])
+        erev = (connectivity_data[f'synparams/{pretype}:{posttype}']['e'][()])
+
+        print(f"Creating synapse component: {pretype} -> {posttype}: {pretype}_{posttype}_{mechanism}.")
+        if "UDF" in mechanism:
+            syn = lems.Component(id_=f"{pretype}_{posttype}_{mechanism}",
+                                 type_=f"{mechanism}",
+                                 tau_r=f"{tau_r} ms",
+                                 tau_d=f"{tau_d} ms",
+                                 Use=Use,
+                                 Dep=f"{Dep} ms",
+                                 Fac=f"{Fac} ms",
+                                 gbase=f"{gbase} uS",
+                                 u0=u0,
+                                 erev=f"{erev} mV",
+                                 )
+        elif "AMPANMDA" in mechanism:
+            syn = lems.Component(id_=f"{pretype}_{posttype}_{mechanism}",
+                                 type_=f"{mechanism}",
+                                 tau_r_AMPA=f"{tau_r_AMPA} ms",
+                                 tau_d_AMPA=f"{tau_d_AMPA} ms",
+                                 tau_r_NMDA=f"{tau_r_NMDA} ms",
+                                 tau_d_NMDA=f"{tau_d_NMDA} ms",
+                                 Use=Use,
+                                 Dep=f"{Dep} ms",
+                                 Fac=f"{Fac} ms",
+                                 gbase=f"{gbase} uS",
+                                 u0=u0,
+                                 erev=f"{erev} mV",
+                                 )
+
+        synapse_components.add(syn)
 
         anml_cell = neuroml.loaders.read_neuroml2_file(f"{posttype}.cell.nml").cells[0]  # type: neuroml.Cell
         syn_count = 0
@@ -194,4 +252,9 @@ for pretype in cell_types:
 
 print(netdoc.summary())
 netdoc.validate(recursive=True)
-write_neuroml2_file(netdoc, "L23Net.net.nml", validate=True)
+
+print(f"Writing {synapse_components_file_name} ")
+synapse_components.export_to_file(synapse_components_file_name)
+
+print(f"Writing {netdoc_file_name} ")
+write_neuroml2_file(netdoc, netdoc_file_name, validate=False)

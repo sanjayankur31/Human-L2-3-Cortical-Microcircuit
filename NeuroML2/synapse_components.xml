@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 https://raw.githubusercontent.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.6.xsd">
+  <Include file="synapses/ProbAMPANMDA.synapse.nml"/>
+  <Include file="synapses/ProbUDF.synapse.nml"/>
+  <Component id="HL23PV_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="710 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.08" Dep="710 ms" Fac="23 ms" gbase="0.00291 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="700 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.26" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PYR_HL23PV_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.88" Dep="510 ms" Fac="180 ms" gbase="0.000337 uS" u0="0" erev="0 mV"/>
+  <Component id="HL23PYR_HL23PYR_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.46" Dep="670 ms" Fac="17 ms" gbase="0.0002482 uS" u0="0" erev="0 mV"/>
+  <Component id="HL23PYR_HL23SST_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.09" Dep="140 ms" Fac="670 ms" gbase="0.00038 uS" u0="0" erev="0 mV"/>
+  <Component id="HL23PYR_HL23VIP_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.5" Dep="670 ms" Fac="17 ms" gbase="0.00031 uS" u0="0" erev="0 mV"/>
+  <Component id="HL23SST_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="710 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.3" Dep="1300 ms" Fac="2 ms" gbase="0.00124 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.31" Dep="890 ms" Fac="25 ms" gbase="0.00046 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.23" Dep="300 ms" Fac="160 ms" gbase="0.0 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.27" Dep="760 ms" Fac="22 ms" gbase="0.00036 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.26" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+</Lems>
