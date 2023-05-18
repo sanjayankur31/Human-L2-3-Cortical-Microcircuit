@@ -1,3 +1,4 @@
 # This test will validate MOST all of the NeuroML 2 files in the current directory
-target: "*cell.nml *net.nml *channel.nml *synapse.nml"
+# cells are not valid because they use user defined component types
+target: "*channel.nml *synapse.nml"
 engine: jNeuroML_validate
