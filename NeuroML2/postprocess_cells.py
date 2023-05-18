@@ -974,13 +974,14 @@ def postprocess_HL23VIP():
                              ion="k",
                              ion_chan_def_file="channels/SK.channel.nml")
     # Ca
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_VIP_somatic",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
@@ -1085,13 +1086,14 @@ def postprocess_HL23VIP():
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_VIP_axonal",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
 
