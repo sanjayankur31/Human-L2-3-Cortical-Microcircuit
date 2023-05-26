@@ -26,3 +26,5 @@ x86_64/
 /NeuroML2/Sim_TestNetwork.json
 /NeuroML2/TestNetwork.json
 *_eden.py
+
+.mypy_cache/

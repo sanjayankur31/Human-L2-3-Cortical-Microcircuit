@@ -1,0 +1,3549 @@
+ca_ion:
+    avg_rev_pot: 121.03277020109208
+    ext_conc: 2.0
+    int_conc: 0.0002781478066867023
+    nsecs: 3
+k_ion:
+    avg_rev_pot: -85.0
+    ext_conc: 2.5
+    int_conc: 54.4
+    nsecs: 3
+mechanisms:
+    CaDynamics:
+        num_params: 4
+        parameters:
+            decay_CaDynamics:
+                ave_all_segs: 285.6987841742943
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 163.03538024059918
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 163.03538024059918
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 531.0255920416845
+            depth_CaDynamics:
+                ave_all_segs: 0.10000000000000002
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.1
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.1
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.1
+            gamma_CaDynamics:
+                ave_all_segs: 0.0005
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0005
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.0005
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0005
+            minCai_CaDynamics:
+                ave_all_segs: 0.0001
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0001
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.0001
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0001
+        present_on_secs: 3
+    Ca_HVA:
+        num_params: 1
+        parameters:
+            gbar_Ca_HVA:
+                ave_all_segs: 0.0020341583464097064
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.002961469262723619
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.002961469262723619
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.00017953651378188165
+        present_on_secs: 3
+    Ca_LVA:
+        num_params: 1
+        parameters:
+            gbar_Ca_LVA:
+                ave_all_segs: 0.03087300040853828
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 5.9457835817342756e-05
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 5.9457835817342756e-05
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.09250008555398015
+        present_on_secs: 3
+    Ih:
+        num_params: 7
+        parameters:
+            gbar_Ih:
+                ave_all_segs: 2.7671764064314368e-05
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 2.7671764064314368e-05
+            shift1_Ih:
+                ave_all_segs: 154.9000000000008
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 154.9
+            shift2_Ih:
+                ave_all_segs: 11.900000000000055
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 11.9
+            shift3_Ih:
+                ave_all_segs: 0.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+            shift4_Ih:
+                ave_all_segs: 33.10000000000017
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 33.1
+            shift5_Ih:
+                ave_all_segs: 6.430000000000014
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 6.43
+            shift6_Ih:
+                ave_all_segs: 193.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 193.0
+        present_on_secs: 52
+    Im:
+        num_params: 1
+        parameters:
+            gbar_Im:
+                ave_all_segs: 0.033778156579389956
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.029587905136596156
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.029587905136596156
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.04215865946497755
+        present_on_secs: 3
+    K_P:
+        num_params: 1
+        parameters:
+            gbar_K_P:
+                ave_all_segs: 0.45698830828161263
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.6854776593761795
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.6854776593761795
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 9.606092478937705e-06
+        present_on_secs: 3
+    K_T:
+        num_params: 1
+        parameters:
+            gbar_K_T:
+                ave_all_segs: 0.051079208591336966
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.07603372775662909
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.07603372775662909
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0011701702607527396
+        present_on_secs: 3
+    Kv3_1:
+        num_params: 1
+        parameters:
+            gbar_Kv3_1:
+                ave_all_segs: 2.9899476592109235
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 2.988867483754507
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 2.988867483754507
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 2.9921080101237565
+        present_on_secs: 3
+    NaTg:
+        num_params: 5
+        parameters:
+            gbar_NaTg:
+                ave_all_segs: 0.23929225965489667
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.10914576408883477
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.10914576408883477
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.49958525078702043
+            slopeh_NaTg:
+                ave_all_segs: 6.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 6.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 6.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 6.0
+            slopem_NaTg:
+                ave_all_segs: 9.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 9.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 9.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 9.0
+            vshifth_NaTg:
+                ave_all_segs: 10.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 10.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 10.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 10.0
+            vshiftm_NaTg:
+                ave_all_segs: 0.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.0
+        present_on_secs: 3
+    Nap:
+        num_params: 1
+        parameters:
+            gbar_Nap:
+                ave_all_segs: 0.003732420192079587
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.001200899579358837
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.001200899579358837
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.008795461417521086
+        present_on_secs: 3
+    SK:
+        num_params: 1
+        parameters:
+            gbar_SK:
+                ave_all_segs: 0.34146384207776465
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.5121938998281017
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.5121938998281017
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 3.7265770903193036e-06
+        present_on_secs: 3
+    ca_ion:
+        num_params: 0
+        parameters: {}
+        present_on_secs: 3
+    capacitance:
+        num_params: 1
+        parameters:
+            cm:
+                ave_all_segs: 2.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 2.0
+        present_on_secs: 52
+    k_ion:
+        num_params: 1
+        parameters:
+            ko:
+                ave_all_segs: 2.5
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 2.5
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 2.5
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 2.5
+        present_on_secs: 3
+    morphology:
+        num_params: 1
+        parameters:
+            diam:
+                ave_all_segs: 0.5605752999470891
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.23069906671183527
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.2287999987602235
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 0.5575053372825111
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 0.5169771818629384
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            1: 0.5445796251105597
+                            2: 0.5195310132858211
+                            3: 0.4945261237744758
+                            4: 0.46961232041107054
+                            5: 0.44477980699201874
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            1: 0.5479293601177759
+                            2: 0.5302238109196012
+                            3: 0.5125029166624006
+                            4: 0.4949037001625221
+                            5: 0.4771156589036542
+                            6: 0.4592944906459427
+                            7: 0.4413757732942716
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            1: 0.7256318271667785
+                            2: 0.690989894373197
+                            3: 0.6563593984137995
+                            4: 0.6218586546221275
+                            5: 0.587463485877998
+                            6: 0.553065473562034
+                            7: 0.5186112056927801
+                            8: 0.4841775337793299
+                            9: 0.44970037913780003
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            1: 0.8068566633987413
+                            2: 0.771148034103982
+                            3: 0.7353037090665508
+                            4: 0.6996306568676195
+                            5: 0.6640800601236629
+                            6: 0.6286569329205584
+                            7: 0.5931369714788607
+                            8: 0.557654662163514
+                            9: 0.5218602432547427
+                            10: 0.4860511670938559
+                            11: 0.45029544786305015
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 0.7410606187665204
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 0.5158969526429581
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            1: 0.4724059597304389
+                            2: 0.46993427137843086
+                            3: 0.4674782738450389
+                            4: 0.4650048658187881
+                            5: 0.46263011061600345
+                            6: 0.4608267156880378
+                            7: 0.4584174625537599
+                            8: 0.4560303115522461
+                            9: 0.45350310254857906
+                            10: 0.45097270996851935
+                            11: 0.4484187651097508
+                            12: 0.4459573903766881
+                            13: 0.4434996816053401
+                            14: 0.440997630738644
+                            15: 0.43856856958162094
+                            16: 0.43611466315120057
+                            17: 0.43367222207708295
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            1: 0.47126113929480806
+                            2: 0.46661079599768257
+                            3: 0.4618889583654743
+                            4: 0.45724896000924475
+                            5: 0.45241851746117046
+                            6: 0.44776416768400995
+                            7: 0.44305427522122515
+                            8: 0.43831125869774257
+                            9: 0.43410510445111194
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            1: 0.4697668682439352
+                            2: 0.461439445010005
+                            3: 0.45313145257850196
+                            4: 0.4448155620602568
+                            5: 0.43649621933867067
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 0.5317755283644129
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            1: 0.4915185284550855
+                            2: 0.48583970348099237
+                            3: 0.4802109924358901
+                            4: 0.4745771473824549
+                            5: 0.4689228711285584
+                            6: 0.46327540727551864
+                            7: 0.45766180486321606
+                            8: 0.4520399186664932
+                            9: 0.44636031503741996
+                            10: 0.4407505251960032
+                            11: 0.4352105544210883
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            1: 0.45218335412039257
+                            2: 0.45052781857689356
+                            3: 0.44885895767213196
+                            4: 0.44715987193381873
+                            5: 0.4455812555424634
+                            6: 0.44437799383728405
+                            7: 0.4428038428225304
+                            8: 0.4411520584602942
+                            9: 0.4395273244090891
+                            10: 0.4378797081508528
+                            11: 0.43617278766602624
+                            12: 0.43467986756754845
+                            13: 0.4331688375568828
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 0.44306972119397153
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 0.725564837530153
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            1: 0.688601552213202
+                            2: 0.664219905083023
+                            3: 0.6397663976905333
+                            4: 0.6156906192061771
+                            5: 0.5914071343092746
+                            6: 0.567059413780933
+                            7: 0.5425824152907796
+                            8: 0.5180479050259782
+                            9: 0.49354132741333845
+                            10: 0.4691517198209268
+                            11: 0.44471880030158983
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 0.6165162366444225
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            1: 0.5110940991915569
+                            2: 0.5035414808860759
+                            3: 0.4961104858627355
+                            4: 0.4885313635488857
+                            5: 0.4810835729591314
+                            6: 0.47358035492560246
+                            7: 0.4662076588689658
+                            8: 0.4586988752899864
+                            9: 0.4512354098517746
+                            10: 0.4437348952375457
+                            11: 0.43619559036059485
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            1: 0.5096361499979563
+                            2: 0.49808131249940235
+                            3: 0.48639979025400515
+                            4: 0.47445652042787817
+                            5: 0.46243501812992116
+                            6: 0.45033531890495887
+                            7: 0.43844033200437044
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 0.5962360987640685
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 0.46412201821291144
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 0.47468257753368054
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            1: 0.4897485372911291
+                            2: 0.4809169475621365
+                            3: 0.4720650580804341
+                            4: 0.4632857757091356
+                            5: 0.45447586353220254
+                            6: 0.44564173989872297
+                            7: 0.43679073933252655
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            1: 0.45105148329131767
+                            2: 0.4466643536111469
+                            3: 0.4425686777373651
+                            4: 0.4385118567342349
+                            5: 0.43443089440024085
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            1: 0.45191684558530587
+                            2: 0.4496116766966555
+                            3: 0.44730923787072924
+                            4: 0.445026372810246
+                            5: 0.4426801778652018
+                            6: 0.4404205752220308
+                            7: 0.43807073066147434
+                            8: 0.43580947431345973
+                            9: 0.4335310576679985
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 1.0378666033398087
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 0.8750947108045185
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 0.7329567215703436
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            1: 0.674749287445085
+                            2: 0.6640141687834396
+                            3: 0.6532473798272236
+                            4: 0.6422701294503054
+                            5: 0.631516873174214
+                            6: 0.6207140486130986
+                            7: 0.6099986779051212
+                            8: 0.599357317074776
+                            9: 0.5885382715417549
+                            10: 0.5777015825012362
+                            11: 0.5668730142371314
+                            12: 0.5561236252535462
+                            13: 0.5454943155548764
+                            14: 0.5346546318656334
+                            15: 0.5238481050251357
+                            16: 0.5130715881183571
+                            17: 0.5023129105111165
+                            18: 0.49145157930872724
+                            19: 0.48066547809751714
+                            20: 0.4697897192592327
+                            21: 0.45887748299847403
+                            22: 0.4481989138919356
+                            23: 0.43769854791434437
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            1: 0.6618000549734269
+                            2: 0.6249132112180504
+                            3: 0.5877755441944379
+                            4: 0.5502026376086265
+                            5: 0.5127777838039254
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            1: 0.49113341484968825
+                            2: 0.4847070649860984
+                            3: 0.47784365246352767
+                            4: 0.47087846189208554
+                            5: 0.4637442734869899
+                            6: 0.4568833208766723
+                            7: 0.4500225741959044
+                            8: 0.4429628900638218
+                            9: 0.4358783634321682
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            1: 0.4849188452082913
+                            2: 0.4639758715198045
+                            3: 0.44309770208790633
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 0.6600859654530944
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 0.5254464117026875
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            1: 0.5119374480190606
+                            2: 0.505715429497517
+                            3: 0.49935105414707703
+                            4: 0.4929628995071849
+                            5: 0.48653154807118004
+                            6: 0.48009469016351347
+                            7: 0.47367864832730144
+                            8: 0.4673041063658717
+                            9: 0.4608456721960469
+                            10: 0.45450864697614324
+                            11: 0.4481644486838141
+                            12: 0.44174651503399126
+                            13: 0.4354549884687577
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 0.50497843574928
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            1: 0.4842993145473104
+                            2: 0.4634459582042211
+                            3: 0.44265559924262105
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            1: 0.4921222069393125
+                            2: 0.48751798460473855
+                            3: 0.4829161507817729
+                            4: 0.4783308559884202
+                            5: 0.47380249529207785
+                            6: 0.46918614461209784
+                            7: 0.4645522734497177
+                            8: 0.4599434323091316
+                            9: 0.45534290236582636
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 0.8769976006255569
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            1: 0.8116971764809601
+                            2: 0.785232640818035
+                            3: 0.7587825396590613
+                            4: 0.7326018105861255
+                            5: 0.7063243068526605
+                            6: 0.6797969632257141
+                            7: 0.6535862428884655
+                            8: 0.6275558072502914
+                            9: 0.6015891575121753
+                            10: 0.5757570418724289
+                            11: 0.549916415238952
+                            12: 0.5236987792859175
+                            13: 0.4974937002508253
+                            14: 0.4713964505252175
+                            15: 0.44523034404162953
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 0.6890676863599582
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            1: 0.5308618205986857
+                            2: 0.5213247223170868
+                            3: 0.5118184723828811
+                            4: 0.5023246069357762
+                            5: 0.493004960118998
+                            6: 0.4835979619480274
+                            7: 0.47417877634137096
+                            8: 0.46471176577293005
+                            9: 0.4551903748005114
+                            10: 0.44582577177470073
+                            11: 0.43661922334271114
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            1: 0.5311689118123296
+                            2: 0.521760095224144
+                            3: 0.5121393621991356
+                            4: 0.5027410747666259
+                            5: 0.4932492641889625
+                            6: 0.48387559011582226
+                            7: 0.47438220963625755
+                            8: 0.46496939965356726
+                            9: 0.45563410032643215
+                            10: 0.44629851673211274
+                            11: 0.43690595930058984
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            1: 0.5076290241094326
+                            2: 0.49099379623036243
+                            3: 0.4741424716120033
+                            4: 0.45737256899445555
+                            5: 0.4406984008617023
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            1: 0.5067403105653974
+                            2: 0.4900821630210227
+                            3: 0.4736524339268165
+                            4: 0.4570099265510534
+                            5: 0.44064787533700533
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 0.8517253213410269
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 0.788940422356574
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 0.6514529638466681
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 13.613599777221681
+        present_on_secs: 52
+    na_ion:
+        num_params: 1
+        parameters:
+            nao:
+                ave_all_segs: 140.0
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 140.0
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 140.0
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 140.0
+        present_on_secs: 3
+    pas:
+        num_params: 2
+        parameters:
+            e_pas:
+                ave_all_segs: -83.92924122901232
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': -83.92924122901199
+            g_pas:
+                ave_all_segs: 0.00011830111773572078
+                values:
+                    NeuronTemplate_0_.axon_0:
+                        id: NeuronTemplate[0].axon[0]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.axon_1:
+                        id: NeuronTemplate[0].axon[1]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_0:
+                        id: NeuronTemplate[0].dend[0]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_1:
+                        id: NeuronTemplate[0].dend[1]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_10:
+                        id: NeuronTemplate[0].dend[10]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_11:
+                        id: NeuronTemplate[0].dend[11]
+                        nseg: 7
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_12:
+                        id: NeuronTemplate[0].dend[12]
+                        nseg: 9
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_13:
+                        id: NeuronTemplate[0].dend[13]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_14:
+                        id: NeuronTemplate[0].dend[14]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_15:
+                        id: NeuronTemplate[0].dend[15]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_16:
+                        id: NeuronTemplate[0].dend[16]
+                        nseg: 17
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_17:
+                        id: NeuronTemplate[0].dend[17]
+                        nseg: 9
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_18:
+                        id: NeuronTemplate[0].dend[18]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_19:
+                        id: NeuronTemplate[0].dend[19]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_2:
+                        id: NeuronTemplate[0].dend[2]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_20:
+                        id: NeuronTemplate[0].dend[20]
+                        nseg: 13
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_21:
+                        id: NeuronTemplate[0].dend[21]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_22:
+                        id: NeuronTemplate[0].dend[22]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_23:
+                        id: NeuronTemplate[0].dend[23]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_24:
+                        id: NeuronTemplate[0].dend[24]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_25:
+                        id: NeuronTemplate[0].dend[25]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_26:
+                        id: NeuronTemplate[0].dend[26]
+                        nseg: 7
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_27:
+                        id: NeuronTemplate[0].dend[27]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_28:
+                        id: NeuronTemplate[0].dend[28]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_29:
+                        id: NeuronTemplate[0].dend[29]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_3:
+                        id: NeuronTemplate[0].dend[3]
+                        nseg: 7
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_30:
+                        id: NeuronTemplate[0].dend[30]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_31:
+                        id: NeuronTemplate[0].dend[31]
+                        nseg: 9
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_32:
+                        id: NeuronTemplate[0].dend[32]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_33:
+                        id: NeuronTemplate[0].dend[33]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_34:
+                        id: NeuronTemplate[0].dend[34]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_35:
+                        id: NeuronTemplate[0].dend[35]
+                        nseg: 23
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_36:
+                        id: NeuronTemplate[0].dend[36]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_37:
+                        id: NeuronTemplate[0].dend[37]
+                        nseg: 9
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_38:
+                        id: NeuronTemplate[0].dend[38]
+                        nseg: 3
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_39:
+                        id: NeuronTemplate[0].dend[39]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_4:
+                        id: NeuronTemplate[0].dend[4]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_40:
+                        id: NeuronTemplate[0].dend[40]
+                        nseg: 13
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_41:
+                        id: NeuronTemplate[0].dend[41]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_42:
+                        id: NeuronTemplate[0].dend[42]
+                        nseg: 3
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_43:
+                        id: NeuronTemplate[0].dend[43]
+                        nseg: 9
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_44:
+                        id: NeuronTemplate[0].dend[44]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_45:
+                        id: NeuronTemplate[0].dend[45]
+                        nseg: 15
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_46:
+                        id: NeuronTemplate[0].dend[46]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_47:
+                        id: NeuronTemplate[0].dend[47]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_48:
+                        id: NeuronTemplate[0].dend[48]
+                        nseg: 11
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_5:
+                        id: NeuronTemplate[0].dend[5]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_6:
+                        id: NeuronTemplate[0].dend[6]
+                        nseg: 5
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_7:
+                        id: NeuronTemplate[0].dend[7]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_8:
+                        id: NeuronTemplate[0].dend[8]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.dend_9:
+                        id: NeuronTemplate[0].dend[9]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+                    NeuronTemplate_0_.soma_0:
+                        id: NeuronTemplate[0].soma[0]
+                        nseg: 1
+                        values:
+                            '*': 0.00011830111773572024
+        present_on_secs: 52
+na_ion:
+    avg_rev_pot: 50.0
+    ext_conc: 140.0
+    int_conc: 10.0
+    nsecs: 3
+num_sections: 52
+temperature: 34.0
+total_Cm: 104.0
+total_L: 5285.1357461378475
+total_Ra: 5200.0
+total_diam: 41.81080296164112
+total_nseg: 274
+

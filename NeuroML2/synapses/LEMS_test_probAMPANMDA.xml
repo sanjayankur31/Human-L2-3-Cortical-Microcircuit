@@ -1,0 +1,37 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.0.1 (libNeuroML v0.5.1)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="test_probAMPANMDA"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="ProbAMPANMDA.synapse.xml"/>
+    <Include file="testProbAMPANMDA.net.nml"/>
+    <Include file="passiveCell.cell.nml"/>
+   
+    <Simulation id="test_probAMPANMDA" length="500ms" step="0.01ms" target="TestNet" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="output1" fileName="test_probAMPANMDA.output.dat">
+            <OutputColumn id="v" quantity="TestPop/0/0/v"/> 
+            <OutputColumn id="i_AMPA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/i_AMPA"/> 
+            <OutputColumn id="i_NMDA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/i_NMDA"/> 
+            <OutputColumn id="g_AMPA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/g_AMPA"/> 
+            <OutputColumn id="g_NMDA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/g_NMDA"/> 
+            <OutputColumn id="A_AMPA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/A_AMPA"/> 
+            <OutputColumn id="A_NMDA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/A_NMDA"/> 
+            <OutputColumn id="B_AMPA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/B_AMPA"/> 
+            <OutputColumn id="B_NMDA" quantity="TestPop/0/0/synapses:probAMPANMDASyn:0/B_NMDA"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

@@ -17,6 +17,7 @@ NEURON {
         RANGE tau_r_AMPA, tau_d_AMPA, tau_r_NMDA, tau_d_NMDA
         RANGE Use, u, Dep, Fac, u0, weight_factor_NMDA
         RANGE i, i_AMPA, i_NMDA, g_AMPA, g_NMDA, e, gmax
+        RANGE Pr1, Pv1
         NONSPECIFIC_CURRENT i, i_AMPA,i_NMDA
 	POINTER rng
 }
@@ -66,6 +67,8 @@ ASSIGNED {
         factor_AMPA
 	factor_NMDA
 	rng
+    Pr1
+    Pv1
 }
 
 STATE {
@@ -143,11 +146,12 @@ NET_RECEIVE (weight, Pv, Pv_tmp, Pr, u, tsyn (ms)){
             Pv_tmp  = 1 - (1-Pv) * exp(-(t-tsyn)/Dep) :Probability Pv for a vesicle to be available for release, analogous to the pool of synaptic
                                                       :resources available for release in the deterministic model. Eq. 3 in Fuhrmann et al.
             Pr  = u * Pv_tmp                          :Pr is calculated as Pv * u (running value of Use)
+            Pr1 = Pr
             Pv_tmp  = Pv_tmp - u * Pv_tmp             :update Pv as per Eq. 3 in Fuhrmann et al.
             :printf("Pv = %g\n", Pv)
             :printf("Pr = %g\n", Pr)
                 
-		   if (erand() < Pr){
+		    if (erand() < Pr){
 		    tsyn = t
 	            Pv = Pv_tmp
                     A_AMPA = A_AMPA + weight*factor_AMPA
@@ -156,6 +160,8 @@ NET_RECEIVE (weight, Pv, Pv_tmp, Pr, u, tsyn (ms)){
                     B_NMDA = B_NMDA + weight*weight_factor_NMDA*factor_NMDA
 
                 }
+
+            Pv1 = Pv
 }
 
 PROCEDURE setRNG() {

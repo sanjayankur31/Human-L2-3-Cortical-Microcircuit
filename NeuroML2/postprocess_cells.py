@@ -88,9 +88,13 @@ def postprocess_HL23PYR():
         if "myelin_" in sg.id and sg.id != "myelin_group":
             myelin_group.add(neuroml.Include(segment_groups=sg.id))
 
-    # add myelin group to axon group
-    # default_axon_group = cell.get_segment_group("axon_group")
-    # default_axon_group.add(neuroml.Include(segment_groups=myelin_group.id))
+    # myelin groups are not included in the all segment group when adding
+    # biophys
+    all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
+    for inc in all_segment_group.includes:
+        if "myelin" in inc.segment_groups:
+            all_segment_group.includes.remove(inc)
+
 
     # optimise dendrite group
     default_dendrite_group.includes = []
@@ -190,13 +194,14 @@ def postprocess_HL23PYR():
                              ion="na",
                              ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
     # Ca
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_PYR_somatic",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
@@ -262,8 +267,10 @@ def postprocess_HL23PYR():
     )
 
     # Basal
+    basal_group = cell.get_segment_group("basal_dendrite_group")
+    sgid = basal_group.id
     cell.set_specific_capacitance("2 uF_per_cm2",
-                                  group_id="basal_dendrite_group")
+                                  group_id=sgid)
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih_basal",
                              ion_channel="Ih",
@@ -355,11 +362,14 @@ def postprocess_HL23PYR():
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
+    # external concentration is set to defaults that NEURON
+    # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_PYR_axonal",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
 
@@ -480,13 +490,14 @@ def postprocess_HL23PV():
                              ion="k",
                              ion_chan_def_file="channels/SK.channel.nml")
     # Ca
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_PV_somatic",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
@@ -591,13 +602,14 @@ def postprocess_HL23PV():
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_PV_axonal",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # L1 validation
@@ -628,6 +640,13 @@ def postprocess_HL23SST():
             basal_group.add(neuroml.Include(segment_groups=sg.id))
         if "myelin_" in sg.id and sg.id != "myelin_group":
             myelin_group.add(neuroml.Include(segment_groups=sg.id))
+
+    # myelin groups are not included in the all segment group when adding
+    # biophys
+    all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
+    for inc in all_segment_group.includes:
+        if "myelin" in inc.segment_groups:
+            all_segment_group.includes.remove(inc)
 
     # optimise dendrite group
     default_dendrite_group.includes = []
@@ -683,6 +702,15 @@ def postprocess_HL23SST():
                              ion="na",
                              ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
 
+    # hcn
+    cell.add_channel_density(nml_cell_doc=celldoc,
+                             cd_id="Ih_somatic",
+                             ion_channel="Ih",
+                             cond_density="0.0000431 S_per_cm2",
+                             erev="-45 mV",
+                             group_id=sgid,
+                             ion="hcn",
+                             ion_chan_def_file="channels/Ih.channel.nml")
     # K
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="K_P_somatic",
@@ -725,13 +753,14 @@ def postprocess_HL23SST():
                              ion="k",
                              ion_chan_def_file="channels/SK.channel.nml")
     # Ca
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_SST_somatic",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
@@ -755,8 +784,10 @@ def postprocess_HL23SST():
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
 
     # Basal
+    basal_group = cell.get_segment_group("basal_dendrite_group")
+    sgid = basal_group.id
     cell.set_specific_capacitance("1 uF_per_cm2",
-                                  group_id="basal_dendrite_group")
+                                  group_id=sgid)
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih_basal",
                              ion_channel="Ih",
@@ -848,13 +879,14 @@ def postprocess_HL23SST():
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_SST_axonal",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # myelin
@@ -974,13 +1006,14 @@ def postprocess_HL23VIP():
                              ion="k",
                              ion_chan_def_file="channels/SK.channel.nml")
     # Ca
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_VIP_somatic",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
@@ -1085,13 +1118,14 @@ def postprocess_HL23VIP():
         segment_groups=sgid,
         ion="ca",
         ion_chan_def_file="channels/Ca_LVA.channel.nml")
-    # internal and external concentrations are set to defaults that NEURON
+    # external concentration is set to defaults that NEURON
     # starts with
+    # internal concentration is set to minCai in mod file
     cell.add_intracellular_property("Species", validate=False,
                                     id="ca",
                                     concentration_model="CaDynamics_E2_NML2_VIP_axonal",
                                     ion="ca",
-                                    initial_concentration="5.0E-11 mol_per_cm3",
+                                    initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
 
@@ -1301,7 +1335,11 @@ def simulate_test_network(cells: list = []):
             ))
         # to match the test_*hoc NEURON files
         cell_net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
-        cell_network.add("ExplicitInput", target=f"{cell}_pop/0/{cell}", input=f"pg_{cell}")
+        cell_inputs = cell_network.add("InputList", id=f"stim_iclamp_{cell}",
+                                       populations=f"{cell}_pop", component=f"pg_{cell}",
+                                       validate=False)
+        cell_inputs.add("Input", id=0, target=f"../{cell}_pop/0",
+                        destination="synapses")
         cell_net_doc.validate(True)
         write_neuroml2_file(cell_net_doc, f"{cell}.net.nml")
         cell_net_sim = LEMSSimulation(f"{cell}_sim", duration=300., dt=0.01,
@@ -1349,9 +1387,9 @@ if __name__ == "__main__":
     analyse_HL23PV(True, True)
     postprocess_HL23PYR()
     analyse_HL23PYR(False, True)
+    postprocess_HL23VIP()
+    analyse_HL23VIP(True, True)
+    simulate_test_network(cellnames)
+    """
     postprocess_HL23SST()
     analyse_HL23SST(True, True)
-    """
-    # postprocess_HL23VIP()
-    # analyse_HL23VIP(True, True)
-    simulate_test_network(cellnames)
