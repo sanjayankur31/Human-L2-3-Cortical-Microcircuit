@@ -15427,8 +15427,8 @@
                 <initMembPotential value="-80mV"/>
             </membraneProperties>
             <intracellularProperties>
-                <species id="ca" concentrationModel="CaDynamics_E2_NML2_VIP_somatic" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_group"/>
-                <species id="ca" concentrationModel="CaDynamics_E2_NML2_VIP_axonal" ion="ca" initialConcentration="5.0E-11 mol_per_cm3" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_group"/>
+                <species id="ca" concentrationModel="CaDynamics_E2_NML2_VIP_somatic" ion="ca" initialConcentration="1e-4 mM" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_group"/>
+                <species id="ca" concentrationModel="CaDynamics_E2_NML2_VIP_axonal" ion="ca" initialConcentration="1e-4 mM" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_group"/>
                 <resistivity value="0.1 kohm_cm"/>
             </intracellularProperties>
         </biophysicalProperties>
