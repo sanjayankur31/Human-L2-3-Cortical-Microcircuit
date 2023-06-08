@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # set the scale of the network
-network_scale = 0.05
+network_scale = 0.02
 print(f"Creating network with scale {network_scale}")
 
 cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
@@ -45,7 +45,7 @@ pop_colors = {
 netdoc = component_factory(neuroml.NeuroMLDocument, id="L23Network")
 network = netdoc.add(neuroml.Network, id="L23Network", temperature="34.0 degC",
                      notes=f"L23 network at {network_scale} scale", validate=False)
-netdoc_file_name = "L23Net.net.nml"
+netdoc_file_name = f"L23Net_{network_scale}.net.nml"
 
 # synapse types
 # LEMS component definitions will be included in simulation file later
