@@ -1,4 +1,4 @@
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="test_probAMPANMDA">
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="test_probUDF">
     <include href="passiveCell.cell.nml"/>
     <spikeArray id="spikeArray">
         <spike id="0" time="100 ms"/>
@@ -12,7 +12,7 @@
             </instance>
         </population>
         <population id="SpikePop" component="spikeArray" size="1"/>
-        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="TestPop" synapse="probAMPANMDA">
+        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="TestPop" synapse="probUDFsyn">
             <connectionWD id="0" preCellId="../SpikePop[0]" postCellId="../TestPop/0/0" weight="0.001" delay="0 ms"/>
         </projection>
     </network>

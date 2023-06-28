@@ -49,7 +49,7 @@ def main(simulation_id):
     stimpop = net.add("Population", id="SpikePop", component=spikearray.id, size=1)
 
     proj = net.add(neuroml.Projection, id="proj", presynaptic_population="SpikePop",
-                   postsynaptic_population="TestPop", synapse="probUDFSyn")
+                   postsynaptic_population="TestPop", synapse="probUDFsyn")
     proj.add(neuroml.ConnectionWD, id=0, pre_cell_id="../SpikePop[0]",
              post_cell_id="../TestPop/0/0", weight="1e-3", delay="0 ms")
 
@@ -79,10 +79,10 @@ def main(simulation_id):
     simulation.add_column_to_output_file("output1", "v", "TestPop/0/0/v")
 
 
-    simulation.add_column_to_output_file("output1", "i", "TestPop/0/0/synapses:probUDFSyn:0/i")
-    simulation.add_column_to_output_file("output1", "g", "TestPop/0/0/synapses:probUDFSyn:0/g")
-    simulation.add_column_to_output_file("output1", "A", "TestPop/0/0/synapses:probUDFSyn:0/A")
-    simulation.add_column_to_output_file("output1", "B", "TestPop/0/0/synapses:probUDFSyn:0/B")
+    simulation.add_column_to_output_file("output1", "i", "TestPop/0/0/synapses:probUDFsyn:0/i")
+    simulation.add_column_to_output_file("output1", "g", "TestPop/0/0/synapses:probUDFsyn:0/g")
+    simulation.add_column_to_output_file("output1", "A", "TestPop/0/0/synapses:probUDFsyn:0/A")
+    simulation.add_column_to_output_file("output1", "B", "TestPop/0/0/synapses:probUDFsyn:0/B")
 
     sim_filename = lems_simulation_file = simulation.save_to_file()
     data = run_lems_with_jneuroml_neuron(sim_filename, max_memory="8G", skip_run=False, nogui=True, compile_mods=True, load_saved_data=True)
@@ -100,8 +100,8 @@ def plots(data):
                   title="Membrane potential (mV)",
                   labels=["v"], show_plot_already=False)
 
-    yvalues1=[data['TestPop/0/0/synapses:probUDFSyn:0/A'],
-              data['TestPop/0/0/synapses:probUDFSyn:0/B'],
+    yvalues1=[data['TestPop/0/0/synapses:probUDFsyn:0/A'],
+              data['TestPop/0/0/synapses:probUDFsyn:0/B'],
               ]
     generate_plot(xvalues=[data['t']] * len(yvalues1),
                   yvalues=yvalues1,
@@ -111,7 +111,7 @@ def plots(data):
                           ], show_plot_already=False)
 
     # conductances, multiple by 10e6 to convert to uS to match NEURON mod file
-    yvalues2=[data['TestPop/0/0/synapses:probUDFSyn:0/g']]
+    yvalues2=[data['TestPop/0/0/synapses:probUDFsyn:0/g']]
     generate_plot(xvalues=[data['t']] * len(yvalues2),
                   yvalues=numpy.array(yvalues2),
                   title="Conductances (S)",

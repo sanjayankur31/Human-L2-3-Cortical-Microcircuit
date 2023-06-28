@@ -2,7 +2,7 @@
     
     <!-- 
 
-        This LEMS file has been automatically generated using PyNeuroML v1.0.1 (libNeuroML v0.5.1)
+        This LEMS file has been automatically generated using PyNeuroML v1.0.8 (libNeuroML v0.5.3)
 
      -->
     
@@ -22,10 +22,10 @@
         
         <OutputFile id="output1" fileName="test_probUDF.output.dat">
             <OutputColumn id="v" quantity="TestPop/0/0/v"/> 
-            <OutputColumn id="i" quantity="TestPop/0/0/synapses:probUDFSyn:0/i"/> 
-            <OutputColumn id="g" quantity="TestPop/0/0/synapses:probUDFSyn:0/g"/> 
-            <OutputColumn id="A" quantity="TestPop/0/0/synapses:probUDFSyn:0/A"/> 
-            <OutputColumn id="B" quantity="TestPop/0/0/synapses:probUDFSyn:0/B"/> 
+            <OutputColumn id="i" quantity="TestPop/0/0/synapses:probUDFsyn:0/i"/> 
+            <OutputColumn id="g" quantity="TestPop/0/0/synapses:probUDFsyn:0/g"/> 
+            <OutputColumn id="A" quantity="TestPop/0/0/synapses:probUDFsyn:0/A"/> 
+            <OutputColumn id="B" quantity="TestPop/0/0/synapses:probUDFsyn:0/B"/> 
         </OutputFile>
         
     </Simulation>
