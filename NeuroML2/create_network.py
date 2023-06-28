@@ -11,6 +11,7 @@ Copyright 2023 Ankur Sinha
 # https://docs.h5py.org/en/stable/quick.html#quick
 
 
+from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 import pathlib
 import logging
 
@@ -165,6 +166,8 @@ for pretype in cell_types:
                                  gbase=f"{gbase} uS",
                                  u0=u0,
                                  erev=f"{erev} mV",
+                                 mg="1 mM"
+                                 weight_factor_NMDA="1"
                                  )
 
         synapse_components.add(syn)
@@ -258,3 +261,16 @@ synapse_components.export_to_file(synapse_components_file_name)
 
 print(f"Writing {netdoc_file_name} ")
 write_neuroml2_file(netdoc, netdoc_file_name, validate=False)
+
+# Create simulation, and record data
+simulation_id = "HL23Sim"
+simulation = LEMSSimulation(
+    sim_id=simulation_id, duration=1000, dt=0.1, simulation_seed=123
+)
+# simulation.assign_simulation_target(network.id)
+simulation.assign_simulation_target("L23Network")
+simulation.include_neuroml2_file("L23Net_0.02.net.nml")
+# simulation.include_lems_file(synapse_components_file_name)
+simulation.include_lems_file("synapse_components.xml")
+
+lems_simulation_file = simulation.save_to_file()

@@ -1,0 +1,61 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.0.8 (libNeuroML v0.5.3)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="HL23Sim"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="L23Net_0.02.net.nml"/>
+    <Include file="HL23PV.cell.nml"/>
+    <Include file="CaDynamics_E2_NML2.nml"/>
+    <Include file="channels/pas.channel.nml"/>
+    <Include file="channels/Ih.channel.nml"/>
+    <Include file="channels/NaTg/NaTg.channel.nml"/>
+    <Include file="channels/Nap.channel.nml"/>
+    <Include file="channels/K_P.channel.nml"/>
+    <Include file="channels/K_T.channel.nml"/>
+    <Include file="channels/Kv3_1.channel.nml"/>
+    <Include file="channels/Im.channel.nml"/>
+    <Include file="channels/SK.channel.nml"/>
+    <Include file="channels/Ca_HVA.channel.nml"/>
+    <Include file="channels/Ca_LVA.channel.nml"/>
+    <Include file="rotated_cells/HL23PV_852.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_884.cell.nml"/>
+    <Include file="HL23PYR.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_0.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_600.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_397.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_194.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_794.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_591.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_388.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_185.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_785.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_582.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_379.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_176.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_776.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_585.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_394.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_203.cell.nml"/>
+    <Include file="HL23SST.cell.nml"/>
+    <Include file="rotated_cells/HL23SST_804.cell.nml"/>
+    <Include file="HL23VIP.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_924.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_979.cell.nml"/>
+    <Include file="synapse_components.xml"/>
+   
+    <Simulation id="HL23Sim" length="1000ms" step="0.1ms" target="L23Network" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+        
+    </Simulation>
+
+</Lems>
