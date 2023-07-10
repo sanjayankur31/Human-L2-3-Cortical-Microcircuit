@@ -1,0 +1,249 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23Network">
+    <include href="HL23PV.cell.nml"/>
+    <include href="rotated_cells/HL23PV_852.cell.nml"/>
+    <include href="HL23PYR.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_0.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_397.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_794.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_388.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_785.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_379.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_776.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_394.cell.nml"/>
+    <include href="HL23SST.cell.nml"/>
+    <include href="rotated_cells/HL23SST_804.cell.nml"/>
+    <include href="HL23VIP.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_924.cell.nml"/>
+    <pulseGenerator id="pulseGen_0" delay="200ms" duration="1000ms" amplitude="200 pA"/>
+    <network id="HL23Network" temperature="34.0 degC">
+        <notes>L23 network at 0.01 scale</notes>
+        <population id="HL23PV_pop_852" component="HL23PV_852" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-65.390056656730806" y="-116.993532553848922" z="-946.991073553129127"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_0" component="HL23PYR_0" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-221.223306399760617" y="84.192327970444907" z="-841.488627155949189"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_397" component="HL23PYR_397" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="186.711303919687111" y="-108.088098299224441" z="-842.085796297591742"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_794" component="HL23PYR_794" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-171.332036406190724" y="174.281129262744628" z="-983.946214887313204"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_388" component="HL23PYR_388" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-65.680911263546363" y="-235.799658273611328" z="-705.129130001679641"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_785" component="HL23PYR_785" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="193.859487156738453" y="-141.113442226513342" z="-1289.199460195959091"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_379" component="HL23PYR_379" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="29.567558509365654" y="103.017517718606726" z="-1206.155865497995592"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_776" component="HL23PYR_776" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-71.604517751624186" y="37.946322703901245" z="-1367.531552376586433"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_394" component="HL23PYR_394" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="91.580909358024982" y="65.813723334521015" z="-620.4714273751772"/>
+            </instance>
+        </population>
+        <population id="HL23SST_pop_804" component="HL23SST_804" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="106.350954605553099" y="-214.951800779721538" z="-645.5753185087774"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop_924" component="HL23VIP_924" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="155.238762493285833" y="108.47285030975101" z="-620.439995080828112"/>
+            </instance>
+        </population>
+        <projection id="proj_852_776" presynapticPopulation="HL23PV_pop_852" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PV_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1417" postFractionAlong="0.88467065344297" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1177" postFractionAlong="0.124468879223415" weight="1." delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1289" postFractionAlong="0.157079487537199" weight="1." delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="528" postFractionAlong="0.958211491533872" weight="1." delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1." delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1." delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="499" postFractionAlong="0.01630281357372" weight="1." delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1." delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1." delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1." delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="209" postFractionAlong="0.950554234620995" weight="1." delay="0.5 ms"/>
+            <connectionWD id="12" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="864" postFractionAlong="0.385442492942158" weight="1." delay="0.5 ms"/>
+            <connectionWD id="13" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="371" postFractionAlong="0.892891064540717" weight="1." delay="0.5 ms"/>
+            <connectionWD id="14" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="985" postFractionAlong="0.085721380944096" weight="1." delay="0.5 ms"/>
+            <connectionWD id="15" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="409" postFractionAlong="0.642931808848832" weight="1." delay="0.5 ms"/>
+            <connectionWD id="16" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1192" postFractionAlong="0.432063919665885" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_852" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PV_pop_852" synapse="HL23PYR_HL23PV_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1757" postFractionAlong="0.203158424921183" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2321" postFractionAlong="0.078219871106718" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2459" postFractionAlong="0.011996588788679" weight="1." delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4282" postFractionAlong="0.578416058370985" weight="1." delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4069" postFractionAlong="0.037980675567437" weight="1." delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4439" postFractionAlong="0.690417728778928" weight="1." delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4298" postFractionAlong="0.867718445531282" weight="1." delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3961" postFractionAlong="0.536276572930858" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_0" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_0" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="2731" postFractionAlong="0.414971335505089" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="5780" postFractionAlong="0.362606596747227" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="610" postFractionAlong="0.086443253156169" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_397" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_397" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4897" postFractionAlong="0.967479297149906" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4143" postFractionAlong="0.12058294376454" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_794" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="3089" postFractionAlong="0.869568687302174" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="4593" postFractionAlong="0.220195018279041" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_794" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1818" postFractionAlong="0.364157237334001" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1491" postFractionAlong="0.625784509795597" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_379_388" presynapticPopulation="HL23PYR_pop_379" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4686" postFractionAlong="0.730400911073671" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4917" postFractionAlong="0.360073474675431" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1546" postFractionAlong="0.471756604935747" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_388" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1112" postFractionAlong="0.873049870035784" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2951" postFractionAlong="0.372423087182093" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_388" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4936" postFractionAlong="0.708084173706072" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1475" postFractionAlong="0.026093474200562" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_785_388" presynapticPopulation="HL23PYR_pop_785" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="5335" postFractionAlong="0.026384495027209" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1373" postFractionAlong="0.743130553308045" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="788" postFractionAlong="0.784828436648627" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_785" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="89" postFractionAlong="0.485446961353405" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2021" postFractionAlong="0.558844285601197" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_794_785" presynapticPopulation="HL23PYR_pop_794" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1986" postFractionAlong="0.42892790330802" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="3488" postFractionAlong="0.387062137667497" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1404" postFractionAlong="0.139575227460775" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_0_776" presynapticPopulation="HL23PYR_pop_0" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2411" postFractionAlong="0.571112018888472" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5353" postFractionAlong="0.817893217164214" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1928" postFractionAlong="0.081731899664106" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_776" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="4228" postFractionAlong="0.324535923594773" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2134" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5111" postFractionAlong="0.210693593811559" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_804_852" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PV_pop_852" synapse="HL23SST_HL23PV_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3943" postFractionAlong="0.621795852458034" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2267" postFractionAlong="0.396584022732885" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4087" postFractionAlong="0.213743174859675" weight="1." delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="586" postFractionAlong="0.319617914773583" weight="1." delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3371" postFractionAlong="0.963974884874753" weight="1." delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="752" postFractionAlong="0.571893202463753" weight="1." delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="178" postFractionAlong="0.833334447768248" weight="1." delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3251" postFractionAlong="0.168960047342061" weight="1." delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1957" postFractionAlong="0.414917906623091" weight="1." delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="998" postFractionAlong="0.511187822103614" weight="1." delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2569" postFractionAlong="0.71641820378391" weight="1." delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1903" postFractionAlong="0.885695552012273" weight="1." delay="0.5 ms"/>
+            <connectionWD id="12" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="122" postFractionAlong="0.735658704094097" weight="1." delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_804_379" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PYR_pop_379" synapse="HL23SST_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1." delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1." delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3262" postFractionAlong="0.828258913628426" weight="1." delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5392" postFractionAlong="0.019376376564879" weight="1." delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2573" postFractionAlong="0.986969018804606" weight="1." delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4278" postFractionAlong="0.524030914568965" weight="1." delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3941" postFractionAlong="0.078750941006535" weight="1." delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3526" postFractionAlong="0.492332036267276" weight="1." delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="1619" postFractionAlong="0.943327903275528" weight="1." delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5526" postFractionAlong="0.404249194424257" weight="1." delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4374" postFractionAlong="0.894732874546683" weight="1." delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3749" postFractionAlong="0.965697268983064" weight="1." delay="0.5 ms"/>
+        </projection>
+        <inputList id="i0" population="HL23PV_pop_852" component="pulseGen_0">
+            <input id="0" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses"/>
+        </inputList>
+        <inputList id="i1" population="HL23PYR_pop_0" component="pulseGen_0">
+            <input id="1" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses"/>
+        </inputList>
+        <inputList id="i2" population="HL23PYR_pop_397" component="pulseGen_0">
+            <input id="2" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses"/>
+        </inputList>
+        <inputList id="i3" population="HL23PYR_pop_794" component="pulseGen_0">
+            <input id="3" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses"/>
+        </inputList>
+        <inputList id="i4" population="HL23PYR_pop_388" component="pulseGen_0">
+            <input id="4" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses"/>
+        </inputList>
+        <inputList id="i5" population="HL23PYR_pop_785" component="pulseGen_0">
+            <input id="5" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses"/>
+        </inputList>
+        <inputList id="i6" population="HL23PYR_pop_379" component="pulseGen_0">
+            <input id="6" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses"/>
+        </inputList>
+        <inputList id="i7" population="HL23PYR_pop_776" component="pulseGen_0">
+            <input id="7" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses"/>
+        </inputList>
+        <inputList id="i8" population="HL23PYR_pop_394" component="pulseGen_0">
+            <input id="8" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses"/>
+        </inputList>
+        <inputList id="i9" population="HL23SST_pop_804" component="pulseGen_0">
+            <input id="9" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses"/>
+        </inputList>
+        <inputList id="i10" population="HL23VIP_pop_924" component="pulseGen_0">
+            <input id="10" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses"/>
+        </inputList>
+    </network>
+</neuroml>
