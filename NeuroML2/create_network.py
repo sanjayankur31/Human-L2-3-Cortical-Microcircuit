@@ -41,7 +41,11 @@ class HL23Net(object):
         object.__init__(self)
 
         self.network_scale = scale
+
+        # data dumped from the simulation
         self.cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
+        self.connectivity_data = h5py.File('../L23Net/Circuit_output/synapse_connections.h5', 'r')
+
         # confirmed from self.cell_data.keys()
         self.cell_types = ['HL23PV', 'HL23PYR', 'HL23SST', 'HL23VIP']
         self.pop_colors = {
@@ -144,32 +148,31 @@ class HL23Net(object):
         conn_count = 0
 
         # create connections
-        connectivity_data = h5py.File('../L23Net/Circuit_output/synapse_connections.h5', 'r')
         for pretype in self.cell_types:
             for posttype in self.cell_types:
-                conndataset = connectivity_data[f"{pretype}:{posttype}"]
+                conndataset = self.connectivity_data[f"{pretype}:{posttype}"]
                 # string
-                mechanism = (connectivity_data[f'synparams/{pretype}:{posttype}']['mechanism'][()].decode('utf-8'))
+                mechanism = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['mechanism'][()].decode('utf-8'))
 
                 # all ints/floats
                 if "UDF" in mechanism:
-                    tau_r = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r'][()])
-                    tau_d = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d'][()])
+                    tau_r = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r'][()])
+                    tau_d = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d'][()])
                 elif "AMPANMDA" in mechanism:
-                    tau_r_AMPA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_AMPA'][()])
-                    tau_r_NMDA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_NMDA'][()])
-                    tau_d_AMPA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_AMPA'][()])
-                    tau_d_NMDA = (connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_NMDA'][()])
+                    tau_r_AMPA = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_AMPA'][()])
+                    tau_r_NMDA = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_r_NMDA'][()])
+                    tau_d_AMPA = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_AMPA'][()])
+                    tau_d_NMDA = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['tau_d_NMDA'][()])
                 else:
                     raise ValueError(f"Unknown mechanism found: {mechanism}")
 
                 # common to both synapses
-                Use = (connectivity_data[f'synparams/{pretype}:{posttype}']['Use'][()])
-                Dep = (connectivity_data[f'synparams/{pretype}:{posttype}']['Dep'][()])
-                Fac = (connectivity_data[f'synparams/{pretype}:{posttype}']['Fac'][()])
-                gbase = (connectivity_data[f'synparams/{pretype}:{posttype}']['gmax'][()])
-                u0 = (connectivity_data[f'synparams/{pretype}:{posttype}']['u0'][()])
-                erev = (connectivity_data[f'synparams/{pretype}:{posttype}']['e'][()])
+                Use = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['Use'][()])
+                Dep = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['Dep'][()])
+                Fac = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['Fac'][()])
+                gbase = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['gmax'][()])
+                u0 = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['u0'][()])
+                erev = (self.connectivity_data[f'synparams/{pretype}:{posttype}']['e'][()])
 
                 print(f"Creating synapse component: {pretype} -> {posttype}: {pretype}_{posttype}_{mechanism}.")
                 if "UDF" in mechanism:
