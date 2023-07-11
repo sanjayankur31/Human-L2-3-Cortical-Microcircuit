@@ -17,6 +17,8 @@ import pyneuroml
 from neuroml.utils import component_factory
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
+from pyneuroml.plot.Plot import generate_plot
+from pyneuroml.pynml import reload_saved_data
 from pyneuroml.pynml import run_lems_with_jneuroml_neuron
 from pyneuroml.pynml import write_neuroml2_file
 from pyneuroml.utils import rotate_cell
@@ -49,6 +51,7 @@ class HL23Net(object):
             'HL23VIP': "0.5 0.5 0.5"
         }
         self.simulation_id = "HL23Sim"
+        self.lems_simulation_file = "LEMS_HL23Sim.xml"
 
     def create_network(self):
         # set the scale of the network
@@ -67,7 +70,7 @@ class HL23Net(object):
         self.synapse_components_file_name = "synapse_components.xml"
 
         self.create_cells()
-        self.create_connections()
+        # self.create_connections()
         self.add_stimulus()
 
         print(self.netdoc.summary())
@@ -304,7 +307,7 @@ class HL23Net(object):
             )
             ctr += 1
 
-    def create_simulation(self, dt=0.1, seed=123):
+    def create_simulation(self, dt=0.025, seed=123):
         # Create simulation, and record data
         simulation = LEMSSimulation(
             sim_id=self.simulation_id, duration=2000, dt=dt,
@@ -316,14 +319,36 @@ class HL23Net(object):
         # simulation.include_lems_file(self.synapse_components_file_name)
         simulation.include_lems_file("synapse_components.xml")
 
-        self.lems_simulation_file = simulation.save_to_file()
+        simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
+        for apop in self.network.populations:
+            simulation.add_column_to_output_file("output1", f"{apop.id}", f"{apop.id}/0/{apop.component}/0/v")
+
+        simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
 
     def run_sim(self):
+        """Run the sim"""
         print(f"Running simulation: {self.lems_simulation_file}")
         run_lems_with_jneuroml_neuron(self.lems_simulation_file,
                                       max_memory="8G", nogui=True,
                                       show_plot_already=False)
+
+    def plot_v_graphs(self):
+        """Plot membrane potential graphs"""
+        data = reload_saved_data(self.lems_simulation_file)
+        logger.debug(data.keys())
+        xvals = [data['t']]
+        yvals = list(data.values())[1:]
+
+        logger.debug(len(xvals * len(yvals)))
+        logger.debug(yvals)
+
+        labels = [a.split("/")[0] for a in data.keys()][1:]
+
+        generate_plot(xvalues=xvals * len(yvals), yvalues=yvals,
+                      title="Membrane potentials", labels=labels,
+                      xaxis="time (ms)", yaxis="v (mV)",
+                      cols_in_legend_box=2)
 
 
 if __name__ == "__main__":
@@ -331,3 +356,4 @@ if __name__ == "__main__":
     model.create_network()
     model.create_simulation()
     model.run_sim()
+    model.plot_v_graphs()
