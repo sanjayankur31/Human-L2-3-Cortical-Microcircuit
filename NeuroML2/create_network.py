@@ -351,7 +351,8 @@ class HL23Net(object):
         generate_plot(xvalues=xvals * len(yvals), yvalues=yvals,
                       title="Membrane potentials", labels=labels,
                       xaxis="time (ms)", yaxis="v (mV)",
-                      cols_in_legend_box=2)
+                      cols_in_legend_box=2,
+                      save_figure_to=f"{self.lems_simulation_file.replace('.xml', '')}_v.png")
 
 
 if __name__ == "__main__":
