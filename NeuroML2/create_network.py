@@ -7,6 +7,7 @@ File: create_network.py
 
 Copyright 2023 Ankur Sinha
 """
+import copy
 import logging
 import pathlib
 
@@ -15,9 +16,11 @@ import lems.api as lems
 import neuroml
 import pyneuroml
 from neuroml.utils import component_factory
+from neuroml.loaders import read_neuroml2_file
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
 from pyneuroml.plot.Plot import generate_plot
+from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.pynml import reload_saved_data
 from pyneuroml.pynml import run_lems_with_jneuroml_neuron
 from pyneuroml.pynml import write_neuroml2_file
@@ -56,6 +59,8 @@ class HL23Net(object):
         }
         self.simulation_id = "HL23Sim"
         self.lems_simulation_file = "LEMS_HL23Sim.xml"
+        self.netdoc = None
+        self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
 
     def create_network(self):
         # set the scale of the network
@@ -64,7 +69,6 @@ class HL23Net(object):
         self.netdoc = component_factory(neuroml.NeuroMLDocument, id="HL23Network")
         self.network = self.netdoc.add(neuroml.Network, id="HL23Network", temperature="34.0 degC",
                                        notes=f"L23 network at {self.network_scale} scale", validate=False)
-        self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
 
         # synapse types
         # LEMS component definitions will be included in simulation file later
@@ -108,7 +112,7 @@ class HL23Net(object):
             nml_cell = neuroml.loaders.read_neuroml2_file(f"{ctype}.cell.nml").cells[0]
 
             # include the cell to ensure the ion channel files are included
-            self.netdoc.add(neuroml.IncludeType, href=f"{ctype}.cell.nml")
+            # self.netdoc.add(neuroml.IncludeType, href=f"{ctype}.cell.nml")
 
             i = 0
             step = int(1 / self.network_scale)
@@ -310,8 +314,34 @@ class HL23Net(object):
             )
             ctr += 1
 
+    def visualize_network(self):
+        """Generate morph plots """
+        # if the network has been constructed, use the network doc object, but
+        # and add the included cells so we also get morphologies plotted
+        if self.netdoc is not None:
+            nml_file = copy.deepcopy(self.netdoc)
+            for inc in nml_file.includes:
+                incfile = read_neuroml2_file(inc.href)
+                for cells in incfile:
+                    nml_file.add(cells)
+
+            nml_file.includes = []
+        else:
+            # otherwise read the file in once so it's not read in repeatedly
+            nml_file = read_neuroml2_file(self.netdoc_file_name,
+                                          include_includes=True)
+
+        for plane in ["xy", "yz", "zx"]:
+            print(f"Plotting {plane}")
+            plot_2D(
+                nml_file=nml_file, plane2d=plane, min_width=4,
+                nogui=True, title="",
+                plot_type="constant",
+                save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.png",
+            )
+
     def create_simulation(self, dt=0.025, seed=123):
-        # Create simulation, and record data
+        """Create simulation, record data"""
         simulation = LEMSSimulation(
             sim_id=self.simulation_id, duration=2000, dt=dt,
             simulation_seed=seed
@@ -356,8 +386,9 @@ class HL23Net(object):
 
 
 if __name__ == "__main__":
-    model = HL23Net(scale=0.01)
-    model.create_network()
-    model.create_simulation()
-    model.run_sim()
-    model.plot_v_graphs()
+    model = HL23Net(scale=0.02)
+    # model.create_network()
+    model.visualize_network()
+    # model.create_simulation()
+    # model.run_sim()
+    # model.plot_v_graphs()
