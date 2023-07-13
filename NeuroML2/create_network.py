@@ -7,6 +7,7 @@ File: create_network.py
 
 Copyright 2023 Ankur Sinha
 """
+import sys
 import copy
 import logging
 import pathlib
@@ -22,7 +23,7 @@ from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
 from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.pynml import reload_saved_data
-from pyneuroml.pynml import run_lems_with_jneuroml_neuron
+from pyneuroml.pynml import run_lems_with_jneuroml_neuron, run_lems_with_jneuroml_netpyne
 from pyneuroml.pynml import write_neuroml2_file
 from pyneuroml.utils import rotate_cell
 
@@ -35,7 +36,8 @@ class HL23Net(object):
 
     """HL23 network"""
 
-    def __init__(self, scale=0.01):
+    def __init__(self, scale=0.01, connections=True, stimulus=True,
+                 biophysics=True):
         """Init
 
         :param scale: network scale
@@ -44,6 +46,9 @@ class HL23Net(object):
         object.__init__(self)
 
         self.network_scale = scale
+        self.connections = connections
+        self.stimulus = stimulus
+        self.biophysics = biophysics
 
         # data dumped from the simulation
         self.cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
@@ -60,32 +65,42 @@ class HL23Net(object):
         self.simulation_id = "HL23Sim"
         self.lems_simulation_file = "LEMS_HL23Sim.xml"
         self.netdoc = None
+        self.network_id = "HL23Network"
         self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
+        self.lems_components_file_name = "lems_components.xml"
 
     def create_network(self):
         # set the scale of the network
         print(f"Creating network with scale {self.network_scale}")
 
         self.netdoc = component_factory(neuroml.NeuroMLDocument, id="HL23Network")
-        self.network = self.netdoc.add(neuroml.Network, id="HL23Network", temperature="34.0 degC",
+        self.network = self.netdoc.add(neuroml.Network, id=self.network_id, temperature="34.0 degC",
                                        notes=f"L23 network at {self.network_scale} scale", validate=False)
 
         # synapse types
         # LEMS component definitions will be included in simulation file later
-        self.synapse_components = lems.Model()
-        self.synapse_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
-        self.synapse_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
-        self.synapse_components_file_name = "synapse_components.xml"
+        self.lems_components = lems.Model()
+        self.lems_components.add(lems.Include("CaDynamics_E2_NML2.nml"))
+        self.lems_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
+        self.lems_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
+
+        # add all the channel definitions to
+        channel_files = pathlib.Path('channels').glob('**/*.channel.nml')
+        for afile in channel_files:
+            logger.debug(f"Including {afile}")
+            self.lems_components.add(lems.Include(str(afile)))
 
         self.create_cells()
-        # self.create_connections()
-        self.add_stimulus()
+        if self.connections is True:
+            self.create_connections()
+        if self.stimulus is True:
+            self.add_stimulus()
 
         print(self.netdoc.summary())
         self.netdoc.validate(recursive=True)
 
-        print(f"Writing {self.synapse_components_file_name} ")
-        self.synapse_components.export_to_file(self.synapse_components_file_name)
+        print(f"Writing {self.lems_components_file_name} ")
+        self.lems_components.export_to_file(self.lems_components_file_name)
 
         print(f"Writing {self.netdoc_file_name} ")
         write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
@@ -109,14 +124,24 @@ class HL23Net(object):
             # ['gid', 'x', 'y', 'z', 'x_rot', 'y_rot', 'z_rot']
             logger.debug(f"table headers are:  {celldataset.dtype.fields.keys()}")
 
-            nml_cell = neuroml.loaders.read_neuroml2_file(f"{ctype}.cell.nml").cells[0]
+            nml_cell = neuroml.loaders.read_neuroml2_file(f"{ctype}.cell.nml").cells[0]  # type: neuroml.Cell
+            # replace biophys with empty object
+            if self.biophysics is False:
+                nml_cell.biophysical_properties = neuroml.BiophysicalProperties(id="biophys")
+                nml_cell.biophysical_properties.add(neuroml.MembraneProperties)
+                nml_cell.biophysical_properties.add(neuroml.IntracellularProperties)
 
             # include the cell to ensure the ion channel files are included
             # self.netdoc.add(neuroml.IncludeType, href=f"{ctype}.cell.nml")
 
             i = 0
             step = int(1 / self.network_scale)
-            for i in range(0, len(celldataset), step):
+            maxcell = len(celldataset)
+            # put in minimum 3 cells of each type
+            if step >= maxcell:
+                step = 1
+                maxcell = 2
+            for i in range(0, maxcell, step):
                 acell = celldataset[i]
                 gid = acell[0]
                 x = acell[1]
@@ -208,7 +233,7 @@ class HL23Net(object):
                                          weight_factor_NMDA="1"
                                          )
 
-                self.synapse_components.add(syn)
+                self.lems_components.add(syn)
 
                 anml_cell = neuroml.loaders.read_neuroml2_file(f"{posttype}.cell.nml").cells[0]  # type: neuroml.Cell
                 syn_count = 0
@@ -322,7 +347,7 @@ class HL23Net(object):
             nml_file = copy.deepcopy(self.netdoc)
             for inc in nml_file.includes:
                 incfile = read_neuroml2_file(inc.href)
-                for cells in incfile:
+                for cells in incfile.cells:
                     nml_file.add(cells)
 
             nml_file.includes = []
@@ -346,11 +371,9 @@ class HL23Net(object):
             sim_id=self.simulation_id, duration=2000, dt=dt,
             simulation_seed=seed
         )
-        # simulation.assign_simulation_target(network.id)
-        simulation.assign_simulation_target("HL23Network")
+        simulation.assign_simulation_target(self.network_id)
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
-        # simulation.include_lems_file(self.synapse_components_file_name)
-        simulation.include_lems_file("synapse_components.xml")
+        simulation.include_lems_file(self.lems_components_file_name)
 
         simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
         for apop in self.network.populations:
@@ -362,9 +385,9 @@ class HL23Net(object):
     def run_sim(self):
         """Run the sim"""
         print(f"Running simulation: {self.lems_simulation_file}")
-        run_lems_with_jneuroml_neuron(self.lems_simulation_file,
-                                      max_memory="8G", nogui=True,
-                                      show_plot_already=False)
+        run_lems_with_jneuroml_netpyne(self.lems_simulation_file,
+                                       max_memory="8G", nogui=True,
+                                       show_plot_already=False)
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
@@ -386,9 +409,17 @@ class HL23Net(object):
 
 
 if __name__ == "__main__":
-    model = HL23Net(scale=0.02)
-    # model.create_network()
-    model.visualize_network()
-    # model.create_simulation()
-    # model.run_sim()
-    # model.plot_v_graphs()
+    scale = 0.02
+    if len(sys.argv) == 2:
+        scale = float(sys.argv[1])
+    elif len(sys.argv) > 2:
+        print("Only one argument accepted, using first as scale value")
+        scale = float(sys.argv[1])
+
+    model = HL23Net(scale=scale, connections=True, stimulus=True,
+                    biophysics=True)
+    model.create_network()
+    # model.visualize_network()
+    model.create_simulation()
+    model.run_sim()
+    model.plot_v_graphs()
