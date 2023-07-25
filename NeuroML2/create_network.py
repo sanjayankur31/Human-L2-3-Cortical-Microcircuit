@@ -13,6 +13,7 @@ import logging
 import pathlib
 
 import h5py
+import pandas
 import lems.api as lems
 import neuroml
 import pyneuroml
@@ -53,9 +54,23 @@ class HL23Net(object):
         # data dumped from the simulation
         self.cell_data = h5py.File('../L23Net/Circuit_output/cell_positions_and_rotations.h5', 'r')
         self.connectivity_data = h5py.File('../L23Net/Circuit_output/synapse_connections.h5', 'r')
+        self.circuit_params = pandas.read_excel('../L23Net/Circuit_param.xls', sheet_name=None, index_col=0)
+        # default synaptic parameters: are read from exported H5 files for
+        # creation of synapses (above)
+        self.circuit_params["syn_params"] = {'none': {'tau_r_AMPA': 0,
+                                                      'tau_d_AMPA': 0,
+                                                      'tau_r_NMDA': 0,
+                                                      'tau_d_NMDA': 0,
+                                                      'e': 0,
+                                                      'Dep': 0,
+                                                      'Fac': 0,
+                                                      'Use': 0,
+                                                      'u0': 0,
+                                                      'gmax': 0}
+                                             }
 
         # confirmed from self.cell_data.keys()
-        self.cell_types = ['HL23PV', 'HL23PYR', 'HL23SST', 'HL23VIP']
+        self.cell_types = [i for i in self.circuit_params['conn_probs'].axes[0]]
         self.pop_colors = {
             'HL23PV': "0 0 1",
             'HL23PYR': "1 0 0",
@@ -116,7 +131,11 @@ class HL23Net(object):
 
         # keep track of cell gids for our connections later, required for scaled down
         # versions when not all cells are included
+        self.nml_cell = {}
         self.cell_list = []
+        self.cell_list_by_type = {}
+        for ctype in self.cell_types:
+            self.cell_list_by_type[ctype] = []
 
         # create the cell populations
         for ctype in self.cell_types:
@@ -124,12 +143,12 @@ class HL23Net(object):
             # ['gid', 'x', 'y', 'z', 'x_rot', 'y_rot', 'z_rot']
             logger.debug(f"table headers are:  {celldataset.dtype.fields.keys()}")
 
-            nml_cell = neuroml.loaders.read_neuroml2_file(f"{ctype}.cell.nml").cells[0]  # type: neuroml.Cell
+            self.nml_cell[ctype] = neuroml.loaders.read_neuroml2_file(f"{ctype}.cell.nml").cells[0]  # type: neuroml.Cell
             # replace biophys with empty object
             if self.biophysics is False:
-                nml_cell.biophysical_properties = neuroml.BiophysicalProperties(id="biophys")
-                nml_cell.biophysical_properties.add(neuroml.MembraneProperties)
-                nml_cell.biophysical_properties.add(neuroml.IntracellularProperties)
+                self.nml_cell[ctype].biophysical_properties = neuroml.BiophysicalProperties(id="biophys")
+                self.nml_cell[ctype].biophysical_properties.add(neuroml.MembraneProperties)
+                self.nml_cell[ctype].biophysical_properties.add(neuroml.IntracellularProperties)
 
             # include the cell to ensure the ion channel files are included
             # self.netdoc.add(neuroml.IncludeType, href=f"{ctype}.cell.nml")
@@ -152,7 +171,7 @@ class HL23Net(object):
                 zrot = acell[6]
 
                 rotated_cell = None
-                rotated_cell = rotate_cell(nml_cell, xrot, yrot, zrot, order="xyz", relative_to_soma=True)
+                rotated_cell = rotate_cell(self.nml_cell[ctype], xrot, yrot, zrot, order="xyz", relative_to_soma=True)
                 rotated_cell.id = rotated_cell.id + f"_{gid}"
                 rotated_cell_doc = component_factory(neuroml.NeuroMLDocument, id=f"{rotated_cell.id}_doc")
                 rotated_cell_doc.add(rotated_cell)
@@ -167,6 +186,7 @@ class HL23Net(object):
                 pop.add(neuroml.Instance, id=0,
                         location=neuroml.Location(x=x, y=y, z=z))
                 self.cell_list.append(gid)
+                self.cell_list_by_type[ctype].append(gid)
 
         print(self.netdoc.summary())
         self.netdoc.validate(recursive=True)
@@ -317,27 +337,62 @@ class HL23Net(object):
                     syn_count += 1
 
     def add_stimulus(self):
-        """Add stimulus to cells.
+        """Add stimulus to cells."""
 
-        Currently simply adds a pulse generator input to each cell for testing
-        """
         print("Adding stimuli")
-        pg = self.netdoc.add(
-            "PulseGenerator",
-            id="pulseGen_0", delay="200ms", duration="1000ms",
-            amplitude="200 pA"
-        )
-        ctr = 0
-        for apop in self.network.populations:
-            inputlist = self.network.add(
-                neuroml.InputList, id=f"i{ctr}", component=pg.id, populations=apop.id,
-                validate=False
-            )
-            inputlist.add(
-                neuroml.Input, id=ctr, target=f"../{apop.id}/0/{apop.component}",
-                destination="synapses"
-            )
-            ctr += 1
+        # cell_nums = [self.circuit_params['SING_CELL_PARAM'].at['cell_num', name] for name in self.cell_types]
+        # from circuit.py
+        for acell_type in self.cell_types:
+            # iterate over rows
+            for row in self.circuit_params['STIM_PARAM'].axes[0]:
+                # initialise parameters
+                num_cells = 0  # number of cells to provide input to
+                start_index = 0  # unused, is set to 0
+                num_stim = 0  # number of spikes
+                interval = 0  # spike interval
+                start_time = 0  # spikes start time
+                delay = 0  # spikes delay
+                delay_range = 0  # spikes delay range
+                loc_num = 0  # number of locations on cell to provide spike to
+                loc = "all"  # what locations to provide spikes to
+                gmax = 0.  # gmax
+                stim_type = ""  # type of synapse for stimulus
+                syn_params = ""  # parameters of synapse
+
+                for col in self.circuit_params['STIM_PARAM'].axes[1]:
+                    # found the cell row
+                    if "cell_name" == col and self.circuit_params['STIM_PARAM'].at[row, col] == acell_type:
+                        num_cells = int(self.circuit_params['STIM_PARAM'].at[row, "num_cells"] * self.network_scale)
+                        start_index = self.circuit_params['STIM_PARAM'].at[row, "start_index"]
+                        num_stim = self.circuit_params['STIM_PARAM'].at[row, "num_stim"]
+                        interval = self.circuit_params['STIM_PARAM'].at[row, "interval"]
+                        start_time = self.circuit_params['STIM_PARAM'].at[row, "start_time"]
+                        delay = self.circuit_params['STIM_PARAM'].at[row, "delay"]
+                        delay_range = self.circuit_params['STIM_PARAM'].at[row, "delay_range"]
+                        loc_num = self.circuit_params['STIM_PARAM'].at[row, "loc_num"]
+                        loc = self.circuit_params['STIM_PARAM'].at[row, "loc"]
+                        gmax = self.circuit_params['STIM_PARAM'].at[row, "gmax"]
+                        stim_type = self.circuit_params['STIM_PARAM'].at[row, "stim_type"]
+                        syn_params = self.circuit_params['STIM_PARAM'].at[row, "syn_params"]
+
+                # load the single template cell, since choosing sections does
+                # not depend on rotation
+                nml_cell = self.nml_cell[acell_type]
+                cells = self.cell_list_by_type[acell_type]
+                ctr = 0
+                # if it's too small a model, at least give one cell input
+                if num_cells == 0:
+                    num_cells = 1
+                while ctr <= num_cells:
+                    cell_id = f"{acell_type}_{cells[ctr]}"
+                    pop_id = f"{acell_type}_pop_{cells[ctr]}"
+                    print(f"Adding stim to {pop_id}/{cell_id}")
+
+                    # TODO: get segments to put inputs on
+                    # TODO: create new synapse to use in explicit input
+                    # TODO: attach stim
+
+                    ctr += 1
 
     def visualize_network(self):
         """Generate morph plots """
@@ -420,6 +475,6 @@ if __name__ == "__main__":
                     biophysics=True)
     model.create_network()
     # model.visualize_network()
-    model.create_simulation()
-    model.run_sim()
-    model.plot_v_graphs()
+    # model.create_simulation()
+    # model.run_sim()
+    # model.plot_v_graphs()
