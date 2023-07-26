@@ -13,6 +13,7 @@ import logging
 import pathlib
 
 import h5py
+import numpy
 import pandas
 import lems.api as lems
 import neuroml
@@ -336,12 +337,19 @@ class HL23Net(object):
 
                     syn_count += 1
 
-    def add_stimulus(self):
-        """Add stimulus to cells."""
+    def background_input(self):
+        """Add background input to cells. """
+        pass
 
+    # TODO: incomplete, to be done after bg input implementation
+    def add_stimulus(self):
+        """Add additional stimulus to cells."""
+
+        logger.setLevel(logging.DEBUG)
         print("Adding stimuli")
         # cell_nums = [self.circuit_params['SING_CELL_PARAM'].at['cell_num', name] for name in self.cell_types]
         # from circuit.py
+        input_ctr = 0
         for acell_type in self.cell_types:
             # iterate over rows
             for row in self.circuit_params['STIM_PARAM'].axes[0]:
@@ -366,33 +374,68 @@ class HL23Net(object):
                         start_index = self.circuit_params['STIM_PARAM'].at[row, "start_index"]
                         num_stim = self.circuit_params['STIM_PARAM'].at[row, "num_stim"]
                         interval = self.circuit_params['STIM_PARAM'].at[row, "interval"]
+                        # currently unused: NeuroML does not have a
+                        # SpikeGenerator that allows setting a start time
                         start_time = self.circuit_params['STIM_PARAM'].at[row, "start_time"]
                         delay = self.circuit_params['STIM_PARAM'].at[row, "delay"]
                         delay_range = self.circuit_params['STIM_PARAM'].at[row, "delay_range"]
                         loc_num = self.circuit_params['STIM_PARAM'].at[row, "loc_num"]
+                        # loc: unused: "dend", which corresponds to all
+                        # dendritic segments
                         loc = self.circuit_params['STIM_PARAM'].at[row, "loc"]
                         gmax = self.circuit_params['STIM_PARAM'].at[row, "gmax"]
                         stim_type = self.circuit_params['STIM_PARAM'].at[row, "stim_type"]
                         syn_params = self.circuit_params['STIM_PARAM'].at[row, "syn_params"]
 
-                # load the single template cell, since choosing sections does
-                # not depend on rotation
-                nml_cell = self.nml_cell[acell_type]
-                cells = self.cell_list_by_type[acell_type]
-                ctr = 0
-                # if it's too small a model, at least give one cell input
-                if num_cells == 0:
-                    num_cells = 1
-                while ctr <= num_cells:
-                    cell_id = f"{acell_type}_{cells[ctr]}"
-                    pop_id = f"{acell_type}_pop_{cells[ctr]}"
-                    print(f"Adding stim to {pop_id}/{cell_id}")
+                        # load the single template cell, since choosing sections does
+                        # not depend on rotation
+                        a_nml_cell = self.nml_cell[acell_type]  # type: neuroml.Cell
 
-                    # TODO: get segments to put inputs on
-                    # TODO: create new synapse to use in explicit input
-                    # TODO: attach stim
+                        # loc is always "dend"
+                        logger.debug(f"loc: {loc}")
+                        dendritic_segments_ids = a_nml_cell.get_all_segments_in_group("dendrite_group")
 
-                    ctr += 1
+                        # dendritic_segments = [nml_cell.get_segment(seg) for seg in dendritic_segments_ids]
+                        segment_areas = numpy.array([a_nml_cell.get_segment_surface_area(seg) for seg in dendritic_segments_ids])
+                        segment_areas = segment_areas / segment_areas.sum()
+
+                        cells = self.cell_list_by_type[acell_type]
+                        ctr = 0
+                        # if it's too small a model, at least give one cell input
+                        if num_cells == 0:
+                            num_cells = 1
+                        while ctr <= num_cells:
+                            cell_id = f"{acell_type}_{cells[ctr]}"
+                            pop_id = f"{acell_type}_pop_{cells[ctr]}"
+
+                            # get segments
+                            input_segments = numpy.random.choice(dendritic_segments_ids,
+                                                                 size=loc_num, replace=False,
+                                                                 p=segment_areas)
+                            for aseg in input_segments:
+                                print(f"Adding sg_{input_ctr}: i_{input_ctr}/{input_ctr} to {pop_id}/{cell_id}/{aseg}")
+                                # currently SpikeGenerator does not allow a start time, so
+                                # this is unused
+                                time_delay = 0
+                                while time_delay <= 0:
+                                    time_delay = numpy.random.uniform(
+                                        low=delay, high=delay + delay_range
+                                    )
+                                gen = self.netdoc.add(
+                                    neuroml.SpikeGenerator, id=f"sg_{input_ctr}", period=f"{interval} ms")
+                                input_list = self.network.add(neuroml.InputList, id=f"i_{input_ctr}",
+                                                              component=gen.id,
+                                                              populations=pop_id)
+                                input_list.add(neuroml.Input, id=f"{input_ctr}",
+                                               target=f"../{pop_id}/0/{cell_id}",
+                                               destination="synapses", segment_id=aseg,
+                                               )
+                                input_ctr += 1
+
+                            ctr += 1
+
+                        break
+        logger.setLevel(logging.INFO)
 
     def visualize_network(self):
         """Generate morph plots """
