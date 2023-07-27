@@ -91,10 +91,13 @@ def postprocess_HL23PYR():
     # myelin groups are not included in the all segment group when adding
     # biophys
     all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
+    all_minus_myelin = cell.add_segment_group("all_minus_myelin", notes="All without myelin")
     for inc in all_segment_group.includes:
-        if "myelin" in inc.segment_groups:
-            all_segment_group.includes.remove(inc)
-
+        if "myelin" not in inc.segment_groups:
+            all_minus_myelin.includes.append(inc)
+    for sg in all_segment_group.members :
+        if "myelin" not in sg.segment:
+            all_minus_myelin.members.append(sg)
 
     # optimise dendrite group
     default_dendrite_group.includes = []
@@ -114,11 +117,11 @@ def postprocess_HL23PYR():
                              ion_channel="pas",
                              cond_density="0.0000954 S_per_cm2",
                              erev="-80 mV",
-                             group_id="all",
+                             group_id="all_minus_myelin",
                              ion="non_specific",
                              ion_chan_def_file="channels/pas.channel.nml")
-    cell.set_resistivity("0.1 kohm_cm", group_id="all")
-    cell.set_specific_capacitance("1 uF_per_cm2", group_id="all")
+    cell.set_resistivity("0.1 kohm_cm", group_id="all_minus_myelin")
+    cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
     cell.add_channel_density(nml_cell_doc=celldoc,
@@ -126,7 +129,7 @@ def postprocess_HL23PYR():
                              ion_channel="Ih",
                              cond_density="0.000148 S_per_cm2",
                              erev="-45 mV",
-                             group_id="all",
+                             group_id="all_minus_myelin",
                              ion="hcn",
                              ion_chan_def_file="channels/Ih.channel.nml")
 
@@ -644,9 +647,13 @@ def postprocess_HL23SST():
     # myelin groups are not included in the all segment group when adding
     # biophys
     all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
+    all_minus_myelin = cell.add_segment_group("all_minus_myelin", notes="All without myelin")
     for inc in all_segment_group.includes:
-        if "myelin" in inc.segment_groups:
-            all_segment_group.includes.remove(inc)
+        if "myelin" not in inc.segment_groups:
+            all_minus_myelin.includes.append(inc)
+    for sg in all_segment_group.members :
+        if "myelin" not in sg.segment:
+            all_minus_myelin.members.append(sg)
 
     # optimise dendrite group
     default_dendrite_group.includes = []
@@ -672,11 +679,11 @@ def postprocess_HL23SST():
                              ion_channel="pas",
                              cond_density="0.0000232 S_per_cm2",
                              erev="-81.5 mV",
-                             group_id="all",
+                             group_id="all_minus_myelin",
                              ion="non_specific",
                              ion_chan_def_file="channels/pas.channel.nml")
-    cell.set_resistivity("0.1 kohm_cm", group_id="all")
-    cell.set_specific_capacitance("1 uF_per_cm2", group_id="all")
+    cell.set_resistivity("0.1 kohm_cm", group_id="all_minus_myelin")
+    cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
     cell.add_channel_density(nml_cell_doc=celldoc,
@@ -684,7 +691,7 @@ def postprocess_HL23SST():
                              ion_channel="Ih",
                              cond_density="0.00001 S_per_cm2",
                              erev="-45 mV",
-                             group_id="all",
+                             group_id="all_minus_myelin",
                              ion="hcn",
                              ion_chan_def_file="channels/Ih.channel.nml")
 
@@ -1383,13 +1390,13 @@ def simulate_test_network(cells: list = []):
 if __name__ == "__main__":
     cellnames = ["HL23PV", "HL23PYR", "HL23SST", "HL23VIP"]
     """
+    postprocess_HL23VIP()
+    analyse_HL23VIP(True, True)
+    simulate_test_network(cellnames)
     postprocess_HL23PV()
     analyse_HL23PV(True, True)
     postprocess_HL23PYR()
     analyse_HL23PYR(False, True)
-    postprocess_HL23VIP()
-    analyse_HL23VIP(True, True)
-    simulate_test_network(cellnames)
-    """
     postprocess_HL23SST()
     analyse_HL23SST(True, True)
+    """

@@ -12,7 +12,7 @@
             </instance>
         </population>
         <population id="SpikePop" component="spikeArray" size="1"/>
-        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="TestPop" synapse="probAMPANMDASyn">
+        <projection id="proj" presynapticPopulation="SpikePop" postsynapticPopulation="TestPop" synapse="probAMPANMDA">
             <connectionWD id="0" preCellId="../SpikePop[0]" postCellId="../TestPop/0/0" weight="0.001" delay="0 ms"/>
         </projection>
     </network>

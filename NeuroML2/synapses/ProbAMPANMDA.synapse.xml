@@ -5,7 +5,7 @@
 
     <Include file="ProbAMPANMDA.synapse.nml" />
     <!-- from the mod file -->
-    <Component type="ProbAMPANMDASyn" id="probAMPANMDASyn"
+    <Component type="ProbAMPANMDA" id="probAMPANMDA"
         tau_r_AMPA="0.2 ms"
         tau_d_AMPA="1.7 ms"
         tau_r_NMDA="0.29 ms"

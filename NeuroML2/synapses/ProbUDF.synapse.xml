@@ -5,7 +5,7 @@
 
     <Include file="ProbUDF.synapse.nml" />
     <!-- from the mod file -->
-    <Component type="ProbUDFSyn" id="probUDFSyn"
+    <Component type="ProbUDFsyn" id="probUDFsyn"
         tau_r="0.2 ms"
         tau_d="1.7 ms"
         Use="1"

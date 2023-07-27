@@ -49,7 +49,7 @@ def main(simulation_id):
     stimpop = net.add("Population", id="SpikePop", component=spikearray.id, size=1)
 
     proj = net.add(neuroml.Projection, id="proj", presynaptic_population="SpikePop",
-                   postsynaptic_population="TestPop", synapse="probAMPANMDASyn")
+                   postsynaptic_population="TestPop", synapse="probAMPANMDA")
     proj.add(neuroml.ConnectionWD, id=0, pre_cell_id="../SpikePop[0]",
              post_cell_id="../TestPop/0/0", weight="1e-3", delay="0 ms")
 
@@ -79,14 +79,14 @@ def main(simulation_id):
     simulation.add_column_to_output_file("output1", "v", "TestPop/0/0/v")
 
 
-    simulation.add_column_to_output_file("output1", "i_AMPA", "TestPop/0/0/synapses:probAMPANMDASyn:0/i_AMPA")
-    simulation.add_column_to_output_file("output1", "i_NMDA", "TestPop/0/0/synapses:probAMPANMDASyn:0/i_NMDA")
-    simulation.add_column_to_output_file("output1", "g_AMPA", "TestPop/0/0/synapses:probAMPANMDASyn:0/g_AMPA")
-    simulation.add_column_to_output_file("output1", "g_NMDA", "TestPop/0/0/synapses:probAMPANMDASyn:0/g_NMDA")
-    simulation.add_column_to_output_file("output1", "A_AMPA", "TestPop/0/0/synapses:probAMPANMDASyn:0/A_AMPA")
-    simulation.add_column_to_output_file("output1", "A_NMDA", "TestPop/0/0/synapses:probAMPANMDASyn:0/A_NMDA")
-    simulation.add_column_to_output_file("output1", "B_AMPA", "TestPop/0/0/synapses:probAMPANMDASyn:0/B_AMPA")
-    simulation.add_column_to_output_file("output1", "B_NMDA", "TestPop/0/0/synapses:probAMPANMDASyn:0/B_NMDA")
+    simulation.add_column_to_output_file("output1", "i_AMPA", "TestPop/0/0/synapses:probAMPANMDA:0/i_AMPA")
+    simulation.add_column_to_output_file("output1", "i_NMDA", "TestPop/0/0/synapses:probAMPANMDA:0/i_NMDA")
+    simulation.add_column_to_output_file("output1", "g_AMPA", "TestPop/0/0/synapses:probAMPANMDA:0/g_AMPA")
+    simulation.add_column_to_output_file("output1", "g_NMDA", "TestPop/0/0/synapses:probAMPANMDA:0/g_NMDA")
+    simulation.add_column_to_output_file("output1", "A_AMPA", "TestPop/0/0/synapses:probAMPANMDA:0/A_AMPA")
+    simulation.add_column_to_output_file("output1", "A_NMDA", "TestPop/0/0/synapses:probAMPANMDA:0/A_NMDA")
+    simulation.add_column_to_output_file("output1", "B_AMPA", "TestPop/0/0/synapses:probAMPANMDA:0/B_AMPA")
+    simulation.add_column_to_output_file("output1", "B_NMDA", "TestPop/0/0/synapses:probAMPANMDA:0/B_NMDA")
 
     sim_filename = lems_simulation_file = simulation.save_to_file()
     data = run_lems_with_jneuroml_neuron(sim_filename, max_memory="8G", skip_run=False, nogui=True, compile_mods=True, load_saved_data=True)
@@ -104,10 +104,10 @@ def plots(data):
                   title="Membrane potential (mV)",
                   labels=["v"], show_plot_already=False)
 
-    yvalues1=[data['TestPop/0/0/synapses:probAMPANMDASyn:0/A_AMPA'],
-              data['TestPop/0/0/synapses:probAMPANMDASyn:0/A_NMDA'],
-              data['TestPop/0/0/synapses:probAMPANMDASyn:0/B_AMPA'],
-              data['TestPop/0/0/synapses:probAMPANMDASyn:0/B_NMDA']]
+    yvalues1=[data['TestPop/0/0/synapses:probAMPANMDA:0/A_AMPA'],
+              data['TestPop/0/0/synapses:probAMPANMDA:0/A_NMDA'],
+              data['TestPop/0/0/synapses:probAMPANMDA:0/B_AMPA'],
+              data['TestPop/0/0/synapses:probAMPANMDA:0/B_NMDA']]
     generate_plot(xvalues=[data['t']] * len(yvalues1),
                   yvalues=yvalues1,
                   title="States",
@@ -116,8 +116,8 @@ def plots(data):
                           ], show_plot_already=False)
 
     # conductances, multiple by 10e6 to convert to uS to match NEURON mod file
-    yvalues2=[data['TestPop/0/0/synapses:probAMPANMDASyn:0/g_AMPA'],
-              data['TestPop/0/0/synapses:probAMPANMDASyn:0/g_NMDA']
+    yvalues2=[data['TestPop/0/0/synapses:probAMPANMDA:0/g_AMPA'],
+              data['TestPop/0/0/synapses:probAMPANMDA:0/g_NMDA']
               ]
     generate_plot(xvalues=[data['t']] * len(yvalues2),
                   yvalues=numpy.array(yvalues2),

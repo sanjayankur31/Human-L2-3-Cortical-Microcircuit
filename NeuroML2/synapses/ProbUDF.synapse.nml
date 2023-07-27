@@ -12,7 +12,7 @@
     -->
 
     <!-- baseConductanceBasedSynapse has v and gbase as requirements, which we need here -->
-    <ComponentType name="ProbUDFSyn"
+    <ComponentType name="ProbUDFsyn"
         extends="baseConductanceBasedSynapse"
         description="AMPA and NMDA receptor conductance using a dual-exponential profile presynaptic short-term plasticity based on Fuhrmann et al. 2002"
         >
