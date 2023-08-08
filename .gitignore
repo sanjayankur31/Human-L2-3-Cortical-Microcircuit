@@ -29,3 +29,4 @@ x86_64/
 
 .mypy_cache/
 /NeuroML2/tests/arm64
+/NeuroML2/arm64
