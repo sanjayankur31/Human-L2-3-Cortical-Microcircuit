@@ -11,17 +11,16 @@ Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
 """
 
 
-import numpy
 import random
-import neuroml
-from neuroml.loaders import read_neuroml2_file
-from neuroml.writers import NeuroMLWriter
-from pyneuroml.analysis import generate_current_vs_frequency_curve
-from pyneuroml.pynml import write_neuroml2_file, run_lems_with_jneuroml_neuron
-from pyneuroml.plot.PlotMorphology import plot_2D
-from pyneuroml.lems.LEMSSimulation import LEMSSimulation
-from neuroml.neuro_lex_ids import neuro_lex_ids
 
+import neuroml
+import numpy
+from neuroml.loaders import read_neuroml2_file
+from neuroml.neuro_lex_ids import neuro_lex_ids
+from pyneuroml.analysis import generate_current_vs_frequency_curve
+from pyneuroml.lems.LEMSSimulation import LEMSSimulation
+from pyneuroml.plot.PlotMorphology import plot_2D
+from pyneuroml.pynml import run_lems_with_jneuroml_neuron, write_neuroml2_file
 
 random.seed(1412)
 
