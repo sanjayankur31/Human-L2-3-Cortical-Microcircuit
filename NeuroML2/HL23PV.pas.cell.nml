@@ -5,16 +5,6 @@
   </notes>
     <include href="CaDynamics_E2_NML2.nml"/>
     <include href="channels/pas.channel.nml"/>
-    <include href="channels/Ih.channel.nml"/>
-    <include href="channels/NaTg/NaTg.channel.nml"/>
-    <include href="channels/Nap.channel.nml"/>
-    <include href="channels/K_P.channel.nml"/>
-    <include href="channels/K_T.channel.nml"/>
-    <include href="channels/Kv3_1.channel.nml"/>
-    <include href="channels/Im.channel.nml"/>
-    <include href="channels/SK.channel.nml"/>
-    <include href="channels/Ca_HVA.channel.nml"/>
-    <include href="channels/Ca_LVA.channel.nml"/>
     <cell id="HL23PV">
         <notes>Cell: HL23PV exported from NEURON ModelView. Reference: Yao, H. K.; Guet-McCreight, A.; Mazza, F.; Moradi Chameh, H.; Prevot, T. D.; Griffiths, J. D.; Tripathy, S. J.; Valiante, T. A.; Sibille, E. &amp; Hay, E.  Reduced inhibition in depression impairs stimulus processing in human cortical microcircuits Cell Reports, Elsevier, 2022, 38</notes>
         <morphology id="morphology">
@@ -23013,31 +23003,10 @@
         <biophysicalProperties id="biophys">
             <membraneProperties>
                 <channelDensity id="pas" ionChannel="pas" condDensity="0.00011830111773572024 S_per_cm2" erev="-83.92924122901199 mV" ion="non_specific"/>
-                <channelDensity id="Ih" ionChannel="Ih" condDensity="2.7671764064314368e-05 S_per_cm2" erev="-45 mV" ion="hcn"/>
-                <channelDensity id="NaTg_somatic" ionChannel="NaTg_PV" condDensity="0.49958525078702043 S_per_cm2" erev="50 mV" segmentGroup="soma_group" ion="na"/>
-                <channelDensity id="Nap_somatic" ionChannel="Nap" condDensity="0.008795461417521086 S_per_cm2" erev="50 mV" segmentGroup="soma_group" ion="na"/>
-                <channelDensity id="K_P_somatic" ionChannel="K_P" condDensity="9.606092478937705e-06 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
-                <channelDensity id="K_T_somatic" ionChannel="K_T" condDensity="0.0011701702607527396 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
-                <channelDensity id="Kv3_1_somatic" ionChannel="Kv3_1" condDensity="2.9921080101237565 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
-                <channelDensity id="Im_somatic" ionChannel="Im" condDensity="0.04215865946497755 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
-                <channelDensity id="SK_somatic" ionChannel="SK" condDensity="3.7265770903193036e-06 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
-                <channelDensity id="NaTg_axonal" ionChannel="NaTg_PV" condDensity="0.10914576408883477 S_per_cm2" erev="50 mV" segmentGroup="axon_group" ion="na"/>
-                <channelDensity id="Nap_axonal" ionChannel="Nap" condDensity="0.001200899579358837 S_per_cm2" erev="50 mV" segmentGroup="axon_group" ion="na"/>
-                <channelDensity id="K_P_axonal" ionChannel="K_P" condDensity="0.6854776593761795 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
-                <channelDensity id="K_T_axonal" ionChannel="K_T" condDensity="0.07603372775662909 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
-                <channelDensity id="Kv3_1_axonal" ionChannel="Kv3_1" condDensity="2.988867483754507 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
-                <channelDensity id="Im_axonal" ionChannel="Im" condDensity="0.029587905136596156 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
-                <channelDensity id="SK_axonal" ionChannel="SK" condDensity="0.5121938998281017 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
-                <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.00017953651378188165 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
-                <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.09250008555398015 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
-                <channelDensityNernst id="Ca_HVA_axonal" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
-                <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
                 <specificCapacitance value="2 uF_per_cm2"/>
                 <initMembPotential value="-80mV"/>
             </membraneProperties>
             <intracellularProperties>
-                <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_somatic" ion="ca" initialConcentration="1e-4 mM" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="soma_group"/>
-                <species id="ca" concentrationModel="CaDynamics_E2_NML2_PV_axonal" ion="ca" initialConcentration="1e-4 mM" initialExtConcentration="2.0E-6 mol_per_cm3" segmentGroup="axon_group"/>
                 <resistivity value="0.1 kohm_cm"/>
             </intracellularProperties>
         </biophysicalProperties>

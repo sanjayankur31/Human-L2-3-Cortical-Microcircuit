@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 https://raw.githubusercontent.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.6.xsd">
+  <Include file="CaDynamics_E2_NML2.nml"/>
+  <Include file="synapses/ProbAMPANMDA.synapse.nml"/>
+  <Include file="synapses/ProbUDF.synapse.nml"/>
+  <Include file="channels/Ih.channel.nml"/>
+  <Include file="channels/K_T.channel.nml"/>
+  <Include file="channels/K_P.channel.nml"/>
+  <Include file="channels/Nap.channel.nml"/>
+  <Include file="channels/Ca_LVA.channel.nml"/>
+  <Include file="channels/Kv3_1.channel.nml"/>
+  <Include file="channels/Im.channel.nml"/>
+  <Include file="channels/SK.channel.nml"/>
+  <Include file="channels/Ca_HVA.channel.nml"/>
+  <Include file="channels/pas.channel.nml"/>
+  <Include file="channels/NaTg/NaTg.channel.nml"/>
+</Lems>

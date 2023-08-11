@@ -1,0 +1,413 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23Network">
+    <include href="rotated_cells/HL23PYR_0.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_240.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_480.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_720.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_157.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_397.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_637.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_74.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_314.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_554.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_794.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_231.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_471.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_711.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_148.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_388.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_628.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_65.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_305.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_545.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_785.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_222.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_462.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_702.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_139.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_379.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_619.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_56.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_296.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_536.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_776.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_225.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_465.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_705.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_154.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_394.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_634.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_83.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_323.cell.nml"/>
+    <include href="rotated_cells/HL23PYR_563.cell.nml"/>
+    <include href="rotated_cells/HL23SST_804.cell.nml"/>
+    <include href="rotated_cells/HL23SST_809.cell.nml"/>
+    <include href="rotated_cells/HL23SST_837.cell.nml"/>
+    <include href="rotated_cells/HL23PV_852.cell.nml"/>
+    <include href="rotated_cells/HL23PV_879.cell.nml"/>
+    <include href="rotated_cells/HL23PV_906.cell.nml"/>
+    <include href="rotated_cells/HL23PV_874.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_924.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_998.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_930.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_933.cell.nml"/>
+    <network id="HL23Network" temperature="34.0 degC">
+        <notes>L23 network at 0.05 scale</notes>
+        <population id="HL23PYR_pop_0" component="HL23PYR_0" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-221.223306399760617" y="84.192327970444907" z="-841.488627155949189"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_240" component="HL23PYR_240" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="85.553186031354755" y="210.000128390918206" z="-1378.673254692557975"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_480" component="HL23PYR_480" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="227.535044773645268" y="58.300577943735888" z="-995.681702062897784"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_720" component="HL23PYR_720" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="181.174600628982319" y="111.950486103625565" z="-1477.369797221297858"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_157" component="HL23PYR_157" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-58.724724451123642" y="151.947100149060333" z="-1220.468494135105175"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_397" component="HL23PYR_397" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="186.711303919687111" y="-108.088098299224441" z="-842.085796297591742"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_637" component="HL23PYR_637" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-67.491061008138459" y="-55.206110963299025" z="-1301.263704523815022"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_74" component="HL23PYR_74" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-231.719578628726708" y="64.355164213319554" z="-1217.08981579209194"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_314" component="HL23PYR_314" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="204.557379055293154" y="-94.149831995002046" z="-1122.21898912789834"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_554" component="HL23PYR_554" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="60.577598189417103" y="-84.532259508425298" z="-1316.6058718495824"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_794" component="HL23PYR_794" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-171.332036406190724" y="174.281129262744628" z="-983.946214887313204"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_231" component="HL23PYR_231" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="17.999782125877882" y="154.658106804919385" z="-968.253657558506916"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_471" component="HL23PYR_471" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="61.705340772775067" y="-141.168387298508492" z="-1021.314829544170038"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_711" component="HL23PYR_711" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="104.803808168441918" y="-97.433362604102072" z="-1220.544625001232362"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_148" component="HL23PYR_148" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-105.242881061969058" y="-205.557351515114789" z="-742.573151107830313"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_388" component="HL23PYR_388" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-65.680911263546363" y="-235.799658273611328" z="-705.129130001679641"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_628" component="HL23PYR_628" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-148.326377619047946" y="-200.059136537204409" z="-849.492102027290116"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_65" component="HL23PYR_65" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="140.782140123143165" y="154.863223337114931" z="-1373.190447802188828"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_305" component="HL23PYR_305" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="125.735628727817854" y="-108.022034294253771" z="-1199.615968002522095"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_545" component="HL23PYR_545" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="85.012654257399845" y="-169.077371273119184" z="-938.621296561627673"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_785" component="HL23PYR_785" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="193.859487156738453" y="-141.113442226513342" z="-1289.199460195959091"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_222" component="HL23PYR_222" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-143.684817000464079" y="-74.984667460416375" z="-1162.541221509992965"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_462" component="HL23PYR_462" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="159.676858321088417" y="-87.800379066191311" z="-910.36287279921271"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_702" component="HL23PYR_702" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="147.459951925159146" y="-145.231785804867854" z="-894.648239236957124"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_139" component="HL23PYR_139" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-28.248691837727048" y="-17.437983498346465" z="-810.319142587119018"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_379" component="HL23PYR_379" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="29.567558509365654" y="103.017517718606726" z="-1206.155865497995592"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_619" component="HL23PYR_619" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-120.866064463194093" y="-49.790520569675202" z="-1470.349351131112371"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_56" component="HL23PYR_56" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="144.740765697215721" y="-93.211887090855427" z="-1016.763260854935197"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_296" component="HL23PYR_296" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="89.962087799448426" y="103.873186726111626" z="-1171.437616186685773"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_536" component="HL23PYR_536" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-44.771837352732881" y="-225.186059505355985" z="-799.308181751307529"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_776" component="HL23PYR_776" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-71.604517751624186" y="37.946322703901245" z="-1367.531552376586433"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_225" component="HL23PYR_225" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="127.176616695961968" y="-158.764307965031776" z="-1106.882293076357655"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_465" component="HL23PYR_465" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-3.771950065568297" y="-26.997135810023888" z="-1490.582979857556893"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_705" component="HL23PYR_705" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="3.910159882808961" y="163.410959337978881" z="-1304.014701564529332"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_154" component="HL23PYR_154" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-189.56374676468252" y="161.437877834066711" z="-1192.174820508276753"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_394" component="HL23PYR_394" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="91.580909358024982" y="65.813723334521015" z="-620.4714273751772"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_634" component="HL23PYR_634" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="127.161193728356096" y="16.549014490885806" z="-1392.981486031767872"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_83" component="HL23PYR_83" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-118.748007954180778" y="179.266214875500083" z="-818.78709451423174"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_323" component="HL23PYR_323" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-75.310983040718867" y="-72.180632559832205" z="-1415.321254682697599"/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_563" component="HL23PYR_563" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="76.801740860361619" y="19.293080771292491" z="-1050.794406830641037"/>
+            </instance>
+        </population>
+        <population id="HL23SST_pop_804" component="HL23SST_804" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="106.350954605553099" y="-214.951800779721538" z="-645.5753185087774"/>
+            </instance>
+        </population>
+        <population id="HL23SST_pop_809" component="HL23SST_809" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-66.661393253613639" y="-154.5426981641846" z="-1365.328199399219784"/>
+            </instance>
+        </population>
+        <population id="HL23SST_pop_837" component="HL23SST_837" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-164.451077229015482" y="158.923509746789762" z="-1115.226553880813071"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_852" component="HL23PV_852" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-65.390056656730806" y="-116.993532553848922" z="-946.991073553129127"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_879" component="HL23PV_879" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-47.599084963993789" y="-61.949116430197734" z="-1138.273622150351457"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_906" component="HL23PV_906" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="58.197290763543016" y="-114.772124254911574" z="-719.147114267836969"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_874" component="HL23PV_874" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-204.206995268567681" y="-109.861930972761925" z="-1040.059836734000555"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop_924" component="HL23VIP_924" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="155.238762493285833" y="108.47285030975101" z="-620.439995080828112"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop_998" component="HL23VIP_998" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-33.447132763495311" y="-135.140237849578682" z="-602.102083605453572"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop_930" component="HL23VIP_930" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-74.998405380504067" y="64.504168799248191" z="-604.371249242716431"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop_933" component="HL23VIP_933" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="44.823960885205075" y="-238.292403288449208" z="-950.209090581213559"/>
+            </instance>
+        </population>
+    </network>
+</neuroml>
