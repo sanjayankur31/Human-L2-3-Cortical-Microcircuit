@@ -38,7 +38,8 @@ class HL23Net(object):
 
     """HL23 network"""
 
-    def __init__(self, scale=0.01, connections=True, stimulus=True,
+    def __init__(self, scale=0.01, connections=True, background_input=True,
+                 stimulus=True,
                  biophysics=True):
         """Init
 
@@ -49,6 +50,7 @@ class HL23Net(object):
 
         self.network_scale = scale
         self.connections = connections
+        self.background_input = background_input
         self.stimulus = stimulus
         self.biophysics = biophysics
 
@@ -109,6 +111,8 @@ class HL23Net(object):
         self.create_cells()
         if self.connections is True:
             self.create_connections()
+        if self.background_input is True:
+            self.add_background_input()
         if self.stimulus is True:
             self.add_stimulus()
 
@@ -353,7 +357,7 @@ class HL23Net(object):
 
                     syn_count += 1
 
-    def background_input(self):
+    def add_background_input(self):
         """Add background input to cells. """
         pass
 
@@ -530,8 +534,8 @@ if __name__ == "__main__":
         print("Only one argument accepted, using first as scale value")
         scale = float(sys.argv[1])
 
-    model = HL23Net(scale=scale, connections=True, stimulus=True,
-                    biophysics=True)
+    model = HL23Net(scale=scale, connections=False, background_input=False, stimulus=False,
+                    biophysics=False)
     model.create_network()
     # model.visualize_network()
     # model.create_simulation()
