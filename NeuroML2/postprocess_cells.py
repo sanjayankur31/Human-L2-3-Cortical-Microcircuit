@@ -123,6 +123,14 @@ def postprocess_HL23PYR():
     cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
+    # myelin
+    cell.set_specific_capacitance("0.02 uF_per_cm2",
+                                  group_id="myelin_group")
+    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
+
+    # write passive cell
+    write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
+
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
                              ion_channel="Ih",
@@ -375,10 +383,6 @@ def postprocess_HL23PYR():
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
 
-    # myelin
-    cell.set_specific_capacitance("0.02 uF_per_cm2",
-                                  group_id="myelin_group")
-    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
     # L1 validation
     # cell.validate(recursive=True)
     # cell.summary(morph=False, biophys=True)
@@ -418,6 +422,9 @@ def postprocess_HL23PV():
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
+
+    # write passive cell before adding active properties
+    write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
@@ -685,6 +692,13 @@ def postprocess_HL23SST():
     cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
+    # myelin
+    cell.set_specific_capacitance("0.02 uF_per_cm2",
+                                  group_id="myelin_group")
+    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
+    # write passive cell
+    write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
+
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
                              ion_channel="Ih",
@@ -895,16 +909,12 @@ def postprocess_HL23SST():
                                     initial_concentration="1e-4 mM",
                                     initial_ext_concentration="2.0E-6 mol_per_cm3",
                                     segment_groups=sgid)
-    # myelin
-    cell.set_specific_capacitance("0.02 uF_per_cm2",
-                                  group_id="myelin_group")
-    cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
-
     # L1 validation
     cell.validate(recursive=True)
     cell.summary(morph=True, biophys=True)
     # use pynml writer to also run L2 validation
     write_neuroml2_file(celldoc, f"{cellname}.cell.nml")
+
 
 def postprocess_HL23VIP():
     """Post process HL23VIP and add biophysics.
@@ -938,6 +948,9 @@ def postprocess_HL23VIP():
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
+
+    # write passive cell
+    write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
     cell.add_channel_density(nml_cell_doc=celldoc,
                              cd_id="Ih",
