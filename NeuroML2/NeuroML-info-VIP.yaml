@@ -12,6 +12,19 @@ mechanisms:
     CaDynamics_E2_VIP_axonal:
         num_params: 5
         parameters:
+            Faraday_CaDynamics_E2_VIP_axonal:
+                ave_all_segs: 0.0964853
+                values:
+                    HL23VIP_0_.axon_0:
+                        id: HL23VIP[0].axon_0
+                        nseg: 1
+                        values:
+                            '*': 0.0964853
+                    HL23VIP_0_.axon_1:
+                        id: HL23VIP[0].axon_1
+                        nseg: 1
+                        values:
+                            '*': 0.0964853
             decay_CaDynamics_E2_VIP_axonal:
                 ave_all_segs: 75.7888
                 values:
@@ -68,6 +81,14 @@ mechanisms:
     CaDynamics_E2_VIP_somatic:
         num_params: 5
         parameters:
+            Faraday_CaDynamics_E2_VIP_somatic:
+                ave_all_segs: 0.0964853
+                values:
+                    HL23VIP_0_.soma_0:
+                        id: HL23VIP[0].soma_0
+                        nseg: 1
+                        values:
+                            '*': 0.0964853
             decay_CaDynamics_E2_VIP_somatic:
                 ave_all_segs: 25.1592
                 values:

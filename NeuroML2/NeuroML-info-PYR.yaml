@@ -12,6 +12,19 @@ mechanisms:
     CaDynamics_E2_PYR_axonal:
         num_params: 5
         parameters:
+            Faraday_CaDynamics_E2_PYR_axonal:
+                ave_all_segs: 0.0964853
+                values:
+                    HL23PYR_0_.axon_0:
+                        id: HL23PYR[0].axon_0
+                        nseg: 5
+                        values:
+                            '*': 0.0964853
+                    HL23PYR_0_.axon_1:
+                        id: HL23PYR[0].axon_1
+                        nseg: 7
+                        values:
+                            '*': 0.0964853
             decay_CaDynamics_E2_PYR_axonal:
                 ave_all_segs: 226.0
                 values:
@@ -68,6 +81,14 @@ mechanisms:
     CaDynamics_E2_PYR_somatic:
         num_params: 5
         parameters:
+            Faraday_CaDynamics_E2_PYR_somatic:
+                ave_all_segs: 0.0964853
+                values:
+                    HL23PYR_0_.soma_0:
+                        id: HL23PYR[0].soma_0
+                        nseg: 1
+                        values:
+                            '*': 0.0964853
             decay_CaDynamics_E2_PYR_somatic:
                 ave_all_segs: 20.0
                 values:

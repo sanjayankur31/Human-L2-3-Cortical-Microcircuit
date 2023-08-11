@@ -1,5 +1,5 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="NeuroML2_file_exported_from_NEURON">
-    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.2.2+ HEAD (93d41fafd+) 2022-12-15
+    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.1.0 HEAD (047dd824) 2022-03-25
           Authors: Michael Hines, Sushil Kambampati and Padraig Gleeson,
           Yale University and UCL 
   </notes>
@@ -22895,6 +22895,12 @@
             </segmentGroup>
             <segmentGroup id="dendrite_group" neuroLexId="GO:0030425">
                 <notes>Default dendrite segment group for the cell</notes>
+                <include segmentGroup="dend_26"/>
+                <include segmentGroup="dend_30"/>
+                <include segmentGroup="dend_31"/>
+                <include segmentGroup="dend_20"/>
+                <include segmentGroup="dend_21"/>
+                <include segmentGroup="dend_25"/>
                 <include segmentGroup="dend_16"/>
                 <include segmentGroup="dend_17"/>
                 <include segmentGroup="dend_18"/>
@@ -22903,29 +22909,30 @@
                 <include segmentGroup="dend_12"/>
                 <include segmentGroup="dend_2"/>
                 <include segmentGroup="dend_3"/>
-                <include segmentGroup="dend_5"/>
                 <include segmentGroup="dend_32"/>
+                <include segmentGroup="dend_5"/>
+                <include segmentGroup="dend_46"/>
                 <include segmentGroup="dend_41"/>
-                <include segmentGroup="dend_47"/>
                 <include segmentGroup="dend_14"/>
-                <include segmentGroup="dend_48"/>
+                <include segmentGroup="dend_47"/>
                 <include segmentGroup="dend_27"/>
-                <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_48"/>
                 <include segmentGroup="dend_22"/>
+                <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_34"/>
                 <include segmentGroup="dend_36"/>
                 <include segmentGroup="dend_40"/>
-                <include segmentGroup="dend_43"/>
                 <include segmentGroup="dend_0"/>
-                <include segmentGroup="dend_10"/>
+                <include segmentGroup="dend_43"/>
                 <include segmentGroup="dend_7"/>
+                <include segmentGroup="dend_10"/>
+                <include segmentGroup="dend_39"/>
                 <include segmentGroup="dend_11"/>
-                <include segmentGroup="dend_34"/>
-                <include segmentGroup="dend_37"/>
                 <include segmentGroup="dend_29"/>
-                <include segmentGroup="dend_38"/>
+                <include segmentGroup="dend_37"/>
                 <include segmentGroup="dend_44"/>
+                <include segmentGroup="dend_38"/>
                 <include segmentGroup="dend_42"/>
-                <include segmentGroup="dend_46"/>
                 <include segmentGroup="dend_28"/>
                 <include segmentGroup="dend_33"/>
                 <include segmentGroup="dend_19"/>
@@ -22936,16 +22943,20 @@
                 <include segmentGroup="dend_15"/>
                 <include segmentGroup="dend_1"/>
                 <include segmentGroup="dend_4"/>
-                <include segmentGroup="dend_39"/>
                 <include segmentGroup="dend_45"/>
-                <include segmentGroup="dend_26"/>
-                <include segmentGroup="dend_30"/>
-                <include segmentGroup="dend_31"/>
-                <include segmentGroup="dend_20"/>
-                <include segmentGroup="dend_21"/>
-                <include segmentGroup="dend_25"/>
             </segmentGroup>
             <segmentGroup id="all">
+                <include segmentGroup="dend_10"/>
+                <include segmentGroup="dend_7"/>
+                <include segmentGroup="dend_43"/>
+                <include segmentGroup="dend_0"/>
+                <include segmentGroup="dend_42"/>
+                <include segmentGroup="axon_0"/>
+                <include segmentGroup="dend_38"/>
+                <include segmentGroup="dend_44"/>
+                <include segmentGroup="dend_37"/>
+                <include segmentGroup="dend_33"/>
+                <include segmentGroup="dend_29"/>
                 <include segmentGroup="dend_28"/>
                 <include segmentGroup="dend_24"/>
                 <include segmentGroup="dend_23"/>
@@ -22977,27 +22988,16 @@
                 <include segmentGroup="dend_2"/>
                 <include segmentGroup="dend_48"/>
                 <include segmentGroup="dend_47"/>
-                <include segmentGroup="dend_41"/>
                 <include segmentGroup="soma_0"/>
-                <include segmentGroup="dend_40"/>
+                <include segmentGroup="dend_41"/>
                 <include segmentGroup="dend_32"/>
-                <include segmentGroup="dend_36"/>
+                <include segmentGroup="dend_40"/>
                 <include segmentGroup="dend_27"/>
-                <include segmentGroup="dend_35"/>
+                <include segmentGroup="dend_36"/>
                 <include segmentGroup="dend_22"/>
-                <include segmentGroup="dend_11"/>
+                <include segmentGroup="dend_35"/>
                 <include segmentGroup="dend_14"/>
-                <include segmentGroup="dend_10"/>
-                <include segmentGroup="dend_7"/>
-                <include segmentGroup="dend_43"/>
-                <include segmentGroup="dend_0"/>
-                <include segmentGroup="dend_42"/>
-                <include segmentGroup="axon_0"/>
-                <include segmentGroup="dend_38"/>
-                <include segmentGroup="dend_44"/>
-                <include segmentGroup="dend_37"/>
-                <include segmentGroup="dend_33"/>
-                <include segmentGroup="dend_29"/>
+                <include segmentGroup="dend_11"/>
             </segmentGroup>
         </morphology>
         <biophysicalProperties id="biophys">

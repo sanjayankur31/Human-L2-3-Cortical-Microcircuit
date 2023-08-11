@@ -12,6 +12,19 @@ mechanisms:
     CaDynamics_E2_SST_axonal:
         num_params: 5
         parameters:
+            Faraday_CaDynamics_E2_SST_axonal:
+                ave_all_segs: 0.0964853
+                values:
+                    HL23SST_0_.axon_0:
+                        id: HL23SST[0].axon_0
+                        nseg: 5
+                        values:
+                            '*': 0.0964853
+                    HL23SST_0_.axon_1:
+                        id: HL23SST[0].axon_1
+                        nseg: 7
+                        values:
+                            '*': 0.0964853
             decay_CaDynamics_E2_SST_axonal:
                 ave_all_segs: 469.0
                 values:

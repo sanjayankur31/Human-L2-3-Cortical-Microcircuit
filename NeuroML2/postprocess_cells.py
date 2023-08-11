@@ -1401,6 +1401,15 @@ def simulate_test_network(cells: list = []):
 
 if __name__ == "__main__":
     cellnames = ["HL23PV", "HL23PYR", "HL23SST", "HL23VIP"]
+    
+    import sys 
+    if '-postprocall' in sys.argv:
+        postprocess_HL23VIP()
+        postprocess_HL23PV()
+        postprocess_HL23PYR()
+        postprocess_HL23SST()
+
+
     """
     postprocess_HL23VIP()
     analyse_HL23VIP(True, True)
