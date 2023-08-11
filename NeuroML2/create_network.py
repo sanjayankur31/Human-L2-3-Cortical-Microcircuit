@@ -121,7 +121,16 @@ class HL23Net(object):
         print(f"Writing {self.netdoc_file_name} ")
         write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
 
-    def create_cells(self):
+    def create_cells(self, overwrite=False):
+        """Create all rotated cells and add them to the network.
+
+        Each rotated cell is added to a separate population because in NeuroML,
+        a population can only include a single Component, but each rotated cell
+        is a different component.
+
+        :param overwrite: regenerate all rotated cell files if True, else, re-use
+        :type overwrite: bool
+        """
         print("Creating cells")
         # make a directory for storing rotated cells
         # we include these cells in the network document to ensure that the network
@@ -172,15 +181,22 @@ class HL23Net(object):
                 zrot = acell[6]
 
                 rotated_cell = None
-                rotated_cell = rotate_cell(self.nml_cell[ctype], xrot, yrot, zrot, order="xyz", relative_to_soma=True)
-                rotated_cell.id = rotated_cell.id + f"_{gid}"
-                rotated_cell_doc = component_factory(neuroml.NeuroMLDocument, id=f"{rotated_cell.id}_doc")
-                rotated_cell_doc.add(rotated_cell)
-                write_neuroml2_file(rotated_cell_doc, f"{self.temp_cell_dir}/{rotated_cell.id}.cell.nml", validate=False)
-                self.netdoc.add(neuroml.IncludeType, href=f"{self.temp_cell_dir}/{rotated_cell.id}.cell.nml")
+                rotated_cell_file = f"{self.temp_cell_dir}/{self.nml_cell[ctype].id}_{gid}.cell.nml"
+                rotated_cell_id = self.nml_cell[ctype].id + f"_{gid}"
+                if overwrite is False and pathlib.Path(rotated_cell_file).exists():
+                    print(f"{rotated_cell_file} already exists, not overwriting.")
+                    print("Set overwrite=True to regenerate all rotated cell files")
+                else:
+                    rotated_cell = rotate_cell(self.nml_cell[ctype], xrot, yrot, zrot, order="xyz", relative_to_soma=True)
+                    rotated_cell.id = rotated_cell_id
+                    rotated_cell_doc = component_factory(neuroml.NeuroMLDocument, id=f"{rotated_cell_id}_doc")
+                    rotated_cell_doc.add(rotated_cell)
+                    write_neuroml2_file(rotated_cell_doc, rotated_cell_file, validate=False)
+
+                self.netdoc.add(neuroml.IncludeType, href=rotated_cell_file)
 
                 pop = self.network.add(neuroml.Population, id=f"{ctype}_pop_{gid}", type="populationList",
-                                       component=rotated_cell.id)
+                                       component=rotated_cell_id)
                 pop.add(neuroml.Property(tag="color", value=self.pop_colors[ctype]))
                 pop.add(neuroml.Property(tag="region", value="L23"))
 
