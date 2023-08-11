@@ -28,3 +28,5 @@ x86_64/
 *_eden.py
 
 .mypy_cache/
+
+/NeuroML2/rotated_cells/
