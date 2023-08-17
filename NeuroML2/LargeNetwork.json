@@ -94,25 +94,25 @@
             "stim_HL23PV": {
                 "input_source": "pfs0",
                 "population": "Pop_HL23PV",
-                "percentage": 100.0,
+                "percentage": 100,
                 "weight": 0.1
             },
             "stim_HL23PYR": {
                 "input_source": "pfs0",
                 "population": "Pop_HL23PYR",
-                "percentage": 100.0,
+                "percentage": 100,
                 "weight": 0.1
             },
             "stim_HL23VIP": {
                 "input_source": "pfs0",
                 "population": "Pop_HL23VIP",
-                "percentage": 100.0,
+                "percentage": 100,
                 "weight": 0.1
             },
             "stim_HL23SST": {
                 "input_source": "pfs0",
                 "population": "Pop_HL23SST",
-                "percentage": 100.0,
+                "percentage": 100,
                 "weight": 0.1
             }
         },
