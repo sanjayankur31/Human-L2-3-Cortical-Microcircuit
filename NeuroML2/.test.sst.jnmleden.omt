@@ -14,4 +14,5 @@ experiments:
           scaling: [1000,1000]
         spike detection:
           method: threshold
+        tolerance: 0.014022701352305402 # Note: this is different on linux and mac!!
 

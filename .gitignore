@@ -28,5 +28,7 @@ x86_64/
 *_eden.py
 
 .mypy_cache/
+/NeuroML2/tests/arm64
+/NeuroML2/arm64
 
 /NeuroML2/rotated_cells/

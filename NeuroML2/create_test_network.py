@@ -49,7 +49,7 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
         net.parameters = parameters
 
-        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=400, height=400, depth=400)
+        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=1000, height=1000, depth=1000)
         net.regions.append(r1)
 
         ampa = Synapse(id="AMPA_syn", neuroml2_source_file="synapses/AMPA_syn.synapse.nml")

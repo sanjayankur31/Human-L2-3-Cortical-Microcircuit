@@ -9,13 +9,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9 ]
         # engine: [ jNeuroML_validate, "NEURON:7.6", "NEURON:8.0", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN ]
-        engine: [ jNeuroML_validate, "NEURON:7.6", "NEURON:8.0", jNeuroML_NEURON, jNeuroML_NetPyNE]
+        engine: [ jNeuroML_validate, "NEURON:7.6", "NEURON:8.0", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN]
+        runs-on: [ ubuntu-latest, macos-latest ]
+        python-version: [ 3.9 ]
 
     steps:
     - uses: actions/checkout@v3
