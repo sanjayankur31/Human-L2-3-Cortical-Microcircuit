@@ -241,6 +241,7 @@ class HL23Net(object):
                         rotated_cell_doc, rotated_cell_file, validate=False
                     )
 
+                # TODO: add tonic inhibition mechanism to pyramidal neurons
                 self.netdoc.add(neuroml.IncludeType, href=rotated_cell_file)
 
                 pop = self.network.add(
@@ -464,7 +465,8 @@ class HL23Net(object):
 
     def add_background_input(self):
         """Add background input to cells."""
-        pass
+        # for each cell, plase a OU process input half way up the dendritic
+        # arbor of each cell
 
     # TODO: incomplete, to be done after bg input implementation
     def add_stimulus(self):

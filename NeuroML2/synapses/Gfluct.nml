@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ProbUDFSynDoc">
+
+    <!-- Note that order of different LEMS types matters for validation, since the schema defines what order they should appear in -->
+
+    <!-- docs on NET_RECEIVE and INITIAL blocks: https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html -->
+
+    <!-- other refs:
+        - https://github.com/NeuroML/jNeuroML/issues/39#issuecomment-213517949
+        - https://github.com/JustasB/Mig3DTest/blob/master/NeuroML2/Synapses/FI.synapse.nml
+        -  https://github.com/OpenSourceBrain/EbnerEtAl2019/blob/master/NeuroML2/fourPathwaySyn.synapse.nml
+    -->
+
+    <!-- baseConductanceBasedSynapse has v and gbase as requirements, which we need here -->
+    <ComponentType name="Gfluct"
+        extends=""
+        description=""
+        >
+
+        <Parameter name="dt" dimension="time"/>
+        <Parameter name="E_e" dimension="voltage"/>
+        <Parameter name="E_i" dimension="voltage"/>
+
+        <Parameter name="g_e0" dimension="conductance"/>
+        <Parameter name="g_i0" dimension="conductance"/>
+
+        <Parameter name="std_e" dimension="conductance"/>
+        <Parameter name="std_i" dimension="conductance"/>
+
+        <Parameter name="tau_e" dimension="time"/>
+        <Parameter name="tau_i" dimension="time"/>
+
+        <Exposure name="i" dimension="current"/>
+        <Exposure name="g_e" dimension="conductance"/>
+        <Exposure name="g_i" dimension="conductance"/>
+
+        <Dynamics>
+            <StateVariable name="g_e" dimension="conductace" />
+            <StateVariable name="g_i" dimension="conductace" />
+            <StateVariable name="g_e1" dimension="conductace" />
+            <StateVariable name="g_i1" dimension="conductace" />
+
+            <DerivedVariable name="i" exposure="i" dimension="current" value="-1 * g_e * (v - E_e) + g_i * (v - E_i)" />
+
+            <OnStart>
+                <StateAssignment variable="g_e1" value="0" />
+                <StateAssignment variable="g_i1" value="0" />
+            </OnStart>
+
+            <!-- oup()-->
+            <OnCondition test="tau_e .neq. 0" >
+                <!-- let exp_e and std_e be computed for each step: we can't have conditionals inside OnStart, although I could use H etc. to hack it -->
+                <StateAssignment variable="g_e" value="exp(-dt/tau_e) * g_e1 + ((std_e * sqrt((1 - exp(-2 * dt/tau_e)))) * rand())" />
+            </OnCondition>
+            <OnCondition test="tau_i .neq. 0" >
+                <StateAssignment variable="g_i" value="exp(-dt/tau_i) * g_i1 + ((std_i * sqrt((1 - exp(-2 * dt/tau_i)))) * rand())" />
+            </OnCondition>
+
+            <OnCondition test="tau_e .eq. 0" >
+                <StateAssignment variable="g_e" value="std_e * rand()" />
+            </OnCondition>
+            <OnCondition test="tau_i .eq. 0" >
+                <StateAssignment variable="g_i" value="std_i * rand()" />
+            </OnCondition>
+        </Dynamics>
+
+    </ComponentType>
+
+</neuroml>
