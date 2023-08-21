@@ -12,6 +12,7 @@ Author: Ankur Sinha <sanjay DOT ankur AT gmail DOT com>
 
 
 import random
+import sys
 
 import neuroml
 import numpy
@@ -36,7 +37,9 @@ def load_and_setup_cell(cellname: str):
     :rtype: neuroml.NeuroMLDocument
 
     """
-    celldoc = read_neuroml2_file(f"{cellname}.morph.cell.nml")  # type: neuroml.NeuroMLDocument
+    celldoc = read_neuroml2_file(
+        f"{cellname}.morph.cell.nml"
+    )  # type: neuroml.NeuroMLDocument
     cell = celldoc.cells[0]  # type: neuroml.Cell
     celldoc.networks = []
     cell.id = cellname
@@ -44,8 +47,14 @@ def load_and_setup_cell(cellname: str):
     cell.notes += ". Reference: Yao, H. K.; Guet-McCreight, A.; Mazza, F.; Moradi Chameh, H.; Prevot, T. D.; Griffiths, J. D.; Tripathy, S. J.; Valiante, T. A.; Sibille, E. & Hay, E.  Reduced inhibition in depression impairs stimulus processing in human cortical microcircuits Cell Reports, Elsevier, 2022, 38"
 
     # create default groups if they don't exist
-    [default_all_group, default_soma_group, default_dendrite_group, default_axon_group] = cell.setup_default_segment_groups(
-        use_convention=True, default_groups=["all", "soma_group", "dendrite_group", "axon_group"]
+    [
+        default_all_group,
+        default_soma_group,
+        default_dendrite_group,
+        default_axon_group,
+    ] = cell.setup_default_segment_groups(
+        use_convention=True,
+        default_groups=["all", "soma_group", "dendrite_group", "axon_group"],
     )
 
     # populate default groups
@@ -63,9 +72,7 @@ def load_and_setup_cell(cellname: str):
 
 
 def postprocess_HL23PYR():
-    """Post process HL23PYR and add biophysics.
-
-    """
+    """Post process HL23PYR and add biophysics."""
     cellname = "HL23PYR"
     celldoc = load_and_setup_cell(cellname)
     cell = celldoc.cells[0]  # type: neuroml.Cell
@@ -75,8 +82,16 @@ def postprocess_HL23PYR():
     # populate the complete dendrite group, and new groups for all apical and
     # basal dendrites
     default_dendrite_group = cell.get_segment_group("dendrite_group")
-    basal_group = cell.add_segment_group("basal_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Basal dendrites")
-    apical_group = cell.add_segment_group("apical_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Apical dendrite_group")
+    basal_group = cell.add_segment_group(
+        "basal_dendrite_group",
+        neuro_lex_id=neuro_lex_ids["dend"],
+        notes="Basal dendrites",
+    )
+    apical_group = cell.add_segment_group(
+        "apical_dendrite_group",
+        neuro_lex_id=neuro_lex_ids["dend"],
+        notes="Apical dendrite_group",
+    )
     # create new global myelin group
     myelin_group = cell.add_segment_group("myelin_group", notes="Myelin group")
     for sg in cell.morphology.segment_groups:
@@ -89,19 +104,25 @@ def postprocess_HL23PYR():
 
     # myelin groups are not included in the all segment group when adding
     # biophys
-    all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
-    all_minus_myelin = cell.add_segment_group("all_minus_myelin", notes="All without myelin")
+    all_segment_group = cell.get_segment_group("all")  # type neuroml.SegmentGroup
+    all_minus_myelin = cell.add_segment_group(
+        "all_minus_myelin", notes="All without myelin"
+    )
     for inc in all_segment_group.includes:
         if "myelin" not in inc.segment_groups:
             all_minus_myelin.includes.append(inc)
-    for sg in all_segment_group.members :
+    for sg in all_segment_group.members:
         if "myelin" not in sg.segment:
             all_minus_myelin.members.append(sg)
 
     # optimise dendrite group
     default_dendrite_group.includes = []
-    default_dendrite_group.includes.append(neuroml.Include(segment_groups=apical_group.id))
-    default_dendrite_group.includes.append(neuroml.Include(segment_groups=basal_group.id))
+    default_dendrite_group.includes.append(
+        neuroml.Include(segment_groups=apical_group.id)
+    )
+    default_dendrite_group.includes.append(
+        neuroml.Include(segment_groups=basal_group.id)
+    )
 
     cell.optimise_segment_groups()
     cell.reorder_segment_groups()
@@ -111,109 +132,129 @@ def postprocess_HL23PYR():
 
     celldoc.add(neuroml.IncludeType(href="CaDynamics_E2_NML2.nml"), validate=False)
     # all
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="pas",
-                             ion_channel="pas",
-                             cond_density="0.0000954 S_per_cm2",
-                             erev="-80 mV",
-                             group_id="all_minus_myelin",
-                             ion="non_specific",
-                             ion_chan_def_file="channels/pas.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="pas",
+        ion_channel="pas",
+        cond_density="0.0000954 S_per_cm2",
+        erev="-80 mV",
+        group_id="all_minus_myelin",
+        ion="non_specific",
+        ion_chan_def_file="channels/pas.channel.nml",
+    )
     cell.set_resistivity("0.1 kohm_cm", group_id="all_minus_myelin")
     cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
     # myelin
-    cell.set_specific_capacitance("0.02 uF_per_cm2",
-                                  group_id="myelin_group")
+    cell.set_specific_capacitance("0.02 uF_per_cm2", group_id="myelin_group")
     cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
 
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih",
-                             ion_channel="Ih",
-                             cond_density="0.000148 S_per_cm2",
-                             erev="-45 mV",
-                             group_id="all_minus_myelin",
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih",
+        ion_channel="Ih",
+        cond_density="0.000148 S_per_cm2",
+        erev="-45 mV",
+        group_id="all_minus_myelin",
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
     print(f"Adding channels to {sgid}")
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_somatic",
-                             ion_channel="SK",
-                             cond_density="0.000853 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_somatic",
-                             ion_channel="K_T",
-                             cond_density="0.0605 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_somatic",
-                             ion_channel="K_P",
-                             cond_density="0.000208 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_somatic",
-                             ion_channel="Kv3_1",
-                             cond_density="0.0424 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih_somatic",
-                             ion_channel="Ih",
-                             cond_density="0.000148 S_per_cm2",
-                             erev="-45 mV",
-                             group_id=sgid,
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_somatic",
-                             ion_channel="Im",
-                             cond_density="0.000306 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_somatic",
+        ion_channel="SK",
+        cond_density="0.000853 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_somatic",
+        ion_channel="K_T",
+        cond_density="0.0605 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_somatic",
+        ion_channel="K_P",
+        cond_density="0.000208 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_somatic",
+        ion_channel="Kv3_1",
+        cond_density="0.0424 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih_somatic",
+        ion_channel="Ih",
+        cond_density="0.000148 S_per_cm2",
+        erev="-45 mV",
+        group_id=sgid,
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_somatic",
+        ion_channel="Im",
+        cond_density="0.000306 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
 
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_somatic",
-                             ion_channel="NaTg_PYR_somatic",
-                             cond_density="0.272 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_somatic",
+        ion_channel="NaTg_PYR_somatic",
+        cond_density="0.272 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
     # Ca
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_PYR_somatic",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_PYR_somatic",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -223,7 +264,8 @@ def postprocess_HL23PYR():
         cond_density="0.00155 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -232,21 +274,19 @@ def postprocess_HL23PYR():
         cond_density="0.00296 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
 
     # Apical
     sg = cell.get_segment_group("apical_dendrite_group")
-    cell.set_specific_capacitance("2 uF_per_cm2",
-                                  group_id=sg.id)
+    cell.set_specific_capacitance("2 uF_per_cm2", group_id=sg.id)
     # Add parameter that we use to distribute Ih
     sg.add(
         "InhomogeneousParameter",
         id="PathLengthOverApicDends",
         variable="p",
         metric="Path Length from root",
-        proximal=sg.component_factory(
-            "ProximalDetails",
-            translation_start="0")
+        proximal=sg.component_factory("ProximalDetails", translation_start="0"),
     )
     # distribute Ih
     cdnonuniform = cell.add_channel_density_v(
@@ -256,13 +296,13 @@ def postprocess_HL23PYR():
         ion_channel="Ih",
         ion="hcn",
         erev="-45 mV",
-        validate=False
+        validate=False,
     )
     varparam = cdnonuniform.add(
         "VariableParameter",
         parameter="condDensity",
         segment_groups=sg.id,
-        validate=False
+        validate=False,
     )
     # TODO: clarify unit conversions
     # 606.3464 is the value of getLongestBranch("apic")
@@ -273,85 +313,100 @@ def postprocess_HL23PYR():
     inhomogeneous_value = varparam.add(
         "InhomogeneousValue",
         inhomogeneous_parameters="PathLengthOverApicDends",
-        value="1E9 * (0.148 * 1E-8) * ((2.087 * exp( 3.6161 * (p/606.3464))) - 0.8696)"
+        value="1E9 * (0.148 * 1E-8) * ((2.087 * exp( 3.6161 * (p/606.3464))) - 0.8696)",
     )
 
     # Basal
     basal_group = cell.get_segment_group("basal_dendrite_group")
     sgid = basal_group.id
-    cell.set_specific_capacitance("2 uF_per_cm2",
-                                  group_id=sgid)
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih_basal",
-                             ion_channel="Ih",
-                             cond_density="0.000000709 S_per_cm2",
-                             erev="-45 mV",
-                             group_id=sgid,
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.set_specific_capacitance("2 uF_per_cm2", group_id=sgid)
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih_basal",
+        ion_channel="Ih",
+        cond_density="0.000000709 S_per_cm2",
+        erev="-45 mV",
+        group_id=sgid,
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # Axonal
     axon_group = cell.get_segment_group("axon_group")
     sgid = axon_group.id
     print(f"Adding channels to {sgid}")
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_axonal",
-                             ion_channel="SK",
-                             cond_density="0.0145 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_axonal",
-                             ion_channel="K_T",
-                             cond_density="0.0424 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_axonal",
-                             ion_channel="K_P",
-                             cond_density="0.338 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_axonal",
-                             ion_channel="Im",
-                             cond_density="0.000 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_axonal",
-                             ion_channel="Kv3_1",
-                             cond_density="0.941 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_axonal",
+        ion_channel="SK",
+        cond_density="0.0145 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_axonal",
+        ion_channel="K_T",
+        cond_density="0.0424 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_axonal",
+        ion_channel="K_P",
+        cond_density="0.338 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_axonal",
+        ion_channel="Im",
+        cond_density="0.000 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_axonal",
+        ion_channel="Kv3_1",
+        cond_density="0.941 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_axonal",
-                             ion_channel="NaTg_PYR_axonal",
-                             cond_density="1.38 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_axonal",
-                             ion_channel="Nap",
-                             cond_density="0.00842 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_axonal",
+        ion_channel="NaTg_PYR_axonal",
+        cond_density="1.38 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_axonal",
+        ion_channel="Nap",
+        cond_density="0.00842 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # Ca
     cell.add_channel_density_v(
@@ -362,7 +417,8 @@ def postprocess_HL23PYR():
         cond_density="0.0003060000 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -371,17 +427,21 @@ def postprocess_HL23PYR():
         cond_density="0.0439000000 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_PYR_axonal",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_PYR_axonal",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
 
     # L1 validation
     # cell.validate(recursive=True)
@@ -411,14 +471,16 @@ def postprocess_HL23PV():
 
     # all
     # Note: ion for passive channel must be "non_specific" for NEURON
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="pas",
-                             ion_channel="pas",
-                             cond_density="0.00011830111773572024 S_per_cm2",
-                             erev="-83.92924122901199 mV",
-                             group_id="all",
-                             ion="non_specific",
-                             ion_chan_def_file="channels/pas.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="pas",
+        ion_channel="pas",
+        cond_density="0.00011830111773572024 S_per_cm2",
+        erev="-83.92924122901199 mV",
+        group_id="all",
+        ion="non_specific",
+        ion_chan_def_file="channels/pas.channel.nml",
+    )
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
@@ -426,89 +488,108 @@ def postprocess_HL23PV():
     # write passive cell before adding active properties
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih",
-                             ion_channel="Ih",
-                             cond_density="2.7671764064314368e-05 S_per_cm2",
-                             erev="-45 mV",
-                             group_id="all",
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih",
+        ion_channel="Ih",
+        cond_density="2.7671764064314368e-05 S_per_cm2",
+        erev="-45 mV",
+        group_id="all",
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_somatic",
-                             ion_channel="NaTg_PV",
-                             cond_density="0.49958525078702043 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_somatic",
-                             ion_channel="Nap",
-                             cond_density="0.008795461417521086 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_somatic",
+        ion_channel="NaTg_PV",
+        cond_density="0.49958525078702043 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_somatic",
+        ion_channel="Nap",
+        cond_density="0.008795461417521086 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_somatic",
-                             ion_channel="K_P",
-                             cond_density="9.606092478937705e-06 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_somatic",
-                             ion_channel="K_T",
-                             cond_density="0.0011701702607527396 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_somatic",
-                             ion_channel="Kv3_1",
-                             cond_density="2.9921080101237565 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_somatic",
-                             ion_channel="Im",
-                             cond_density="0.04215865946497755 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_somatic",
-                             ion_channel="SK",
-                             cond_density="3.7265770903193036e-06 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_somatic",
+        ion_channel="K_P",
+        cond_density="9.606092478937705e-06 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_somatic",
+        ion_channel="K_T",
+        cond_density="0.0011701702607527396 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_somatic",
+        ion_channel="Kv3_1",
+        cond_density="2.9921080101237565 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_somatic",
+        ion_channel="Im",
+        cond_density="0.04215865946497755 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_somatic",
+        ion_channel="SK",
+        cond_density="3.7265770903193036e-06 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_PV_somatic",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_PV_somatic",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -518,7 +599,8 @@ def postprocess_HL23PV():
         cond_density="0.00017953651378188165 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -527,71 +609,86 @@ def postprocess_HL23PV():
         cond_density="0.09250008555398015 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
 
     # axonal
     sgs = cell.get_segment_group("axon_group")
     sgid = sgs.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_axonal",
-                             ion_channel="NaTg_PV",
-                             cond_density="0.10914576408883477 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_axonal",
-                             ion_channel="Nap",
-                             cond_density="0.001200899579358837 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_axonal",
+        ion_channel="NaTg_PV",
+        cond_density="0.10914576408883477 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_axonal",
+        ion_channel="Nap",
+        cond_density="0.001200899579358837 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_axonal",
-                             ion_channel="K_P",
-                             cond_density="0.6854776593761795 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_axonal",
-                             ion_channel="K_T",
-                             cond_density="0.07603372775662909 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_axonal",
-                             ion_channel="Kv3_1",
-                             cond_density="2.988867483754507 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_axonal",
-                             ion_channel="Im",
-                             cond_density="0.029587905136596156 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_axonal",
-                             ion_channel="SK",
-                             cond_density="0.5121938998281017 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_axonal",
+        ion_channel="K_P",
+        cond_density="0.6854776593761795 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_axonal",
+        ion_channel="K_T",
+        cond_density="0.07603372775662909 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_axonal",
+        ion_channel="Kv3_1",
+        cond_density="2.988867483754507 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_axonal",
+        ion_channel="Im",
+        cond_density="0.029587905136596156 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_axonal",
+        ion_channel="SK",
+        cond_density="0.5121938998281017 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -601,7 +698,8 @@ def postprocess_HL23PV():
         cond_density="0.002961469262723619 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -610,17 +708,21 @@ def postprocess_HL23PV():
         cond_density="5.9457835817342756e-05 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_PV_axonal",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_PV_axonal",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # L1 validation
     cell.validate(recursive=True)
     cell.summary(morph=True, biophys=True)
@@ -641,7 +743,11 @@ def postprocess_HL23SST():
     # populate the complete dendrite group, and new groups for all apical and
     # basal dendrites
     default_dendrite_group = cell.get_segment_group("dendrite_group")
-    basal_group = cell.add_segment_group("basal_dendrite_group", neuro_lex_id=neuro_lex_ids["dend"], notes="Basal dendrites")
+    basal_group = cell.add_segment_group(
+        "basal_dendrite_group",
+        neuro_lex_id=neuro_lex_ids["dend"],
+        notes="Basal dendrites",
+    )
     # create new global myelin group
     myelin_group = cell.add_segment_group("myelin_group", notes="Myelin group")
     for sg in cell.morphology.segment_groups:
@@ -652,18 +758,22 @@ def postprocess_HL23SST():
 
     # myelin groups are not included in the all segment group when adding
     # biophys
-    all_segment_group = cell.get_segment_group("all") # type neuroml.SegmentGroup
-    all_minus_myelin = cell.add_segment_group("all_minus_myelin", notes="All without myelin")
+    all_segment_group = cell.get_segment_group("all")  # type neuroml.SegmentGroup
+    all_minus_myelin = cell.add_segment_group(
+        "all_minus_myelin", notes="All without myelin"
+    )
     for inc in all_segment_group.includes:
         if "myelin" not in inc.segment_groups:
             all_minus_myelin.includes.append(inc)
-    for sg in all_segment_group.members :
+    for sg in all_segment_group.members:
         if "myelin" not in sg.segment:
             all_minus_myelin.members.append(sg)
 
     # optimise dendrite group
     default_dendrite_group.includes = []
-    default_dendrite_group.includes.append(neuroml.Include(segment_groups=basal_group.id))
+    default_dendrite_group.includes.append(
+        neuroml.Include(segment_groups=basal_group.id)
+    )
 
     cell.optimise_segment_groups()
     cell.reorder_segment_groups()
@@ -680,109 +790,129 @@ def postprocess_HL23SST():
 
     # all
     # Note: ion for passive channel must be "non_specific" for NEURON
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="pas",
-                             ion_channel="pas",
-                             cond_density="0.0000232 S_per_cm2",
-                             erev="-81.5 mV",
-                             group_id="all_minus_myelin",
-                             ion="non_specific",
-                             ion_chan_def_file="channels/pas.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="pas",
+        ion_channel="pas",
+        cond_density="0.0000232 S_per_cm2",
+        erev="-81.5 mV",
+        group_id="all_minus_myelin",
+        ion="non_specific",
+        ion_chan_def_file="channels/pas.channel.nml",
+    )
     cell.set_resistivity("0.1 kohm_cm", group_id="all_minus_myelin")
     cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
     # myelin
-    cell.set_specific_capacitance("0.02 uF_per_cm2",
-                                  group_id="myelin_group")
+    cell.set_specific_capacitance("0.02 uF_per_cm2", group_id="myelin_group")
     cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih",
-                             ion_channel="Ih",
-                             cond_density="0.00001 S_per_cm2",
-                             erev="-45 mV",
-                             group_id="all_minus_myelin",
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih",
+        ion_channel="Ih",
+        cond_density="0.00001 S_per_cm2",
+        erev="-45 mV",
+        group_id="all_minus_myelin",
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_somatic",
-                             ion_channel="NaTg_SST_somatic",
-                             cond_density="0.127 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_somatic",
+        ion_channel="NaTg_SST_somatic",
+        cond_density="0.127 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
 
     # hcn
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih_somatic",
-                             ion_channel="Ih",
-                             cond_density="0.0000431 S_per_cm2",
-                             erev="-45 mV",
-                             group_id=sgid,
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih_somatic",
+        ion_channel="Ih",
+        cond_density="0.0000431 S_per_cm2",
+        erev="-45 mV",
+        group_id=sgid,
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_somatic",
-                             ion_channel="K_P",
-                             cond_density="0.0111 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_somatic",
-                             ion_channel="K_T",
-                             cond_density="0.00000 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_somatic",
-                             ion_channel="Kv3_1",
-                             cond_density="0.871 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_somatic",
-                             ion_channel="Im",
-                             cond_density="0.000158 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_somatic",
-                             ion_channel="SK",
-                             cond_density="0.00 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_somatic",
+        ion_channel="K_P",
+        cond_density="0.0111 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_somatic",
+        ion_channel="K_T",
+        cond_density="0.00000 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_somatic",
+        ion_channel="Kv3_1",
+        cond_density="0.871 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_somatic",
+        ion_channel="Im",
+        cond_density="0.000158 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_somatic",
+        ion_channel="SK",
+        cond_density="0.00 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_SST_somatic",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_SST_somatic",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -792,7 +922,8 @@ def postprocess_HL23SST():
         cond_density="0.00355 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -801,85 +932,101 @@ def postprocess_HL23SST():
         cond_density="0.00314 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
 
     # Basal
     basal_group = cell.get_segment_group("basal_dendrite_group")
     sgid = basal_group.id
-    cell.set_specific_capacitance("1 uF_per_cm2",
-                                  group_id=sgid)
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih_basal",
-                             ion_channel="Ih",
-                             cond_density="0.0000949 S_per_cm2",
-                             erev="-45 mV",
-                             group_id=sgid,
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.set_specific_capacitance("1 uF_per_cm2", group_id=sgid)
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih_basal",
+        ion_channel="Ih",
+        cond_density="0.0000949 S_per_cm2",
+        erev="-45 mV",
+        group_id=sgid,
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # axonal
     sgs = cell.get_segment_group("axon_group")
     sgid = sgs.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_axonal",
-                             ion_channel="NaTg_SST_axonal",
-                             cond_density="0.343 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_axonal",
-                             ion_channel="Nap",
-                             cond_density="0.000444 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_axonal",
+        ion_channel="NaTg_SST_axonal",
+        cond_density="0.343 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_axonal",
+        ion_channel="Nap",
+        cond_density="0.000444 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_axonal",
-                             ion_channel="K_P",
-                             cond_density="0.0295 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_axonal",
-                             ion_channel="K_T",
-                             cond_density="0.023 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_axonal",
-                             ion_channel="Kv3_1",
-                             cond_density="0.984 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_axonal",
-                             ion_channel="Im",
-                             cond_density="0.000317 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_axonal",
-                             ion_channel="SK",
-                             cond_density="0.00113 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_axonal",
+        ion_channel="K_P",
+        cond_density="0.0295 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_axonal",
+        ion_channel="K_T",
+        cond_density="0.023 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_axonal",
+        ion_channel="Kv3_1",
+        cond_density="0.984 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_axonal",
+        ion_channel="Im",
+        cond_density="0.000317 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_axonal",
+        ion_channel="SK",
+        cond_density="0.00113 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -889,7 +1036,8 @@ def postprocess_HL23SST():
         cond_density="0.00145 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -898,17 +1046,21 @@ def postprocess_HL23SST():
         cond_density="0.0627 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_SST_axonal",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_SST_axonal",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # L1 validation
     cell.validate(recursive=True)
     cell.summary(morph=True, biophys=True)
@@ -937,14 +1089,16 @@ def postprocess_HL23VIP():
 
     # all
     # Note: ion for passive channel must be "non_specific" for NEURON
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="pas",
-                             ion_channel="pas",
-                             cond_density="2.5756438955642182e-05 S_per_cm2",
-                             erev="-79.74132024971513 mV",
-                             group_id="all",
-                             ion="non_specific",
-                             ion_chan_def_file="channels/pas.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="pas",
+        ion_channel="pas",
+        cond_density="2.5756438955642182e-05 S_per_cm2",
+        erev="-79.74132024971513 mV",
+        group_id="all",
+        ion="non_specific",
+        ion_chan_def_file="channels/pas.channel.nml",
+    )
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
@@ -952,89 +1106,108 @@ def postprocess_HL23VIP():
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Ih",
-                             ion_channel="Ih",
-                             cond_density="4.274951616063423e-05 S_per_cm2",
-                             erev="-45 mV",
-                             group_id="all",
-                             ion="hcn",
-                             ion_chan_def_file="channels/Ih.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih",
+        ion_channel="Ih",
+        cond_density="4.274951616063423e-05 S_per_cm2",
+        erev="-45 mV",
+        group_id="all",
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
 
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_somatic",
-                             ion_channel="NaTg_VIP_somatic",
-                             cond_density="0.11491205828369114 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_somatic",
-                             ion_channel="Nap",
-                             cond_density="0.0001895305240694194 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_somatic",
+        ion_channel="NaTg_VIP_somatic",
+        cond_density="0.11491205828369114 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_somatic",
+        ion_channel="Nap",
+        cond_density="0.0001895305240694194 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_somatic",
-                             ion_channel="K_P",
-                             cond_density="0.0009925418924114282 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_somatic",
-                             ion_channel="K_T",
-                             cond_density="0.009051981253674193 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_somatic",
-                             ion_channel="Kv3_1",
-                             cond_density="0.31215653649208114 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_somatic",
-                             ion_channel="Im",
-                             cond_density="0.0003679378262289559 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_somatic",
-                             ion_channel="SK",
-                             cond_density="0.1655502166633749 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_somatic",
+        ion_channel="K_P",
+        cond_density="0.0009925418924114282 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_somatic",
+        ion_channel="K_T",
+        cond_density="0.009051981253674193 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_somatic",
+        ion_channel="Kv3_1",
+        cond_density="0.31215653649208114 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_somatic",
+        ion_channel="Im",
+        cond_density="0.0003679378262289559 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_somatic",
+        ion_channel="SK",
+        cond_density="0.1655502166633749 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_VIP_somatic",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_VIP_somatic",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
     # https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/ions.html
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -1044,7 +1217,8 @@ def postprocess_HL23VIP():
         cond_density="4.384846294634834e-05 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -1053,71 +1227,86 @@ def postprocess_HL23VIP():
         cond_density="0.0034472458995879864 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
 
     # axonal
     sgs = cell.get_segment_group("axon_group")
     sgid = sgs.id
     print(f"Adding channels to {sgid}")
     # Na
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="NaTg_axonal",
-                             ion_channel="NaTg_VIP_axonal",
-                             cond_density="0.20112200814143477 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/NaTg/NaTg.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Nap_axonal",
-                             ion_channel="Nap",
-                             cond_density="0.0006248906854665301 S_per_cm2",
-                             erev="50 mV",
-                             group_id=sgid,
-                             ion="na",
-                             ion_chan_def_file="channels/Nap.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="NaTg_axonal",
+        ion_channel="NaTg_VIP_axonal",
+        cond_density="0.20112200814143477 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/NaTg/NaTg.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Nap_axonal",
+        ion_channel="Nap",
+        cond_density="0.0006248906854665301 S_per_cm2",
+        erev="50 mV",
+        group_id=sgid,
+        ion="na",
+        ion_chan_def_file="channels/Nap.channel.nml",
+    )
 
     # K
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_P_axonal",
-                             ion_channel="K_P",
-                             cond_density="0.26489876414660096 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_P.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="K_T_axonal",
-                             ion_channel="K_T",
-                             cond_density="0.014364427062274185 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/K_T.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Kv3_1_axonal",
-                             ion_channel="Kv3_1",
-                             cond_density="0.0011201608191112877 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Kv3_1.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="Im_axonal",
-                             ion_channel="Im",
-                             cond_density="0.00013891465461042372 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/Im.channel.nml")
-    cell.add_channel_density(nml_cell_doc=celldoc,
-                             cd_id="SK_axonal",
-                             ion_channel="SK",
-                             cond_density="0.7027792087501376 S_per_cm2",
-                             erev="-85 mV",
-                             group_id=sgid,
-                             ion="k",
-                             ion_chan_def_file="channels/SK.channel.nml")
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_P_axonal",
+        ion_channel="K_P",
+        cond_density="0.26489876414660096 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_P.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="K_T_axonal",
+        ion_channel="K_T",
+        cond_density="0.014364427062274185 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/K_T.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Kv3_1_axonal",
+        ion_channel="Kv3_1",
+        cond_density="0.0011201608191112877 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Kv3_1.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Im_axonal",
+        ion_channel="Im",
+        cond_density="0.00013891465461042372 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/Im.channel.nml",
+    )
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="SK_axonal",
+        ion_channel="SK",
+        cond_density="0.7027792087501376 S_per_cm2",
+        erev="-85 mV",
+        group_id=sgid,
+        ion="k",
+        ion_chan_def_file="channels/SK.channel.nml",
+    )
     # Ca
     cell.add_channel_density_v(
         "ChannelDensityNernst",
@@ -1127,7 +1316,8 @@ def postprocess_HL23VIP():
         cond_density="2.819397237794038e-05 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_HVA.channel.nml")
+        ion_chan_def_file="channels/Ca_HVA.channel.nml",
+    )
     cell.add_channel_density_v(
         "ChannelDensityNernst",
         nml_cell_doc=celldoc,
@@ -1136,17 +1326,21 @@ def postprocess_HL23VIP():
         cond_density="0.010354001513952075 S_per_cm2",
         segment_groups=sgid,
         ion="ca",
-        ion_chan_def_file="channels/Ca_LVA.channel.nml")
+        ion_chan_def_file="channels/Ca_LVA.channel.nml",
+    )
     # external concentration is set to defaults that NEURON
     # starts with
     # internal concentration is set to minCai in mod file
-    cell.add_intracellular_property("Species", validate=False,
-                                    id="ca",
-                                    concentration_model="CaDynamics_E2_NML2_VIP_axonal",
-                                    ion="ca",
-                                    initial_concentration="1e-4 mM",
-                                    initial_ext_concentration="2.0E-6 mol_per_cm3",
-                                    segment_groups=sgid)
+    cell.add_intracellular_property(
+        "Species",
+        validate=False,
+        id="ca",
+        concentration_model="CaDynamics_E2_NML2_VIP_axonal",
+        ion="ca",
+        initial_concentration="1e-4 mM",
+        initial_ext_concentration="2.0E-6 mol_per_cm3",
+        segment_groups=sgid,
+    )
 
     # L1 validation
     cell.validate(recursive=True)
@@ -1175,8 +1369,8 @@ def analyse_HL23PYR(hyperpolarising: bool = True, depolarising: bool = True):
             plot_iv=True,
             plot_if=False,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
     if depolarising:
@@ -1193,8 +1387,8 @@ def analyse_HL23PYR(hyperpolarising: bool = True, depolarising: bool = True):
             post_zero_pulse=300,
             plot_iv=True,
             simulator="jNeuroML_NEURON",
-            analysis_delay=50.,
-            analysis_duration=200.
+            analysis_delay=50.0,
+            analysis_duration=200.0,
         )
 
 
@@ -1217,8 +1411,8 @@ def analyse_HL23PV(hyperpolarising: bool = True, depolarising: bool = True):
             plot_iv=True,
             plot_if=False,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
     if depolarising:
@@ -1233,8 +1427,8 @@ def analyse_HL23PV(hyperpolarising: bool = True, depolarising: bool = True):
             post_zero_pulse=300,
             plot_iv=True,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
 
@@ -1257,8 +1451,8 @@ def analyse_HL23SST(hyperpolarising: bool = True, depolarising: bool = True):
             plot_iv=True,
             plot_if=False,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
     if depolarising:
@@ -1274,8 +1468,8 @@ def analyse_HL23SST(hyperpolarising: bool = True, depolarising: bool = True):
             post_zero_pulse=300,
             plot_iv=True,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
 
@@ -1298,8 +1492,8 @@ def analyse_HL23VIP(hyperpolarising: bool = True, depolarising: bool = True):
             plot_iv=True,
             plot_if=False,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
     if depolarising:
@@ -1315,8 +1509,8 @@ def analyse_HL23VIP(hyperpolarising: bool = True, depolarising: bool = True):
             post_zero_pulse=300,
             plot_iv=True,
             simulator="jNeuroML_NEURON",
-            analysis_delay=300.,
-            analysis_duration=400.
+            analysis_delay=300.0,
+            analysis_duration=400.0,
         )
 
 
@@ -1330,68 +1524,126 @@ def simulate_test_network(cells: list = []):
     :returns: None
 
     """
-    net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument",
-                                                        id="HL23")
+    net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument", id="HL23")
 
-    network = net_doc.add("Network", id="HL23Net",
-                          type="networkWithTemperature", temperature="34 degC", validate=False)  # type: neuroml.Network
+    network = net_doc.add(
+        "Network",
+        id="HL23Net",
+        type="networkWithTemperature",
+        temperature="34 degC",
+        validate=False,
+    )  # type: neuroml.Network
 
     for cell in cells:
         # a document for the cell with input for OMV test
-        cell_net_doc = neuroml.NeuroMLDocument.component_factory("NeuroMLDocument", id=f"{cell}")
-        cell_network = cell_net_doc.add("Network", id=f"{cell}Net",
-                                        type="networkWithTemperature", temperature="34 degC", validate=False)  # type: neuroml.Network
+        cell_net_doc = neuroml.NeuroMLDocument.component_factory(
+            "NeuroMLDocument", id=f"{cell}"
+        )
+        cell_network = cell_net_doc.add(
+            "Network",
+            id=f"{cell}Net",
+            type="networkWithTemperature",
+            temperature="34 degC",
+            validate=False,
+        )  # type: neuroml.Network
         cell_net_doc.add("IncludeType", href=f"{cell}.cell.nml")
-        cell_pop = cell_network.add("Population", id=f"{cell}_pop",
-                                    type="populationList", component=f"{cell}",
-                                    validate=False)  # type: neuroml.Population
-        cell_pop.add("Property", tag="color", value=f"{random.random()} {random.random()} {random.random()}")
+        cell_pop = cell_network.add(
+            "Population",
+            id=f"{cell}_pop",
+            type="populationList",
+            component=f"{cell}",
+            validate=False,
+        )  # type: neuroml.Population
+        cell_pop.add(
+            "Property",
+            tag="color",
+            value=f"{random.random()} {random.random()} {random.random()}",
+        )
         cell_pop.add("Property", tag="region", value="L23")
         cell_pop.add(
-            "Instance", id="0",
+            "Instance",
+            id="0",
             location=cell_pop.component_factory(
-                "Location", x="0", y="0", z="0",
-            ))
+                "Location",
+                x="0",
+                y="0",
+                z="0",
+            ),
+        )
         # to match the test_*hoc NEURON files
-        cell_net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
-        cell_inputs = cell_network.add("InputList", id=f"stim_iclamp_{cell}",
-                                       populations=f"{cell}_pop", component=f"pg_{cell}",
-                                       validate=False)
-        cell_inputs.add("Input", id=0, target=f"../{cell}_pop/0",
-                        destination="synapses")
+        cell_net_doc.add(
+            "PulseGenerator",
+            id=f"pg_{cell}",
+            notes="Simple pulse generator",
+            delay="50ms",
+            duration="200ms",
+            amplitude="0.2nA",
+        )
+        cell_inputs = cell_network.add(
+            "InputList",
+            id=f"stim_iclamp_{cell}",
+            populations=f"{cell}_pop",
+            component=f"pg_{cell}",
+            validate=False,
+        )
+        cell_inputs.add(
+            "Input", id=0, target=f"../{cell}_pop/0", destination="synapses"
+        )
         cell_net_doc.validate(True)
         write_neuroml2_file(cell_net_doc, f"{cell}.net.nml")
-        cell_net_sim = LEMSSimulation(f"{cell}_sim", duration=300., dt=0.01,
-                                      target=cell_network.id)
+        cell_net_sim = LEMSSimulation(
+            f"{cell}_sim", duration=300.0, dt=0.01, target=cell_network.id
+        )
         cell_net_sim.include_neuroml2_file(f"{cell}.net.nml")
-        cell_net_sim.create_output_file(id=f"{cell}_net_output",
-                                        file_name=f"{cell}_net.dat")
-        cell_net_sim.add_column_to_output_file(output_file_id=f"{cell}_net_output",
-                                               column_id=f"{cell}_pop_0_v",
-                                               quantity=f"{cell}_pop/0/{cell}/0/v")
+        cell_net_sim.create_output_file(
+            id=f"{cell}_net_output", file_name=f"{cell}_net.dat"
+        )
+        cell_net_sim.add_column_to_output_file(
+            output_file_id=f"{cell}_net_output",
+            column_id=f"{cell}_pop_0_v",
+            quantity=f"{cell}_pop/0/{cell}/0/v",
+        )
         # Save LEMS simulation to file
         cell_sim_file = cell_net_sim.save_to_file()
 
         # Run the simulation using the NEURON simulator
-        run_lems_with_jneuroml_neuron(cell_sim_file, max_memory="8G", nogui=True,
-                                      plot=False, skip_run=False)
+        run_lems_with_jneuroml_neuron(
+            cell_sim_file, max_memory="8G", nogui=True, plot=False, skip_run=False
+        )
 
         # network with all 4 cells
         net_doc.add("IncludeType", href=f"{cell}.cell.nml")
-        pop = network.add("Population", id=f"{cell}_pop",
-                          type="populationList", component=f"{cell}",
-                          validate=False)  # type: neuroml.Population
-        pop.add("Property", tag="color", value=f"{random.random()} {random.random()} {random.random()}")
+        pop = network.add(
+            "Population",
+            id=f"{cell}_pop",
+            type="populationList",
+            component=f"{cell}",
+            validate=False,
+        )  # type: neuroml.Population
+        pop.add(
+            "Property",
+            tag="color",
+            value=f"{random.random()} {random.random()} {random.random()}",
+        )
         pop.add("Property", tag="region", value="L23")
         pop.add(
-            "Instance", id="0",
+            "Instance",
+            id="0",
             location=pop.component_factory(
                 "Location",
                 x=f"{random.randint(0, 200)}",
                 y=f"{random.randint(0, 200)}",
-                z=f"{random.randint(0, 200)}")
+                z=f"{random.randint(0, 200)}",
+            ),
         )
-        net_doc.add("PulseGenerator", id=f"pg_{cell}", notes="Simple pulse generator", delay="50ms", duration="200ms", amplitude="0.2nA")
+        net_doc.add(
+            "PulseGenerator",
+            id=f"pg_{cell}",
+            notes="Simple pulse generator",
+            delay="50ms",
+            duration="200ms",
+            amplitude="0.2nA",
+        )
         network.add("ExplicitInput", target="pop0[0]", input=f"pg_{cell}")
 
     net_doc.validate(True)
@@ -1401,14 +1653,12 @@ def simulate_test_network(cells: list = []):
 
 if __name__ == "__main__":
     cellnames = ["HL23PV", "HL23PYR", "HL23SST", "HL23VIP"]
-    
-    import sys 
-    if '-postprocall' in sys.argv:
+
+    if "-postprocall" in sys.argv:
         postprocess_HL23VIP()
         postprocess_HL23PV()
         postprocess_HL23PYR()
         postprocess_HL23SST()
-
 
     """
     postprocess_HL23VIP()
