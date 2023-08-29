@@ -1,7 +1,0 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.6"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 ../../LEMS/Schemas/LEMS/LEMS_v0.7.6.xsd"
-      description="Defines Components of Gfluct ComponentType">
-
-    <Include file="Gfluct.nml" />
-
