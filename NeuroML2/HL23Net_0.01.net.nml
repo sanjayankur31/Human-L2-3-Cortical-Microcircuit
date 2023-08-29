@@ -1,7 +1,4 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23Network">
-    <include href="HL23PV.cell.nml"/>
-    <include href="rotated_cells/HL23PV_852.cell.nml"/>
-    <include href="HL23PYR.cell.nml"/>
     <include href="rotated_cells/HL23PYR_0.cell.nml"/>
     <include href="rotated_cells/HL23PYR_397.cell.nml"/>
     <include href="rotated_cells/HL23PYR_794.cell.nml"/>
@@ -10,20 +7,14 @@
     <include href="rotated_cells/HL23PYR_379.cell.nml"/>
     <include href="rotated_cells/HL23PYR_776.cell.nml"/>
     <include href="rotated_cells/HL23PYR_394.cell.nml"/>
-    <include href="HL23SST.cell.nml"/>
     <include href="rotated_cells/HL23SST_804.cell.nml"/>
-    <include href="HL23VIP.cell.nml"/>
+    <include href="rotated_cells/HL23SST_816.cell.nml"/>
+    <include href="rotated_cells/HL23PV_852.cell.nml"/>
+    <include href="rotated_cells/HL23PV_864.cell.nml"/>
     <include href="rotated_cells/HL23VIP_924.cell.nml"/>
-    <pulseGenerator id="pulseGen_0" delay="200ms" duration="1000ms" amplitude="200 pA"/>
+    <include href="rotated_cells/HL23VIP_936.cell.nml"/>
     <network id="HL23Network" temperature="34.0 degC">
         <notes>L23 network at 0.01 scale</notes>
-        <population id="HL23PV_pop_852" component="HL23PV_852" type="populationList">
-            <property tag="color" value="0 0 1"/>
-            <property tag="region" value="L23"/>
-            <instance id="0">
-                <location x="-65.390056656730806" y="-116.993532553848922" z="-946.991073553129127"/>
-            </instance>
-        </population>
         <population id="HL23PYR_pop_0" component="HL23PYR_0" type="populationList">
             <property tag="color" value="1 0 0"/>
             <property tag="region" value="L23"/>
@@ -87,6 +78,27 @@
                 <location x="106.350954605553099" y="-214.951800779721538" z="-645.5753185087774"/>
             </instance>
         </population>
+        <population id="HL23SST_pop_816" component="HL23SST_816" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-206.462723262819111" y="-23.384348836400449" z="-675.156452413023658"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_852" component="HL23PV_852" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-65.390056656730806" y="-116.993532553848922" z="-946.991073553129127"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop_864" component="HL23PV_864" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="110.372916240357171" y="-23.733806935129497" z="-918.42937440240803"/>
+            </instance>
+        </population>
         <population id="HL23VIP_pop_924" component="HL23VIP_924" type="populationList">
             <property tag="color" value="0.5 0.5 0.5"/>
             <property tag="region" value="L23"/>
@@ -94,156 +106,654 @@
                 <location x="155.238762493285833" y="108.47285030975101" z="-620.439995080828112"/>
             </instance>
         </population>
-        <projection id="proj_852_776" presynapticPopulation="HL23PV_pop_852" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PV_HL23PYR_ProbUDFsyn">
-            <connectionWD id="0" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1417" postFractionAlong="0.88467065344297" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1177" postFractionAlong="0.124468879223415" weight="1." delay="0.5 ms"/>
-            <connectionWD id="3" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1289" postFractionAlong="0.157079487537199" weight="1." delay="0.5 ms"/>
-            <connectionWD id="4" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="528" postFractionAlong="0.958211491533872" weight="1." delay="0.5 ms"/>
-            <connectionWD id="5" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1." delay="0.5 ms"/>
-            <connectionWD id="6" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1." delay="0.5 ms"/>
-            <connectionWD id="7" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="499" postFractionAlong="0.01630281357372" weight="1." delay="0.5 ms"/>
-            <connectionWD id="8" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1." delay="0.5 ms"/>
-            <connectionWD id="9" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1." delay="0.5 ms"/>
-            <connectionWD id="10" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1." delay="0.5 ms"/>
-            <connectionWD id="11" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="209" postFractionAlong="0.950554234620995" weight="1." delay="0.5 ms"/>
-            <connectionWD id="12" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="864" postFractionAlong="0.385442492942158" weight="1." delay="0.5 ms"/>
-            <connectionWD id="13" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="371" postFractionAlong="0.892891064540717" weight="1." delay="0.5 ms"/>
-            <connectionWD id="14" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="985" postFractionAlong="0.085721380944096" weight="1." delay="0.5 ms"/>
-            <connectionWD id="15" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="409" postFractionAlong="0.642931808848832" weight="1." delay="0.5 ms"/>
-            <connectionWD id="16" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1192" postFractionAlong="0.432063919665885" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_776_852" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PV_pop_852" synapse="HL23PYR_HL23PV_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1757" postFractionAlong="0.203158424921183" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2321" postFractionAlong="0.078219871106718" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2459" postFractionAlong="0.011996588788679" weight="1." delay="0.5 ms"/>
-            <connectionWD id="3" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4282" postFractionAlong="0.578416058370985" weight="1." delay="0.5 ms"/>
-            <connectionWD id="4" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4069" postFractionAlong="0.037980675567437" weight="1." delay="0.5 ms"/>
-            <connectionWD id="5" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4439" postFractionAlong="0.690417728778928" weight="1." delay="0.5 ms"/>
-            <connectionWD id="6" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4298" postFractionAlong="0.867718445531282" weight="1." delay="0.5 ms"/>
-            <connectionWD id="7" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3961" postFractionAlong="0.536276572930858" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_394_0" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_0" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="2731" postFractionAlong="0.414971335505089" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="5780" postFractionAlong="0.362606596747227" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="610" postFractionAlong="0.086443253156169" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_776_397" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_397" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4897" postFractionAlong="0.967479297149906" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4143" postFractionAlong="0.12058294376454" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_394_794" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="3089" postFractionAlong="0.869568687302174" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="4593" postFractionAlong="0.220195018279041" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_776_794" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1818" postFractionAlong="0.364157237334001" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1491" postFractionAlong="0.625784509795597" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_379_388" presynapticPopulation="HL23PYR_pop_379" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4686" postFractionAlong="0.730400911073671" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4917" postFractionAlong="0.360073474675431" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1546" postFractionAlong="0.471756604935747" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_394_388" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1112" postFractionAlong="0.873049870035784" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2951" postFractionAlong="0.372423087182093" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_776_388" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4936" postFractionAlong="0.708084173706072" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1475" postFractionAlong="0.026093474200562" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_785_388" presynapticPopulation="HL23PYR_pop_785" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="5335" postFractionAlong="0.026384495027209" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1373" postFractionAlong="0.743130553308045" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="788" postFractionAlong="0.784828436648627" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_394_785" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="89" postFractionAlong="0.485446961353405" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2021" postFractionAlong="0.558844285601197" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_794_785" presynapticPopulation="HL23PYR_pop_794" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1986" postFractionAlong="0.42892790330802" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="3488" postFractionAlong="0.387062137667497" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1404" postFractionAlong="0.139575227460775" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_0_776" presynapticPopulation="HL23PYR_pop_0" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2411" postFractionAlong="0.571112018888472" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5353" postFractionAlong="0.817893217164214" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1928" postFractionAlong="0.081731899664106" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_394_776" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
-            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="4228" postFractionAlong="0.324535923594773" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2134" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5111" postFractionAlong="0.210693593811559" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_804_852" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PV_pop_852" synapse="HL23SST_HL23PV_ProbUDFsyn">
-            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3943" postFractionAlong="0.621795852458034" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2267" postFractionAlong="0.396584022732885" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4087" postFractionAlong="0.213743174859675" weight="1." delay="0.5 ms"/>
-            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="586" postFractionAlong="0.319617914773583" weight="1." delay="0.5 ms"/>
-            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3371" postFractionAlong="0.963974884874753" weight="1." delay="0.5 ms"/>
-            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="752" postFractionAlong="0.571893202463753" weight="1." delay="0.5 ms"/>
-            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="178" postFractionAlong="0.833334447768248" weight="1." delay="0.5 ms"/>
-            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3251" postFractionAlong="0.168960047342061" weight="1." delay="0.5 ms"/>
-            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1957" postFractionAlong="0.414917906623091" weight="1." delay="0.5 ms"/>
-            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="998" postFractionAlong="0.511187822103614" weight="1." delay="0.5 ms"/>
-            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2569" postFractionAlong="0.71641820378391" weight="1." delay="0.5 ms"/>
-            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1903" postFractionAlong="0.885695552012273" weight="1." delay="0.5 ms"/>
-            <connectionWD id="12" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="122" postFractionAlong="0.735658704094097" weight="1." delay="0.5 ms"/>
-        </projection>
-        <projection id="proj_804_379" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PYR_pop_379" synapse="HL23SST_HL23PYR_ProbUDFsyn">
-            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1." delay="0.5 ms"/>
-            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1." delay="0.5 ms"/>
-            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3262" postFractionAlong="0.828258913628426" weight="1." delay="0.5 ms"/>
-            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5392" postFractionAlong="0.019376376564879" weight="1." delay="0.5 ms"/>
-            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2573" postFractionAlong="0.986969018804606" weight="1." delay="0.5 ms"/>
-            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4278" postFractionAlong="0.524030914568965" weight="1." delay="0.5 ms"/>
-            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3941" postFractionAlong="0.078750941006535" weight="1." delay="0.5 ms"/>
-            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3526" postFractionAlong="0.492332036267276" weight="1." delay="0.5 ms"/>
-            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="1619" postFractionAlong="0.943327903275528" weight="1." delay="0.5 ms"/>
-            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5526" postFractionAlong="0.404249194424257" weight="1." delay="0.5 ms"/>
-            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4374" postFractionAlong="0.894732874546683" weight="1." delay="0.5 ms"/>
-            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3749" postFractionAlong="0.965697268983064" weight="1." delay="0.5 ms"/>
-        </projection>
-        <inputList id="i0" population="HL23PV_pop_852" component="pulseGen_0">
-            <input id="0" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses"/>
+        <population id="HL23VIP_pop_936" component="HL23VIP_936" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="118.727725395658069" y="115.43567054935167" z="-910.081605547348772"/>
+            </instance>
+        </population>
+        <inputList id="Gfluct_0" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_5">
+            <input id="0" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="1" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="2" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="3" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="4" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="5" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="6" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="7" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="8" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="9" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="10" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="11" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="12" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="13" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="14" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="15" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="16" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="17" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
         </inputList>
-        <inputList id="i1" population="HL23PYR_pop_0" component="pulseGen_0">
-            <input id="1" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses"/>
+        <inputList id="Gfluct_1" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_1">
+            <input id="18" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="19" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="20" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="21" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="22" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="23" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="24" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="25" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="26" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
         </inputList>
-        <inputList id="i2" population="HL23PYR_pop_397" component="pulseGen_0">
-            <input id="2" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses"/>
+        <inputList id="Gfluct_2" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_3">
+            <input id="27" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="28" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="29" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="30" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="31" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="32" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="33" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="34" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="35" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="36" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="37" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
         </inputList>
-        <inputList id="i3" population="HL23PYR_pop_794" component="pulseGen_0">
-            <input id="3" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses"/>
+        <inputList id="Gfluct_3" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_7">
+            <input id="38" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="39" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="40" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="41" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="42" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="43" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="44" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="45" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="46" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="47" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="48" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="49" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
         </inputList>
-        <inputList id="i4" population="HL23PYR_pop_388" component="pulseGen_0">
-            <input id="4" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses"/>
+        <inputList id="Gfluct_4" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_9">
+            <input id="50" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="51" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="52" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="53" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="54" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="55" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="56" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
         </inputList>
-        <inputList id="i5" population="HL23PYR_pop_785" component="pulseGen_0">
-            <input id="5" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses"/>
+        <inputList id="Gfluct_5" population="HL23PYR_pop_397" component="Gfluct_HL23PYR_0_5">
+            <input id="57" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="58" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="59" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="60" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="61" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="62" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="63" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="64" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="65" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="66" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="67" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="68" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="69" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="70" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="71" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="72" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="73" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="74" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
         </inputList>
-        <inputList id="i6" population="HL23PYR_pop_379" component="pulseGen_0">
-            <input id="6" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses"/>
+        <inputList id="Gfluct_6" population="HL23PYR_pop_397" component="Gfluct_HL23PYR_0_1">
+            <input id="75" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="76" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="77" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="78" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="79" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="80" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="81" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="82" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="83" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
         </inputList>
-        <inputList id="i7" population="HL23PYR_pop_776" component="pulseGen_0">
-            <input id="7" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses"/>
+        <inputList id="Gfluct_7" population="HL23PYR_pop_397" component="Gfluct_HL23PYR_0_3">
+            <input id="84" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="85" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="86" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="87" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="88" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="89" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="90" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="91" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="92" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="93" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="94" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
         </inputList>
-        <inputList id="i8" population="HL23PYR_pop_394" component="pulseGen_0">
-            <input id="8" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses"/>
+        <inputList id="Gfluct_8" population="HL23PYR_pop_397" component="Gfluct_HL23PYR_0_7">
+            <input id="95" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="96" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="97" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="98" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="99" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="100" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="101" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="102" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="103" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="104" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="105" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="106" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
         </inputList>
-        <inputList id="i9" population="HL23SST_pop_804" component="pulseGen_0">
-            <input id="9" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses"/>
+        <inputList id="Gfluct_9" population="HL23PYR_pop_397" component="Gfluct_HL23PYR_0_9">
+            <input id="107" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="108" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="109" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="110" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="111" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="112" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="113" target="../HL23PYR_pop_397/0/HL23PYR_397" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
         </inputList>
-        <inputList id="i10" population="HL23VIP_pop_924" component="pulseGen_0">
-            <input id="10" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses"/>
+        <inputList id="Gfluct_10" population="HL23PYR_pop_794" component="Gfluct_HL23PYR_0_5">
+            <input id="114" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="115" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="116" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="117" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="118" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="119" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="120" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="121" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="122" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="123" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="124" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="125" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="126" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="127" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="128" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="129" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="130" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="131" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_11" population="HL23PYR_pop_794" component="Gfluct_HL23PYR_0_1">
+            <input id="132" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="133" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="134" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="135" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="136" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="137" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="138" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="139" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="140" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_12" population="HL23PYR_pop_794" component="Gfluct_HL23PYR_0_3">
+            <input id="141" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="142" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="143" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="144" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="145" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="146" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="147" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="148" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="149" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="150" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="151" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_13" population="HL23PYR_pop_794" component="Gfluct_HL23PYR_0_7">
+            <input id="152" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="153" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="154" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="155" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="156" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="157" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="158" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="159" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="160" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="161" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="162" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="163" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_14" population="HL23PYR_pop_794" component="Gfluct_HL23PYR_0_9">
+            <input id="164" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="165" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="166" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="167" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="168" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="169" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="170" target="../HL23PYR_pop_794/0/HL23PYR_794" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_15" population="HL23PYR_pop_388" component="Gfluct_HL23PYR_0_5">
+            <input id="171" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="172" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="173" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="174" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="175" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="176" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="177" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="178" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="179" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="180" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="181" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="182" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="183" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="184" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="185" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="186" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="187" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="188" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_16" population="HL23PYR_pop_388" component="Gfluct_HL23PYR_0_1">
+            <input id="189" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="190" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="191" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="192" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="193" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="194" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="195" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="196" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="197" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_17" population="HL23PYR_pop_388" component="Gfluct_HL23PYR_0_3">
+            <input id="198" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="199" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="200" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="201" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="202" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="203" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="204" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="205" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="206" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="207" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="208" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_18" population="HL23PYR_pop_388" component="Gfluct_HL23PYR_0_7">
+            <input id="209" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="210" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="211" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="212" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="213" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="214" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="215" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="216" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="217" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="218" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="219" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="220" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_19" population="HL23PYR_pop_388" component="Gfluct_HL23PYR_0_9">
+            <input id="221" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="222" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="223" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="224" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="225" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="226" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="227" target="../HL23PYR_pop_388/0/HL23PYR_388" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_20" population="HL23PYR_pop_785" component="Gfluct_HL23PYR_0_5">
+            <input id="228" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="229" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="230" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="231" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="232" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="233" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="234" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="235" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="236" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="237" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="238" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="239" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="240" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="241" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="242" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="243" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="244" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="245" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_21" population="HL23PYR_pop_785" component="Gfluct_HL23PYR_0_1">
+            <input id="246" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="247" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="248" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="249" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="250" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="251" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="252" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="253" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="254" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_22" population="HL23PYR_pop_785" component="Gfluct_HL23PYR_0_3">
+            <input id="255" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="256" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="257" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="258" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="259" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="260" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="261" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="262" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="263" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="264" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="265" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_23" population="HL23PYR_pop_785" component="Gfluct_HL23PYR_0_7">
+            <input id="266" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="267" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="268" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="269" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="270" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="271" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="272" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="273" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="274" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="275" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="276" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="277" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_24" population="HL23PYR_pop_785" component="Gfluct_HL23PYR_0_9">
+            <input id="278" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="279" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="280" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="281" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="282" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="283" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="284" target="../HL23PYR_pop_785/0/HL23PYR_785" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_25" population="HL23PYR_pop_379" component="Gfluct_HL23PYR_0_5">
+            <input id="285" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="286" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="287" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="288" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="289" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="290" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="291" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="292" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="293" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="294" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="295" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="296" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="297" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="298" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="299" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="300" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="301" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="302" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_26" population="HL23PYR_pop_379" component="Gfluct_HL23PYR_0_1">
+            <input id="303" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="304" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="305" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="306" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="307" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="308" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="309" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="310" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="311" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_27" population="HL23PYR_pop_379" component="Gfluct_HL23PYR_0_3">
+            <input id="312" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="313" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="314" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="315" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="316" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="317" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="318" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="319" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="320" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="321" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="322" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_28" population="HL23PYR_pop_379" component="Gfluct_HL23PYR_0_7">
+            <input id="323" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="324" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="325" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="326" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="327" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="328" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="329" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="330" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="331" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="332" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="333" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="334" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_29" population="HL23PYR_pop_379" component="Gfluct_HL23PYR_0_9">
+            <input id="335" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="336" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="337" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="338" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="339" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="340" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="341" target="../HL23PYR_pop_379/0/HL23PYR_379" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_30" population="HL23PYR_pop_776" component="Gfluct_HL23PYR_0_5">
+            <input id="342" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="343" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="344" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="345" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="346" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="347" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="348" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="349" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="350" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="351" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="352" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="353" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="354" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="355" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="356" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="357" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="358" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="359" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_31" population="HL23PYR_pop_776" component="Gfluct_HL23PYR_0_1">
+            <input id="360" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="361" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="362" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="363" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="364" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="365" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="366" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="367" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="368" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_32" population="HL23PYR_pop_776" component="Gfluct_HL23PYR_0_3">
+            <input id="369" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="370" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="371" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="372" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="373" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="374" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="375" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="376" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="377" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="378" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="379" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_33" population="HL23PYR_pop_776" component="Gfluct_HL23PYR_0_7">
+            <input id="380" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="381" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="382" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="383" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="384" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="385" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="386" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="387" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="388" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="389" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="390" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="391" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_34" population="HL23PYR_pop_776" component="Gfluct_HL23PYR_0_9">
+            <input id="392" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="393" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="394" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="395" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="396" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="397" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="398" target="../HL23PYR_pop_776/0/HL23PYR_776" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_35" population="HL23PYR_pop_394" component="Gfluct_HL23PYR_0_5">
+            <input id="399" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
+            <input id="400" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>
+            <input id="401" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1437" fractionAlong="0.808836829690587"/>
+            <input id="402" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1063" fractionAlong="0.784465734937017"/>
+            <input id="403" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="314" fractionAlong="0.634047997777794"/>
+            <input id="404" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="553" fractionAlong="0.516354441382446"/>
+            <input id="405" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="73" fractionAlong="0.374374030863017"/>
+            <input id="406" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="788" fractionAlong="0.321925237456228"/>
+            <input id="407" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1544" fractionAlong="0.294638167078481"/>
+            <input id="408" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="268" fractionAlong="0.268763536158021"/>
+            <input id="409" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="169" fractionAlong="0.213079631549824"/>
+            <input id="410" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="671" fractionAlong="0.091464666561529"/>
+            <input id="411" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="392" fractionAlong="0.043476200641377"/>
+            <input id="412" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1315" fractionAlong="0.005964157573522"/>
+            <input id="413" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2992" fractionAlong="0.973487332626834"/>
+            <input id="414" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3832" fractionAlong="0.807762871508964"/>
+            <input id="415" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2603" fractionAlong="0.174789800038948"/>
+            <input id="416" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2423" fractionAlong="0.114442320980663"/>
+        </inputList>
+        <inputList id="Gfluct_36" population="HL23PYR_pop_394" component="Gfluct_HL23PYR_0_1">
+            <input id="417" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5626" fractionAlong="0.9431395536055"/>
+            <input id="418" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2132" fractionAlong="0.953249395378716"/>
+            <input id="419" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1756" fractionAlong="0.979343217060713"/>
+            <input id="420" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2031" fractionAlong="0.813140868377532"/>
+            <input id="421" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1653" fractionAlong="0.441683581989116"/>
+            <input id="422" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5221" fractionAlong="0.23013309788074"/>
+            <input id="423" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5505" fractionAlong="0.222269801972381"/>
+            <input id="424" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5319" fractionAlong="0.14323975486569"/>
+            <input id="425" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1897" fractionAlong="0.025962674432078"/>
+        </inputList>
+        <inputList id="Gfluct_37" population="HL23PYR_pop_394" component="Gfluct_HL23PYR_0_3">
+            <input id="426" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2316" fractionAlong="0.982179433270446"/>
+            <input id="427" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4965" fractionAlong="0.919038444753989"/>
+            <input id="428" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4829" fractionAlong="0.823677567631594"/>
+            <input id="429" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5425" fractionAlong="0.955720626520597"/>
+            <input id="430" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2003" fractionAlong="0.68701601255894"/>
+            <input id="431" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5187" fractionAlong="0.65362372440673"/>
+            <input id="432" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="1861" fractionAlong="0.624576663969798"/>
+            <input id="433" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3520" fractionAlong="0.530457396591156"/>
+            <input id="434" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3725" fractionAlong="0.521435828968104"/>
+            <input id="435" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3614" fractionAlong="0.107528471220275"/>
+            <input id="436" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="5611" fractionAlong="0.107807819947692"/>
+        </inputList>
+        <inputList id="Gfluct_38" population="HL23PYR_pop_394" component="Gfluct_HL23PYR_0_7">
+            <input id="437" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3938" fractionAlong="0.516208173623192"/>
+            <input id="438" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4371" fractionAlong="0.990298519967635"/>
+            <input id="439" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3392" fractionAlong="0.82083765826732"/>
+            <input id="440" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2529" fractionAlong="0.739144760415302"/>
+            <input id="441" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4339" fractionAlong="0.592210691093571"/>
+            <input id="442" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2841" fractionAlong="0.537127878062249"/>
+            <input id="443" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2709" fractionAlong="0.447978776682937"/>
+            <input id="444" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4660" fractionAlong="0.349671752523858"/>
+            <input id="445" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3949" fractionAlong="0.308060844006758"/>
+            <input id="446" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3101" fractionAlong="0.277465815384309"/>
+            <input id="447" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4443" fractionAlong="0.212992891334639"/>
+            <input id="448" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3235" fractionAlong="0.025628935332012"/>
+        </inputList>
+        <inputList id="Gfluct_39" population="HL23PYR_pop_394" component="Gfluct_HL23PYR_0_9">
+            <input id="449" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2813" fractionAlong="0.971705983774493"/>
+            <input id="450" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4551" fractionAlong="0.824427134963368"/>
+            <input id="451" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4182" fractionAlong="0.651386422975677"/>
+            <input id="452" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="2942" fractionAlong="0.468481928568966"/>
+            <input id="453" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="4054" fractionAlong="0.457648487948218"/>
+            <input id="454" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3344" fractionAlong="0.183828619915136"/>
+            <input id="455" target="../HL23PYR_pop_394/0/HL23PYR_394" destination="synapses" segmentId="3213" fractionAlong="0.062644350060458"/>
+        </inputList>
+        <inputList id="Gfluct_40" population="HL23SST_pop_804" component="Gfluct_HL23SST_0_5">
+            <input id="456" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2955" fractionAlong="0.992363905920124"/>
+            <input id="457" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="3013" fractionAlong="0.926913586159216"/>
+            <input id="458" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="200" fractionAlong="0.477760761568788"/>
+            <input id="459" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="954" fractionAlong="0.800034367786851"/>
+            <input id="460" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="396" fractionAlong="0.751424430932258"/>
+            <input id="461" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="1658" fractionAlong="0.730337042429099"/>
+            <input id="462" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2551" fractionAlong="0.686547167534837"/>
+            <input id="463" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="1797" fractionAlong="0.593346996371349"/>
+            <input id="464" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2229" fractionAlong="0.544579131301869"/>
+            <input id="465" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="709" fractionAlong="0.53709868097915"/>
+            <input id="466" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2677" fractionAlong="0.478994067219149"/>
+            <input id="467" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2362" fractionAlong="0.365126991744841"/>
+            <input id="468" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="112" fractionAlong="0.322823048306232"/>
+            <input id="469" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2783" fractionAlong="0.25604664393151"/>
+            <input id="470" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="1475" fractionAlong="0.251275895553744"/>
+            <input id="471" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="3254" fractionAlong="0.191809449921036"/>
+            <input id="472" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="1165" fractionAlong="0.182295333193187"/>
+            <input id="473" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="2034" fractionAlong="0.168138308642186"/>
+            <input id="474" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="534" fractionAlong="0.16169738871198"/>
+            <input id="475" target="../HL23SST_pop_804/0/HL23SST_804" destination="synapses" segmentId="1280" fractionAlong="0.132341571612187"/>
+        </inputList>
+        <inputList id="Gfluct_41" population="HL23SST_pop_816" component="Gfluct_HL23SST_0_5">
+            <input id="476" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2955" fractionAlong="0.992363905920124"/>
+            <input id="477" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="3013" fractionAlong="0.926913586159216"/>
+            <input id="478" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="200" fractionAlong="0.477760761568788"/>
+            <input id="479" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="954" fractionAlong="0.800034367786851"/>
+            <input id="480" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="396" fractionAlong="0.751424430932258"/>
+            <input id="481" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="1658" fractionAlong="0.730337042429099"/>
+            <input id="482" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2551" fractionAlong="0.686547167534837"/>
+            <input id="483" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="1797" fractionAlong="0.593346996371349"/>
+            <input id="484" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2229" fractionAlong="0.544579131301869"/>
+            <input id="485" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="709" fractionAlong="0.53709868097915"/>
+            <input id="486" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2677" fractionAlong="0.478994067219149"/>
+            <input id="487" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2362" fractionAlong="0.365126991744841"/>
+            <input id="488" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="112" fractionAlong="0.322823048306232"/>
+            <input id="489" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2783" fractionAlong="0.25604664393151"/>
+            <input id="490" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="1475" fractionAlong="0.251275895553744"/>
+            <input id="491" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="3254" fractionAlong="0.191809449921036"/>
+            <input id="492" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="1165" fractionAlong="0.182295333193187"/>
+            <input id="493" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="2034" fractionAlong="0.168138308642186"/>
+            <input id="494" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="534" fractionAlong="0.16169738871198"/>
+            <input id="495" target="../HL23SST_pop_816/0/HL23SST_816" destination="synapses" segmentId="1280" fractionAlong="0.132341571612187"/>
+        </inputList>
+        <inputList id="Gfluct_42" population="HL23PV_pop_852" component="Gfluct_HL23PV_0_5">
+            <input id="496" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="1836" fractionAlong="0.991164515108885"/>
+            <input id="497" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="3272" fractionAlong="0.937324870527937"/>
+            <input id="498" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="1310" fractionAlong="0.935464618350524"/>
+            <input id="499" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="4470" fractionAlong="0.92191322191434"/>
+            <input id="500" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="4284" fractionAlong="0.778613547869961"/>
+            <input id="501" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="3564" fractionAlong="0.791969692625149"/>
+            <input id="502" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="2287" fractionAlong="0.663843633063666"/>
+            <input id="503" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="2090" fractionAlong="0.574387557403562"/>
+            <input id="504" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="2881" fractionAlong="0.527336881008324"/>
+            <input id="505" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="208" fractionAlong="0.355992095996448"/>
+            <input id="506" target="../HL23PV_pop_852/0/HL23PV_852" destination="synapses" segmentId="4015" fractionAlong="0.114189608010542"/>
+        </inputList>
+        <inputList id="Gfluct_43" population="HL23PV_pop_864" component="Gfluct_HL23PV_0_5">
+            <input id="507" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="1836" fractionAlong="0.991164515108885"/>
+            <input id="508" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="3272" fractionAlong="0.937324870527937"/>
+            <input id="509" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="1310" fractionAlong="0.935464618350524"/>
+            <input id="510" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="4470" fractionAlong="0.92191322191434"/>
+            <input id="511" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="4284" fractionAlong="0.778613547869961"/>
+            <input id="512" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="3564" fractionAlong="0.791969692625149"/>
+            <input id="513" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="2287" fractionAlong="0.663843633063666"/>
+            <input id="514" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="2090" fractionAlong="0.574387557403562"/>
+            <input id="515" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="2881" fractionAlong="0.527336881008324"/>
+            <input id="516" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="208" fractionAlong="0.355992095996448"/>
+            <input id="517" target="../HL23PV_pop_864/0/HL23PV_864" destination="synapses" segmentId="4015" fractionAlong="0.114189608010542"/>
+        </inputList>
+        <inputList id="Gfluct_44" population="HL23VIP_pop_924" component="Gfluct_HL23VIP_0_5">
+            <input id="518" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="1218" fractionAlong="0.98143834656655"/>
+            <input id="519" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2340" fractionAlong="0.865477716974497"/>
+            <input id="520" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="663" fractionAlong="0.846527930765908"/>
+            <input id="521" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="783" fractionAlong="0.804773325722387"/>
+            <input id="522" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2935" fractionAlong="0.757429323880243"/>
+            <input id="523" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="1453" fractionAlong="0.668266551766382"/>
+            <input id="524" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="293" fractionAlong="0.63435074927099"/>
+            <input id="525" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="1072" fractionAlong="0.504040639201083"/>
+            <input id="526" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2215" fractionAlong="0.506939239130194"/>
+            <input id="527" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="1740" fractionAlong="0.459781367804972"/>
+            <input id="528" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="197" fractionAlong="0.298140689265953"/>
+            <input id="529" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2888" fractionAlong="0.13373816876733"/>
+            <input id="530" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2522" fractionAlong="0.102155021175572"/>
+            <input id="531" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="1922" fractionAlong="0.095174387799151"/>
+            <input id="532" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="2101" fractionAlong="0.076592683539646"/>
+            <input id="533" target="../HL23VIP_pop_924/0/HL23VIP_924" destination="synapses" segmentId="972" fractionAlong="0.017422574552406"/>
+        </inputList>
+        <inputList id="Gfluct_45" population="HL23VIP_pop_936" component="Gfluct_HL23VIP_0_5">
+            <input id="534" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="1218" fractionAlong="0.98143834656655"/>
+            <input id="535" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2340" fractionAlong="0.865477716974497"/>
+            <input id="536" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="663" fractionAlong="0.846527930765908"/>
+            <input id="537" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="783" fractionAlong="0.804773325722387"/>
+            <input id="538" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2935" fractionAlong="0.757429323880243"/>
+            <input id="539" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="1453" fractionAlong="0.668266551766382"/>
+            <input id="540" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="293" fractionAlong="0.63435074927099"/>
+            <input id="541" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="1072" fractionAlong="0.504040639201083"/>
+            <input id="542" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2215" fractionAlong="0.506939239130194"/>
+            <input id="543" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="1740" fractionAlong="0.459781367804972"/>
+            <input id="544" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="197" fractionAlong="0.298140689265953"/>
+            <input id="545" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2888" fractionAlong="0.13373816876733"/>
+            <input id="546" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2522" fractionAlong="0.102155021175572"/>
+            <input id="547" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="1922" fractionAlong="0.095174387799151"/>
+            <input id="548" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="2101" fractionAlong="0.076592683539646"/>
+            <input id="549" target="../HL23VIP_pop_936/0/HL23VIP_936" destination="synapses" segmentId="972" fractionAlong="0.017422574552406"/>
         </inputList>
     </network>
 </neuroml>

@@ -3,15 +3,24 @@
   <Include file="CaDynamics_E2_NML2.nml"/>
   <Include file="synapses/ProbAMPANMDA.synapse.nml"/>
   <Include file="synapses/ProbUDF.synapse.nml"/>
-  <Include file="channels/Ih.channel.nml"/>
-  <Include file="channels/K_T.channel.nml"/>
-  <Include file="channels/K_P.channel.nml"/>
-  <Include file="channels/Nap.channel.nml"/>
-  <Include file="channels/Ca_LVA.channel.nml"/>
-  <Include file="channels/Kv3_1.channel.nml"/>
-  <Include file="channels/Im.channel.nml"/>
-  <Include file="channels/SK.channel.nml"/>
   <Include file="channels/Ca_HVA.channel.nml"/>
+  <Include file="channels/Ca_LVA.channel.nml"/>
+  <Include file="channels/Ih.channel.nml"/>
+  <Include file="channels/Im.channel.nml"/>
+  <Include file="channels/K_P.channel.nml"/>
+  <Include file="channels/K_T.channel.nml"/>
+  <Include file="channels/Kv3_1.channel.nml"/>
+  <Include file="channels/Nap.channel.nml"/>
+  <Include file="channels/SK.channel.nml"/>
   <Include file="channels/pas.channel.nml"/>
   <Include file="channels/NaTg/NaTg.channel.nml"/>
+  <Include file="synapses/Gfluct.nml"/>
+  <Component id="Gfluct_HL23PYR_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="46.164195579603586 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="46.164195579603586 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23SST_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="49.461638121003844 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="49.461638121003844 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PV_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="461.6419557960359 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="461.6419557960359 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23VIP_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="108.81560386620846 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="108.81560386620846 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_1" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="30.944785706118136 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="30.944785706118136 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_3" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="37.79604661212809 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="37.79604661212809 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_7" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="56.385075809173344 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="56.385075809173344 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_9" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="68.86888711239459 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="68.86888711239459 pS" std_i="0pS"/>
 </Lems>

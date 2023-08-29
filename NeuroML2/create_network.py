@@ -7,10 +7,12 @@ File: create_network.py
 
 Copyright 2023 Ankur Sinha
 """
+import math
 import copy
 import logging
 import pathlib
 import sys
+import typing
 
 import h5py
 import lems.api as lems
@@ -102,6 +104,8 @@ class HL23Net(object):
         self.network_id = "HL23Network"
         self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
         self.lems_components_file_name = "lems_components.xml"
+        self.sim_length = "1000ms"
+        self.dt = "0.01ms"
 
     def create_network(self):
         # set the scale of the network
@@ -166,7 +170,7 @@ class HL23Net(object):
 
         # keep track of cell gids for our connections later, required for scaled down
         # versions when not all cells are included
-        self.nml_cell = {}
+        self.nml_cell = {}  # type: typing.Dict[str, neuroml.Cell]
         self.cell_list = []
         self.cell_list_by_type = {}
         for ctype in self.cell_types:
@@ -465,8 +469,115 @@ class HL23Net(object):
 
     def add_background_input(self):
         """Add background input to cells."""
-        # for each cell, plase a OU process input half way up the dendritic
-        # arbor of each cell
+        # Component Type definition
+        self.lems_components.add(lems.Include("synapses/Gfluct.nml"))
+
+        # base excitatory conductances (from paper)
+        cell_type_ge0 = {
+            "HL23PYR": 28,
+            "HL23PV": 280,
+            "HL23SST": 30,
+            "HL23VIP": 66,
+        }
+        # store input locations per cell type and create input components for
+        # each cell type also, since all cells are indentical
+        # values: { 'rel distance' : [(seg id, frac along)] }
+        cell_type_input_locations = {}  # type: typing.Dict[str, typing.Dict[float, typing.Tuple[int, float]]]
+        for cell_type, cell in self.nml_cell.items():
+            cell_type_input_locations[cell_type] = {}
+            extremeties = cell.get_extremeties()
+            try:
+                basal_segs = cell.get_all_segments_in_group("basal_dendrite_group")
+            except Exception:
+                # PV cell doesn't have basal, only a dendrite group
+                basal_segs = cell.get_all_segments_in_group("dendrite_group")
+
+            # input points on basal dendrites
+            longest_basal_branch_length = 0
+            for segid, distance in extremeties.items():
+                if distance > longest_basal_branch_length and segid in basal_segs:
+                    longest_basal_branch_length = distance
+
+            half_way_basal = longest_basal_branch_length / 2
+            segs_basal = cell.get_segments_at_distance(half_way_basal)
+
+            # create input component for 0.5
+            g_e0 = cell_type_ge0[cell_type] * math.exp(0.5)
+            gfluct_component = lems.Component(id_=f"Gfluct_{cell_type}_0_5",
+                                              type_="Gfluct", start="0ms",
+                                              stop=self.sim_length, dt=self.dt,
+                                              E_e="0mV",
+                                              E_i="-80mV", g_e0=f"{g_e0} pS", g_i0="0pS",
+                                              tau_e="65ms", tau_i="20ms",
+                                              std_e=f"{g_e0} pS", std_i="0pS")
+            self.lems_components.add(gfluct_component)
+
+            # get segments to place input at
+            cell_type_input_locations[cell_type][0.5] = []
+            for seg, frac_along in segs_basal.items():
+                if seg in basal_segs:
+                    cell_type_input_locations[cell_type][0.5].append((seg, frac_along))
+
+        # additional for pyr apical cells
+        pyr_cell = self.nml_cell["HL23PYR"]
+        extremeties = pyr_cell.get_extremeties()
+        longest_apical_branch_length = 0
+        pyr_apical_segs = pyr_cell.get_all_segments_in_group("apical_dendrite_group")
+        for segid, distance in extremeties.items():
+            if distance > longest_apical_branch_length and segid in pyr_apical_segs:
+                longest_apical_branch_length = distance
+
+        apical_input_distances = [0.1, 0.3, 0.5, 0.7, 0.9]
+        for d in apical_input_distances:
+            # create the input component
+            g_e0 = 28 * math.exp(d)
+            # create input component for use at each distance point
+            gfluct_component = lems.Component(id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
+                                              type_="Gfluct", start="0ms",
+                                              stop=self.sim_length, dt=self.dt,
+                                              E_e="0mV",
+                                              E_i="-80mV", g_e0=f"{g_e0} pS", g_i0="0pS",
+                                              tau_e="65ms", tau_i="20ms",
+                                              std_e=f"{g_e0} pS", std_i="0pS")
+            self.lems_components.add(gfluct_component)
+
+            # get segments to place at
+            segs_apical = pyr_cell.get_segments_at_distance(d * longest_apical_branch_length)
+            for seg, frac_along in segs_apical.items():
+                if seg in pyr_apical_segs:
+                    try:
+                        cell_type_input_locations["HL23PYR"][d].append((seg, frac_along))
+                    except KeyError:
+                        cell_type_input_locations["HL23PYR"][d] = []
+                        cell_type_input_locations["HL23PYR"][d].append((seg, frac_along))
+
+        # create a new input list for each population, and each location
+        # because input list takes a component as an argument, and a different
+        # component is required for each location
+        input_list_ctr = 0
+        input_ctr = 0
+        for pop in self.network.populations:
+            # cell name
+            cell_type = pop.component.split("_")[0]
+            # temporarily skip cells I haven't sorted out yet
+            try:
+                input_segs = cell_type_input_locations[cell_type]
+            except KeyError:
+                continue
+
+            for rel_dist, seginfos in input_segs.items():
+                # one input list per population per component
+                inputlist = self.network.add("InputList", id=f"Gfluct_{input_list_ctr}",
+                                             component=f"Gfluct_{cell_type}_{str(rel_dist).replace('.', '_')}",
+                                             populations=pop.id,
+                                             validate=False)
+                input_list_ctr += 1
+                for (seg, frac_along) in seginfos:
+                    inputlist.add("Input", id=f"{input_ctr}",
+                                  target=f"../{pop.id}/0/{pop.component}",
+                                  destination="synapses", segment_id=seg,
+                                  fraction_along=frac_along)
+                    input_ctr += 1
 
     # TODO: incomplete, to be done after bg input implementation
     def add_stimulus(self):
@@ -691,10 +802,10 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
+        biophysics=True,
         connections=False,
-        background_input=False,
+        background_input=True,
         stimulus=False,
-        biophysics=False,
     )
     model.create_network()
     # model.visualize_network()
