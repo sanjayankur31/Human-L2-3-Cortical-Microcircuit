@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="TonicPavlov2009">
 
+
+    <ionChannelHH id="something" conductance="9.38S" species="nonspecific">
+        <gateHHRates id="h" instances="1">
+            <forwardRate type="HHExpLinearRate" rate="20per_ms" midpoint="10mV" scale="-12.5mV"/>
+            <reverseRate type="HHExpLinearRate" rate="50per_ms" midpoint="-20mV" scale="10mV"/>
+        </gateHHRates>
+    </ionChannelHH>
+
+    <!--
     <ionChannelKS id="TonicGABAPavlov2009_normal" conductance="9.38S" species="nonspecific">
         <gateKS id="k" instances="1">
             <closedState id="c" />
             <openState id="o" />
-            <forwardTransition id="alpha" from="c" to="o">
+            <KSTransition id="alpha" from="c" to="o">
                 <rate type="GABAPavlov2009_fwd_rate" />
-            </forwardTransition>
-            <reverseTransition id="beta" from="o" to="c">
+            </KSTransition>
+            <KSTransition id="beta" from="o" to="c">
                 <rate type="GABAPavlov2009_bwd_rate" />
-            </reverseTransition>
+            </KSTransition>
         </gateKS>
     </ionChannelKS>
 
-    <!-- "b" -->
     <ComponentType name="GABAPavlov2009_fwd_rate" extends="baseVoltageDepRate" >
 
         <Constant name="VOLT_SCALE" dimension="voltage" value="1mV" />
@@ -31,7 +39,6 @@
             </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
-    <!-- "a" -->
     <ComponentType name="GABAPavlov2009_bwd_rate" extends="baseVoltageDepRate" >
 
         <Constant name="VOLT_SCALE" dimension="voltage" value="1mV" />
@@ -45,4 +52,5 @@
             </ConditionalDerivedVariable>
         </Dynamics>
     </ComponentType>
+        -->
 </neuroml>
