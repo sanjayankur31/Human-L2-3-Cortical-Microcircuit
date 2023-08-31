@@ -3,6 +3,7 @@
   <Include file="CaDynamics_E2_NML2.nml"/>
   <Include file="synapses/ProbAMPANMDA.synapse.nml"/>
   <Include file="synapses/ProbUDF.synapse.nml"/>
+  <Include file="channels/Tonic.nml"/>
   <Include file="channels/Ca_HVA.channel.nml"/>
   <Include file="channels/Ca_LVA.channel.nml"/>
   <Include file="channels/Ih.channel.nml"/>
@@ -15,6 +16,22 @@
   <Include file="channels/pas.channel.nml"/>
   <Include file="channels/NaTg/NaTg.channel.nml"/>
   <Include file="synapses/Gfluct.nml"/>
+  <Component id="HL23PYR_HL23PYR_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.46" Dep="670 ms" Fac="17 ms" gbase="0.0002482 uS" u0="0" erev="0 mV" mg="1 mM" weight_factor_NMDA="1"/>
+  <Component id="HL23PYR_HL23SST_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.09" Dep="140 ms" Fac="670 ms" gbase="0.00038 uS" u0="0" erev="0 mV" mg="1 mM" weight_factor_NMDA="1"/>
+  <Component id="HL23PYR_HL23PV_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.88" Dep="510 ms" Fac="180 ms" gbase="0.000337 uS" u0="0" erev="0 mV" mg="1 mM" weight_factor_NMDA="1"/>
+  <Component id="HL23PYR_HL23VIP_ProbAMPANMDA" type="ProbAMPANMDA" tau_r_AMPA="0.3 ms" tau_d_AMPA="3 ms" tau_r_NMDA="2 ms" tau_d_NMDA="65 ms" Use="0.5" Dep="670 ms" Fac="17 ms" gbase="0.00031 uS" u0="0" erev="0 mV" mg="1 mM" weight_factor_NMDA="1"/>
+  <Component id="HL23SST_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.3" Dep="1300 ms" Fac="2 ms" gbase="0.00124 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="710 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23SST_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.31" Dep="890 ms" Fac="25 ms" gbase="0.00046 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.08" Dep="710 ms" Fac="23 ms" gbase="0.00291 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="700 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="710 ms" Fac="21 ms" gbase="0.00033 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23PV_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.26" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23PYR_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.23" Dep="300 ms" Fac="160 ms" gbase="0.0 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.27" Dep="760 ms" Fac="22 ms" gbase="0.00036 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
+  <Component id="HL23VIP_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.26" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
   <Component id="Gfluct_HL23PYR_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="46.164195579603586 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="46.164195579603586 pS" std_i="0pS"/>
   <Component id="Gfluct_HL23SST_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="49.461638121003844 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="49.461638121003844 pS" std_i="0pS"/>
   <Component id="Gfluct_HL23PV_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="461.6419557960359 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="461.6419557960359 pS" std_i="0pS"/>

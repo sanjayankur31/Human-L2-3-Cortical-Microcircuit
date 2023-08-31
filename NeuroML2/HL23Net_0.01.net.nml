@@ -113,6 +113,222 @@
                 <location x="118.727725395658069" y="115.43567054935167" z="-910.081605547348772"/>
             </instance>
         </population>
+        <projection id="proj_394_0" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_0" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="2731" postFractionAlong="0.414971335505089" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="5780" postFractionAlong="0.362606596747227" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_0/0/HL23PYR_0" postSegmentId="610" postFractionAlong="0.086443253156169" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_397" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_397" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4897" postFractionAlong="0.967479297149906" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_397/0/HL23PYR_397" postSegmentId="4143" postFractionAlong="0.12058294376454" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_794" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="3089" postFractionAlong="0.869568687302174" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="4593" postFractionAlong="0.220195018279041" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_794" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1818" postFractionAlong="0.364157237334001" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="1491" postFractionAlong="0.625784509795597" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_379_388" presynapticPopulation="HL23PYR_pop_379" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4686" postFractionAlong="0.730400911073671" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4917" postFractionAlong="0.360073474675431" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1546" postFractionAlong="0.471756604935747" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_388" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1112" postFractionAlong="0.873049870035784" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="2951" postFractionAlong="0.372423087182093" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_388" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="4936" postFractionAlong="0.708084173706072" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1475" postFractionAlong="0.026093474200562" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_785_388" presynapticPopulation="HL23PYR_pop_785" postsynapticPopulation="HL23PYR_pop_388" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="5335" postFractionAlong="0.026384495027209" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="1373" postFractionAlong="0.743130553308045" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_785/0/HL23PYR_785" postCellId="../HL23PYR_pop_388/0/HL23PYR_388" postSegmentId="788" postFractionAlong="0.784828436648627" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_785" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="89" postFractionAlong="0.485446961353405" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2021" postFractionAlong="0.558844285601197" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_794_785" presynapticPopulation="HL23PYR_pop_794" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1986" postFractionAlong="0.42892790330802" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="3488" postFractionAlong="0.387062137667497" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_794/0/HL23PYR_794" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1404" postFractionAlong="0.139575227460775" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_0_776" presynapticPopulation="HL23PYR_pop_0" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2411" postFractionAlong="0.571112018888472" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5353" postFractionAlong="0.817893217164214" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_0/0/HL23PYR_0" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1928" postFractionAlong="0.081731899664106" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_394_776" presynapticPopulation="HL23PYR_pop_394" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PYR_HL23PYR_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="4228" postFractionAlong="0.324535923594773" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="2134" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_394/0/HL23PYR_394" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="5111" postFractionAlong="0.210693593811559" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_379_816" presynapticPopulation="HL23PYR_pop_379" postsynapticPopulation="HL23SST_pop_816" synapse="HL23PYR_HL23SST_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1421" postFractionAlong="0.073227554660103" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1658" postFractionAlong="0.432673638403585" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="3252" postFractionAlong="0.195171801957218" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1184" postFractionAlong="0.565575102665142" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="268" postFractionAlong="0.512899025161882" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1872" postFractionAlong="0.838350838679691" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="326" postFractionAlong="0.056034837047675" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PYR_pop_379/0/HL23PYR_379" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="686" postFractionAlong="0.727763561666901" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_852" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PV_pop_852" synapse="HL23PYR_HL23PV_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1757" postFractionAlong="0.203158424921183" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2321" postFractionAlong="0.078219871106718" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2459" postFractionAlong="0.011996588788679" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4282" postFractionAlong="0.578416058370985" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4069" postFractionAlong="0.037980675567437" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4439" postFractionAlong="0.690417728778928" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4298" postFractionAlong="0.867718445531282" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3961" postFractionAlong="0.536276572930858" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_776_864" presynapticPopulation="HL23PYR_pop_776" postsynapticPopulation="HL23PV_pop_864" synapse="HL23PYR_HL23PV_ProbAMPANMDA">
+            <connectionWD id="0" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="2376" postFractionAlong="0.456071442887983" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="4474" postFractionAlong="0.616028482655793" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="2303" postFractionAlong="0.070602572998263" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1318" postFractionAlong="0.053738267284808" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1114" postFractionAlong="0.016010195099859" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="3722" postFractionAlong="0.383296155622356" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1660" postFractionAlong="0.546997513867439" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PYR_pop_776/0/HL23PYR_776" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1821" postFractionAlong="0.603541326824618" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_816_794" presynapticPopulation="HL23SST_pop_816" postsynapticPopulation="HL23PYR_pop_794" synapse="HL23SST_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="5076" postFractionAlong="0.352501993911949" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2806" postFractionAlong="0.821970407089754" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="3826" postFractionAlong="0.467986864108484" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2387" postFractionAlong="0.970321072962375" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="5028" postFractionAlong="0.781587468889392" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2304" postFractionAlong="0.261128084306953" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="4818" postFractionAlong="0.732363713771815" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2017" postFractionAlong="0.404495911288864" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2030" postFractionAlong="0.515608678227804" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="3414" postFractionAlong="0.101676993924194" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2876" postFractionAlong="0.445605907539403" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_794/0/HL23PYR_794" postSegmentId="2137" postFractionAlong="0.67977249574221" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_816_785" presynapticPopulation="HL23SST_pop_816" postsynapticPopulation="HL23PYR_pop_785" synapse="HL23SST_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="4388" postFractionAlong="0.820201817095359" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="5060" postFractionAlong="0.509989311475955" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2284" postFractionAlong="0.433297138705345" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2252" postFractionAlong="0.906303836151568" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1619" postFractionAlong="0.943327903275528" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2643" postFractionAlong="0.145432819062957" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="5128" postFractionAlong="0.984851744985052" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="4355" postFractionAlong="0.66653085503558" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="3711" postFractionAlong="0.768663424981376" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="4176" postFractionAlong="0.20133582634862" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_816/0/HL23SST_816" postCellId="../HL23PYR_pop_785/0/HL23PYR_785" postSegmentId="1724" postFractionAlong="0.594959182268139" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_804_379" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PYR_pop_379" synapse="HL23SST_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5258" postFractionAlong="0.919359603388131" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2343" postFractionAlong="0.543982953630112" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3262" postFractionAlong="0.828258913628426" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5392" postFractionAlong="0.019376376564879" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="2573" postFractionAlong="0.986969018804606" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4278" postFractionAlong="0.524030914568965" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3941" postFractionAlong="0.078750941006535" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3526" postFractionAlong="0.492332036267276" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="1619" postFractionAlong="0.943327903275528" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="5526" postFractionAlong="0.404249194424257" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="4374" postFractionAlong="0.894732874546683" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PYR_pop_379/0/HL23PYR_379" postSegmentId="3749" postFractionAlong="0.965697268983064" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_804_852" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PV_pop_852" synapse="HL23SST_HL23PV_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3943" postFractionAlong="0.621795852458034" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2267" postFractionAlong="0.396584022732885" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4087" postFractionAlong="0.213743174859675" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="586" postFractionAlong="0.319617914773583" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3371" postFractionAlong="0.963974884874753" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="752" postFractionAlong="0.571893202463753" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="178" postFractionAlong="0.833334447768248" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3251" postFractionAlong="0.168960047342061" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1957" postFractionAlong="0.414917906623091" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="998" postFractionAlong="0.511187822103614" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2569" postFractionAlong="0.71641820378391" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="1903" postFractionAlong="0.885695552012273" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="12" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="122" postFractionAlong="0.735658704094097" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_804_864" presynapticPopulation="HL23SST_pop_804" postsynapticPopulation="HL23PV_pop_864" synapse="HL23SST_HL23PV_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="4147" postFractionAlong="0.493419517711815" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1603" postFractionAlong="0.501907483866568" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="2754" postFractionAlong="0.715824110089279" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1939" postFractionAlong="0.790849205876551" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="285" postFractionAlong="0.177895146894618" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="964" postFractionAlong="0.853161489698471" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1114" postFractionAlong="0.016010195099859" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="1993" postFractionAlong="0.02507920323885" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="568" postFractionAlong="0.312209945764785" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="3530" postFractionAlong="0.632255279060272" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="3547" postFractionAlong="0.00386141124448" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="3448" postFractionAlong="0.202022133550769" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="12" preCellId="../HL23SST_pop_804/0/HL23SST_804" postCellId="../HL23PV_pop_864/0/HL23PV_864" postSegmentId="3834" postFractionAlong="0.664959850244601" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_852_776" presynapticPopulation="HL23PV_pop_852" postsynapticPopulation="HL23PYR_pop_776" synapse="HL23PV_HL23PYR_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1417" postFractionAlong="0.88467065344297" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1177" postFractionAlong="0.124468879223415" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1289" postFractionAlong="0.157079487537199" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="528" postFractionAlong="0.958211491533872" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="719" postFractionAlong="0.28479210476945" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1306" postFractionAlong="0.884539693839552" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="499" postFractionAlong="0.01630281357372" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="900" postFractionAlong="0.910526191652126" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="821" postFractionAlong="0.602803996382105" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="230" postFractionAlong="0.416086634724764" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="11" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="209" postFractionAlong="0.950554234620995" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="12" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="864" postFractionAlong="0.385442492942158" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="13" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="371" postFractionAlong="0.892891064540717" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="14" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="985" postFractionAlong="0.085721380944096" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="15" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="409" postFractionAlong="0.642931808848832" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="16" preCellId="../HL23PV_pop_852/0/HL23PV_852" postCellId="../HL23PYR_pop_776/0/HL23PYR_776" postSegmentId="1192" postFractionAlong="0.432063919665885" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_936_804" presynapticPopulation="HL23VIP_pop_936" postsynapticPopulation="HL23SST_pop_804" synapse="HL23VIP_HL23SST_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="2610" postFractionAlong="0.860121736261316" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="1092" postFractionAlong="0.615406750957362" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="1981" postFractionAlong="0.194401372148045" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="134" postFractionAlong="0.462156782998693" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="144" postFractionAlong="0.246548271547834" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="3094" postFractionAlong="0.704175442165248" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="93" postFractionAlong="0.210184667480359" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="1298" postFractionAlong="0.244326071261031" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_804/0/HL23SST_804" postSegmentId="2287" postFractionAlong="0.002711486133983" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_936_816" presynapticPopulation="HL23VIP_pop_936" postsynapticPopulation="HL23SST_pop_816" synapse="HL23VIP_HL23SST_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="2776" postFractionAlong="0.559737040083994" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="2855" postFractionAlong="0.38838956881838" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1577" postFractionAlong="0.384278834838678" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="573" postFractionAlong="0.998137518621794" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="801" postFractionAlong="0.092769263583924" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1075" postFractionAlong="0.888978645635576" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="2035" postFractionAlong="0.723665283994676" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="1833" postFractionAlong="0.809041163627685" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23SST_pop_816/0/HL23SST_816" postSegmentId="3155" postFractionAlong="0.683462835940538" weight="1.0" delay="0.5 ms"/>
+        </projection>
+        <projection id="proj_936_852" presynapticPopulation="HL23VIP_pop_936" postsynapticPopulation="HL23PV_pop_852" synapse="HL23VIP_HL23PV_ProbUDFsyn">
+            <connectionWD id="0" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3653" postFractionAlong="0.553542564252773" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="1" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2893" postFractionAlong="0.480366081530362" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="2" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="931" postFractionAlong="0.111799604929165" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="3" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="771" postFractionAlong="0.471647586508465" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="4" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="695" postFractionAlong="0.935889415662037" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="5" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="981" postFractionAlong="0.710516456292625" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="6" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="2376" postFractionAlong="0.456071442887983" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="7" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="547" postFractionAlong="0.687097043657955" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="8" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="141" postFractionAlong="0.375087901156368" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="9" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="3687" postFractionAlong="0.947703421839825" weight="1.0" delay="0.5 ms"/>
+            <connectionWD id="10" preCellId="../HL23VIP_pop_936/0/HL23VIP_936" postCellId="../HL23PV_pop_852/0/HL23PV_852" postSegmentId="4215" postFractionAlong="0.156650612014168" weight="1.0" delay="0.5 ms"/>
+        </projection>
         <inputList id="Gfluct_0" population="HL23PYR_pop_0" component="Gfluct_HL23PYR_0_5">
             <input id="0" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="905" fractionAlong="0.885114796445408"/>
             <input id="1" target="../HL23PYR_pop_0/0/HL23PYR_0" destination="synapses" segmentId="1205" fractionAlong="0.851171143911959"/>

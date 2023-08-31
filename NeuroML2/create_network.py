@@ -126,6 +126,7 @@ class HL23Net(object):
         self.lems_components.add(lems.Include("CaDynamics_E2_NML2.nml"))
         self.lems_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
         self.lems_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
+        self.lems_components.add(lems.Include("channels/Tonic.nml"))
 
         # add all the channel definitions to
         channel_files = pathlib.Path("channels").glob("**/*.channel.nml")
