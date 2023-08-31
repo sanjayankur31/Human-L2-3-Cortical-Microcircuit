@@ -6,6 +6,7 @@
     <include href="CaDynamics_E2_NML2.nml"/>
     <include href="channels/pas.channel.nml"/>
     <include href="channels/Ih.channel.nml"/>
+    <include href="channels/Tonic.nml"/>
     <include href="channels/SK.channel.nml"/>
     <include href="channels/K_T.channel.nml"/>
     <include href="channels/K_P.channel.nml"/>
@@ -30342,6 +30343,7 @@
             <membraneProperties>
                 <channelDensity id="pas" ionChannel="pas" condDensity="0.0000954 S_per_cm2" erev="-80 mV" segmentGroup="all_minus_myelin" ion="non_specific"/>
                 <channelDensity id="Ih" ionChannel="Ih" condDensity="0.000148 S_per_cm2" erev="-45 mV" segmentGroup="all_minus_myelin" ion="hcn"/>
+                <channelDensity id="TonicInhibition" ionChannel="TonicPavlov2009" condDensity="0.000938 S_per_cm2" erev="-75 mV" segmentGroup="all_minus_myelin" ion="non_specific"/>
                 <channelDensity id="SK_somatic" ionChannel="SK" condDensity="0.000853 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
                 <channelDensity id="K_T_somatic" ionChannel="K_T" condDensity="0.0605 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
                 <channelDensity id="K_P_somatic" ionChannel="K_P" condDensity="0.000208 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>

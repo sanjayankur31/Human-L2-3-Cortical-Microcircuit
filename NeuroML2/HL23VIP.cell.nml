@@ -6,6 +6,7 @@
     <include href="CaDynamics_E2_NML2.nml"/>
     <include href="channels/pas.channel.nml"/>
     <include href="channels/Ih.channel.nml"/>
+    <include href="channels/Tonic.nml"/>
     <include href="channels/NaTg/NaTg.channel.nml"/>
     <include href="channels/Nap.channel.nml"/>
     <include href="channels/K_P.channel.nml"/>
@@ -15396,6 +15397,7 @@
             <membraneProperties>
                 <channelDensity id="pas" ionChannel="pas" condDensity="2.5756438955642182e-05 S_per_cm2" erev="-79.74132024971513 mV" ion="non_specific"/>
                 <channelDensity id="Ih" ionChannel="Ih" condDensity="4.274951616063423e-05 S_per_cm2" erev="-45 mV" ion="hcn"/>
+                <channelDensity id="TonicInhibition" ionChannel="TonicPavlov2009" condDensity="0.000938 S_per_cm2" erev="-75 mV" ion="non_specific"/>
                 <channelDensity id="NaTg_somatic" ionChannel="NaTg_VIP_somatic" condDensity="0.11491205828369114 S_per_cm2" erev="50 mV" segmentGroup="soma_group" ion="na"/>
                 <channelDensity id="Nap_somatic" ionChannel="Nap" condDensity="0.0001895305240694194 S_per_cm2" erev="50 mV" segmentGroup="soma_group" ion="na"/>
                 <channelDensity id="K_P_somatic" ionChannel="K_P" condDensity="0.0009925418924114282 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
