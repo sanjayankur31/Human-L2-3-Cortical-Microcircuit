@@ -803,12 +803,12 @@ if __name__ == "__main__":
     model = HL23Net(
         scale=scale,
         biophysics=True,
-        connections=False,
+        connections=True,
         background_input=True,
         stimulus=False,
     )
     model.create_network()
     # model.visualize_network()
-    # model.create_simulation()
+    model.create_simulation()
     # model.run_sim()
     # model.plot_v_graphs()
