@@ -98,8 +98,8 @@ class HL23Net(object):
             "HL23SST": "0 1 0",
             "HL23VIP": "0.5 0.5 0.5",
         }
-        self.simulation_id = "HL23Sim"
-        self.lems_simulation_file = "LEMS_HL23Sim.xml"
+        self.simulation_id = f"HL23Sim_{self.network_scale}"
+        self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
         self.netdoc = None
         self.network_id = "HL23Network"
         self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
