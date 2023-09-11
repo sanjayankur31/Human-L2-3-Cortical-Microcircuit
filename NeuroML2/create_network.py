@@ -241,12 +241,36 @@ class HL23Net(object):
                     rotated_cell_doc = component_factory(
                         neuroml.NeuroMLDocument, id=f"{rotated_cell_id}_doc"
                     )
+
+                    # add gaba tonic inhibition to cells
+                    if ctype == "HL23PYR" or ctype == "HL23SST":
+                        rotated_cell.add_channel_density(
+                            nml_cell_doc=rotated_cell_doc,
+                            cd_id="TonicInhibition",
+                            ion_channel="TonicPavlov2009",
+                            cond_density="0.000938 S_per_cm2",
+                            erev="-75 mV",
+                            group_id="all_minus_myelin",
+                            ion="non_specific",
+                            ion_chan_def_file="channels/Tonic.nml",
+                        )
+                    elif ctype == "HL23PV" or ctype == "HL23VIP":
+                        rotated_cell.add_channel_density(
+                            nml_cell_doc=rotated_cell_doc,
+                            cd_id="TonicInhibition",
+                            ion_channel="TonicPavlov2009",
+                            cond_density="0.000938 S_per_cm2",
+                            erev="-75 mV",
+                            group_id="all",
+                            ion="non_specific",
+                            ion_chan_def_file="channels/Tonic.nml",
+                        )
+
                     rotated_cell_doc.add(rotated_cell)
                     write_neuroml2_file(
                         rotated_cell_doc, rotated_cell_file, validate=False
                     )
 
-                # TODO: add tonic inhibition mechanism to pyramidal neurons
                 self.netdoc.add(neuroml.IncludeType, href=rotated_cell_file)
 
                 pop = self.network.add(
