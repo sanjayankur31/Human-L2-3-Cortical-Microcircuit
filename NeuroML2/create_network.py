@@ -243,6 +243,8 @@ class HL23Net(object):
                     )
 
                     # add gaba tonic inhibition to cells
+                    # definition file is included in the network, so we don't
+                    # re-include it here.
                     if ctype == "HL23PYR" or ctype == "HL23SST":
                         rotated_cell.add_channel_density(
                             nml_cell_doc=rotated_cell_doc,
@@ -252,7 +254,7 @@ class HL23Net(object):
                             erev="-75 mV",
                             group_id="all_minus_myelin",
                             ion="non_specific",
-                            ion_chan_def_file="channels/Tonic.nml",
+                            ion_chan_def_file="",
                         )
                     elif ctype == "HL23PV" or ctype == "HL23VIP":
                         rotated_cell.add_channel_density(
@@ -263,7 +265,7 @@ class HL23Net(object):
                             erev="-75 mV",
                             group_id="all",
                             ion="non_specific",
-                            ion_chan_def_file="channels/Tonic.nml",
+                            ion_chan_def_file="",
                         )
 
                     rotated_cell_doc.add(rotated_cell)
