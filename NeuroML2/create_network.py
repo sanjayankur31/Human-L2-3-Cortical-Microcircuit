@@ -103,7 +103,7 @@ class HL23Net(object):
         self.netdoc = None
         self.network_id = "HL23Network"
         self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
-        self.lems_components_file_name = "lems_components.xml"
+        self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.sim_length = "1000ms"
         self.dt = "0.01ms"
 
