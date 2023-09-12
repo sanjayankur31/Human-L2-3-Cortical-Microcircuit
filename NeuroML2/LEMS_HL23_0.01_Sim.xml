@@ -29,7 +29,7 @@
     <Include file="rotated_cells/HL23PV_864.cell.nml"/>
     <Include file="rotated_cells/HL23VIP_924.cell.nml"/>
     <Include file="rotated_cells/HL23VIP_936.cell.nml"/>
-    <Include file="lems_components.xml"/>
+    <Include file="lems_components_0.01.xml"/>
    
     <Simulation id="HL23Sim_0.01" length="2000ms" step="0.025ms" target="HL23Network" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
         
