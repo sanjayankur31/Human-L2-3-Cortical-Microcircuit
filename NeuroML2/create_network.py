@@ -33,6 +33,7 @@ from pyneuroml.pynml import (
     write_neuroml2_file,
 )
 from pyneuroml.utils import rotate_cell
+from pyneuroml.nsgr import run_on_nsg
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -785,7 +786,7 @@ class HL23Net(object):
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
 
-    def run_sim(self, nsg=False):
+    def run_sim(self, nsg: typing.Union[str, bool] = False):
         """Run the sim"""
         if nsg is False:
             print(f"Running simulation: {self.lems_simulation_file}")
@@ -795,10 +796,14 @@ class HL23Net(object):
                 nogui=True,
                 show_plot_already=False,
             )
+        elif nsg == "dry":
+            print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
+            run_on_nsg("jneuroml_neuron", self.lems_simulation_file,
+                       dry_run=True, max_memory="8G")
         else:
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg("jneuroml_neuron", self.lems_simulation_file,
-                       dry_run=True, max_memory="8G")
+                       max_memory="8G")
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
