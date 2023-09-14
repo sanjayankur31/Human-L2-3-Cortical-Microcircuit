@@ -785,15 +785,20 @@ class HL23Net(object):
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
 
-    def run_sim(self):
+    def run_sim(self, nsg=False):
         """Run the sim"""
-        print(f"Running simulation: {self.lems_simulation_file}")
-        run_lems_with_jneuroml_netpyne(
-            self.lems_simulation_file,
-            max_memory="8G",
-            nogui=True,
-            show_plot_already=False,
-        )
+        if nsg is False:
+            print(f"Running simulation: {self.lems_simulation_file}")
+            run_lems_with_jneuroml_netpyne(
+                self.lems_simulation_file,
+                max_memory="8G",
+                nogui=True,
+                show_plot_already=False,
+            )
+        else:
+            print(f"Running simulation on NSG: {self.lems_simulation_file}")
+            run_on_nsg("jneuroml_neuron", self.lems_simulation_file,
+                       dry_run=True, max_memory="8G")
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
