@@ -239,7 +239,7 @@ class HL23Net(object):
             # put in minimum 2 cells of each type
             if step >= maxcell:
                 step = 1
-                maxcell = 1
+                maxcell = 2
             for i in range(0, maxcell, step):
                 acell = celldataset[i]
                 gid = acell[0]
