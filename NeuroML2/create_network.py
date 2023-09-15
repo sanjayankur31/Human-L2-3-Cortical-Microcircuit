@@ -130,6 +130,7 @@ class HL23Net(object):
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.sim_length = "1000ms"
         self.dt = "0.025ms"
+        self.seed = 4587
 
     def create_network(self):
         # set the scale of the network
@@ -235,10 +236,10 @@ class HL23Net(object):
             i = 0
             step = int(1 / self.network_scale)
             maxcell = len(celldataset)
-            # put in minimum 3 cells of each type
+            # put in minimum 2 cells of each type
             if step >= maxcell:
                 step = 1
-                maxcell = 2
+                maxcell = 1
             for i in range(0, maxcell, step):
                 acell = celldataset[i]
                 gid = acell[0]
@@ -797,10 +798,19 @@ class HL23Net(object):
                 save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.png",
             )
 
-    def create_simulation(self, dt=0.025, seed=123):
+    def create_simulation(self, dt=None, seed=123):
         """Create simulation, record data"""
+        if dt is None:
+            dt = self.dt
+
+        if seed is None:
+            seed = self.seed
+
         simulation = LEMSSimulation(
-            sim_id=self.simulation_id, duration=2000, dt=dt, simulation_seed=seed
+            sim_id=self.simulation_id,
+            duration=float(self.sim_length.replace("ms", "")),
+            dt=float(dt.replace("ms", "")),
+            simulation_seed=seed
         )
         simulation.assign_simulation_target(self.network_id)
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
@@ -867,7 +877,7 @@ class HL23Net(object):
         print("Adding step current to each cell")
         # a single pulse generator
         pg = self.netdoc.add(neuroml.PulseGenerator, id="pg_0",
-                             delay="50ms", duration=self.sim_length,
+                             delay="100ms", duration=self.sim_length,
                              amplitude="0.2nA")
         for pop in self.network.populations:
             self.network.add(neuroml.ExplicitInput, target=f"{pop.id}[0]",
@@ -886,7 +896,7 @@ if __name__ == "__main__":
         scale=scale,
         new_cells=True,
         biophysics=True,
-        tonic_inhibition=False,
+        tonic_inhibition=True,
         connections=False,
         network_input="step",
         stimulus=False,
