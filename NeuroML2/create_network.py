@@ -857,6 +857,22 @@ class HL23Net(object):
             save_figure_to=f"{self.lems_simulation_file.replace('.xml', '')}_v.png",
         )
 
+    def add_step_current(self):
+        """Add a constant step current to all cells.
+
+        Useful for testing the cells to ensure they produce correct behaviour,
+        in an unconnected network, for example
+
+        """
+        print("Adding step current to each cell")
+        # a single pulse generator
+        pg = self.netdoc.add(neuroml.PulseGenerator, id="pg_0",
+                             delay="50ms", duration=self.sim_length,
+                             amplitude="0.2nA")
+        for pop in self.network.populations:
+            self.network.add(neuroml.ExplicitInput, target=f"{pop.id}[0]",
+                             input=pg.id)
+
 
 if __name__ == "__main__":
     scale = 0.02
