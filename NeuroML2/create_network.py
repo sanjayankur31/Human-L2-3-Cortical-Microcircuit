@@ -530,12 +530,12 @@ class HL23Net(object):
         # Component Type definition
         self.lems_components.add(lems.Include("synapses/Gfluct.nml"))
 
-        # base excitatory conductances (from paper)
+        # base excitatory conductances (from paper, given here in uS)
         cell_type_ge0 = {
-            "HL23PYR": 28,
-            "HL23PV": 280,
-            "HL23SST": 30,
-            "HL23VIP": 66,
+            "HL23PYR": 0.000028,
+            "HL23PV": 0.00028,
+            "HL23SST": 0.00003,
+            "HL23VIP": 0.000066,
         }
         # store input locations per cell type and create input components for
         # each cell type also, since all cells are indentical
@@ -565,9 +565,9 @@ class HL23Net(object):
                                               type_="Gfluct", start="0ms",
                                               stop=self.sim_length, dt=self.dt,
                                               E_e="0mV",
-                                              E_i="-80mV", g_e0=f"{g_e0} pS", g_i0="0pS",
+                                              E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
-                                              std_e=f"{g_e0} pS", std_i="0pS")
+                                              std_e=f"{g_e0} uS", std_i="0pS")
             self.lems_components.add(gfluct_component)
 
             # get segments to place input at
@@ -588,15 +588,15 @@ class HL23Net(object):
         apical_input_distances = [0.1, 0.3, 0.5, 0.7, 0.9]
         for d in apical_input_distances:
             # create the input component
-            g_e0 = 28 * math.exp(d)
+            g_e0 = cell_type_ge0[cell_type] * math.exp(d)
             # create input component for use at each distance point
             gfluct_component = lems.Component(id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
                                               type_="Gfluct", start="0ms",
                                               stop=self.sim_length, dt=self.dt,
                                               E_e="0mV",
-                                              E_i="-80mV", g_e0=f"{g_e0} pS", g_i0="0pS",
+                                              E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
-                                              std_e=f"{g_e0} pS", std_i="0pS")
+                                              std_e=f"{g_e0} uS", std_i="0pS")
             self.lems_components.add(gfluct_component)
 
             # get segments to place at
