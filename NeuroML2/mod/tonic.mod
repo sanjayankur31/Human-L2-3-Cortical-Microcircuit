@@ -14,8 +14,8 @@ e_gaba = -80 (millivolt)
 ASSIGNED{
 v (millivolt)
 i (milliampere)
-a (/ms)
-b (/ms)}
+a (/ms) : wrong, needs to be per second
+b (/ms)} : wrong, is per second
 
 STATE{o c}
 
