@@ -45,24 +45,47 @@ class HL23Net(object):
 
     def __init__(
         self,
-        scale=0.01,
-        connections=True,
-        background_input=True,
-        stimulus=True,
-        biophysics=True,
+        scale: float = 0.01,
+        connections: bool = True,
+        network_input: str = "background",
+        stimulus: bool = True,
+        biophysics: bool = True,
+        tonic_inhibition: bool = True,
+        new_cells: bool = True,
     ):
         """Init
 
         :param scale: network scale
+        :type scale: float
+        :param connections: toggle creation of network connections
+        :type connections: bool
+        :param network_input: select input to provide to cells
+            - "background": for OU background input
+            - "step": for a constant step current
+            - "none": for no input
+        :type network_input: str
+        :param stimulus: toggle addition of stimulus to cells for stim protocol
+        :type stimulus: bool
+        :param biophysics: toggle addition of biophysics to cells (otherwise
+            the cells only include morphology)
+        :type biophysics: bool
+        :param tonic_inhibition: toggle addition of tonic inhibition to cells
+            note: requires biophysics to be enabled
+        :type tonic_inhibition: bool
+        :param new_cells: toggle regeneration of rotated cells, otherwise
+            existing rotated cells are used
+        :type new_cells: bool
 
         """
         object.__init__(self)
 
         self.network_scale = scale
         self.connections = connections
-        self.background_input = background_input
+        self.network_input = network_input
         self.stimulus = stimulus
         self.biophysics = biophysics
+        self.tonic_inhibition = tonic_inhibition
+        self.new_cells = new_cells
 
         # data dumped from the simulation
         self.cell_data = h5py.File(
@@ -127,7 +150,8 @@ class HL23Net(object):
         self.lems_components.add(lems.Include("CaDynamics_E2_NML2.nml"))
         self.lems_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
         self.lems_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
-        self.lems_components.add(lems.Include("channels/Tonic.nml"))
+        if self.tonic_inhibition:
+            self.lems_components.add(lems.Include("channels/Tonic.nml"))
 
         # add all the channel definitions to
         channel_files = pathlib.Path("channels").glob("**/*.channel.nml")
@@ -138,8 +162,15 @@ class HL23Net(object):
         self.create_cells()
         if self.connections is True:
             self.create_connections()
-        if self.background_input is True:
+        if self.network_input == "background":
             self.add_background_input()
+        elif self.network_input == "step":
+            self.add_step_current()
+        elif self.network_input == "none":
+            pass
+        else:
+            print(f"Invalid network_input value: {self.network_input}, not adding any")
+            pass
         if self.stimulus is True:
             self.add_stimulus()
 
@@ -152,15 +183,12 @@ class HL23Net(object):
         print(f"Writing {self.netdoc_file_name} ")
         write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
 
-    def create_cells(self, overwrite=False):
+    def create_cells(self):
         """Create all rotated cells and add them to the network.
 
         Each rotated cell is added to a separate population because in NeuroML,
         a population can only include a single Component, but each rotated cell
         is a different component.
-
-        :param overwrite: regenerate all rotated cell files if True, else, re-use
-        :type overwrite: bool
         """
         print("Creating cells")
         # make a directory for storing rotated cells
@@ -226,9 +254,9 @@ class HL23Net(object):
                     f"{self.temp_cell_dir}/{self.nml_cell[ctype].id}_{gid}.cell.nml"
                 )
                 rotated_cell_id = self.nml_cell[ctype].id + f"_{gid}"
-                if overwrite is False and pathlib.Path(rotated_cell_file).exists():
+                if self.new_cells is False and pathlib.Path(rotated_cell_file).exists():
                     print(f"{rotated_cell_file} already exists, not overwriting.")
-                    print("Set overwrite=True to regenerate all rotated cell files")
+                    print("Set new_cells=True to regenerate all rotated cell files")
                 else:
                     rotated_cell = rotate_cell(
                         self.nml_cell[ctype],
@@ -243,31 +271,32 @@ class HL23Net(object):
                         neuroml.NeuroMLDocument, id=f"{rotated_cell_id}_doc"
                     )
 
-                    # add gaba tonic inhibition to cells
-                    # definition file is included in the network, so we don't
-                    # re-include it here.
-                    if ctype == "HL23PYR" or ctype == "HL23SST":
-                        rotated_cell.add_channel_density(
-                            nml_cell_doc=rotated_cell_doc,
-                            cd_id="TonicInhibition",
-                            ion_channel="TonicPavlov2009",
-                            cond_density="0.000938 S_per_cm2",
-                            erev="-75 mV",
-                            group_id="all_minus_myelin",
-                            ion="non_specific",
-                            ion_chan_def_file="",
-                        )
-                    elif ctype == "HL23PV" or ctype == "HL23VIP":
-                        rotated_cell.add_channel_density(
-                            nml_cell_doc=rotated_cell_doc,
-                            cd_id="TonicInhibition",
-                            ion_channel="TonicPavlov2009",
-                            cond_density="0.000938 S_per_cm2",
-                            erev="-75 mV",
-                            group_id="all",
-                            ion="non_specific",
-                            ion_chan_def_file="",
-                        )
+                    if self.biophysics is True and self.tonic_inhibition is True:
+                        # add gaba tonic inhibition to cells
+                        # definition file is included in the network, so we don't
+                        # re-include it here.
+                        if ctype == "HL23PYR" or ctype == "HL23SST":
+                            rotated_cell.add_channel_density(
+                                nml_cell_doc=rotated_cell_doc,
+                                cd_id="TonicInhibition",
+                                ion_channel="TonicPavlov2009",
+                                cond_density="0.000938 S_per_cm2",
+                                erev="-75 mV",
+                                group_id="all_minus_myelin",
+                                ion="non_specific",
+                                ion_chan_def_file="",
+                            )
+                        elif ctype == "HL23PV" or ctype == "HL23VIP":
+                            rotated_cell.add_channel_density(
+                                nml_cell_doc=rotated_cell_doc,
+                                cd_id="TonicInhibition",
+                                ion_channel="TonicPavlov2009",
+                                cond_density="0.000938 S_per_cm2",
+                                erev="-75 mV",
+                                group_id="all",
+                                ion="non_specific",
+                                ion_chan_def_file="",
+                            )
 
                     rotated_cell_doc.add(rotated_cell)
                     write_neuroml2_file(
@@ -839,13 +868,15 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
+        new_cells=True,
         biophysics=True,
-        connections=True,
-        background_input=True,
+        tonic_inhibition=False,
+        connections=False,
+        network_input="step",
         stimulus=False,
     )
     model.create_network()
     # model.visualize_network()
     model.create_simulation()
-    # model.run_sim()
+    # model.run_sim(nsg="dry")
     # model.plot_v_graphs()
