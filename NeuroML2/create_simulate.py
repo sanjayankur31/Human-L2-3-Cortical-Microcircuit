@@ -945,5 +945,19 @@ if __name__ == "__main__":
     model.create_network()
     # model.visualize_network()
     model.create_simulation()
-    model.run_sim()
+    # For normal run
+    model.run_sim(engine="jneuroml_neuron", nsg=False,
+                  skip_run=False)
+    """
+    # for NSG
+    model.run_sim(engine="jneuroml_netpyne", nsg=True,
+                  nsg_sim_config={
+                      "number_cores_": "64",
+                      "number_nodes_": "1",
+                      "tasks_per_node_": "1",
+                      "runtime_": "0.5",
+                      'toolId': "PY_EXPANSE",
+                      'nrnivmodl_o_': "1"
+                  })
+    """
     # model.plot_v_graphs()
