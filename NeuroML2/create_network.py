@@ -329,6 +329,14 @@ class HL23Net(object):
         # count how many connections we have in total
         conn_count = 0
 
+        # create dicts to hold values for caching: prevents us from having to
+        # get this info again and again
+        ordered_segments = {}
+        cumulative_lengths = {}
+        for atype in self.cell_types:
+            ordered_segments[f"{atype}"] = {}
+            cumulative_lengths[f"{atype}"] = {}
+
         # create connections
         for pretype in self.cell_types:
             for posttype in self.cell_types:
@@ -416,11 +424,7 @@ class HL23Net(object):
 
                 self.lems_components.add(syn)
 
-                anml_cell = neuroml.loaders.read_neuroml2_file(
-                    f"{posttype}.cell.nml"
-                ).cells[
-                    0
-                ]  # type: neuroml.Cell
+                anml_cell = self.nml_cell[f"{posttype}"]  # type: neuroml.Cell
                 syn_count = 0
                 cur_precell = None
                 cur_postcell = None
@@ -445,12 +449,21 @@ class HL23Net(object):
 
                     section = (section.decode("utf-8")).split(".")[1]
                     neuroml_seggrp_id = get_segment_group_name(section)
-                    [
-                        ord_segs,
-                        cumul_lengths,
-                    ] = anml_cell.get_ordered_segments_in_groups(
-                        group_list=[neuroml_seggrp_id], include_cumulative_lengths=True
-                    )
+
+                    # use info if it's cached, otherwise get new info and cache
+                    # it
+                    try:
+                        ord_segs = ordered_segments[f"{posttype}"][neuroml_seggrp_id]
+                        cumul_lengths = cumulative_lengths[f"{posttype}"][neuroml_seggrp_id]
+                    except KeyError:
+                        [
+                            ord_segs,
+                            cumul_lengths,
+                        ] = anml_cell.get_ordered_segments_in_groups(
+                            group_list=[neuroml_seggrp_id], include_cumulative_lengths=True
+                        )
+                        ordered_segments[f"{posttype}"][neuroml_seggrp_id] = ord_segs
+                        cumulative_lengths[f"{posttype}"][neuroml_seggrp_id] = cumul_lengths
 
                     list_ord_segs = ord_segs[neuroml_seggrp_id]
                     list_cumul_lengths = cumul_lengths[neuroml_seggrp_id]
