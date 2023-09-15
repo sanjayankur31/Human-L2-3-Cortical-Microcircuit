@@ -825,11 +825,12 @@ class HL23Net(object):
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
 
-    def run_sim(self, nsg: typing.Union[str, bool] = False):
+    def run_sim(self, engine: str = "jneuroml_neuron", nsg: typing.Union[str, bool] = False):
         """Run the sim"""
         if nsg is False:
             print(f"Running simulation: {self.lems_simulation_file}")
-            run_lems_with_jneuroml_netpyne(
+            run_lems_with(
+                engine,
                 self.lems_simulation_file,
                 max_memory="8G",
                 nogui=True,
@@ -837,11 +838,11 @@ class HL23Net(object):
             )
         elif nsg == "dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
-            run_on_nsg("jneuroml_neuron", self.lems_simulation_file,
+            run_on_nsg(engine, self.lems_simulation_file,
                        dry_run=True, max_memory="8G")
         else:
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
-            run_on_nsg("jneuroml_neuron", self.lems_simulation_file,
+            run_on_nsg(engine, self.lems_simulation_file,
                        max_memory="8G")
 
     def plot_v_graphs(self):
@@ -894,15 +895,15 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=True,
+        new_cells=False,
         biophysics=True,
         tonic_inhibition=True,
-        connections=False,
-        network_input="step",
+        connections=True,
+        network_input="background",
         stimulus=False,
     )
     model.create_network()
     # model.visualize_network()
     model.create_simulation()
-    # model.run_sim(nsg="dry")
+    model.run_sim()
     # model.plot_v_graphs()
