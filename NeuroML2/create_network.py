@@ -28,9 +28,8 @@ from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.pynml import (
     reload_saved_data,
-    run_lems_with_jneuroml_netpyne,
-    run_lems_with_jneuroml_neuron,
     write_neuroml2_file,
+    run_lems_with
 )
 from pyneuroml.utils import rotate_cell
 from pyneuroml.nsgr import run_on_nsg
