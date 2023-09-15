@@ -874,15 +874,16 @@ class HL23Net(object):
                 max_memory="8G",
                 nogui=True,
                 show_plot_already=False,
+                **kwargs
             )
         elif nsg == "dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
-                       dry_run=True, max_memory="8G")
+                       dry_run=True, max_memory="8G", **kwargs)
         else:
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
-                       max_memory="8G")
+                       max_memory="8G", **kwargs)
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
