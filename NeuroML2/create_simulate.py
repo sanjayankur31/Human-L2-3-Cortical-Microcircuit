@@ -13,6 +13,7 @@ import logging
 import pathlib
 import sys
 import typing
+import time
 
 import h5py
 import lems.api as lems
@@ -133,6 +134,7 @@ class HL23Net(object):
 
     def create_network(self):
         # set the scale of the network
+        start = time.time()
         print(f"Creating network with scale {self.network_scale}")
 
         self.netdoc = component_factory(neuroml.NeuroMLDocument, id="HL23Network")
@@ -182,6 +184,8 @@ class HL23Net(object):
 
         print(f"Writing {self.netdoc_file_name} ")
         write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
+        end = time.time()
+        print(f"Creating network took: {(end - start)} seconds.")
 
     def create_cells(self):
         """Create all rotated cells and add them to the network.
@@ -190,6 +194,7 @@ class HL23Net(object):
         a population can only include a single Component, but each rotated cell
         is a different component.
         """
+        start = time.time()
         print("Creating cells")
         # make a directory for storing rotated cells
         # we include these cells in the network document to ensure that the network
@@ -322,8 +327,11 @@ class HL23Net(object):
 
         print(self.netdoc.summary())
         self.netdoc.validate(recursive=True)
+        end = time.time()
+        print(f"Creating cells took: {(end - start)} seconds")
 
     def create_connections(self):
+        start = time.time()
         print("Creating connections")
         # count how many connections we have in total
         conn_count = 0
@@ -536,9 +544,12 @@ class HL23Net(object):
                         raise e
 
                     syn_count += 1
+        end = time.time()
+        print(f"Creating connections took: {(end - start)} seconds.")
 
     def add_background_input(self):
         """Add background input to cells."""
+        start = time.time()
         # Component Type definition
         self.lems_components.add(lems.Include("synapses/Gfluct.nml"))
 
@@ -648,6 +659,9 @@ class HL23Net(object):
                                   destination="synapses", segment_id=seg,
                                   fraction_along=frac_along)
                     input_ctr += 1
+
+        end = time.time()
+        print(f"Adding background input took: {(end - start)} seconds.")
 
     # TODO: incomplete, to be done after bg input implementation
     def add_stimulus(self):
@@ -812,6 +826,7 @@ class HL23Net(object):
 
     def create_simulation(self, dt=None, seed=123):
         """Create simulation, record data"""
+        start = time.time()
         if dt is None:
             dt = self.dt
 
@@ -829,6 +844,7 @@ class HL23Net(object):
         simulation.include_lems_file(self.lems_components_file_name)
 
         simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
+        print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
         for apop in self.network.populations:
             simulation.add_column_to_output_file(
                 "output1", f"{apop.id}", f"{apop.id}/0/{apop.component}/0/v"
@@ -836,9 +852,20 @@ class HL23Net(object):
 
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
+        end = time.time()
+        print(f"Creating simulation took: {(end - start)} seconds.")
 
-    def run_sim(self, engine: str = "jneuroml_neuron", nsg: typing.Union[str, bool] = False):
-        """Run the sim"""
+    def run_sim(self, engine: str = "jneuroml_neuron",
+                nsg: typing.Union[str, bool] = False,
+                **kwargs):
+        """Run the sim
+
+        :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
+        :type engine: str
+        :param nsg: toggle submitting to nsg
+        :type nsg: bool
+        :param **kwargs: other engine + nsg specific args
+        """
         if nsg is False:
             print(f"Running simulation: {self.lems_simulation_file}")
             run_lems_with(
