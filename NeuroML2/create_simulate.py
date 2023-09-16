@@ -52,6 +52,7 @@ class HL23Net(object):
         biophysics: bool = True,
         tonic_inhibition: bool = True,
         new_cells: bool = True,
+        max_memory: str = "8G"
     ):
         """Init
 
@@ -75,6 +76,8 @@ class HL23Net(object):
         :param new_cells: toggle regeneration of rotated cells, otherwise
             existing rotated cells are used
         :type new_cells: bool
+        :param max_memory: max memory for JVM when running pyneuroml
+        :type max_memory: str
 
         """
         object.__init__(self)
@@ -86,6 +89,7 @@ class HL23Net(object):
         self.biophysics = biophysics
         self.tonic_inhibition = tonic_inhibition
         self.new_cells = new_cells
+        self.max_memory = max_memory
 
         # data dumped from the simulation
         self.cell_data = h5py.File(
@@ -871,7 +875,7 @@ class HL23Net(object):
             run_lems_with(
                 engine,
                 self.lems_simulation_file,
-                max_memory="8G",
+                max_memory=self.max_memory,
                 nogui=True,
                 show_plot_already=False,
                 **kwargs
@@ -879,11 +883,11 @@ class HL23Net(object):
         elif nsg == "dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
-                       dry_run=True, max_memory="8G", **kwargs)
+                       dry_run=True, max_memory=self.max_memory, **kwargs)
         else:
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
-                       max_memory="8G", **kwargs)
+                       max_memory=self.max_memory, **kwargs)
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
