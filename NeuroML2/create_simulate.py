@@ -15,6 +15,7 @@ import sys
 import typing
 import time
 
+import progressbar
 import h5py
 import lems.api as lems
 import neuroml
@@ -52,7 +53,8 @@ class HL23Net(object):
         biophysics: bool = True,
         tonic_inhibition: bool = True,
         new_cells: bool = True,
-        max_memory: str = "8G"
+        max_memory: str = "8G",
+        hdf5=True,
     ):
         """Init
 
@@ -78,6 +80,8 @@ class HL23Net(object):
         :type new_cells: bool
         :param max_memory: max memory for JVM when running pyneuroml
         :type max_memory: str
+        :param hdf5: toggle exporting to HDF5 format
+        :type hdf5: bool
 
         """
         object.__init__(self)
@@ -90,6 +94,7 @@ class HL23Net(object):
         self.tonic_inhibition = tonic_inhibition
         self.new_cells = new_cells
         self.max_memory = max_memory
+        self.hdf5 = hdf5
 
         # data dumped from the simulation
         self.cell_data = h5py.File(
@@ -131,6 +136,8 @@ class HL23Net(object):
         self.netdoc = None
         self.network_id = "HL23Network"
         self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
+        if self.hdf5 is True:
+            self.netdoc_file_name += ".h5"
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.sim_length = "1000ms"
         self.dt = "0.025ms"
@@ -443,6 +450,9 @@ class HL23Net(object):
                     f"Creating connections: {pretype} -> {posttype} (~{int(conndataset.shape[0] * self.network_scale * self.network_scale)} conns)."
                 )
 
+                # show a progress bar so we have some idea of what's going on
+                bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
+                bar_count = 0
                 for conn in conndataset:
                     precell = conn[0]
                     postcell = conn[1]
@@ -450,6 +460,9 @@ class HL23Net(object):
                     delay = conn[3]
                     section = conn[4]
                     sectionx = conn[5]
+
+                    bar_count += 1
+                    bar.update(bar_count)
 
                     # if both cells are not in our population, skip this connection
                     if precell not in self.cell_list or postcell not in self.cell_list:
@@ -945,21 +958,22 @@ if __name__ == "__main__":
         connections=True,
         network_input="background",
         stimulus=False,
+        hdf5=True,
     )
     model.create_network()
     # model.visualize_network()
     model.create_simulation()
+    """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
-    """
     # for NSG
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
                   nsg_sim_config={
                       "number_cores_": "64",
+                      "tasks_per_node_": 64,
                       "number_nodes_": "1",
-                      "tasks_per_node_": "1",
-                      "runtime_": "0.5",
+                      "runtime_": "2",
                       'toolId': "PY_EXPANSE",
                       'nrnivmodl_o_': "1"
                   })
