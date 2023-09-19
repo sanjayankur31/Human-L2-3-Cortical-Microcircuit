@@ -1,0 +1,7 @@
+pyneuroml[all]
+pylems
+neuron
+netpyne
+progressbar2
+h5py
+pandas

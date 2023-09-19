@@ -16,6 +16,7 @@
     
     <Include file="HL23PYR.net.nml"/>
     <Include file="HL23PYR.cell.nml"/>
+    <Include file="HL23PYR.tonic.cell.nml"/>
     <Include file="CaDynamics_E2_NML2.nml"/>
     <Include file="channels/pas.channel.nml"/>
     <Include file="channels/Ih.channel.nml"/>
@@ -28,11 +29,13 @@
     <Include file="channels/Ca_HVA.channel.nml"/>
     <Include file="channels/Ca_LVA.channel.nml"/>
     <Include file="channels/Nap.channel.nml"/>
+    <Include file="channels/Tonic.nml"/>
    
     <Simulation id="HL23PYR_sim" length="300.0ms" step="0.01ms" target="HL23PYRNet" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
         
         <OutputFile id="HL23PYR_net_output" fileName="HL23PYR_net.dat">
             <OutputColumn id="HL23PYR_pop_0_v" quantity="HL23PYR_pop/0/HL23PYR/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_0_v_tonic" quantity="HL23PYR_pop_tonic/0/HL23PYR_tonic/0/v"/> 
         </OutputFile>
         
     </Simulation>

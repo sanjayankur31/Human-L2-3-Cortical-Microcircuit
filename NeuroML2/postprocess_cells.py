@@ -163,17 +163,6 @@ def postprocess_HL23PYR():
         ion="hcn",
         ion_chan_def_file="channels/Ih.channel.nml",
     )
-    # gaba tonic inhibition
-    cell.add_channel_density(
-        nml_cell_doc=celldoc,
-        cd_id="TonicInhibition",
-        ion_channel="TonicPavlov2009",
-        cond_density="0.000938 S_per_cm2",
-        erev="-75 mV",
-        group_id="all_minus_myelin",
-        ion="non_specific",
-        ion_chan_def_file="channels/Tonic.nml",
-    )
 
     # somatic
     soma_group = cell.get_segment_group("soma_group")
@@ -510,18 +499,6 @@ def postprocess_HL23PV():
         ion_chan_def_file="channels/Ih.channel.nml",
     )
 
-    # gaba tonic inhibition
-    cell.add_channel_density(
-        nml_cell_doc=celldoc,
-        cd_id="TonicInhibition",
-        ion_channel="TonicPavlov2009",
-        cond_density="0.000938 S_per_cm2",
-        erev="-75 mV",
-        group_id="all",
-        ion="non_specific",
-        ion_chan_def_file="channels/Tonic.nml",
-    )
-
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
@@ -844,18 +821,6 @@ def postprocess_HL23SST():
         ion_chan_def_file="channels/Ih.channel.nml",
     )
 
-    # gaba tonic inhibition
-    cell.add_channel_density(
-        nml_cell_doc=celldoc,
-        cd_id="TonicInhibition",
-        ion_channel="TonicPavlov2009",
-        cond_density="0.000938 S_per_cm2",
-        erev="-75 mV",
-        group_id="all_minus_myelin",
-        ion="non_specific",
-        ion_chan_def_file="channels/Tonic.nml",
-    )
-
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
@@ -1150,18 +1115,6 @@ def postprocess_HL23VIP():
         group_id="all",
         ion="hcn",
         ion_chan_def_file="channels/Ih.channel.nml",
-    )
-
-    # gaba tonic inhibition
-    cell.add_channel_density(
-        nml_cell_doc=celldoc,
-        cd_id="TonicInhibition",
-        ion_channel="TonicPavlov2009",
-        cond_density="0.000938 S_per_cm2",
-        erev="-75 mV",
-        group_id="all",
-        ion="non_specific",
-        ion_chan_def_file="channels/Tonic.nml",
     )
 
     # somatic
