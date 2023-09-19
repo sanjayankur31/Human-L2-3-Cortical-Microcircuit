@@ -7,35 +7,33 @@ File: create_simulate.py
 
 Copyright 2023 Ankur Sinha
 """
-import math
 import copy
 import logging
+import math
 import pathlib
-import sys
-import typing
-import time
 import random
+import sys
+import time
+import typing
 
-import progressbar
 import h5py
 import lems.api as lems
 import neuroml
 import numpy
 import pandas
+import progressbar
 import pyneuroml
 from neuroml.loaders import read_neuroml2_file
 from neuroml.utils import component_factory
+from neuroml.writers import NeuroMLHdf5Writer
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
+from pyneuroml.nsgr import run_on_nsg
 from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
-from pyneuroml.pynml import (
-    reload_saved_data,
-    write_neuroml2_file,
-    run_lems_with
-)
+from pyneuroml.pynml import (reload_saved_data, run_lems_with,
+                             write_neuroml2_file)
 from pyneuroml.utils import rotate_cell
-from pyneuroml.nsgr import run_on_nsg
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -195,7 +193,12 @@ class HL23Net(object):
         self.lems_components.export_to_file(self.lems_components_file_name)
 
         print(f"Writing {self.netdoc_file_name} ")
-        write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
+        if self.hdf5:
+            NeuroMLHdf5Writer.write(self.netdoc, self.netdoc_file_name,
+                                    embed_xml=False, compress=True)
+        else:
+            write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
+
         end = time.time()
         print(f"Creating network took: {(end - start)} seconds.")
 
