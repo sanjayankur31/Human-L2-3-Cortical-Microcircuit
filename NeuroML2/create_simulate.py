@@ -14,6 +14,7 @@ import pathlib
 import sys
 import typing
 import time
+import random
 
 import progressbar
 import h5py
@@ -813,7 +814,7 @@ class HL23Net(object):
                         break
         logger.setLevel(logging.INFO)
 
-    def visualize_network(self):
+    def visualize_network(self, point_fraction=0.0):
         """Generate morph plots"""
         # if the network has been constructed, use the network doc object, but
         # and add the included cells so we also get morphologies plotted
@@ -829,16 +830,67 @@ class HL23Net(object):
             # otherwise read the file in once so it's not read in repeatedly
             nml_file = read_neuroml2_file(self.netdoc_file_name, include_includes=True)
 
+        PYR_cells = []
+        SST_cells = []
+        PV_cells = []
+        VIP_cells = []
+
+        for ac in nml_file.cells:
+            if "PYR" in ac.id:
+                PYR_cells.append(ac.id)
+            if "PV" in ac.id:
+                PV_cells.append(ac.id)
+            if "VIP" in ac.id:
+                VIP_cells.append(ac.id)
+            if "SST" in ac.id:
+                SST_cells.append(ac.id)
+
+        PYR_point_cells = random.sample(PYR_cells, int(len(PYR_cells) * point_fraction))
+        SST_point_cells = random.sample(SST_cells, int(len(SST_cells) * point_fraction))
+        PV_point_cells = random.sample(PV_cells, int(len(PV_cells) * point_fraction))
+        VIP_point_cells = random.sample(VIP_cells, int(len(VIP_cells) * point_fraction))
+
         for plane in ["xy", "yz", "zx"]:
-            print(f"Plotting {plane}")
+            print(f"Plotting {plane} with {point_fraction} fraction as point cells")
             plot_2D(
                 nml_file=nml_file,
                 plane2d=plane,
-                min_width=4,
+                min_width=1,
                 nogui=True,
                 title="",
                 plot_type="constant",
                 save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.png",
+                plot_spec={
+                    "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
+                }
+            )
+
+            print(f"Plotting {plane} with all cells as point cells")
+            plot_2D(
+                nml_file=nml_file,
+                plane2d=plane,
+                min_width=1,
+                nogui=True,
+                title="",
+                plot_type="constant",
+                save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.allpoints.png",
+                plot_spec={
+                    "point_fraction": 1.0
+                }
+            )
+
+            print(f"Plotting {plane} with a single cells of each type in detail")
+            plot_2D(
+                nml_file=nml_file,
+                plane2d=plane,
+                min_width=1,
+                nogui=True,
+                title="",
+                plot_type="constant",
+                save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.points.png",
+                plot_spec={
+                    "point_cells": PYR_cells[1:] + SST_cells[1:] + VIP_cells[1:] + PV_cells[1:]
+                }
             )
 
     def create_simulation(self, dt=None, seed=123):
