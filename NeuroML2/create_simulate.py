@@ -270,6 +270,7 @@ class HL23Net(object):
                 unrotated_cell_doc = component_factory(
                     neuroml.NeuroMLDocument, id=f"{unrotated_cell.id}_doc"
                 )
+                unrotated_cell_doc.add(unrotated_cell)
                 if self.biophysics is True:
                     self.__add_tonic_inhibition(ctype, unrotated_cell,
                                                 unrotated_cell_doc)
@@ -513,7 +514,7 @@ class HL23Net(object):
                 cur_precell = None
                 cur_postcell = None
                 print(
-                    f"Creating connections: {pretype} -> {posttype} (~{int(conndataset.shape[0] * self.network_scale * self.network_scale)} conns)."
+                    f"Creating connections: {pretype} -> {posttype} (~{int(conndataset.shape[0])} with scale of {self.network_scale})."
                 )
                 # if we're not rotating cells, we only need one project between
                 # the single populations of different cell types
@@ -628,7 +629,7 @@ class HL23Net(object):
                                 post_cell_id=f"../{posttype}_pop_{postcell}/0/{posttype}_{postcell}",
                                 post_segment_id=post_seg.id,
                                 post_fraction_along=frac_along,
-                                weight=weight,
+                                weight=str(float(weight) / self.network_scale),
                                 delay=f"{delay} ms",
                             )
                         except ValueError as e:
@@ -647,7 +648,7 @@ class HL23Net(object):
                                 post_cell_id=f"../{posttype}_pop/{self.cell_list[postcell]}/{posttype}_sim",
                                 post_segment_id=post_seg.id,
                                 post_fraction_along=frac_along,
-                                weight=weight,
+                                weight=str(float(weight) / self.network_scale),
                                 delay=f"{delay} ms",
                             )
                         except ValueError as e:
@@ -1125,9 +1126,9 @@ if __name__ == "__main__":
         rotate_cells=False,
     )
     model.create_network()
+    model.create_simulation()
     """
     # model.visualize_network(point_fraction=0.75)
-    model.create_simulation()
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
