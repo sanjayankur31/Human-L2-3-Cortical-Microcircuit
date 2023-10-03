@@ -31,6 +31,7 @@ from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
 from pyneuroml.nsgr import run_on_nsg
 from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
+from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
 from pyneuroml.pynml import (reload_saved_data, run_lems_with,
                              write_neuroml2_file)
 from pyneuroml.utils import rotate_cell
@@ -924,44 +925,72 @@ class HL23Net(object):
                         break
         logger.setLevel(logging.INFO)
 
-    def visualize_network(self, point_fraction=0.0):
+    def visualize_network(self, min_cells=5):
         """Generate morph plots"""
-        # if the network has been constructed, use the network doc object, but
-        # and add the included cells so we also get morphologies plotted
+        print(f"Visualising network at scale {self.network_scale} with {min_cells} in full")
+        # if the network has been constructed, copy over the populations and
+        # include the cells
         if self.netdoc is not None:
-            nml_file = copy.deepcopy(self.netdoc)
-            for inc in nml_file.includes:
+            nml_file = neuroml.NeuroMLDocument(id="network_copy")
+            nml_file.add(neuroml.Network, id="dummy_network")
+            # copy over populations
+            nml_file.networks[0].populations = self.netdoc.networks[0].populations
+            nml_file.includes = self.netdoc.includes
+            # include cells
+            for inc in self.nml_file.includes:
                 incfile = read_neuroml2_file(inc.href)
-                for cells in incfile.cells:
-                    nml_file.add(cells)
-
-            nml_file.includes = []
+                for cell in incfile.cells:
+                    nml_file.add(cell)
         else:
             # otherwise read the file in once so it's not read in repeatedly
-            nml_file = read_neuroml2_file(self.netdoc_file_name, include_includes=True)
+            print(f"Reading {self.netdoc_file_name}")
+            nml_file = read_neuroml2_file(self.netdoc_file_name)
 
         PYR_cells = []
         SST_cells = []
         PV_cells = []
         VIP_cells = []
+        PYR_point_cells = []
+        SST_point_cells = []
+        PV_point_cells = []
+        VIP_point_cells = []
 
+        # because each cell is in a separate population
+        print("Picking point cells")
+        for inc in nml_file.includes:
+            cell = inc.href.split("/")[1].replace(".cell.nml", "")
+            # remove artificial long axons
+            if "PYR" in cell:
+                PYR_cells.append(cell)
+            if "PV" in cell:
+                PV_cells.append(cell)
+            if "VIP" in cell:
+                VIP_cells.append(cell)
+            if "SST" in cell:
+                SST_cells.append(cell)
+
+        # at least plot min_cells cells of each type, and all the rest as points
+        if (len(PYR_cells) - min_cells) > 0:
+            PYR_point_cells = random.sample(PYR_cells, len(PYR_cells) - min_cells)
+        if (len(SST_cells) - min_cells) > 0:
+            SST_point_cells = random.sample(SST_cells, len(SST_cells) - min_cells)
+        if (len(PV_cells) - min_cells) > 0:
+            PV_point_cells = random.sample(PV_cells, len(PV_cells) - min_cells)
+        if (len(VIP_cells) - min_cells) > 0:
+            VIP_point_cells = random.sample(VIP_cells, len(VIP_cells) - min_cells)
+
+        """
+        print("Removing axons from PYR cells")
         for ac in nml_file.cells:
-            if "PYR" in ac.id:
-                PYR_cells.append(ac.id)
-            if "PV" in ac.id:
-                PV_cells.append(ac.id)
-            if "VIP" in ac.id:
-                VIP_cells.append(ac.id)
-            if "SST" in ac.id:
-                SST_cells.append(ac.id)
+            if ac.id not in PYR_point_cells:
+                axons = ac.get_all_segments_in_group(ac.get_segment_group("axon_group"))
+                for s in ac.morphology.segments:
+                    if s.id in axons:
+                        ac.morphology.segments.remove(s)
 
-        PYR_point_cells = random.sample(PYR_cells, int(len(PYR_cells) * point_fraction))
-        SST_point_cells = random.sample(SST_cells, int(len(SST_cells) * point_fraction))
-        PV_point_cells = random.sample(PV_cells, int(len(PV_cells) * point_fraction))
-        VIP_point_cells = random.sample(VIP_cells, int(len(VIP_cells) * point_fraction))
-
+        """
+        """
         for plane in ["xy", "yz", "zx"]:
-            """
             print(f"Plotting {plane} with {point_fraction} fraction as point cells")
             plot_2D(
                 nml_file=nml_file,
@@ -989,7 +1018,6 @@ class HL23Net(object):
                     "point_fraction": 1.0
                 }
             )
-            """
 
             print(f"Plotting {plane} with a single cells of each type in detail")
             plot_2D(
@@ -1004,6 +1032,10 @@ class HL23Net(object):
                     "point_cells": PYR_cells[1:] + SST_cells[1:] + VIP_cells[1:] + PV_cells[1:]
                 }
             )
+            """
+        plot_interactive_3D(self.netdoc_file_name, plot_type="detailed", plot_spec={
+            "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
+        })
 
     def create_simulation(self, dt=None, seed=123):
         """Create simulation, record data"""
@@ -1125,10 +1157,10 @@ if __name__ == "__main__":
         hdf5=False,
         rotate_cells=False,
     )
-    model.create_network()
-    model.create_simulation()
+    # model.create_network()
+    # model.create_simulation()
+    model.visualize_network(min_cells=15)
     """
-    # model.visualize_network(point_fraction=0.75)
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
