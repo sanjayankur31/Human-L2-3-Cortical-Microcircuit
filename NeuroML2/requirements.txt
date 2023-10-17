@@ -5,3 +5,5 @@ netpyne
 progressbar2
 h5py
 pandas
+pynsgr
+xlrd

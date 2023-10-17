@@ -7,34 +7,34 @@ File: create_simulate.py
 
 Copyright 2023 Ankur Sinha
 """
-import math
 import copy
 import logging
+import math
 import pathlib
+import random
 import sys
-import typing
 import time
+import typing
 
-import progressbar
 import h5py
 import lems.api as lems
 import neuroml
 import numpy
 import pandas
+import progressbar
 import pyneuroml
 from neuroml.loaders import read_neuroml2_file
 from neuroml.utils import component_factory
+from neuroml.writers import NeuroMLHdf5Writer
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 from pyneuroml.neuron.nrn_export_utils import get_segment_group_name
+from pyneuroml.nsgr import run_on_nsg
 from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
-from pyneuroml.pynml import (
-    reload_saved_data,
-    write_neuroml2_file,
-    run_lems_with
-)
+from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
+from pyneuroml.pynml import (reload_saved_data, run_lems_with,
+                             write_neuroml2_file)
 from pyneuroml.utils import rotate_cell
-from pyneuroml.nsgr import run_on_nsg
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -55,6 +55,7 @@ class HL23Net(object):
         new_cells: bool = True,
         max_memory: str = "8G",
         hdf5=True,
+        rotate_cells=False,
     ):
         """Init
 
@@ -82,6 +83,10 @@ class HL23Net(object):
         :type max_memory: str
         :param hdf5: toggle exporting to HDF5 format
         :type hdf5: bool
+        :param rotate_cells: generate rotated cells, useful for visualization
+            but does not affect the spiking simulation (will affect LPF, but
+            we're not generating those here)
+        :type rotate_cells: bool
 
         """
         object.__init__(self)
@@ -95,6 +100,7 @@ class HL23Net(object):
         self.new_cells = new_cells
         self.max_memory = max_memory
         self.hdf5 = hdf5
+        self.rotate_cells = rotate_cells
 
         # data dumped from the simulation
         self.cell_data = h5py.File(
@@ -194,7 +200,12 @@ class HL23Net(object):
         self.lems_components.export_to_file(self.lems_components_file_name)
 
         print(f"Writing {self.netdoc_file_name} ")
-        write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
+        if self.hdf5:
+            NeuroMLHdf5Writer.write(self.netdoc, self.netdoc_file_name,
+                                    embed_xml=False, compress=True)
+        else:
+            write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
+
         end = time.time()
         print(f"Creating network took: {(end - start)} seconds.")
 
@@ -217,7 +228,7 @@ class HL23Net(object):
         # keep track of cell gids for our connections later, required for scaled down
         # versions when not all cells are included
         self.nml_cell = {}  # type: typing.Dict[str, neuroml.Cell]
-        self.cell_list = []
+        self.cell_list = {}  # type: typing.Dict[str, int]
         self.cell_list_by_type = {}
         for ctype in self.cell_types:
             self.cell_list_by_type[ctype] = []
@@ -248,6 +259,37 @@ class HL23Net(object):
             # include the cell to ensure the ion channel files are included
             # self.netdoc.add(neuroml.IncludeType, href=f"{ctype}.cell.nml")
 
+            # If we don't rotate cells, we only need one population per cell
+            # type.
+            # Make a copy anyway because we're modifying the original cell
+            if self.rotate_cells is False:
+                unrotated_cell = copy.deepcopy(self.nml_cell[ctype])
+                unrotated_cell.id = unrotated_cell.id + "_sim"
+                unrotated_cell_file = (
+                    f"{self.temp_cell_dir}/{unrotated_cell.id}.cell.nml"
+                )
+                unrotated_cell_doc = component_factory(
+                    neuroml.NeuroMLDocument, id=f"{unrotated_cell.id}_doc"
+                )
+                unrotated_cell_doc.add(unrotated_cell)
+                if self.biophysics is True:
+                    self.__add_tonic_inhibition(ctype, unrotated_cell,
+                                                unrotated_cell_doc)
+                write_neuroml2_file(
+                    unrotated_cell_doc, unrotated_cell_file, validate=False
+                )
+
+                self.netdoc.add(neuroml.IncludeType, href=unrotated_cell_file)
+
+                pop = self.network.add(
+                    neuroml.Population,
+                    id=f"{ctype}_pop",
+                    type="populationList",
+                    component=unrotated_cell.id,
+                )
+                pop.add(neuroml.Property(tag="color", value=self.pop_colors[ctype]))
+                pop.add(neuroml.Property(tag="region", value="L23"))
+
             i = 0
             step = int(1 / self.network_scale)
             maxcell = len(celldataset)
@@ -255,8 +297,8 @@ class HL23Net(object):
             if step >= maxcell:
                 step = 1
                 maxcell = 2
-            for i in range(0, maxcell, step):
-                acell = celldataset[i]
+            for j in range(0, maxcell, step):
+                acell = celldataset[j]
                 gid = acell[0]
                 x = acell[1]
                 y = acell[2]
@@ -265,81 +307,107 @@ class HL23Net(object):
                 yrot = acell[5]
                 zrot = acell[6]
 
-                rotated_cell = None
-                rotated_cell_file = (
-                    f"{self.temp_cell_dir}/{self.nml_cell[ctype].id}_{gid}.cell.nml"
-                )
-                rotated_cell_id = self.nml_cell[ctype].id + f"_{gid}"
-                if self.new_cells is False and pathlib.Path(rotated_cell_file).exists():
-                    print(f"{rotated_cell_file} already exists, not overwriting.")
-                    print("Set new_cells=True to regenerate all rotated cell files")
+                if self.rotate_cells is True:
+                    rotated_cell = None
+                    rotated_cell_file = (
+                        f"{self.temp_cell_dir}/{self.nml_cell[ctype].id}_{gid}.cell.nml"
+                    )
+                    rotated_cell_id = self.nml_cell[ctype].id + f"_{gid}"
+                    if self.new_cells is False and pathlib.Path(rotated_cell_file).exists():
+                        print(f"{rotated_cell_file} already exists, not overwriting.")
+                        print("Set new_cells=True to regenerate all rotated cell files")
+                    else:
+                        rotated_cell = rotate_cell(
+                            self.nml_cell[ctype],
+                            xrot,
+                            yrot,
+                            zrot,
+                            order="xyz",
+                            relative_to_soma=True,
+                        )
+                        rotated_cell.id = rotated_cell_id
+                        rotated_cell_doc = component_factory(
+                            neuroml.NeuroMLDocument, id=f"{rotated_cell_id}_doc"
+                        )
+
+                        if self.biophysics is True:
+                            self.__add_tonic_inhibition(ctype, rotated_cell,
+                                                        rotated_cell_doc)
+
+                        rotated_cell_doc.add(rotated_cell)
+                        write_neuroml2_file(
+                            rotated_cell_doc, rotated_cell_file, validate=False
+                        )
+
+                    self.netdoc.add(neuroml.IncludeType, href=rotated_cell_file)
+
+                    pop = self.network.add(
+                        neuroml.Population,
+                        id=f"{ctype}_pop_{gid}",
+                        type="populationList",
+                        component=rotated_cell_id,
+                    )
+                    pop.add(neuroml.Property(tag="color", value=self.pop_colors[ctype]))
+                    pop.add(neuroml.Property(tag="region", value="L23"))
+
+                    pop.add(
+                        neuroml.Instance, id=0, location=neuroml.Location(x=x, y=y, z=z)
+                    )
+                    # track what gids we're including in our network
+                    # used later when creating connections
+                    self.cell_list[gid] = 0
                 else:
-                    rotated_cell = rotate_cell(
-                        self.nml_cell[ctype],
-                        xrot,
-                        yrot,
-                        zrot,
-                        order="xyz",
-                        relative_to_soma=True,
+                    pop.add(
+                        neuroml.Instance, id=i, location=neuroml.Location(x=x, y=y, z=z)
                     )
-                    rotated_cell.id = rotated_cell_id
-                    rotated_cell_doc = component_factory(
-                        neuroml.NeuroMLDocument, id=f"{rotated_cell_id}_doc"
-                    )
+                    self.cell_list[gid] = i
 
-                    if self.biophysics is True and self.tonic_inhibition is True:
-                        # add gaba tonic inhibition to cells
-                        # definition file is included in the network, so we don't
-                        # re-include it here.
-                        if ctype == "HL23PYR" or ctype == "HL23SST":
-                            rotated_cell.add_channel_density(
-                                nml_cell_doc=rotated_cell_doc,
-                                cd_id="TonicInhibition",
-                                ion_channel="TonicPavlov2009",
-                                cond_density="0.000938 S_per_cm2",
-                                erev="-75 mV",
-                                group_id="all_minus_myelin",
-                                ion="non_specific",
-                                ion_chan_def_file="",
-                            )
-                        elif ctype == "HL23PV" or ctype == "HL23VIP":
-                            rotated_cell.add_channel_density(
-                                nml_cell_doc=rotated_cell_doc,
-                                cd_id="TonicInhibition",
-                                ion_channel="TonicPavlov2009",
-                                cond_density="0.000938 S_per_cm2",
-                                erev="-75 mV",
-                                group_id="all",
-                                ion="non_specific",
-                                ion_chan_def_file="",
-                            )
+                i += 1
 
-                    rotated_cell_doc.add(rotated_cell)
-                    write_neuroml2_file(
-                        rotated_cell_doc, rotated_cell_file, validate=False
-                    )
-
-                self.netdoc.add(neuroml.IncludeType, href=rotated_cell_file)
-
-                pop = self.network.add(
-                    neuroml.Population,
-                    id=f"{ctype}_pop_{gid}",
-                    type="populationList",
-                    component=rotated_cell_id,
-                )
-                pop.add(neuroml.Property(tag="color", value=self.pop_colors[ctype]))
-                pop.add(neuroml.Property(tag="region", value="L23"))
-
-                pop.add(
-                    neuroml.Instance, id=0, location=neuroml.Location(x=x, y=y, z=z)
-                )
-                self.cell_list.append(gid)
+                # currently unused
                 self.cell_list_by_type[ctype].append(gid)
 
         print(self.netdoc.summary())
         self.netdoc.validate(recursive=True)
         end = time.time()
         print(f"Creating cells took: {(end - start)} seconds")
+
+    def __add_tonic_inhibition(self, ctype, cell, cell_doc):
+        """Add tonic inhibition to provided cell
+
+        :param ctype: cell type
+        :type ctype: str
+        :param cell: cell object to add to
+        :type cell: neuroml.Cell
+        :param cell_doc: cell doc object
+        :type cell_doc: neuroml.NeuroMLDocument
+        """
+        if self.tonic_inhibition is True:
+            # add gaba tonic inhibition to cells
+            # definition file is included in the network, so we don't
+            # re-include it here.
+            if ctype == "HL23PYR" or ctype == "HL23SST":
+                cell.add_channel_density(
+                    nml_cell_doc=cell_doc,
+                    cd_id="TonicInhibition",
+                    ion_channel="TonicPavlov2009",
+                    cond_density="0.000938 S_per_cm2",
+                    erev="-75 mV",
+                    group_id="all_minus_myelin",
+                    ion="non_specific",
+                    ion_chan_def_file="",
+                )
+            elif ctype == "HL23PV" or ctype == "HL23VIP":
+                cell.add_channel_density(
+                    nml_cell_doc=cell_doc,
+                    cd_id="TonicInhibition",
+                    ion_channel="TonicPavlov2009",
+                    cond_density="0.000938 S_per_cm2",
+                    erev="-75 mV",
+                    group_id="all",
+                    ion="non_specific",
+                    ion_chan_def_file="",
+                )
 
     def create_connections(self):
         start = time.time()
@@ -447,11 +515,22 @@ class HL23Net(object):
                 cur_precell = None
                 cur_postcell = None
                 print(
-                    f"Creating connections: {pretype} -> {posttype} (~{int(conndataset.shape[0] * self.network_scale * self.network_scale)} conns)."
+                    f"Creating connections: {pretype} -> {posttype} (~{int(conndataset.shape[0])} with scale of {self.network_scale})."
                 )
+                # if we're not rotating cells, we only need one project between
+                # the single populations of different cell types
+                if self.rotate_cells is False:
+                    proj = component_factory(
+                        neuroml.Projection,
+                        id=f"proj_{pretype}_{posttype}",
+                        presynaptic_population=f"{pretype}_pop",
+                        postsynaptic_population=f"{posttype}_pop",
+                        synapse=f"{pretype}_{posttype}_{mechanism}",
+                    ) # type: neuroml.Projection
 
                 # show a progress bar so we have some idea of what's going on
-                bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
+                # bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
+                bar = progressbar.ProgressBar()
                 bar_count = 0
                 for conn in conndataset:
                     precell = conn[0]
@@ -461,15 +540,15 @@ class HL23Net(object):
                     section = conn[4]
                     sectionx = conn[5]
 
-                    bar_count += 1
-                    bar.update(bar_count)
-
                     # if both cells are not in our population, skip this connection
-                    if precell not in self.cell_list or postcell not in self.cell_list:
+                    if precell not in self.cell_list.keys() or postcell not in self.cell_list.keys():
                         logger.debug(
                             f"{precell} or {postcell} are not included in the network. Skipping"
                         )
                         continue
+
+                    bar_count += 1
+                    bar.update(bar_count)
 
                     section = (section.decode("utf-8")).split(".")[1]
                     neuroml_seggrp_id = get_segment_group_name(section)
@@ -523,44 +602,73 @@ class HL23Net(object):
 
                     conn_count += 1
                     logger.debug(
-                        f"{conn_count}: {pretype}:{precell} -> {posttype}:{postcell} {neuroml_seggrp_id}: segment {post_seg.id} ({list_cumul_lengths[ind-1]} - {list_cumul_lengths[ind]}) at {frac_along} with mechanism {mechanism}"
+                        f"{conn_count}: {pretype}:{precell} -> {posttype}:{postcell} {neuroml_seggrp_id}: segment {post_seg.id} ({list_cumul_lengths[ind - 1]} - {list_cumul_lengths[ind]}) at {frac_along} with mechanism {mechanism}"
                     )
 
                     # a new projection is only required when the pre or post cell
                     # change
-                    if precell != cur_precell or postcell != cur_postcell:
-                        proj = self.network.add(
-                            neuroml.Projection,
-                            id=f"proj_{precell}_{postcell}",
-                            presynaptic_population=f"{pretype}_pop_{precell}",
-                            postsynaptic_population=f"{posttype}_pop_{postcell}",
-                            synapse=f"{pretype}_{posttype}_{mechanism}",
-                        )
+                    if self.rotate_cells is True:
+                        if precell != cur_precell or postcell != cur_postcell:
+                            proj = self.network.add(
+                                neuroml.Projection,
+                                id=f"proj_{precell}_{postcell}",
+                                presynaptic_population=f"{pretype}_pop_{precell}",
+                                postsynaptic_population=f"{posttype}_pop_{postcell}",
+                                synapse=f"{pretype}_{posttype}_{mechanism}",
+                            )
 
-                        cur_precell = precell
-                        cur_postcell = postcell
-                        syn_count = 0
+                            cur_precell = precell
+                            cur_postcell = postcell
+                            syn_count = 0
 
-                    try:
-                        proj.add(
-                            neuroml.ConnectionWD,
-                            id=syn_count,
-                            pre_cell_id=f"../{pretype}_pop_{precell}/0/{pretype}_{precell}",
-                            pre_segment_id=0,
-                            post_cell_id=f"../{posttype}_pop_{postcell}/0/{posttype}_{postcell}",
-                            post_segment_id=post_seg.id,
-                            post_fraction_along=frac_along,
-                            weight=weight,
-                            delay=f"{delay} ms",
-                        )
-                    except ValueError as e:
-                        print(f"list of cumulative lengths: {list_cumul_lengths}")
-                        print(
-                            f"frac_along: ({section_loc} - {list_cumul_lengths[ind - 1]}) / ({list_cumul_lengths[ind]} - {list_cumul_lengths[ind - 1]}) = {frac_along}"
-                        )
-                        raise e
+                        try:
+                            proj.add(
+                                neuroml.ConnectionWD,
+                                id=syn_count,
+                                pre_cell_id=f"../{pretype}_pop_{precell}/0/{pretype}_{precell}",
+                                pre_segment_id=0,
+                                post_cell_id=f"../{posttype}_pop_{postcell}/0/{posttype}_{postcell}",
+                                post_segment_id=post_seg.id,
+                                post_fraction_along=frac_along,
+                                weight=str(float(weight) / self.network_scale),
+                                delay=f"{delay} ms",
+                            )
+                        except ValueError as e:
+                            print(f"list of cumulative lengths: {list_cumul_lengths}")
+                            print(
+                                f"frac_along: ({section_loc} - {list_cumul_lengths[ind - 1]}) / ({list_cumul_lengths[ind]} - {list_cumul_lengths[ind - 1]}) = {frac_along}"
+                            )
+                            raise e
+                    else:
+                        try:
+                            proj.add(
+                                neuroml.ConnectionWD,
+                                id=syn_count,
+                                pre_cell_id=f"../{pretype}_pop/{self.cell_list[precell]}/{pretype}_sim",
+                                pre_segment_id=0,
+                                post_cell_id=f"../{posttype}_pop/{self.cell_list[postcell]}/{posttype}_sim",
+                                post_segment_id=post_seg.id,
+                                post_fraction_along=frac_along,
+                                weight=str(float(weight) / self.network_scale),
+                                delay=f"{delay} ms",
+                            )
+                        except ValueError as e:
+                            print(f"list of cumulative lengths: {list_cumul_lengths}")
+                            print(
+                                f"frac_along: ({section_loc} - {list_cumul_lengths[ind - 1]}) / ({list_cumul_lengths[ind]} - {list_cumul_lengths[ind - 1]}) = {frac_along}"
+                            )
+                            raise e
 
                     syn_count += 1
+
+                # Only add projection to network if there's at least one
+                # connection in it.
+                # Not required with rotated cells because projection creation
+                # and connection creation go hand in hand
+                if self.rotate_cells is False:
+                    if len(proj.connection_wds) > 0:
+                        self.network.add(proj)
+
         end = time.time()
         print(f"Creating connections took: {(end - start)} seconds.")
 
@@ -657,11 +765,7 @@ class HL23Net(object):
         for pop in self.network.populations:
             # cell name
             cell_type = pop.component.split("_")[0]
-            # temporarily skip cells I haven't sorted out yet
-            try:
-                input_segs = cell_type_input_locations[cell_type]
-            except KeyError:
-                continue
+            input_segs = cell_type_input_locations[cell_type]
 
             for rel_dist, seginfos in input_segs.items():
                 # one input list per population per component
@@ -671,11 +775,19 @@ class HL23Net(object):
                                              validate=False)
                 input_list_ctr += 1
                 for (seg, frac_along) in seginfos:
-                    inputlist.add("Input", id=f"{input_ctr}",
-                                  target=f"../{pop.id}/0/{pop.component}",
-                                  destination="synapses", segment_id=seg,
-                                  fraction_along=frac_along)
-                    input_ctr += 1
+                    if self.rotate_cells is True:
+                        inputlist.add("Input", id=f"{input_ctr}",
+                                      target=f"../{pop.id}/0/{pop.component}",
+                                      destination="synapses", segment_id=seg,
+                                      fraction_along=frac_along)
+                        input_ctr += 1
+                    else:
+                        for inst in pop.instances:
+                            inputlist.add("Input", id=f"{input_ctr}",
+                                          target=f"../{pop.id}/{inst.id}/{pop.component}",
+                                          destination="synapses", segment_id=seg,
+                                          fraction_along=frac_along)
+                            input_ctr += 1
 
         end = time.time()
         print(f"Adding background input took: {(end - start)} seconds.")
@@ -813,33 +925,117 @@ class HL23Net(object):
                         break
         logger.setLevel(logging.INFO)
 
-    def visualize_network(self):
+    def visualize_network(self, min_cells=5):
         """Generate morph plots"""
-        # if the network has been constructed, use the network doc object, but
-        # and add the included cells so we also get morphologies plotted
+        print(f"Visualising network at scale {self.network_scale} with {min_cells} in full")
+        # if the network has been constructed, copy over the populations and
+        # include the cells
         if self.netdoc is not None:
-            nml_file = copy.deepcopy(self.netdoc)
-            for inc in nml_file.includes:
+            nml_file = neuroml.NeuroMLDocument(id="network_copy")
+            nml_file.add(neuroml.Network, id="dummy_network")
+            # copy over populations
+            nml_file.networks[0].populations = self.netdoc.networks[0].populations
+            nml_file.includes = self.netdoc.includes
+            # include cells
+            for inc in self.nml_file.includes:
                 incfile = read_neuroml2_file(inc.href)
-                for cells in incfile.cells:
-                    nml_file.add(cells)
-
-            nml_file.includes = []
+                for cell in incfile.cells:
+                    nml_file.add(cell)
         else:
             # otherwise read the file in once so it's not read in repeatedly
-            nml_file = read_neuroml2_file(self.netdoc_file_name, include_includes=True)
+            print(f"Reading {self.netdoc_file_name}")
+            nml_file = read_neuroml2_file(self.netdoc_file_name)
 
+        PYR_cells = []
+        SST_cells = []
+        PV_cells = []
+        VIP_cells = []
+        PYR_point_cells = []
+        SST_point_cells = []
+        PV_point_cells = []
+        VIP_point_cells = []
+
+        # because each cell is in a separate population
+        print("Picking point cells")
+        for inc in nml_file.includes:
+            cell = inc.href.split("/")[1].replace(".cell.nml", "")
+            # remove artificial long axons
+            if "PYR" in cell:
+                PYR_cells.append(cell)
+            if "PV" in cell:
+                PV_cells.append(cell)
+            if "VIP" in cell:
+                VIP_cells.append(cell)
+            if "SST" in cell:
+                SST_cells.append(cell)
+
+        # at least plot min_cells cells of each type, and all the rest as points
+        if (len(PYR_cells) - min_cells) > 0:
+            PYR_point_cells = random.sample(PYR_cells, len(PYR_cells) - min_cells)
+        if (len(SST_cells) - min_cells) > 0:
+            SST_point_cells = random.sample(SST_cells, len(SST_cells) - min_cells)
+        if (len(PV_cells) - min_cells) > 0:
+            PV_point_cells = random.sample(PV_cells, len(PV_cells) - min_cells)
+        if (len(VIP_cells) - min_cells) > 0:
+            VIP_point_cells = random.sample(VIP_cells, len(VIP_cells) - min_cells)
+
+        """
+        print("Removing axons from PYR cells")
+        for ac in nml_file.cells:
+            if ac.id not in PYR_point_cells:
+                axons = ac.get_all_segments_in_group(ac.get_segment_group("axon_group"))
+                for s in ac.morphology.segments:
+                    if s.id in axons:
+                        ac.morphology.segments.remove(s)
+
+        """
+        """
         for plane in ["xy", "yz", "zx"]:
-            print(f"Plotting {plane}")
+            print(f"Plotting {plane} with {point_fraction} fraction as point cells")
             plot_2D(
                 nml_file=nml_file,
                 plane2d=plane,
-                min_width=4,
+                min_width=1,
                 nogui=True,
                 title="",
                 plot_type="constant",
                 save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.png",
+                plot_spec={
+                    "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
+                }
             )
+
+            print(f"Plotting {plane} with all cells as point cells")
+            plot_2D(
+                nml_file=nml_file,
+                plane2d=plane,
+                min_width=1,
+                nogui=True,
+                title="",
+                plot_type="constant",
+                save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.allpoints.png",
+                plot_spec={
+                    "point_fraction": 1.0
+                }
+            )
+
+            print(f"Plotting {plane} with a single cells of each type in detail")
+            plot_2D(
+                nml_file=nml_file,
+                plane2d=plane,
+                min_width=1,
+                nogui=True,
+                title="",
+                plot_type="constant",
+                save_to_file=f"{self.netdoc_file_name.replace('.nml', '')}.{plane}.points.png",
+                plot_spec={
+                    "point_cells": PYR_cells[1:] + SST_cells[1:] + VIP_cells[1:] + PV_cells[1:]
+                }
+            )
+            """
+        plot_interactive_3D(self.netdoc_file_name, plot_type="detailed", plot_spec={
+            "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
+        })
 
     def create_simulation(self, dt=None, seed=123):
         """Create simulation, record data"""
@@ -952,17 +1148,18 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=False,
+        new_cells=True,
         biophysics=True,
         tonic_inhibition=True,
         connections=True,
         network_input="background",
         stimulus=False,
-        hdf5=True,
+        hdf5=False,
+        rotate_cells=False,
     )
-    model.create_network()
-    # model.visualize_network()
-    model.create_simulation()
+    # model.create_network()
+    # model.create_simulation()
+    model.visualize_network(min_cells=15)
     """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
