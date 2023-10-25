@@ -13,18 +13,18 @@ mechanisms:
         num_params: 5
         parameters:
             Faraday_CaDynamics_E2_VIP_axonal:
-                ave_all_segs: 0.0964853
+                ave_all_segs: 96485300000.0
                 values:
                     HL23VIP_0_.axon_0:
                         id: HL23VIP[0].axon_0
                         nseg: 1
                         values:
-                            '*': 0.0964853
+                            '*': 96485300000.0
                     HL23VIP_0_.axon_1:
                         id: HL23VIP[0].axon_1
                         nseg: 1
                         values:
-                            '*': 0.0964853
+                            '*': 96485300000.0
             decay_CaDynamics_E2_VIP_axonal:
                 ave_all_segs: 75.7888
                 values:
@@ -39,18 +39,18 @@ mechanisms:
                         values:
                             '*': 75.7888
             depth_CaDynamics_E2_VIP_axonal:
-                ave_all_segs: 0.1
+                ave_all_segs: 1.0e-05
                 values:
                     HL23VIP_0_.axon_0:
                         id: HL23VIP[0].axon_0
                         nseg: 1
                         values:
-                            '*': 0.1
+                            '*': 1.0e-05
                     HL23VIP_0_.axon_1:
                         id: HL23VIP[0].axon_1
                         nseg: 1
                         values:
-                            '*': 0.1
+                            '*': 1.0e-05
             gamma_CaDynamics_E2_VIP_axonal:
                 ave_all_segs: 0.0005
                 values:
@@ -82,13 +82,13 @@ mechanisms:
         num_params: 5
         parameters:
             Faraday_CaDynamics_E2_VIP_somatic:
-                ave_all_segs: 0.0964853
+                ave_all_segs: 96485300000.0
                 values:
                     HL23VIP_0_.soma_0:
                         id: HL23VIP[0].soma_0
                         nseg: 1
                         values:
-                            '*': 0.0964853
+                            '*': 96485300000.0
             decay_CaDynamics_E2_VIP_somatic:
                 ave_all_segs: 25.1592
                 values:
@@ -98,13 +98,13 @@ mechanisms:
                         values:
                             '*': 25.1592
             depth_CaDynamics_E2_VIP_somatic:
-                ave_all_segs: 0.1
+                ave_all_segs: 1.0e-05
                 values:
                     HL23VIP_0_.soma_0:
                         id: HL23VIP[0].soma_0
                         nseg: 1
                         values:
-                            '*': 0.1
+                            '*': 1.0e-05
             gamma_CaDynamics_E2_VIP_somatic:
                 ave_all_segs: 0.0005
                 values:
