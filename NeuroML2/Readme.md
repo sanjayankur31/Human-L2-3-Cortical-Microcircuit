@@ -28,8 +28,8 @@ These files are created for different network scales:
 
 ## NeuroML files are stored in a git-annex repository
 
-Because of the large number of files and large sizes of the NeuroML files, these are not stored on the GitHub repository.
-Instead, they are stored on [g-node](https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit) which supports large files and git-annex.
+Because of the large number of files and large sizes of the NeuroML files, not all files can be stored on GitHub, which limits files to 100Mb.
+These large files are are stored on [g-node](https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit) which supports large files using git-annex.
 If you want to obtain these, please follow these steps.
 
 https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit
