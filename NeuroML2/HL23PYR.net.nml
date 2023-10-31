@@ -1,1 +1,29 @@
-/annex/objects/SHA256E-s1782--5d9726b26c4474d78037bd2c3ae4918eed840664b5dfc7e20a45e087e47d3da2.net.nml
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="HL23PYR">
+    <include href="HL23PYR.cell.nml"/>
+    <include href="HL23PYR.tonic.cell.nml"/>
+    <pulseGenerator id="pg_HL23PYR" delay="50ms" duration="200ms" amplitude="0.2nA">
+        <notes>Simple pulse generator</notes>
+    </pulseGenerator>
+    <network id="HL23PYRNet" type="networkWithTemperature" temperature="34 degC">
+        <population id="HL23PYR_pop" component="HL23PYR" type="populationList">
+            <property tag="color" value="0.4911688801788786 0.8258528277092643 0.7026721292874603"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="0." y="0." z="0."/>
+            </instance>
+        </population>
+        <population id="HL23PYR_pop_tonic" component="HL23PYR_tonic" type="populationList">
+            <property tag="color" value="0.4911688801788786 0.8258528277092643 0.7026721292874603"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="0." y="0." z="0."/>
+            </instance>
+        </population>
+        <inputList id="stim_iclamp_HL23PYR" population="HL23PYR_pop" component="pg_HL23PYR">
+            <input id="0" target="../HL23PYR_pop/0" destination="synapses"/>
+        </inputList>
+        <inputList id="stim_iclamp_HL23PYR_tonic" population="HL23PYR_pop_tonic" component="pg_HL23PYR">
+            <input id="0" target="../HL23PYR_pop_tonic/0" destination="synapses"/>
+        </inputList>
+    </network>
+</neuroml>

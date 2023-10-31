@@ -1,1 +1,129 @@
-/annex/objects/SHA256E-s8491--9541e3bd85bb3d0e0b13e9258c80e80ccf8d516ba6a0caf7e476b9bb8f50d4e6.xml
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.0.10 (libNeuroML v0.5.3)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="HL23Sim_0.05"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="HL23Net_0.05.net.nml"/>
+    <Include file="rotated_cells/HL23PYR_0.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_240.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_480.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_720.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_157.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_397.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_637.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_74.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_314.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_554.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_794.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_231.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_471.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_711.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_148.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_388.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_628.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_65.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_305.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_545.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_785.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_222.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_462.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_702.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_139.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_379.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_619.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_56.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_296.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_536.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_776.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_225.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_465.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_705.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_154.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_394.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_634.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_83.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_323.cell.nml"/>
+    <Include file="rotated_cells/HL23PYR_563.cell.nml"/>
+    <Include file="rotated_cells/HL23SST_804.cell.nml"/>
+    <Include file="rotated_cells/HL23SST_809.cell.nml"/>
+    <Include file="rotated_cells/HL23SST_837.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_852.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_879.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_906.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_874.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_924.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_998.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_930.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_933.cell.nml"/>
+    <Include file="lems_components_0.05.xml"/>
+   
+    <Simulation id="HL23Sim_0.05" length="2000ms" step="0.025ms" target="HL23Network" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="output1" fileName="HL23Net_0.05.v.dat">
+            <OutputColumn id="HL23PYR_pop_0" quantity="HL23PYR_pop_0/0/HL23PYR_0/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_240" quantity="HL23PYR_pop_240/0/HL23PYR_240/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_480" quantity="HL23PYR_pop_480/0/HL23PYR_480/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_720" quantity="HL23PYR_pop_720/0/HL23PYR_720/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_157" quantity="HL23PYR_pop_157/0/HL23PYR_157/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_397" quantity="HL23PYR_pop_397/0/HL23PYR_397/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_637" quantity="HL23PYR_pop_637/0/HL23PYR_637/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_74" quantity="HL23PYR_pop_74/0/HL23PYR_74/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_314" quantity="HL23PYR_pop_314/0/HL23PYR_314/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_554" quantity="HL23PYR_pop_554/0/HL23PYR_554/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_794" quantity="HL23PYR_pop_794/0/HL23PYR_794/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_231" quantity="HL23PYR_pop_231/0/HL23PYR_231/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_471" quantity="HL23PYR_pop_471/0/HL23PYR_471/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_711" quantity="HL23PYR_pop_711/0/HL23PYR_711/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_148" quantity="HL23PYR_pop_148/0/HL23PYR_148/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_388" quantity="HL23PYR_pop_388/0/HL23PYR_388/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_628" quantity="HL23PYR_pop_628/0/HL23PYR_628/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_65" quantity="HL23PYR_pop_65/0/HL23PYR_65/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_305" quantity="HL23PYR_pop_305/0/HL23PYR_305/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_545" quantity="HL23PYR_pop_545/0/HL23PYR_545/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_785" quantity="HL23PYR_pop_785/0/HL23PYR_785/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_222" quantity="HL23PYR_pop_222/0/HL23PYR_222/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_462" quantity="HL23PYR_pop_462/0/HL23PYR_462/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_702" quantity="HL23PYR_pop_702/0/HL23PYR_702/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_139" quantity="HL23PYR_pop_139/0/HL23PYR_139/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_379" quantity="HL23PYR_pop_379/0/HL23PYR_379/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_619" quantity="HL23PYR_pop_619/0/HL23PYR_619/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_56" quantity="HL23PYR_pop_56/0/HL23PYR_56/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_296" quantity="HL23PYR_pop_296/0/HL23PYR_296/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_536" quantity="HL23PYR_pop_536/0/HL23PYR_536/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_776" quantity="HL23PYR_pop_776/0/HL23PYR_776/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_225" quantity="HL23PYR_pop_225/0/HL23PYR_225/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_465" quantity="HL23PYR_pop_465/0/HL23PYR_465/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_705" quantity="HL23PYR_pop_705/0/HL23PYR_705/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_154" quantity="HL23PYR_pop_154/0/HL23PYR_154/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_394" quantity="HL23PYR_pop_394/0/HL23PYR_394/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_634" quantity="HL23PYR_pop_634/0/HL23PYR_634/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_83" quantity="HL23PYR_pop_83/0/HL23PYR_83/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_323" quantity="HL23PYR_pop_323/0/HL23PYR_323/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_563" quantity="HL23PYR_pop_563/0/HL23PYR_563/0/v"/> 
+            <OutputColumn id="HL23SST_pop_804" quantity="HL23SST_pop_804/0/HL23SST_804/0/v"/> 
+            <OutputColumn id="HL23SST_pop_809" quantity="HL23SST_pop_809/0/HL23SST_809/0/v"/> 
+            <OutputColumn id="HL23SST_pop_837" quantity="HL23SST_pop_837/0/HL23SST_837/0/v"/> 
+            <OutputColumn id="HL23PV_pop_852" quantity="HL23PV_pop_852/0/HL23PV_852/0/v"/> 
+            <OutputColumn id="HL23PV_pop_879" quantity="HL23PV_pop_879/0/HL23PV_879/0/v"/> 
+            <OutputColumn id="HL23PV_pop_906" quantity="HL23PV_pop_906/0/HL23PV_906/0/v"/> 
+            <OutputColumn id="HL23PV_pop_874" quantity="HL23PV_pop_874/0/HL23PV_874/0/v"/> 
+            <OutputColumn id="HL23VIP_pop_924" quantity="HL23VIP_pop_924/0/HL23VIP_924/0/v"/> 
+            <OutputColumn id="HL23VIP_pop_998" quantity="HL23VIP_pop_998/0/HL23VIP_998/0/v"/> 
+            <OutputColumn id="HL23VIP_pop_930" quantity="HL23VIP_pop_930/0/HL23VIP_930/0/v"/> 
+            <OutputColumn id="HL23VIP_pop_933" quantity="HL23VIP_pop_933/0/HL23VIP_933/0/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

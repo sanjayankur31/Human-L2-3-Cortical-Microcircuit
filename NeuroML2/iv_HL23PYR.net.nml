@@ -1,1 +1,10 @@
-/annex/objects/SHA256E-s854--2f71147e725a391c58a3feb62b0411486f6612a48f7fd9825d9a8014fd70479b.net.nml
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="network_of_HL23PYR">
+    <include href="HL23PYR.cell.nml"/>
+    <pulseGenerator id="input_0_2nA" delay="200ms" duration="250.0ms" amplitude="0.2nA"/>
+    <network id="network_of_HL23PYR" type="networkWithTemperature" temperature="34 degC">
+        <population id="population_of_HL23PYR" component="HL23PYR" size="1"/>
+        <inputList id="input_0_2nA" population="population_of_HL23PYR" component="input_0_2nA">
+            <input id="0" target="../population_of_HL23PYR[0]" destination="synapses"/>
+        </inputList>
+    </network>
+</neuroml>

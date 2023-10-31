@@ -1,1 +1,40 @@
-/annex/objects/SHA256E-s1422--a83383467d5da905eaa2bdb12fe3904533cdce22d53e13ad7eb3bdd179ddb193.xml
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.7.6 (libNeuroML v0.4.2)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="HL23PV_sim"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="HL23PV.net.nml"/>
+    <Include file="HL23PV.cell.nml"/>
+    <Include file="CaDynamics_E2_NML2.nml"/>
+    <Include file="channels/pas.channel.nml"/>
+    <Include file="channels/Ih.channel.nml"/>
+    <Include file="channels/NaTg/NaTg.channel.nml"/>
+    <Include file="channels/Nap.channel.nml"/>
+    <Include file="channels/K_P.channel.nml"/>
+    <Include file="channels/K_T.channel.nml"/>
+    <Include file="channels/Kv3_1.channel.nml"/>
+    <Include file="channels/Im.channel.nml"/>
+    <Include file="channels/SK.channel.nml"/>
+    <Include file="channels/Ca_HVA.channel.nml"/>
+    <Include file="channels/Ca_LVA.channel.nml"/>
+   
+    <Simulation id="HL23PV_sim" length="300.0ms" step="0.01ms" target="HL23PVNet" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="HL23PV_net_output" fileName="HL23PV_net.dat">
+            <OutputColumn id="HL23PV_pop_0_v" quantity="HL23PV_pop/0/HL23PV/0/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

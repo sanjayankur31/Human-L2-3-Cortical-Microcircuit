@@ -1,1 +1,35 @@
-/annex/objects/SHA256E-s1352--e68dae06cc09d5e1bc7b42a610c430ae90d5bf85fbbbdf4300d5e7f8dac06df9.xml
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.1.2 (libNeuroML v0.5.5)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="HL23Sim_0.01"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="HL23Net_0.01.net.nml"/>
+    <Include file="rotated_cells/HL23PYR_sim.cell.nml"/>
+    <Include file="rotated_cells/HL23SST_sim.cell.nml"/>
+    <Include file="rotated_cells/HL23PV_sim.cell.nml"/>
+    <Include file="rotated_cells/HL23VIP_sim.cell.nml"/>
+    <Include file="lems_components_0.01.xml"/>
+   
+    <Simulation id="HL23Sim_0.01" length="1000.0ms" step="0.025ms" target="HL23Network" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
+        
+        <OutputFile id="output1" fileName="HL23Net_0.01.v.dat">
+            <OutputColumn id="HL23PYR_pop" quantity="HL23PYR_pop/0/HL23PYR_sim/0/v"/> 
+            <OutputColumn id="HL23SST_pop" quantity="HL23SST_pop/0/HL23SST_sim/0/v"/> 
+            <OutputColumn id="HL23PV_pop" quantity="HL23PV_pop/0/HL23PV_sim/0/v"/> 
+            <OutputColumn id="HL23VIP_pop" quantity="HL23VIP_pop/0/HL23VIP_sim/0/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>
