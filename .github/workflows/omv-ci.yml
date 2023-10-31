@@ -36,6 +36,8 @@ jobs:
 
     - name: Get files for tests from git-annex
       run: |
+        git config --global user.email "test@test.com"
+        git config --global user.name "test user"
         git remote add gnode https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit.git
         git annex init
         git annex get NeuroML2/HL23{PYR,SST,VIP,PV}.{cell,tonic.cell,net}.nml
