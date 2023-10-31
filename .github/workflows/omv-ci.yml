@@ -38,7 +38,7 @@ jobs:
       run: |
         git config --global user.email "test@test.com"
         git config --global user.name "test user"
-        git remote add gnode https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit.git
+        git remote add gnode git@gin.g-node.org:/ankursinha/Human-L2-3-Cortical-Microcircuit.git
         git annex init
         git annex get NeuroML2/HL23{PYR,SST,VIP,PV}.{cell,tonic.cell,net}.nml
         git annex get NeuroML2/LEMS_HL23{PYR,SST,VIP,PV}_sim.xml
