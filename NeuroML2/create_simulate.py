@@ -138,10 +138,16 @@ class HL23Net(object):
             "HL23VIP": "0.5 0.5 0.5",
         }
         self.simulation_id = f"HL23Sim_{self.network_scale}"
-        self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
+        if self.rotate_cells is True:
+            self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.rotated.xml"
+        else:
+            self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
         self.netdoc = None
         self.network_id = "HL23Network"
-        self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
+        if self.rotate_cells is True:
+            self.netdoc_file_name = f"HL23Net_{self.network_scale}.rotated.net.nml"
+        else:
+            self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
         if self.hdf5 is True:
             self.netdoc_file_name += ".h5"
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
@@ -526,7 +532,7 @@ class HL23Net(object):
                         presynaptic_population=f"{pretype}_pop",
                         postsynaptic_population=f"{posttype}_pop",
                         synapse=f"{pretype}_{posttype}_{mechanism}",
-                    ) # type: neuroml.Projection
+                    )  # type: neuroml.Projection
 
                 # show a progress bar so we have some idea of what's going on
                 # bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
@@ -660,6 +666,7 @@ class HL23Net(object):
                             raise e
 
                     syn_count += 1
+                bar.finish()
 
                 # Only add projection to network if there's at least one
                 # connection in it.
@@ -1035,7 +1042,7 @@ class HL23Net(object):
             """
         plot_interactive_3D(self.netdoc_file_name, plot_type="detailed", plot_spec={
             "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
-        })
+        }, min_width=1.0)
 
     def create_simulation(self, dt=None, seed=123):
         """Create simulation, record data"""
@@ -1155,11 +1162,11 @@ if __name__ == "__main__":
         network_input="background",
         stimulus=False,
         hdf5=False,
-        rotate_cells=False,
+        rotate_cells=True,
     )
-    # model.create_network()
+    model.create_network()
     # model.create_simulation()
-    model.visualize_network(min_cells=15)
+    # model.visualize_network(min_cells=25)
     """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
