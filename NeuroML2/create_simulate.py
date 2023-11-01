@@ -1044,8 +1044,16 @@ class HL23Net(object):
             "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
         }, min_width=1.0)
 
-    def create_simulation(self, dt=None, seed=123):
-        """Create simulation, record data"""
+    def create_simulation(self, dt=None, seed=123, record_data=True):
+        """Create simulation, record data.
+
+        :param dt: override dt value (in ms)
+        :type dt: str
+        :param seed: seed
+        :type seed: int
+        :param record_data: toggle whether data should be recorded
+        :type record_data: bool
+        """
         start = time.time()
         if dt is None:
             dt = self.dt
@@ -1063,12 +1071,14 @@ class HL23Net(object):
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
         simulation.include_lems_file(self.lems_components_file_name)
 
-        simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
-        print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
-        for apop in self.network.populations:
-            simulation.add_column_to_output_file(
-                "output1", f"{apop.id}", f"{apop.id}/0/{apop.component}/0/v"
-            )
+        if record_data is True:
+            simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
+            print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
+            for apop in self.network.populations:
+                for inst in apop.instances:
+                    simulation.add_column_to_output_file(
+                        "output1", f"{apop.id}_{inst}", f"{apop.id}/{inst}/{apop.component}/0/v"
+                    )
 
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
