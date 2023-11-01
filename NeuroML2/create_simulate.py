@@ -216,11 +216,15 @@ class HL23Net(object):
         print(f"Creating network took: {(end - start)} seconds.")
 
     def create_cells(self):
-        """Create all rotated cells and add them to the network.
+        """Create cells and add them to the network.
 
-        Each rotated cell is added to a separate population because in NeuroML,
-        a population can only include a single Component, but each rotated cell
-        is a different component.
+        Each rotated cell is a new component in NeuroML, and since each
+        population can only have one component attached to it when cells are
+        rotated, each cell will belong to a different single celled population.
+
+        However, for simulations where one isn't looking at LFPs etc., one does
+        not need to rotate the cells. So, one cell component will be used to
+        create a single population of each cell type.
         """
         start = time.time()
         print("Creating cells")
@@ -1077,7 +1081,7 @@ class HL23Net(object):
             for apop in self.network.populations:
                 for inst in apop.instances:
                     simulation.add_column_to_output_file(
-                        "output1", f"{apop.id}_{inst}", f"{apop.id}/{inst}/{apop.component}/0/v"
+                        "output1", f"{apop.id}_{inst.id}", f"{apop.id}/{inst.id}/{apop.component}/0/v"
                     )
 
         simulation.save_to_file(self.lems_simulation_file)
@@ -1114,6 +1118,8 @@ class HL23Net(object):
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        max_memory=self.max_memory, **kwargs)
+            print("Press Ctrl C to interrupt the waiting process")
+            print("You can use `nsg_job -l` to check the status of the job and download the simulation reults")
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
@@ -1165,31 +1171,31 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=True,
+        new_cells=False,
         biophysics=True,
         tonic_inhibition=True,
         connections=True,
         network_input="background",
         stimulus=False,
         hdf5=False,
-        rotate_cells=True,
+        rotate_cells=False,
     )
     model.create_network()
-    # model.create_simulation()
+    model.create_simulation()
     # model.visualize_network(min_cells=25)
     """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
+    """
     # for NSG
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": 64,
-                      "number_nodes_": "1",
+                      "number_nodes_": "2",
                       "runtime_": "2",
-                      'toolId': "PY_EXPANSE",
+                      'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1"
                   })
-    """
     # model.plot_v_graphs()

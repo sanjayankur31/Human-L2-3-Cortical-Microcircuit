@@ -1,11 +1,11 @@
 <Lems>
-    
+
     <!-- 
 
-        This LEMS file has been automatically generated using PyNeuroML v1.1.2 (libNeuroML v0.5.5)
+        This LEMS file has been automatically generated using PyNeuroML v1.1.5 (libNeuroML v0.5.6)
 
      -->
-    
+
     <!-- Specify which component to run -->
     <Target component="HL23Sim_0.01"/>
 
@@ -13,23 +13,32 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
-    
+
     <Include file="HL23Net_0.01.net.nml"/>
     <Include file="rotated_cells/HL23PYR_sim.cell.nml"/>
     <Include file="rotated_cells/HL23SST_sim.cell.nml"/>
     <Include file="rotated_cells/HL23PV_sim.cell.nml"/>
     <Include file="rotated_cells/HL23VIP_sim.cell.nml"/>
     <Include file="lems_components_0.01.xml"/>
-   
+
     <Simulation id="HL23Sim_0.01" length="1000.0ms" step="0.025ms" target="HL23Network" seed="123">  <!-- Note seed: ensures same random numbers used every run -->
-        
         <OutputFile id="output1" fileName="HL23Net_0.01.v.dat">
-            <OutputColumn id="HL23PYR_pop" quantity="HL23PYR_pop/0/HL23PYR_sim/0/v"/> 
-            <OutputColumn id="HL23SST_pop" quantity="HL23SST_pop/0/HL23SST_sim/0/v"/> 
-            <OutputColumn id="HL23PV_pop" quantity="HL23PV_pop/0/HL23PV_sim/0/v"/> 
-            <OutputColumn id="HL23VIP_pop" quantity="HL23VIP_pop/0/HL23VIP_sim/0/v"/> 
+            <OutputColumn id="HL23PYR_pop_0" quantity="HL23PYR_pop/0/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_1" quantity="HL23PYR_pop/1/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_2" quantity="HL23PYR_pop/2/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_3" quantity="HL23PYR_pop/3/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_4" quantity="HL23PYR_pop/4/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_5" quantity="HL23PYR_pop/5/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_6" quantity="HL23PYR_pop/6/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23PYR_pop_7" quantity="HL23PYR_pop/7/HL23PYR_sim/0/v"/>
+            <OutputColumn id="HL23SST_pop_0" quantity="HL23SST_pop/0/HL23SST_sim/0/v"/>
+            <OutputColumn id="HL23SST_pop_1" quantity="HL23SST_pop/1/HL23SST_sim/0/v"/>
+            <OutputColumn id="HL23PV_pop_0" quantity="HL23PV_pop/0/HL23PV_sim/0/v"/>
+            <OutputColumn id="HL23PV_pop_1" quantity="HL23PV_pop/1/HL23PV_sim/0/v"/>
+            <OutputColumn id="HL23VIP_pop_0" quantity="HL23VIP_pop/0/HL23VIP_sim/0/v"/>
+            <OutputColumn id="HL23VIP_pop_1" quantity="HL23VIP_pop/1/HL23VIP_sim/0/v"/>
         </OutputFile>
-        
+
     </Simulation>
 
 </Lems>
