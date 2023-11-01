@@ -31,4 +31,6 @@ x86_64/
 /NeuroML2/tests/arm64
 /NeuroML2/arm64
 
+
+/NeuroML2/rotated_cells/*_sim.cell.nml
 __pycache__/
