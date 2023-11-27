@@ -138,10 +138,16 @@ class HL23Net(object):
             "HL23VIP": "0.5 0.5 0.5",
         }
         self.simulation_id = f"HL23Sim_{self.network_scale}"
-        self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
+        if self.rotate_cells is True:
+            self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.rotated.xml"
+        else:
+            self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
         self.netdoc = None
         self.network_id = "HL23Network"
-        self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
+        if self.rotate_cells is True:
+            self.netdoc_file_name = f"HL23Net_{self.network_scale}.rotated.net.nml"
+        else:
+            self.netdoc_file_name = f"HL23Net_{self.network_scale}.net.nml"
         if self.hdf5 is True:
             self.netdoc_file_name += ".h5"
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
@@ -210,11 +216,15 @@ class HL23Net(object):
         print(f"Creating network took: {(end - start)} seconds.")
 
     def create_cells(self):
-        """Create all rotated cells and add them to the network.
+        """Create cells and add them to the network.
 
-        Each rotated cell is added to a separate population because in NeuroML,
-        a population can only include a single Component, but each rotated cell
-        is a different component.
+        Each rotated cell is a new component in NeuroML, and since each
+        population can only have one component attached to it when cells are
+        rotated, each cell will belong to a different single celled population.
+
+        However, for simulations where one isn't looking at LFPs etc., one does
+        not need to rotate the cells. So, one cell component will be used to
+        create a single population of each cell type.
         """
         start = time.time()
         print("Creating cells")
@@ -526,7 +536,7 @@ class HL23Net(object):
                         presynaptic_population=f"{pretype}_pop",
                         postsynaptic_population=f"{posttype}_pop",
                         synapse=f"{pretype}_{posttype}_{mechanism}",
-                    ) # type: neuroml.Projection
+                    )  # type: neuroml.Projection
 
                 # show a progress bar so we have some idea of what's going on
                 # bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
@@ -660,6 +670,7 @@ class HL23Net(object):
                             raise e
 
                     syn_count += 1
+                bar.finish()
 
                 # Only add projection to network if there's at least one
                 # connection in it.
@@ -1035,10 +1046,18 @@ class HL23Net(object):
             """
         plot_interactive_3D(self.netdoc_file_name, plot_type="detailed", plot_spec={
             "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
-        })
+        }, min_width=1.0)
 
-    def create_simulation(self, dt=None, seed=123):
-        """Create simulation, record data"""
+    def create_simulation(self, dt=None, seed=123, record_data=True):
+        """Create simulation, record data.
+
+        :param dt: override dt value (in ms)
+        :type dt: str
+        :param seed: seed
+        :type seed: int
+        :param record_data: toggle whether data should be recorded
+        :type record_data: bool
+        """
         start = time.time()
         if dt is None:
             dt = self.dt
@@ -1056,12 +1075,14 @@ class HL23Net(object):
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
         simulation.include_lems_file(self.lems_components_file_name)
 
-        simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
-        print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
-        for apop in self.network.populations:
-            simulation.add_column_to_output_file(
-                "output1", f"{apop.id}", f"{apop.id}/0/{apop.component}/0/v"
-            )
+        if record_data is True:
+            simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
+            print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
+            for apop in self.network.populations:
+                for inst in apop.instances:
+                    simulation.add_column_to_output_file(
+                        "output1", f"{apop.id}_{inst.id}", f"{apop.id}/{inst.id}/{apop.component}/0/v"
+                    )
 
         simulation.save_to_file(self.lems_simulation_file)
         print(f"Saved simulation to {self.lems_simulation_file}")
@@ -1097,6 +1118,8 @@ class HL23Net(object):
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        max_memory=self.max_memory, **kwargs)
+            print("Press Ctrl C to interrupt the waiting process")
+            print("You can use `nsg_job -l` to check the status of the job and download the simulation reults")
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
@@ -1148,7 +1171,7 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=True,
+        new_cells=False,
         biophysics=True,
         tonic_inhibition=True,
         connections=True,
@@ -1157,22 +1180,25 @@ if __name__ == "__main__":
         hdf5=False,
         rotate_cells=False,
     )
-    # model.create_network()
-    # model.create_simulation()
-    model.visualize_network(min_cells=15)
+    model.create_network()
+    model.create_simulation()
+    # model.visualize_network(min_cells=25)
     """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
+    """
     # for NSG
+    # with netpyne, use `-nogui` to prevent matplotlib import
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
                   nsg_sim_config={
                       "number_cores_": "64",
-                      "tasks_per_node_": 64,
-                      "number_nodes_": "1",
+                      "tasks_per_node_": "64",
+                      "number_nodes_": "2",
                       "runtime_": "2",
-                      'toolId': "PY_EXPANSE",
-                      'nrnivmodl_o_': "1"
-                  })
-    """
+                      'toolId': "OSBv2_EXPANSE_0_7_3",
+                      'nrnivmodl_o_': "1",
+                      "cmdlineopts_": "-nogui"
+                  },
+                  nogui=True)
     # model.plot_v_graphs()

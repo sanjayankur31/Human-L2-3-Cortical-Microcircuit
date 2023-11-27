@@ -25,3 +25,46 @@ These files are created for different network scales:
 - lems_component*.xml: files including LEMS definitions for inclusion into the LEMS simulation files
 - LEMS*xml: LEMS simulation scripts
 - HL23Net*.net.nml: Network description files
+
+## NeuroML files are stored in a git-annex repository
+
+Because of the large number of files and large sizes of the NeuroML files, not all files can be stored on GitHub, which limits files to 100Mb.
+These large files are are stored on [g-node](https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit) which supports large files using git-annex.
+If you want to obtain these, please follow these steps.
+
+https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit
+
+### Install git-annex
+
+It is a tool that allows for version control of large files, and is used by other tools like [datalad](https://handbook.datalad.org).
+Installation instructions can be found at:
+
+https://git-annex.branchable.com/install/
+
+
+Clone the G-node repository:
+
+```
+git clone https://gin.g-node.org/ankursinha/Human-L2-3-Cortical-Microcircuit
+git annex init
+```
+You can also use the `gin` client if you wish. Instructions are provided on g-node.
+
+The files that are managed by git-annex will only be shown as links.
+This way, they don't take up space on your local machine until you fetch them.
+You can fetch individual files:
+
+```
+git annex get <path to file>
+```
+
+or get all of them:
+```
+git annex sync --content
+```
+
+If you don't need a file, you can "drop" it from your local hard disk:
+
+```
+git annex drop <path to file>
+```
