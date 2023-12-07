@@ -1101,8 +1101,8 @@ class HL23Net(object):
 
         :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
         :type engine: str
-        :param nsg: toggle submitting to nsg
-        :type nsg: bool
+        :param nsg: toggle submitting to nsg, use "dry" for a dry run
+        :type nsg: bool or str
         :param **kwargs: other engine + nsg specific args
         """
         if nsg is False:
