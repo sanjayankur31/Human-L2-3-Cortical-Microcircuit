@@ -15,6 +15,7 @@ import random
 import sys
 import time
 import typing
+import bisect
 
 import h5py
 import lems.api as lems
@@ -583,11 +584,7 @@ class HL23Net(object):
                     total_len = list_cumul_lengths[-1]
 
                     section_loc = total_len * sectionx
-                    ind = 0
-                    for leng in list_cumul_lengths:
-                        if leng > section_loc:
-                            break
-                        ind += 1
+                    ind = bisect.bisect_left(list_cumul_lengths, section_loc)
 
                     post_seg = list_ord_segs[ind]
 
