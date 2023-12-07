@@ -41,6 +41,13 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
+# https://stackoverflow.com/questions/3410976/how-to-round-a-number-to-significant-figures-in-python
+# currently unused
+def round_to_sig(x):
+    one_less = round(x, int(math.floor(math.log10(abs(x))))) / 10
+    return round(x + one_less, int(math.floor(math.log10(abs(one_less)))))
+
+
 class HL23Net(object):
 
     """HL23 network"""
