@@ -540,8 +540,9 @@ class HL23Net(object):
                     )  # type: neuroml.Projection
 
                 # show a progress bar so we have some idea of what's going on
-                # bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
-                bar = progressbar.ProgressBar()
+                max_value_possible = int(conndataset.shape[0])
+                # rounded = round_to_sig(approx_max_value)
+                bar = progressbar.ProgressBar(max_val=max_value_possible, poll_interval=30)
                 bar_count = 0
                 for conn in conndataset:
                     precell = conn[0]
@@ -558,8 +559,8 @@ class HL23Net(object):
                         )
                         continue
 
-                    bar_count += 1
                     bar.update(bar_count)
+                    bar_count += 1
 
                     section = (section.decode("utf-8")).split(".")[1]
                     neuroml_seggrp_id = get_segment_group_name(section)
