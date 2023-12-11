@@ -17,31 +17,31 @@
     </pulseGenerator>
     <network id="HL23Net" type="networkWithTemperature" temperature="34 degC">
         <population id="HL23PV_pop" component="HL23PV" type="populationList">
-            <property tag="color" value="0.9211165553686066 0.14007090321945415 0.13240906273729447"/>
+            <property tag="color" value="0.8258528277092643 0.7026721292874603 0.3711218355643212"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="90." y="97." z="122."/>
+                <location x="151.0" y="107.0" z="152.0"/>
             </instance>
         </population>
         <population id="HL23PYR_pop" component="HL23PYR" type="populationList">
-            <property tag="color" value="0.3711218355643212 0.5921654881609745 0.8643564030331798"/>
+            <property tag="color" value="0.41279258530304264 0.6738038445103539 0.1692198559903848"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="82." y="166." z="49."/>
+                <location x="63.0" y="81.0" z="161.0"/>
             </instance>
         </population>
         <population id="HL23SST_pop" component="HL23SST" type="populationList">
-            <property tag="color" value="0.12784498310997972 0.6035166401204584 0.31978189671367574"/>
+            <property tag="color" value="0.401938987145538 0.7045979982277839 0.39340325762864414"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="137." y="92." z="9."/>
+                <location x="151.0" y="198.0" z="25.0"/>
             </instance>
         </population>
         <population id="HL23VIP_pop" component="HL23VIP" type="populationList">
-            <property tag="color" value="0.39340325762864414 0.5925035310986511 0.8124028526236982"/>
+            <property tag="color" value="0.29793772864771784 0.5515873792106866 0.5986193047542998"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="60." y="194." z="48."/>
+                <location x="90.0" y="184.0" z="91.0"/>
             </instance>
         </population>
         <explicitInput target="pop0[0]" input="pg_HL23PV"/>

@@ -5,10 +5,10 @@
     </pulseGenerator>
     <network id="HL23VIPNet" type="networkWithTemperature" temperature="34 degC">
         <population id="HL23VIP_pop" component="HL23VIP" type="populationList">
-            <property tag="color" value="0.5663043989204367 0.401938987145538 0.7045979982277839"/>
+            <property tag="color" value="0.9794101583806073 0.9037718829562477 0.18968218720673302"/>
             <property tag="region" value="L23"/>
             <instance id="0">
-                <location x="0." y="0." z="0."/>
+                <location x="0.0" y="0.0" z="0.0"/>
             </instance>
         </population>
         <inputList id="stim_iclamp_HL23VIP" population="HL23VIP_pop" component="pg_HL23VIP">
