@@ -810,17 +810,6 @@ def postprocess_HL23SST():
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
-    cell.add_channel_density(
-        nml_cell_doc=celldoc,
-        cd_id="Ih",
-        ion_channel="Ih",
-        cond_density="0.00001 S_per_cm2",
-        erev="-45 mV",
-        group_id="all_minus_myelin",
-        ion="hcn",
-        ion_chan_def_file="channels/Ih.channel.nml",
-    )
-
     # somatic
     soma_group = cell.get_segment_group("soma_group")
     sgid = soma_group.id
@@ -1061,6 +1050,18 @@ def postprocess_HL23SST():
         initial_ext_concentration="2.0E-6 mol_per_cm3",
         segment_groups=sgid,
     )
+    # HCN
+    cell.add_channel_density(
+        nml_cell_doc=celldoc,
+        cd_id="Ih_axonal",
+        ion_channel="Ih",
+        cond_density="0.00001 S_per_cm2",
+        erev="-45 mV",
+        group_id=sgid,
+        ion="hcn",
+        ion_chan_def_file="channels/Ih.channel.nml",
+    )
+
     # L1 validation
     cell.validate(recursive=True)
     cell.summary(morph=True, biophys=True)
@@ -1668,6 +1669,6 @@ if __name__ == "__main__":
     analyse_HL23PV(True, True)
     postprocess_HL23PYR()
     analyse_HL23PYR(False, True)
-    postprocess_HL23SST()
     analyse_HL23SST(True, True)
     """
+    postprocess_HL23SST()

@@ -5,8 +5,8 @@
   </notes>
     <include href="CaDynamics_E2_NML2.nml"/>
     <include href="channels/pas.channel.nml"/>
-    <include href="channels/Ih.channel.nml"/>
     <include href="channels/NaTg/NaTg.channel.nml"/>
+    <include href="channels/Ih.channel.nml"/>
     <include href="channels/K_P.channel.nml"/>
     <include href="channels/K_T.channel.nml"/>
     <include href="channels/Kv3_1.channel.nml"/>
@@ -17407,7 +17407,6 @@
         <biophysicalProperties id="biophys">
             <membraneProperties>
                 <channelDensity id="pas" ionChannel="pas" condDensity="0.0000232 S_per_cm2" erev="-81.5 mV" segmentGroup="all_minus_myelin" ion="non_specific"/>
-                <channelDensity id="Ih" ionChannel="Ih" condDensity="0.00001 S_per_cm2" erev="-45 mV" segmentGroup="all_minus_myelin" ion="hcn"/>
                 <channelDensity id="NaTg_somatic" ionChannel="NaTg_SST_somatic" condDensity="0.127 S_per_cm2" erev="50 mV" segmentGroup="soma_group" ion="na"/>
                 <channelDensity id="Ih_somatic" ionChannel="Ih" condDensity="0.0000431 S_per_cm2" erev="-45 mV" segmentGroup="soma_group" ion="hcn"/>
                 <channelDensity id="K_P_somatic" ionChannel="K_P" condDensity="0.0111 S_per_cm2" erev="-85 mV" segmentGroup="soma_group" ion="k"/>
@@ -17423,6 +17422,7 @@
                 <channelDensity id="Kv3_1_axonal" ionChannel="Kv3_1" condDensity="0.984 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
                 <channelDensity id="Im_axonal" ionChannel="Im" condDensity="0.000317 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
                 <channelDensity id="SK_axonal" ionChannel="SK" condDensity="0.00113 S_per_cm2" erev="-85 mV" segmentGroup="axon_group" ion="k"/>
+                <channelDensity id="Ih_axonal" ionChannel="Ih" condDensity="0.00001 S_per_cm2" erev="-45 mV" segmentGroup="axon_group" ion="hcn"/>
                 <channelDensityNernst id="Ca_HVA_somatic" ionChannel="Ca_HVA" condDensity="0.00355 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
                 <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.00314 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
                 <channelDensityNernst id="Ca_HVA_axonal" ionChannel="Ca_HVA" condDensity="0.00145 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
