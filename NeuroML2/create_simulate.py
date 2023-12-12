@@ -1199,8 +1199,8 @@ if __name__ == "__main__":
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": "64",
-                      "number_nodes_": "2",
-                      "runtime_": "2",
+                      "number_nodes_": "20",
+                      "runtime_": "5",
                       'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1",
                       "cmdlineopts_": "-nogui"
