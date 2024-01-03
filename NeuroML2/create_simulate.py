@@ -1176,23 +1176,22 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=False,
+        new_cells=True,
         biophysics=True,
-        tonic_inhibition=True,
-        connections=True,
+        tonic_inhibition=False,
+        connections=False,
         network_input="background",
         stimulus=False,
         hdf5=False,
-        rotate_cells=False,
+        rotate_cells=True,
     )
     model.create_network()
+    """
     model.create_simulation()
     # model.visualize_network(min_cells=25)
-    """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
-    """
     # for NSG
     # with netpyne, use `-nogui` to prevent matplotlib import
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
@@ -1207,3 +1206,4 @@ if __name__ == "__main__":
                   },
                   nogui=True)
     # model.plot_v_graphs()
+    """
