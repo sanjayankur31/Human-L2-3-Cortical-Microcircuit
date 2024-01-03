@@ -1176,17 +1176,17 @@ if __name__ == "__main__":
 
     model = HL23Net(
         scale=scale,
-        new_cells=True,
+        new_cells=False,
         biophysics=True,
-        tonic_inhibition=False,
-        connections=False,
+        tonic_inhibition=True,
+        connections=True,
         network_input="background",
         stimulus=False,
         hdf5=False,
-        rotate_cells=True,
+        rotate_cells=False,
     )
-    model.create_network()
     """
+    model.create_network()
     model.create_simulation()
     # model.visualize_network(min_cells=25)
     # For normal run
@@ -1194,16 +1194,19 @@ if __name__ == "__main__":
                   skip_run=False)
     # for NSG
     # with netpyne, use `-nogui` to prevent matplotlib import
+    """
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": "64",
                       "number_nodes_": "20",
+                      "number_gbmemorypernode_": "192",
                       "runtime_": "5",
                       'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1",
                       "cmdlineopts_": "-nogui"
                   },
                   nogui=True)
+    """
     # model.plot_v_graphs()
     """
