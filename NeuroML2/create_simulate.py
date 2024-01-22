@@ -15,6 +15,7 @@ import random
 import sys
 import time
 import typing
+import bisect
 
 import h5py
 import lems.api as lems
@@ -38,6 +39,13 @@ from pyneuroml.utils import rotate_cell
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
+
+# https://stackoverflow.com/questions/3410976/how-to-round-a-number-to-significant-figures-in-python
+# currently unused
+def round_to_sig(x):
+    one_less = round(x, int(math.floor(math.log10(abs(x))))) / 10
+    return round(x + one_less, int(math.floor(math.log10(abs(one_less)))))
 
 
 class HL23Net(object):
@@ -539,8 +547,9 @@ class HL23Net(object):
                     )  # type: neuroml.Projection
 
                 # show a progress bar so we have some idea of what's going on
-                # bar = progressbar.ProgressBar(max_value=int(conndataset.shape[0] * self.network_scale * self.network_scale))
-                bar = progressbar.ProgressBar()
+                max_value_possible = int(conndataset.shape[0])
+                # rounded = round_to_sig(approx_max_value)
+                bar = progressbar.ProgressBar(max_val=max_value_possible, poll_interval=30)
                 bar_count = 0
                 for conn in conndataset:
                     precell = conn[0]
@@ -557,8 +566,8 @@ class HL23Net(object):
                         )
                         continue
 
-                    bar_count += 1
                     bar.update(bar_count)
+                    bar_count += 1
 
                     section = (section.decode("utf-8")).split(".")[1]
                     neuroml_seggrp_id = get_segment_group_name(section)
@@ -583,11 +592,7 @@ class HL23Net(object):
                     total_len = list_cumul_lengths[-1]
 
                     section_loc = total_len * sectionx
-                    ind = 0
-                    for leng in list_cumul_lengths:
-                        if leng > section_loc:
-                            break
-                        ind += 1
+                    ind = bisect.bisect_left(list_cumul_lengths, section_loc)
 
                     post_seg = list_ord_segs[ind]
 
@@ -1096,8 +1101,8 @@ class HL23Net(object):
 
         :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
         :type engine: str
-        :param nsg: toggle submitting to nsg
-        :type nsg: bool
+        :param nsg: toggle submitting to nsg, use "dry" for a dry run
+        :type nsg: bool or str
         :param **kwargs: other engine + nsg specific args
         """
         if nsg is False:
@@ -1180,25 +1185,28 @@ if __name__ == "__main__":
         hdf5=False,
         rotate_cells=False,
     )
+    """
     model.create_network()
     model.create_simulation()
     # model.visualize_network(min_cells=25)
-    """
     # For normal run
     model.run_sim(engine="jneuroml_neuron", nsg=False,
                   skip_run=False)
-    """
     # for NSG
     # with netpyne, use `-nogui` to prevent matplotlib import
+    """
     model.run_sim(engine="jneuroml_netpyne", nsg=True,
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": "64",
-                      "number_nodes_": "2",
-                      "runtime_": "2",
+                      "number_nodes_": "20",
+                      "number_gbmemorypernode_": "192",
+                      "runtime_": "5",
                       'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1",
                       "cmdlineopts_": "-nogui"
                   },
                   nogui=True)
+    """
     # model.plot_v_graphs()
+    """

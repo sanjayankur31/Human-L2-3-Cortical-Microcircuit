@@ -1168,7 +1168,7 @@ mechanisms:
                         values:
                             '*': 1.0e-05
             gmax_Ih:
-                ave_all_segs: 0.0015897764797549684
+                ave_all_segs: 0.00158518922246965
                 values:
                     HL23PYR_0_.apic_0:
                         id: HL23PYR[0].apic_0
@@ -1650,12 +1650,12 @@ mechanisms:
                         id: HL23PYR[0].axon_0
                         nseg: 5
                         values:
-                            '*': 0.00014799999
+                            '*': 1.0e-05
                     HL23PYR_0_.axon_1:
                         id: HL23PYR[0].axon_1
                         nseg: 7
                         values:
-                            '*': 0.00014799999
+                            '*': 1.0e-05
                     HL23PYR_0_.dend_0:
                         id: HL23PYR[0].dend_0
                         nseg: 1
