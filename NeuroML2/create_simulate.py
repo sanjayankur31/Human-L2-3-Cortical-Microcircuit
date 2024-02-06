@@ -16,6 +16,7 @@ import sys
 import time
 import typing
 import bisect
+import textwrap
 
 import h5py
 import lems.api as lems
@@ -1095,17 +1096,19 @@ class HL23Net(object):
         print(f"Creating simulation took: {(end - start)} seconds.")
 
     def run_sim(self, engine: str = "jneuroml_neuron",
-                nsg: typing.Union[str, bool] = False,
+                cluster: typing.Union[str, bool] = False,
                 **kwargs):
         """Run the sim
 
         :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
         :type engine: str
-        :param nsg: toggle submitting to nsg, use "dry" for a dry run
-        :type nsg: bool or str
+        :param cluster: toggle submitting to nsg or qsub
+            Use "nsg_dry" for a dry NSG run (won't submit)
+            Use "qsub" to generate a qsub script instead
+        :type cluster: bool or str
         :param **kwargs: other engine + nsg specific args
         """
-        if nsg is False:
+        if cluster is False:
             print(f"Running simulation: {self.lems_simulation_file}")
             run_lems_with(
                 engine,
@@ -1115,11 +1118,40 @@ class HL23Net(object):
                 show_plot_already=False,
                 **kwargs
             )
-        elif nsg == "dry":
+        elif cluster == "qsub":
+            print(f"Generating files but not running: {self.lems_simulation_file}")
+            # TODO: create in a different folder like NSG
+            run_lems_with(
+                engine,
+                self.lems_simulation_file,
+                max_memory=self.max_memory,
+                nogui=True,
+                skip_run=True,
+                show_plot_already=False,
+                **kwargs
+            )
+            qsub_fn = f"{self.lems_simulation_file}.sh"
+            netpyne_simfile = self.lems_simulation_file.split(".")[0] + "_netpyne.py"
+            print(f"Generating qsub script for use on cluster: {qsub_fn}")
+            with open(qsub_fn, 'w') as f:
+                print(
+                    textwrap.dedent(
+                        f"""
+                        #!/bin/bash -l
+                        #$ -pe mpi 1024
+                        #$ -l mem=4G
+                        #$ -l h_rt=6:00:00
+                        #$ -cwd
+
+                        gerun python3 {netpyne_simfile}
+                        """
+                    ),
+                    file=f)
+        elif cluster == "nsg_dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        dry_run=True, max_memory=self.max_memory, **kwargs)
-        else:
+        elif cluster == "nsg":
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        max_memory=self.max_memory, **kwargs)
@@ -1185,22 +1217,21 @@ if __name__ == "__main__":
         hdf5=False,
         rotate_cells=False,
     )
-    """
     model.create_network()
     model.create_simulation()
+    """
     # model.visualize_network(min_cells=25)
     # For normal run
-    model.run_sim(engine="jneuroml_neuron", nsg=False,
+    model.run_sim(engine="jneuroml_neuron", cluster=False,
                   skip_run=False)
     # for NSG
     # with netpyne, use `-nogui` to prevent matplotlib import
-    """
-    model.run_sim(engine="jneuroml_netpyne", nsg=True,
+    model.run_sim(engine="jneuroml_netpyne", cluster="nsg",
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": "64",
-                      "number_nodes_": "20",
-                      "number_gbmemorypernode_": "192",
+                      "number_nodes_": "8",
+                      "number_gbmemorypernode_": "240",
                       "runtime_": "5",
                       'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1",
@@ -1208,5 +1239,5 @@ if __name__ == "__main__":
                   },
                   nogui=True)
     """
+    model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
     # model.plot_v_graphs()
-    """
