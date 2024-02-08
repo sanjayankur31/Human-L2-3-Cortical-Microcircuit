@@ -17,6 +17,7 @@ import time
 import typing
 import bisect
 import textwrap
+import inspect
 
 import h5py
 import lems.api as lems
@@ -35,7 +36,8 @@ from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
 from pyneuroml.pynml import (reload_saved_data, run_lems_with,
-                             write_neuroml2_file)
+                             write_neuroml2_file,
+                             generate_sim_scripts_in_folder)
 from pyneuroml.utils import rotate_cell
 
 logger = logging.getLogger(__name__)
@@ -1121,32 +1123,38 @@ class HL23Net(object):
         elif cluster == "qsub":
             print(f"Generating files but not running: {self.lems_simulation_file}")
             # TODO: create in a different folder like NSG
-            run_lems_with(
-                engine,
-                self.lems_simulation_file,
+            tdir = generate_sim_scripts_in_folder(
+                engine=engine,
+                lems_file_name=self.lems_simulation_file,
+                root_dir=".",
                 max_memory=self.max_memory,
                 nogui=True,
-                skip_run=True,
                 show_plot_already=False,
                 **kwargs
             )
-            qsub_fn = f"{self.lems_simulation_file}.sh"
+            # remove trailing backslash
+            if tdir[-1] == "/":
+                tdir = tdir[:-1]
+            qsub_fn = f"{tdir}/{tdir}_generated/{self.lems_simulation_file}.sh"
             netpyne_simfile = self.lems_simulation_file.split(".")[0] + "_netpyne.py"
             print(f"Generating qsub script for use on cluster: {qsub_fn}")
             with open(qsub_fn, 'w') as f:
                 print(
-                    textwrap.dedent(
-                        f"""
-                        #!/bin/bash -l
-                        #$ -pe mpi 1024
-                        #$ -l mem=4G
-                        #$ -l h_rt=6:00:00
-                        #$ -cwd
+                    inspect.cleandoc(
+                        textwrap.dedent(
+                            f"""
+                            #!/bin/bash -l
+                            #$ -pe mpi 1024
+                            #$ -l mem=4G
+                            #$ -l h_rt=6:00:00
+                            #$ -cwd
 
-                        gerun python3 {netpyne_simfile}
-                        """
+                            gerun python3 {netpyne_simfile}
+                            """
+                        )
                     ),
-                    file=f)
+                    file=f
+                )
         elif cluster == "nsg_dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
@@ -1217,9 +1225,9 @@ if __name__ == "__main__":
         hdf5=False,
         rotate_cells=False,
     )
+    """
     model.create_network()
     model.create_simulation()
-    """
     # model.visualize_network(min_cells=25)
     # For normal run
     model.run_sim(engine="jneuroml_neuron", cluster=False,
