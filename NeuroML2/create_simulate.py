@@ -1148,6 +1148,7 @@ class HL23Net(object):
                             #$ -l mem=4G
                             #$ -l h_rt=6:00:00
                             #$ -cwd
+                            #$ -m be
 
                             gerun python3 {netpyne_simfile}
                             """
