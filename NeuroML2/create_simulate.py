@@ -1145,7 +1145,7 @@ class HL23Net(object):
             if tdir[-1] == "/":
                 tdir = tdir[:-1]
             qsub_fn = f"{tdir}/{tdir}_generated/{self.lems_simulation_file}.sh"
-            netpyne_simfile = self.lems_simulation_file.split(".")[0] + "_netpyne.py"
+            netpyne_simfile = self.lems_simulation_file.replace(".xml", "_netpyne.py")
             print(f"Generating qsub script for use on cluster: {qsub_fn}")
             with open(qsub_fn, 'w') as f:
                 print(
@@ -1159,7 +1159,9 @@ class HL23Net(object):
                             #$ -cwd
                             #$ -m be
 
-                            gerun python3 {netpyne_simfile}
+                            source ~/.venv/bin/activate
+                            nrnivmodl
+                            gerun python3 {netpyne_simfile} -nogui
                             """
                         )
                     ),
