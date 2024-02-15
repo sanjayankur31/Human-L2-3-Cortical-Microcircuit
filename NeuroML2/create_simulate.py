@@ -114,34 +114,39 @@ class HL23Net(object):
         self.rotate_cells = rotate_cells
 
         # data dumped from the simulation
-        self.cell_data = h5py.File(
-            "../L23Net/Circuit_output/cell_positions_and_rotations.h5", "r"
-        )
-        self.connectivity_data = h5py.File(
-            "../L23Net/Circuit_output/synapse_connections.h5", "r"
-        )
-        self.circuit_params = pandas.read_excel(
-            "../L23Net/Circuit_param.xls", sheet_name=None, index_col=0
-        )
-        # default synaptic parameters: are read from exported H5 files for
-        # creation of synapses (above)
-        self.circuit_params["syn_params"] = {
-            "none": {
-                "tau_r_AMPA": 0,
-                "tau_d_AMPA": 0,
-                "tau_r_NMDA": 0,
-                "tau_d_NMDA": 0,
-                "e": 0,
-                "Dep": 0,
-                "Fac": 0,
-                "Use": 0,
-                "u0": 0,
-                "gmax": 0,
+        try:
+            self.cell_data = h5py.File(
+                "../L23Net/Circuit_output/cell_positions_and_rotations.h5", "r"
+            )
+            self.connectivity_data = h5py.File(
+                "../L23Net/Circuit_output/synapse_connections.h5", "r"
+            )
+            self.circuit_params = pandas.read_excel(
+                "../L23Net/Circuit_param.xls", sheet_name=None, index_col=0
+            )
+            # default synaptic parameters: are read from exported H5 files for
+            # creation of synapses (above)
+            self.circuit_params["syn_params"] = {
+                "none": {
+                    "tau_r_AMPA": 0,
+                    "tau_d_AMPA": 0,
+                    "tau_r_NMDA": 0,
+                    "tau_d_NMDA": 0,
+                    "e": 0,
+                    "Dep": 0,
+                    "Fac": 0,
+                    "Use": 0,
+                    "u0": 0,
+                    "gmax": 0,
+                }
             }
-        }
 
-        # confirmed from self.cell_data.keys()
-        self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
+            # confirmed from self.cell_data.keys()
+            self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
+        except FileNotFoundError:
+            print("Files not found")
+            self.create = False
+
         self.pop_colors = {
             "HL23PV": "0 0 1",
             "HL23PYR": "1 0 0",
@@ -168,6 +173,10 @@ class HL23Net(object):
 
     def create_network(self):
         # set the scale of the network
+        if self.create is False:
+            print("Not creating network")
+            return
+
         start = time.time()
         print(f"Creating network with scale {self.network_scale}")
 
