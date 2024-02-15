@@ -1180,7 +1180,9 @@ class HL23Net(object):
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
-        data = reload_saved_data(self.lems_simulation_file)
+        data = reload_saved_data(self.lems_simulation_file, plot=True,
+                                 show_plot_already=True, reload_events=False)
+        """
         logger.debug(data.keys())
         xvals = [data["t"]]
         yvals = list(data.values())[1:]
