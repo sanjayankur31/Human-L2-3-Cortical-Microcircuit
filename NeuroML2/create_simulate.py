@@ -39,6 +39,7 @@ from pyneuroml.pynml import (reload_saved_data, run_lems_with,
                              write_neuroml2_file,
                              generate_sim_scripts_in_folder)
 from pyneuroml.utils import rotate_cell
+from pyneuroml.utils.units import get_value_in_si, convert_to_units
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -167,7 +168,9 @@ class HL23Net(object):
         if self.hdf5 is True:
             self.netdoc_file_name += ".h5"
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
+        self.stim_start = "200ms"
         self.sim_length = "1000ms"
+        self.sim_end = convert_to_units(get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length), "ms")
         self.dt = "0.025ms"
         self.seed = 4587
 
@@ -738,8 +741,9 @@ class HL23Net(object):
             # create input component for 0.5
             g_e0 = cell_type_ge0[cell_type] * math.exp(0.5)
             gfluct_component = lems.Component(id_=f"Gfluct_{cell_type}_0_5",
-                                              type_="Gfluct", start="0ms",
-                                              stop=self.sim_length, dt=self.dt,
+                                              type_="Gfluct",
+                                              start=self.stim_start,
+                                              stop=self.sim_end, dt=self.dt,
                                               E_e="0mV",
                                               E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
@@ -767,8 +771,9 @@ class HL23Net(object):
             g_e0 = cell_type_ge0[cell_type] * math.exp(d)
             # create input component for use at each distance point
             gfluct_component = lems.Component(id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
-                                              type_="Gfluct", start="0ms",
-                                              stop=self.sim_length, dt=self.dt,
+                                              type_="Gfluct",
+                                              start=self.stim_start,
+                                              stop=self.sim_end, dt=self.dt,
                                               E_e="0mV",
                                               E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
@@ -1202,6 +1207,7 @@ class HL23Net(object):
             cols_in_legend_box=2,
             save_figure_to=f"{self.lems_simulation_file.replace('.xml', '')}_v.png",
         )
+        """
 
     def add_step_current(self):
         """Add a constant step current to all cells.
@@ -1261,5 +1267,5 @@ if __name__ == "__main__":
                   },
                   nogui=True)
     """
-    model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
+    # model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
     # model.plot_v_graphs()
