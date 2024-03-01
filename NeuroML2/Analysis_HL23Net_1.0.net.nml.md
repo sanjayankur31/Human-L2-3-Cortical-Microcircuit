@@ -72,8 +72,8 @@
 *
 *******************************************************
 ```
-![fig](HL23Net_0.1.net.nml.circo.2.png)
-![fig](HL23Net_0.1.net.nml.dot.6.png)
+![fig](HL23Net_1.0.net.nml.circo.2.png)
+![fig](HL23Net_1.0.net.nml.dot.6.png)
 ### Chemical conns (avg weight per existant conn)
 ![fig](./HL23Network_Chemical_conns_-avg_weight_per_existant_conn-.png)
 ```

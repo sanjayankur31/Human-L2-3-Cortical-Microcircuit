@@ -59,8 +59,8 @@ nml2_doc = pynml.read_neuroml2_file(f)
 net_info = nml2_doc.summary(show_includes=False)
 info +='```\n%s\n```\n'%(net_info)
 
-info +='![fig](%s)\n'%('HL23Net_0.1.net.nml.circo.2.png')
-info +='![fig](%s)\n'%('HL23Net_0.1.net.nml.dot.6.png')
+info +='![fig](%s.circo.2.png)\n'%(f)
+info +='![fig](%s.dot.6.png)\n'%(f)
 
 for w in handler.weight_arrays_to_show:
 
