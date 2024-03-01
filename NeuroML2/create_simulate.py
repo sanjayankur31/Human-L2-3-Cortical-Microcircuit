@@ -16,6 +16,8 @@ import sys
 import time
 import typing
 import bisect
+import textwrap
+import inspect
 
 import h5py
 import lems.api as lems
@@ -34,8 +36,10 @@ from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
 from pyneuroml.pynml import (reload_saved_data, run_lems_with,
-                             write_neuroml2_file)
+                             write_neuroml2_file,
+                             generate_sim_scripts_in_folder)
 from pyneuroml.utils import rotate_cell
+from pyneuroml.utils.units import get_value_in_si, convert_to_units
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -111,34 +115,39 @@ class HL23Net(object):
         self.rotate_cells = rotate_cells
 
         # data dumped from the simulation
-        self.cell_data = h5py.File(
-            "../L23Net/Circuit_output/cell_positions_and_rotations.h5", "r"
-        )
-        self.connectivity_data = h5py.File(
-            "../L23Net/Circuit_output/synapse_connections.h5", "r"
-        )
-        self.circuit_params = pandas.read_excel(
-            "../L23Net/Circuit_param.xls", sheet_name=None, index_col=0
-        )
-        # default synaptic parameters: are read from exported H5 files for
-        # creation of synapses (above)
-        self.circuit_params["syn_params"] = {
-            "none": {
-                "tau_r_AMPA": 0,
-                "tau_d_AMPA": 0,
-                "tau_r_NMDA": 0,
-                "tau_d_NMDA": 0,
-                "e": 0,
-                "Dep": 0,
-                "Fac": 0,
-                "Use": 0,
-                "u0": 0,
-                "gmax": 0,
+        try:
+            self.cell_data = h5py.File(
+                "../L23Net/Circuit_output/cell_positions_and_rotations.h5", "r"
+            )
+            self.connectivity_data = h5py.File(
+                "../L23Net/Circuit_output/synapse_connections.h5", "r"
+            )
+            self.circuit_params = pandas.read_excel(
+                "../L23Net/Circuit_param.xls", sheet_name=None, index_col=0
+            )
+            # default synaptic parameters: are read from exported H5 files for
+            # creation of synapses (above)
+            self.circuit_params["syn_params"] = {
+                "none": {
+                    "tau_r_AMPA": 0,
+                    "tau_d_AMPA": 0,
+                    "tau_r_NMDA": 0,
+                    "tau_d_NMDA": 0,
+                    "e": 0,
+                    "Dep": 0,
+                    "Fac": 0,
+                    "Use": 0,
+                    "u0": 0,
+                    "gmax": 0,
+                }
             }
-        }
 
-        # confirmed from self.cell_data.keys()
-        self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
+            # confirmed from self.cell_data.keys()
+            self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
+        except FileNotFoundError:
+            print("Files not found")
+            self.create = False
+
         self.pop_colors = {
             "HL23PV": "0 0 1",
             "HL23PYR": "1 0 0",
@@ -159,12 +168,18 @@ class HL23Net(object):
         if self.hdf5 is True:
             self.netdoc_file_name += ".h5"
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
+        self.stim_start = "200ms"
         self.sim_length = "1000ms"
+        self.sim_end = convert_to_units(get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length), "ms")
         self.dt = "0.025ms"
         self.seed = 4587
 
     def create_network(self):
         # set the scale of the network
+        if self.create is False:
+            print("Not creating network")
+            return
+
         start = time.time()
         print(f"Creating network with scale {self.network_scale}")
 
@@ -726,8 +741,9 @@ class HL23Net(object):
             # create input component for 0.5
             g_e0 = cell_type_ge0[cell_type] * math.exp(0.5)
             gfluct_component = lems.Component(id_=f"Gfluct_{cell_type}_0_5",
-                                              type_="Gfluct", start="0ms",
-                                              stop=self.sim_length, dt=self.dt,
+                                              type_="Gfluct",
+                                              start=self.stim_start,
+                                              stop=self.sim_end, dt=self.dt,
                                               E_e="0mV",
                                               E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
@@ -755,8 +771,9 @@ class HL23Net(object):
             g_e0 = cell_type_ge0[cell_type] * math.exp(d)
             # create input component for use at each distance point
             gfluct_component = lems.Component(id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
-                                              type_="Gfluct", start="0ms",
-                                              stop=self.sim_length, dt=self.dt,
+                                              type_="Gfluct",
+                                              start=self.stim_start,
+                                              stop=self.sim_end, dt=self.dt,
                                               E_e="0mV",
                                               E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
                                               tau_e="65ms", tau_i="20ms",
@@ -1095,17 +1112,19 @@ class HL23Net(object):
         print(f"Creating simulation took: {(end - start)} seconds.")
 
     def run_sim(self, engine: str = "jneuroml_neuron",
-                nsg: typing.Union[str, bool] = False,
+                cluster: typing.Union[str, bool] = False,
                 **kwargs):
         """Run the sim
 
         :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
         :type engine: str
-        :param nsg: toggle submitting to nsg, use "dry" for a dry run
-        :type nsg: bool or str
+        :param cluster: toggle submitting to nsg or qsub
+            Use "nsg_dry" for a dry NSG run (won't submit)
+            Use "qsub" to generate a qsub script instead
+        :type cluster: bool or str
         :param **kwargs: other engine + nsg specific args
         """
-        if nsg is False:
+        if cluster is False:
             print(f"Running simulation: {self.lems_simulation_file}")
             run_lems_with(
                 engine,
@@ -1115,11 +1134,49 @@ class HL23Net(object):
                 show_plot_already=False,
                 **kwargs
             )
-        elif nsg == "dry":
+        elif cluster == "qsub":
+            print(f"Generating files but not running: {self.lems_simulation_file}")
+            # TODO: create in a different folder like NSG
+            tdir = generate_sim_scripts_in_folder(
+                engine=engine,
+                lems_file_name=self.lems_simulation_file,
+                root_dir=".",
+                max_memory=self.max_memory,
+                nogui=True,
+                show_plot_already=False,
+                **kwargs
+            )
+            # remove trailing backslash
+            if tdir[-1] == "/":
+                tdir = tdir[:-1]
+            qsub_fn = f"{tdir}/{tdir}_generated/{self.lems_simulation_file}.sh"
+            netpyne_simfile = self.lems_simulation_file.replace(".xml", "_netpyne.py")
+            print(f"Generating qsub script for use on cluster: {qsub_fn}")
+            with open(qsub_fn, 'w') as f:
+                print(
+                    inspect.cleandoc(
+                        textwrap.dedent(
+                            f"""
+                            #!/bin/bash -l
+                            #$ -pe mpi 1024
+                            #$ -l mem=4G
+                            #$ -l h_rt=6:00:00
+                            #$ -cwd
+                            #$ -m be
+
+                            source ~/.venv/bin/activate
+                            nrnivmodl
+                            gerun python3 {netpyne_simfile} -nogui
+                            """
+                        )
+                    ),
+                    file=f
+                )
+        elif cluster == "nsg_dry":
             print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        dry_run=True, max_memory=self.max_memory, **kwargs)
-        else:
+        elif cluster == "nsg":
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
             run_on_nsg(engine, self.lems_simulation_file,
                        max_memory=self.max_memory, **kwargs)
@@ -1128,7 +1185,9 @@ class HL23Net(object):
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
-        data = reload_saved_data(self.lems_simulation_file)
+        data = reload_saved_data(self.lems_simulation_file, plot=True,
+                                 show_plot_already=True, reload_events=False)
+        """
         logger.debug(data.keys())
         xvals = [data["t"]]
         yvals = list(data.values())[1:]
@@ -1148,6 +1207,7 @@ class HL23Net(object):
             cols_in_legend_box=2,
             save_figure_to=f"{self.lems_simulation_file.replace('.xml', '')}_v.png",
         )
+        """
 
     def add_step_current(self):
         """Add a constant step current to all cells.
@@ -1190,17 +1250,16 @@ if __name__ == "__main__":
     model.create_simulation()
     # model.visualize_network(min_cells=25)
     # For normal run
-    model.run_sim(engine="jneuroml_neuron", nsg=False,
+    model.run_sim(engine="jneuroml_neuron", cluster=False,
                   skip_run=False)
     # for NSG
     # with netpyne, use `-nogui` to prevent matplotlib import
-    """
-    model.run_sim(engine="jneuroml_netpyne", nsg=True,
+    model.run_sim(engine="jneuroml_netpyne", cluster="nsg",
                   nsg_sim_config={
                       "number_cores_": "64",
                       "tasks_per_node_": "64",
-                      "number_nodes_": "20",
-                      "number_gbmemorypernode_": "192",
+                      "number_nodes_": "8",
+                      "number_gbmemorypernode_": "240",
                       "runtime_": "5",
                       'toolId': "OSBv2_EXPANSE_0_7_3",
                       'nrnivmodl_o_': "1",
@@ -1208,5 +1267,5 @@ if __name__ == "__main__":
                   },
                   nogui=True)
     """
+    # model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
     # model.plot_v_graphs()
-    """
