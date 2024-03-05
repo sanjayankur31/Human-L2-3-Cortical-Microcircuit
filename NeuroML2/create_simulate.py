@@ -170,7 +170,7 @@ class HL23Net(object):
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.stim_start = "200ms"
         self.sim_length = "1000ms"
-        self.sim_end = convert_to_units(get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length), "ms")
+        self.sim_end = convert_to_units(f"{get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length)} s", "ms")
         self.dt = "0.025ms"
         self.seed = 4587
 
@@ -1267,5 +1267,5 @@ if __name__ == "__main__":
                   },
                   nogui=True)
     """
-    # model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
+    model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
     # model.plot_v_graphs()
