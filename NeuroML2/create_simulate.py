@@ -992,7 +992,6 @@ class HL23Net(object):
         print("Picking point cells")
         for inc in nml_file.includes:
             cell = inc.href.split("/")[1].replace(".cell.nml", "")
-            # remove artificial long axons
             if "PYR" in cell:
                 PYR_cells.append(cell)
             if "PV" in cell:
@@ -1001,6 +1000,11 @@ class HL23Net(object):
                 VIP_cells.append(cell)
             if "SST" in cell:
                 SST_cells.append(cell)
+
+        print(f"Got {len(PYR_cells)} PYR cells")
+        print(f"Got {len(SST_cells)} SST cells")
+        print(f"Got {len(PV_cells)} PV cells")
+        print(f"Got {len(VIP_cells)} VIP cells")
 
         # at least plot min_cells cells of each type, and all the rest as points
         if (len(PYR_cells) - min_cells) > 0:
@@ -1011,6 +1015,7 @@ class HL23Net(object):
             PV_point_cells = random.sample(PV_cells, len(PV_cells) - min_cells)
         if (len(VIP_cells) - min_cells) > 0:
             VIP_point_cells = random.sample(VIP_cells, len(VIP_cells) - min_cells)
+        print(f"Picked {len(PYR_point_cells) + len(SST_point_cells) + len(PV_point_cells) + len(VIP_point_cells)} point cells")
 
         """
         print("Removing axons from PYR cells")
