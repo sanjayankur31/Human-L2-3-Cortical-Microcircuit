@@ -358,6 +358,8 @@ def plot_somavs(network,VOLTAGES):
 if plotsomavs:
 	VOLTAGES = somavCollect(network,cell_indices_to_plot,RANK,SIZE,COMM)
 
+N_cells = 1000
+
 if RANK ==0:
 	if plotnetworksomas:
 		fig = plot_network_somas(OUTPUTPATH)
