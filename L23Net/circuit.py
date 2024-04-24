@@ -52,7 +52,7 @@ DRUG = False
 rec_LFP = False #record LFP from center of layer
 rec_DIPOLES = False #record population - wide dipoles
 
-run_circuit_functions = False
+run_circuit_functions = True
 #===========================================================================
 # Params
 #===========================================================================

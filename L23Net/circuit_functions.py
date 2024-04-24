@@ -24,7 +24,7 @@ import neuron
 from neuron import h, gui
 import LFPy
 from LFPy import NetworkCell, Network, Synapse, RecExtElectrode, StimIntElectrode
-from net_params import *
+# from net_params import *
 import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
@@ -37,10 +37,10 @@ import itertools
 # Frank ===============
 
 # Alex ===============
-plotnetworksomas = True
+plotnetworksomas = False
 plotrasterandrates = True
-plotephistimseriesandPSD = True
-plotsomavs = True # Specify cell indices to plot in 'cell_indices_to_plot' - Note: plotting too many cells can randomly cause TCP connection errors
+plotephistimseriesandPSD = False
+plotsomavs = False # Specify cell indices to plot in 'cell_indices_to_plot' - Note: plotting too many cells can randomly cause TCP connection errors
 
 # Kant ===============
 
@@ -81,15 +81,15 @@ def bandPassFilter(signal,low=.1, high=100.):
 #===============================
 #= Frank
 #===============================
-pop_colors = {'HL23PN1':'k', 'HL23MN1':'red', 'HL23BN1':'green', 'HL23VN1':'yellow'}
-popnames = ['HL23PN1', 'HL23MN1', 'HL23BN1', 'HL23VN1']
+pop_colors = {'HL23PYR':'k', 'HL23PV':'red', 'HL23SST':'green', 'HL23VIP':'yellow'}
+popnames = ['HL23PYR', 'HL23PV', 'HL23SST', 'HL23VIP']
 #===============================
 
 #===============================
 #= Alex
 #===============================
-pop_colors = {'HL23PN1':'k', 'HL23MN1':'crimson', 'HL23BN1':'green', 'HL23VN1':'darkorange'}
-popnames = ['HL23PN1', 'HL23MN1', 'HL23BN1', 'HL23VN1']
+pop_colors = {'HL23PYR':'k', 'HL23PV':'crimson', 'HL23SST':'green', 'HL23VIP':'darkorange'}
+popnames = ['HL23PYR', 'HL23PV', 'HL23SST', 'HL23VIP']
 poplabels = ['PN', 'MN', 'BN', 'VN']
 
 font = {'family' : 'normal',
@@ -208,7 +208,7 @@ def plot_spiketimehists(SPIKES,network):
 def plot_eeg(network,DIPOLEMOMENT):
 	low = .1
 	high = 100
-	DP = DIPOLEMOMENT['HL23PN1']
+	DP = DIPOLEMOMENT['HL23PYR']
 	for pop in popnames[1:]:
 		DP = np.add(DP,DIPOLEMOMENT[pop])
 
@@ -381,6 +381,6 @@ if RANK ==0:
 #===============================
 # Kant
 #===============================
-pop_colors = {'HL23PN1':'k', 'HL23MN1':'red', 'HL23BN1':'green', 'HL23VN1':'yellow'}
-popnames = ['HL23PN1', 'HL23MN1', 'HL23BN1', 'HL23VN1']
+pop_colors = {'HL23PYR':'k', 'HL23PV':'red', 'HL23SST':'green', 'HL23VIP':'yellow'}
+popnames = ['HL23PYR', 'HL23PV', 'HL23SST', 'HL23VIP']
 #===============================
