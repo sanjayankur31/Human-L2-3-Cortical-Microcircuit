@@ -4,10 +4,10 @@
         "notes": "Network example",
         "parameters": {
             "average_rate": "200 Hz",
-            "num_HL23PV": 1,
-            "num_HL23PYR": 1,
-            "num_HL23VIP": 1,
-            "num_HL23SST": 1
+            "num_HL23PV": 3,
+            "num_HL23PYR": 3,
+            "num_HL23VIP": 3,
+            "num_HL23SST": 3
         },
         "cells": {
             "HL23PV": {
@@ -39,13 +39,37 @@
             }
         },
         "regions": {
-            "L23": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "width": 1000.0,
-                "height": 1000.0,
-                "depth": 1000.0
+            "L23_HL23PV": {
+                "x": -608.193,
+                "y": -557.609,
+                "z": -30.8661,
+                "width": 500.0,
+                "height": 300.0,
+                "depth": 500.0
+            },
+            "L23_HL23PYR": {
+                "x": -508.534,
+                "y": -577.616,
+                "z": -36.2701,
+                "width": 500.0,
+                "height": 300.0,
+                "depth": 500.0
+            },
+            "L23_HL23VIP": {
+                "x": -305.172,
+                "y": -263.232,
+                "z": -28.84,
+                "width": 500.0,
+                "height": 300.0,
+                "depth": 500.0
+            },
+            "L23_HL23SST": {
+                "x": -289.84,
+                "y": -985.039,
+                "z": -19.04,
+                "width": 500.0,
+                "height": 300.0,
+                "depth": 500.0
             }
         },
         "populations": {
@@ -56,7 +80,7 @@
                     "color": "0 0.9 0"
                 },
                 "random_layout": {
-                    "region": "L23"
+                    "region": "L23_HL23PV"
                 }
             },
             "Pop_HL23PYR": {
@@ -66,7 +90,7 @@
                     "color": "0.2 0.2 0.2"
                 },
                 "random_layout": {
-                    "region": "L23"
+                    "region": "L23_HL23PYR"
                 }
             },
             "Pop_HL23VIP": {
@@ -76,7 +100,7 @@
                     "color": "0.9 0.9 0"
                 },
                 "random_layout": {
-                    "region": "L23"
+                    "region": "L23_HL23VIP"
                 }
             },
             "Pop_HL23SST": {
@@ -86,7 +110,7 @@
                     "color": "0.9 0 0"
                 },
                 "random_layout": {
-                    "region": "L23"
+                    "region": "L23_HL23SST"
                 }
             }
         },

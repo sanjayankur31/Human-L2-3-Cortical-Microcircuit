@@ -35,3 +35,4 @@ x86_64/
 
 #/NeuroML2/rotated_cells/*_sim.cell.nml
 __pycache__/
+/NeuroML2/TestNetwork.net.png

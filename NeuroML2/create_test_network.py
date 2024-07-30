@@ -5,6 +5,7 @@ Create a test network using NeuroMLlite.
 from neuromllite import *
 from neuromllite.NetworkGenerator import *
 from neuromllite.utils import create_new_model
+from pyneuroml import pynml
 import sys
 
 
@@ -20,6 +21,8 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
         cell_id = '%s'%cell
         reference+='_%s'%cell_id
         cells_nmll[cell_id] = Cell(id=cell_id, neuroml2_source_file='%s.cell.nml'%(cell))
+
+        print('-- Loading cell: %s'%cells_nmll[cell_id])
 
     ################################################################################
 
@@ -49,9 +52,6 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
 
         net.parameters = parameters
 
-        r1 = RectangularRegion(id="L23", x=0, y=0, z=0, width=1000, height=1000, depth=1000)
-        net.regions.append(r1)
-
         ampa = Synapse(id="AMPA_syn", neuroml2_source_file="synapses/AMPA_syn.synapse.nml")
         net.synapses.append(ampa)
 
@@ -79,6 +79,15 @@ def generate(cell_numbers, duration=300, config='IClamp', parameters = None):
         for cell in cell_numbers:
             cell_nmll = cells_nmll[cell]
             net.cells.append(cell_nmll)
+
+            nml_cell = pynml.read_neuroml2_file(cells_nmll[cell].neuroml2_source_file).cells[0]
+
+            region_height = 300
+            region_size = 500
+            cell_start = nml_cell.morphology.segments[0].proximal
+
+            r1 = RectangularRegion(id="L23_%s"%cell, x=-1*cell_start.x, y=-1*cell_start.y, z=-1*cell_start.z, width=region_size, height=region_height, depth=region_size)
+            net.regions.append(r1)
 
             size = cell_numbers[cell]
 
@@ -133,7 +142,7 @@ if __name__ == "__main__":
                 sim, net = generate({cell:1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
                 check_to_generate_or_run(sys.argv, sim)
 
-        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1, 'HL23SST':1}, 1000, config="TestNetwork", parameters={'average_rate':'200 Hz'})
+        sim, net = generate({'HL23PV':3, 'HL23PYR':3, 'HL23VIP':3, 'HL23SST':3}, 1000, config="TestNetwork", parameters={'average_rate':'200 Hz'})
 
         check_to_generate_or_run(sys.argv, sim)
 
