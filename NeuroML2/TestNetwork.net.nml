@@ -4,10 +4,10 @@
     Generation seed: 1234
     NeuroMLlite parameters: 
         average_rate = 200 Hz
-        num_HL23PV = 1
-        num_HL23PYR = 1
-        num_HL23SST = 1
-        num_HL23VIP = 1</notes>
+        num_HL23PV = 3
+        num_HL23PYR = 3
+        num_HL23SST = 3
+        num_HL23VIP = 3</notes>
     <include href="HL23PV.cell.nml"/>
     <include href="HL23PYR.cell.nml"/>
     <include href="HL23VIP.cell.nml"/>
@@ -18,45 +18,77 @@
         <notes>Network example</notes>
         <property tag="recommended_dt_ms" value="0.01"/>
         <property tag="recommended_duration_ms" value="300.0"/>
-        <population id="Pop_HL23PV" component="HL23PV" size="1" type="populationList">
+        <population id="Pop_HL23PV" component="HL23PV" size="3" type="populationList">
             <property tag="color" value="0 0.9 0"/>
-            <property tag="region" value="L23"/>
+            <property tag="region" value="L23_HL23PV"/>
             <instance id="0">
-                <location x="966.453535692138757" y="440.732599175352675" z="7.491470058587191"/>
+                <location x="-124.966232153930605" y="-425.389220247394235" z="-27.120364970706405"/>
+            </instance>
+            <instance id="1">
+                <location x="-152.705018775437907" y="-275.828300790870856" z="260.247686529474549"/>
+            </instance>
+            <instance id="2">
+                <location x="-272.41125925600744" y="-532.427531948874844" z="352.374366395898107"/>
             </instance>
         </population>
-        <population id="Pop_HL23PYR" component="HL23PYR" size="1" type="populationList">
+        <population id="Pop_HL23PYR" component="HL23PYR" size="3" type="populationList">
             <property tag="color" value="0.2 0.2 0.2"/>
-            <property tag="region" value="L23"/>
+            <property tag="region" value="L23_HL23PYR"/>
             <instance id="0">
-                <location x="910.975962449124154" y="939.268997363764015" z="582.227573058949133"/>
+                <location x="-390.129112318441116" y="-568.371793482016983" z="358.116258618141728"/>
+            </instance>
+            <instance id="1">
+                <location x="-335.489517201438446" y="-390.631557488249427" z="271.637747551807593"/>
+            </instance>
+            <instance id="2">
+                <location x="-434.256680645856193" y="-522.688805777020434" z="20.93638484434382"/>
             </instance>
         </population>
-        <population id="Pop_HL23VIP" component="HL23VIP" size="1" type="populationList">
+        <population id="Pop_HL23VIP" component="HL23VIP" size="3" type="populationList">
             <property tag="color" value="0.9 0.9 0"/>
-            <property tag="region" value="L23"/>
+            <property tag="region" value="L23_HL23VIP"/>
             <instance id="0">
-                <location x="671.563481487985086" y="83.93822683708396" z="766.480932791796249"/>
+                <location x="-297.862609756545453" y="-117.206537818572514" z="453.610780458107854"/>
+            </instance>
+            <instance id="1">
+                <location x="-272.890859511406973" y="-100.905544334660959" z="204.109279504154784"/>
+            </instance>
+            <instance id="2">
+                <location x="-4.440275219474302" y="-236.553351002801321" z="260.661343093683286"/>
             </instance>
         </population>
-        <population id="Pop_HL23SST" component="HL23SST" size="1" type="populationList">
+        <population id="Pop_HL23SST" component="HL23SST" size="3" type="populationList">
             <property tag="color" value="0.9 0 0"/>
-            <property tag="region" value="L23"/>
+            <property tag="region" value="L23_HL23SST"/>
             <instance id="0">
-                <location x="236.809775363117751" y="30.814021726609965" z="788.772717236283484"/>
+                <location x="-155.047248090275843" y="-818.109231833135254" z="303.277117089141313"/>
+            </instance>
+            <instance id="1">
+                <location x="-49.321814316740756" y="-878.46725576710503" z="105.536060680604493"/>
+            </instance>
+            <instance id="2">
+                <location x="176.917749021173393" y="-849.022594157051913" z="246.04060345579515"/>
             </instance>
         </population>
         <inputList id="stim_HL23PV" population="Pop_HL23PV" component="pfs0">
             <inputW id="0" target="../Pop_HL23PV/0/HL23PV" destination="synapses" weight="0.1"/>
+            <inputW id="1" target="../Pop_HL23PV/1/HL23PV" destination="synapses" weight="0.1"/>
+            <inputW id="2" target="../Pop_HL23PV/2/HL23PV" destination="synapses" weight="0.1"/>
         </inputList>
         <inputList id="stim_HL23PYR" population="Pop_HL23PYR" component="pfs0">
             <inputW id="0" target="../Pop_HL23PYR/0/HL23PYR" destination="synapses" weight="0.1"/>
+            <inputW id="1" target="../Pop_HL23PYR/1/HL23PYR" destination="synapses" weight="0.1"/>
+            <inputW id="2" target="../Pop_HL23PYR/2/HL23PYR" destination="synapses" weight="0.1"/>
         </inputList>
         <inputList id="stim_HL23VIP" population="Pop_HL23VIP" component="pfs0">
             <inputW id="0" target="../Pop_HL23VIP/0/HL23VIP" destination="synapses" weight="0.1"/>
+            <inputW id="1" target="../Pop_HL23VIP/1/HL23VIP" destination="synapses" weight="0.1"/>
+            <inputW id="2" target="../Pop_HL23VIP/2/HL23VIP" destination="synapses" weight="0.1"/>
         </inputList>
         <inputList id="stim_HL23SST" population="Pop_HL23SST" component="pfs0">
             <inputW id="0" target="../Pop_HL23SST/0/HL23SST" destination="synapses" weight="0.1"/>
+            <inputW id="1" target="../Pop_HL23SST/1/HL23SST" destination="synapses" weight="0.1"/>
+            <inputW id="2" target="../Pop_HL23SST/2/HL23SST" destination="synapses" weight="0.1"/>
         </inputList>
     </network>
 </neuroml>
