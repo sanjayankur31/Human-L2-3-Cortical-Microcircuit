@@ -133,7 +133,7 @@ if __name__ == "__main__":
                 sim, net = generate({cell:1}, 300, config="IClamp",parameters={'stim_amp':'200pA'})
                 check_to_generate_or_run(sys.argv, sim)
 
-        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1, 'HL23SST':1}, 300, config="TestNetwork", parameters={'average_rate':'100 Hz'})
+        sim, net = generate({'HL23PV':1, 'HL23PYR':1, 'HL23VIP':1, 'HL23SST':1}, 1000, config="TestNetwork", parameters={'average_rate':'200 Hz'})
 
         check_to_generate_or_run(sys.argv, sim)
 
