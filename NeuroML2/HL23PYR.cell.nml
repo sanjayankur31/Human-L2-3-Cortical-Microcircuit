@@ -1,5 +1,5 @@
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="NeuroML2_file_exported_from_NEURON">
-    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.1.0 HEAD (047dd824) 2022-03-25
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="NeuroML2_file_exported_from_NEURON">
+    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.2.2 release/8.2 (93d41fafd) 2022-12-15
           Authors: Michael Hines, Sushil Kambampati and Padraig Gleeson,
           Yale University and UCL 
   </notes>
@@ -30366,6 +30366,7 @@
                         <inhomogeneousValue inhomogeneousParameter="PathLengthOverApicDends" value="1E9 * (0.148 * 1E-8) * ((2.087 * exp( 3.6161 * (p/606.3464))) - 0.8696)"/>
                     </variableParameter>
                 </channelDensityNonUniform>
+                <spikeThresh value="10mV"/>
                 <specificCapacitance value="1 uF_per_cm2" segmentGroup="all_minus_myelin"/>
                 <specificCapacitance value="0.02 uF_per_cm2" segmentGroup="myelin_group"/>
                 <specificCapacitance value="2 uF_per_cm2" segmentGroup="apical_dendrite_group"/>

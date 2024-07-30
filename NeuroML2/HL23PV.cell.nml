@@ -1,5 +1,5 @@
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="NeuroML2_file_exported_from_NEURON">
-    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.1.0 HEAD (047dd824) 2022-03-25
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="NeuroML2_file_exported_from_NEURON">
+    <notes> NeuroML 2 file generated from ModelView by: NEURON -- VERSION 8.2.2 release/8.2 (93d41fafd) 2022-12-15
           Authors: Michael Hines, Sushil Kambampati and Padraig Gleeson,
           Yale University and UCL 
   </notes>
@@ -23032,6 +23032,7 @@
                 <channelDensityNernst id="Ca_LVA_somatic" ionChannel="Ca_LVA" condDensity="0.09250008555398015 S_per_cm2" segmentGroup="soma_group" ion="ca"/>
                 <channelDensityNernst id="Ca_HVA_axonal" ionChannel="Ca_HVA" condDensity="0.002961469262723619 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
                 <channelDensityNernst id="Ca_LVA_axonal" ionChannel="Ca_LVA" condDensity="5.9457835817342756e-05 S_per_cm2" segmentGroup="axon_group" ion="ca"/>
+                <spikeThresh value="10mV"/>
                 <specificCapacitance value="2 uF_per_cm2"/>
                 <initMembPotential value="-80mV"/>
             </membraneProperties>

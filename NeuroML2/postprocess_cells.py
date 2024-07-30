@@ -146,6 +146,10 @@ def postprocess_HL23PYR():
     cell.set_specific_capacitance("1 uF_per_cm2", group_id="all_minus_myelin")
     cell.set_init_memb_potential("-80mV")
 
+    # 10mV is default for Neuron spike threshold in NetCon
+    # https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html
+    cell.biophysical_properties.membrane_properties.spike_threshes.append(neuroml.SpikeThresh(value="10mV", segment_groups='all'))
+
     # myelin
     cell.set_specific_capacitance("0.02 uF_per_cm2", group_id="myelin_group")
     cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
@@ -285,7 +289,6 @@ def postprocess_HL23PYR():
         ion_channel="Ih",
         ion="hcn",
         erev="-45 mV",
-        validate=False,
     )
     varparam = cdnonuniform.add(
         "VariableParameter",
@@ -484,6 +487,10 @@ def postprocess_HL23PV():
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
+
+    # 10mV is default for Neuron spike threshold in NetCon
+    # https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html
+    cell.biophysical_properties.membrane_properties.spike_threshes.append(neuroml.SpikeThresh(value="10mV", segment_groups='all'))
 
     # write passive cell before adding active properties
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
@@ -807,6 +814,11 @@ def postprocess_HL23SST():
     # myelin
     cell.set_specific_capacitance("0.02 uF_per_cm2", group_id="myelin_group")
     cell.set_resistivity("0.1 kohm_cm", group_id="myelin_group")
+
+    # 10mV is default for Neuron spike threshold in NetCon
+    # https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html
+    cell.biophysical_properties.membrane_properties.spike_threshes.append(neuroml.SpikeThresh(value="10mV", segment_groups='all'))
+
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
 
@@ -1103,6 +1115,10 @@ def postprocess_HL23VIP():
     cell.set_resistivity("0.1 kohm_cm", group_id="all")
     cell.set_specific_capacitance("2 uF_per_cm2", group_id="all")
     cell.set_init_memb_potential("-80mV")
+
+    # 10mV is default for Neuron spike threshold in NetCon
+    # https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html
+    cell.biophysical_properties.membrane_properties.spike_threshes.append(neuroml.SpikeThresh(value="10mV", segment_groups='all'))
 
     # write passive cell
     write_neuroml2_file(celldoc, f"{cellname}.pas.cell.nml")
