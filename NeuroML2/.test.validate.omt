@@ -1,0 +1,4 @@
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation 
+
+target: "*.cell.nml HL23.net.nml TestNetwork.net.nml"
+engine: jNeuroML_validate

@@ -1,9 +1,9 @@
 {
     "TestNetwork": {
-        "version": "NeuroMLlite v0.5.8",
+        "version": "NeuroMLlite v0.6.0",
         "notes": "Network example",
         "parameters": {
-            "average_rate": "100 Hz",
+            "average_rate": "200 Hz",
             "num_HL23PV": 1,
             "num_HL23PYR": 1,
             "num_HL23VIP": 1,

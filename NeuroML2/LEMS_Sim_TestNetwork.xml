@@ -1,0 +1,76 @@
+<Lems>
+
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v1.3.5 (libNeuroML v0.6.1)
+
+     -->
+
+    <!-- Specify which component to run -->
+    <Target component="Sim_TestNetwork" reportFile="report.Sim_TestNetwork.txt"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="PyNN.xml"/>
+    <Include file="TestNetwork.net.nml"/>
+    <Include file="HL23PV.cell.nml"/>
+    <Include file="HL23PYR.cell.nml"/>
+    <Include file="HL23VIP.cell.nml"/>
+    <Include file="HL23SST.cell.nml"/>
+    <Include file="synapses/AMPA_syn.synapse.nml"/>
+
+    <Simulation id="Sim_TestNetwork" length="300.0ms" step="0.01ms" target="TestNetwork" seed="1111">  <!-- Note seed: ensures same random numbers used every run -->
+        <Display id="Pop_HL23PV_v" title="Plots of Pop_HL23PV_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23PV_0_HL23PV_v" quantity="Pop_HL23PV/0/HL23PV/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
+        </Display>
+
+        <Display id="Pop_HL23PYR_v" title="Plots of Pop_HL23PYR_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23PYR_0_HL23PYR_v" quantity="Pop_HL23PYR/0/HL23PYR/v" scale="1mV" color="#0534e4" timeScale="1ms"/>
+        </Display>
+
+        <Display id="Pop_HL23SST_v" title="Plots of Pop_HL23SST_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23SST_0_HL23SST_v" quantity="Pop_HL23SST/0/HL23SST/v" scale="1mV" color="#98e752" timeScale="1ms"/>
+        </Display>
+
+        <Display id="Pop_HL23VIP_v" title="Plots of Pop_HL23VIP_v" timeScale="1ms" xmin="-30.0" xmax="330.0" ymin="-80" ymax="40">
+            <Line id="Pop_HL23VIP_0_HL23VIP_v" quantity="Pop_HL23VIP/0/HL23VIP/v" scale="1mV" color="#bca074" timeScale="1ms"/>
+        </Display>
+
+        <OutputFile id="Sim_TestNetwork_Pop_HL23PV_v_dat" fileName="Sim_TestNetwork.Pop_HL23PV.v.dat">
+            <OutputColumn id="Pop_HL23PV_0_HL23PV_v" quantity="Pop_HL23PV/0/HL23PV/v"/>
+        </OutputFile>
+
+        <OutputFile id="Sim_TestNetwork_Pop_HL23PYR_v_dat" fileName="Sim_TestNetwork.Pop_HL23PYR.v.dat">
+            <OutputColumn id="Pop_HL23PYR_0_HL23PYR_v" quantity="Pop_HL23PYR/0/HL23PYR/v"/>
+        </OutputFile>
+
+        <OutputFile id="Sim_TestNetwork_Pop_HL23SST_v_dat" fileName="Sim_TestNetwork.Pop_HL23SST.v.dat">
+            <OutputColumn id="Pop_HL23SST_0_HL23SST_v" quantity="Pop_HL23SST/0/HL23SST/v"/>
+        </OutputFile>
+
+        <OutputFile id="Sim_TestNetwork_Pop_HL23VIP_v_dat" fileName="Sim_TestNetwork.Pop_HL23VIP.v.dat">
+            <OutputColumn id="Pop_HL23VIP_0_HL23VIP_v" quantity="Pop_HL23VIP/0/HL23VIP/v"/>
+        </OutputFile>
+
+        <EventOutputFile id="Sim_TestNetwork_Pop_HL23PV_spikes" fileName="Sim_TestNetwork.Pop_HL23PV.spikes" format="ID_TIME">
+            <EventSelection id="0" select="Pop_HL23PV/0/HL23PV" eventPort="spike"/>
+        </EventOutputFile>
+
+        <EventOutputFile id="Sim_TestNetwork_Pop_HL23PYR_spikes" fileName="Sim_TestNetwork.Pop_HL23PYR.spikes" format="ID_TIME">
+            <EventSelection id="0" select="Pop_HL23PYR/0/HL23PYR" eventPort="spike"/>
+        </EventOutputFile>
+
+        <EventOutputFile id="Sim_TestNetwork_Pop_HL23SST_spikes" fileName="Sim_TestNetwork.Pop_HL23SST.spikes" format="ID_TIME">
+            <EventSelection id="0" select="Pop_HL23SST/0/HL23SST" eventPort="spike"/>
+        </EventOutputFile>
+
+        <EventOutputFile id="Sim_TestNetwork_Pop_HL23VIP_spikes" fileName="Sim_TestNetwork.Pop_HL23VIP.spikes" format="ID_TIME">
+            <EventSelection id="0" select="Pop_HL23VIP/0/HL23VIP" eventPort="spike"/>
+        </EventOutputFile>
+
+    </Simulation>
+
+</Lems>

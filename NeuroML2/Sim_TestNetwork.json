@@ -1,6 +1,6 @@
 {
     "Sim_TestNetwork": {
-        "version": "NeuroMLlite v0.5.8",
+        "version": "NeuroMLlite v0.6.0",
         "network": "TestNetwork.json",
         "duration": 300.0,
         "dt": 0.01,

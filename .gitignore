@@ -25,6 +25,7 @@ x86_64/
 *_netpyne.py
 /NeuroML2/Sim_TestNetwork.json
 /NeuroML2/TestNetwork.json
+/NeuroML2/*spikes
 *_eden.py
 
 .mypy_cache/
