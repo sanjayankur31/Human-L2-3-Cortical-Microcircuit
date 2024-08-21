@@ -17,7 +17,7 @@ Learn more about NeuroML here: https://docs.neuroml.org
 - getinfoneuroml.py: gets information about NeuroML cell models
 - create_test_network.py: creates a test network to test for validation
 - create_omv_tests.py: script to create OMV test templates
-- create_network.py: main script for creation of network and simulation
+- nml_main.py: main script for creation of network and simulation
 
 
 These files are created for different network scales:
