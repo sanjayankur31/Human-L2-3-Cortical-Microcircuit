@@ -10,17 +10,18 @@ File: nml_main.py
 Copyright 2023 Ankur Sinha
 """
 
+import argparse
+import bisect
 import copy
+import inspect
 import logging
 import math
 import pathlib
 import random
 import sys
+import textwrap
 import time
 import typing
-import bisect
-import textwrap
-import inspect
 
 import h5py
 import lems.api as lems
@@ -38,13 +39,13 @@ from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
 from pyneuroml.pynml import (
+    generate_sim_scripts_in_folder,
     reload_saved_data,
     run_lems_with,
     write_neuroml2_file,
-    generate_sim_scripts_in_folder,
 )
 from pyneuroml.utils import rotate_cell
-from pyneuroml.utils.units import get_value_in_si, convert_to_units
+from pyneuroml.utils.units import convert_to_units, get_value_in_si
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -1322,45 +1323,187 @@ class HL23Net(object):
 
 
 if __name__ == "__main__":
-    scale = 0.02
-    if len(sys.argv) == 2:
-        scale = float(sys.argv[1])
-    elif len(sys.argv) > 2:
-        print("Only one argument accepted, using first as scale value")
-        scale = float(sys.argv[1])
+    parser = argparse.ArgumentParser(
+        prog="NeuroML_YaoEtAl2022",
+        description="Generate and simulate NeuroML version of Yao et al 2022",
+    )
+    # general options
+    general_args = parser.add_argument_group("General options")
+    general_args.add_argument(
+        "-s",
+        "--scale",
+        action="store",
+        help="Scale of network",
+        default="1",
+        required=True,
+        type=float,
+    )
+    general_args.add_argument(
+        "-n",
+        "--new_cells",
+        action="store_true",
+        help="Toggle creation of new cells or re-use of existing ones",
+        default=False,
+    )
+    general_args.add_argument(
+        "-b",
+        "--biophysics",
+        action="store_true",
+        help="Toggle inclusion of biophysics",
+        default=True,
+    )
+    general_args.add_argument(
+        "-t",
+        "--tonic_inhibition",
+        action="store_true",
+        help="Toggle tonic inhibition in the network",
+        default=True,
+    )
+    general_args.add_argument(
+        "-c",
+        "--connections",
+        action="store_true",
+        help="Toggle creation of network connections",
+        default=True,
+    )
+    general_args.add_argument(
+        "-i",
+        "--network_input",
+        action="store",
+        help="Type of input to give to network",
+        choices=["background", "step", "none"],
+        default="background",
+    )
+    general_args.add_argument(
+        "-l",
+        "--stimulus",
+        action="store_true",
+        help="Toggle external stimulus",
+        default=False,
+    )
+    general_args.add_argument(
+        "--hdf5",
+        action="store_true",
+        help="Toggle exporting as HDF5",
+    )
+    general_args.add_argument(
+        "-r",
+        "--rotate_cells",
+        action="store_true",
+        help="Toggle rotation of cells: not required for simulation since placements of cells in space does not affect it",
+        default=False,
+    )
+
+    # actions
+    action_args = parser.add_argument_group("Actions")
+    action_args.add_argument(
+        "--create_network",
+        action="store_true",
+        help="Toggle creation of new network",
+        default=False,
+    )
+    action_args.add_argument(
+        "--create_simulation",
+        action="store_true",
+        help="Toggle creation of new simulation",
+        default=False,
+    )
+    action_args.add_argument(
+        "--visualize_network",
+        action="store",
+        metavar="<min number of cells to visualise with full morphology>",
+        help="Visualise network with provided minimum number of cells",
+        type=int,
+        default=25,
+    )
+
+    run_parser = action_args.add_mutually_exclusive_group()
+    run_parser.add_argument(
+        "--simulate_neuron",
+        action="store_true",
+        help="Simulation using single threaded NEURON simulation",
+    )
+    run_parser.add_argument(
+        "--simulate_netpyne_nsg",
+        action="store_true",
+        help="Generate configuration to run using NetPyNE on NSG",
+    )
+    run_parser.add_argument(
+        "--simulate_netpyne_qsub",
+        action="store_true",
+        help="Generate configuration to run using NetPyNE on a cluster using qsub",
+    )
+
+    # NSG options
+    nsg_args = parser.add_argument_group("NSG options")
+
+    # parse
+    nsg_args.add_argument(
+        "--number_cores", action="store", default="64", help="Number of cores requested"
+    )
+    nsg_args.add_argument(
+        "--number_of_nodes", action="store", default="8", help="Number of nodes"
+    )
+    nsg_args.add_argument(
+        "--tasks_per_node",
+        action="store",
+        default="64",
+        help="Number of tasks per node (cores * number nodes?)",
+    )
+    nsg_args.add_argument(
+        "--memory_per_node",
+        action="store",
+        default="240",
+        help="Memory requested per node in GB",
+    )
+    nsg_args.add_argument(
+        "--runtime", action="store", default="5", help="Run time requested in hours"
+    )
+    nsg_args.add_argument(
+        "--environment",
+        action="store",
+        default="OSBv2_EXPANSE_0_7_3",
+        help="Environment to request",
+    )
+
+    args = parser.parse_args()
 
     model = HL23Net(
-        scale=scale,
-        new_cells=False,
-        biophysics=True,
-        tonic_inhibition=True,
-        connections=True,
-        network_input="background",
-        stimulus=False,
-        hdf5=False,
-        rotate_cells=False,
+        scale=args.scale,
+        new_cells=args.new_cells,
+        biophysics=args.biophysics,
+        tonic_inhibition=args.tonic_inhibition,
+        connections=args.connections,
+        network_input=args.network_input,
+        stimulus=args.stimulus,
+        hdf5=args.hdf5,
+        rotate_cells=args.rotate_cells,
     )
-    """
-    model.create_network()
-    model.create_simulation()
-    # model.visualize_network(min_cells=25)
-    # For normal run
-    model.run_sim(engine="jneuroml_neuron", cluster=False,
-                  skip_run=False)
-    # for NSG
-    # with netpyne, use `-nogui` to prevent matplotlib import
-    model.run_sim(engine="jneuroml_netpyne", cluster="nsg",
-                  nsg_sim_config={
-                      "number_cores_": "64",
-                      "tasks_per_node_": "64",
-                      "number_nodes_": "8",
-                      "number_gbmemorypernode_": "240",
-                      "runtime_": "5",
-                      'toolId': "OSBv2_EXPANSE_0_7_3",
-                      'nrnivmodl_o_': "1",
-                      "cmdlineopts_": "-nogui"
-                  },
-                  nogui=True)
-    """
-    model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
-    # model.plot_v_graphs()
+    if args.create_network:
+        model.create_network()
+    if args.create_simulation:
+        model.create_simulation()
+    if args.visualize_network:
+        model.visualize_network(min_cells=args.visualize_network)
+
+    # simulation
+    if args.simulate_neuron:
+        model.run_sim(engine="jneuroml_neuron", cluster=False, skip_run=False)
+    elif args.simulate_netpyne_nsg:
+        model.run_sim(
+            engine="jneuroml_netpyne",
+            cluster="nsg",
+            nsg_sim_config={
+                "number_cores_": args.number_cores,
+                "tasks_per_node_": args.tasks_per_node,
+                "number_nodes_": args.number_nodes,
+                "number_gbmemorypernode_": args.memory_per_node,
+                "runtime_": args.runtime,
+                "toolId": args.environment,
+                "nrnivmodl_o_": "1",
+                "cmdlineopts_": "-nogui",
+            },
+            nogui=True,
+        )
+    elif args.simulate_netpyne_qsub:
+        model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
