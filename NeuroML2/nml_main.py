@@ -150,7 +150,7 @@ class HL23Net(object):
             # confirmed from self.cell_data.keys()
             self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
         except FileNotFoundError:
-            print("Files not found")
+            print("Original simulation datea files not found. Will not create model.")
             self.create = False
 
         self.pop_colors = {
@@ -1140,7 +1140,6 @@ class HL23Net(object):
                 + PV_point_cells
             },
             min_width=1.0,
-            precision=(0, 200),
         )
 
     def create_simulation(self, dt=None, seed=123, record_data=True):
