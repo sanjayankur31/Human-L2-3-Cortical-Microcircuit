@@ -1140,6 +1140,7 @@ class HL23Net(object):
                 + PV_point_cells
             },
             min_width=1.0,
+            precision=(0, 200),
         )
 
     def create_simulation(self, dt=None, seed=123, record_data=True):
