@@ -150,7 +150,9 @@ class HL23Net(object):
             # confirmed from self.cell_data.keys()
             self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
         except FileNotFoundError:
-            print("Original simulation datea files not found. Will not create model.")
+            print(
+                "Original simulation data files not found. Will not be able to re-create model."
+            )
             self.create = False
 
         self.pop_colors = {
@@ -1237,13 +1239,13 @@ class HL23Net(object):
                         textwrap.dedent(
                             f"""
                             #!/bin/bash -l
-                            #$ -pe mpi 1024
+                            #$ -pe mpi 36
                             #$ -l mem=4G
                             #$ -l h_rt=6:00:00
                             #$ -cwd
                             #$ -m be
 
-                            source ~/.venv/bin/activate
+                            source ~/.venv311/bin/activate
                             nrnivmodl
                             gerun python3 {netpyne_simfile} -nogui
                             """
@@ -1378,19 +1380,20 @@ if __name__ == "__main__":
         "-l",
         "--stimulus",
         action="store_true",
-        help="Toggle external stimulus",
+        help="Enable external stimulus",
         default=False,
     )
     general_args.add_argument(
+        "-5",
         "--hdf5",
         action="store_true",
-        help="Toggle exporting as HDF5",
+        help="Enable exporting as HDF5",
     )
     general_args.add_argument(
         "-r",
         "--rotate_cells",
         action="store_true",
-        help="Toggle rotation of cells: not required for simulation since placements of cells in space does not affect it",
+        help="Enable rotation of cells: not required for simulation since placements of cells in space does not affect it",
         default=False,
     )
 
@@ -1399,13 +1402,13 @@ if __name__ == "__main__":
     action_args.add_argument(
         "--create_network",
         action="store_true",
-        help="Toggle creation of new network",
+        help="Create a new network",
         default=False,
     )
     action_args.add_argument(
         "--create_simulation",
         action="store_true",
-        help="Toggle creation of new simulation",
+        help="Create new simulation",
         default=False,
     )
     action_args.add_argument(
@@ -1414,7 +1417,7 @@ if __name__ == "__main__":
         metavar="<min number of cells to visualise with full morphology>",
         help="Visualise network with provided minimum number of cells",
         type=int,
-        default=25,
+        default=-1,
     )
 
     run_parser = action_args.add_mutually_exclusive_group()
@@ -1483,7 +1486,7 @@ if __name__ == "__main__":
         model.create_network()
     if args.create_simulation:
         model.create_simulation()
-    if args.visualize_network:
+    if args.visualize_network != -1:
         model.visualize_network(min_cells=args.visualize_network)
 
     # simulation
