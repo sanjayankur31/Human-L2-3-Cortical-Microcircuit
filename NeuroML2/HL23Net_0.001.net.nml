@@ -1,0 +1,58 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.1.xsd" id="HL23Network">
+    <include href="rotated_cells/HL23PYR_sim.cell.nml"/>
+    <include href="rotated_cells/HL23SST_sim.cell.nml"/>
+    <include href="rotated_cells/HL23PV_sim.cell.nml"/>
+    <include href="rotated_cells/HL23VIP_sim.cell.nml"/>
+    <pulseGenerator id="pg_0" delay="100ms" duration="1000ms" amplitude="0.2nA"/>
+    <network id="HL23Network" temperature="34.0 degC">
+        <notes>L23 network at 0.001 scale</notes>
+        <population id="HL23PYR_pop" component="HL23PYR_sim" type="populationList">
+            <property tag="color" value="1 0 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-224.803300636861707" y="-5.805105764465801" z="-979.304497782459066"/>
+            </instance>
+            <instance id="1">
+                <location x="-152.804536879868778" y="-31.472244570110107" z="-815.15690867089404"/>
+            </instance>
+        </population>
+        <population id="HL23SST_pop" component="HL23SST_sim" type="populationList">
+            <property tag="color" value="0 1 0"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="44.921359908303039" y="49.932050003806296" z="-990.870141338771077"/>
+            </instance>
+            <instance id="1">
+                <location x="-102.034992538473702" y="-159.258132793744238" z="-1468.12713935954207"/>
+            </instance>
+        </population>
+        <population id="HL23PV_pop" component="HL23PV_sim" type="populationList">
+            <property tag="color" value="0 0 1"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="-150.38813344036501" y="128.256798996629385" z="-1191.954516681976202"/>
+            </instance>
+            <instance id="1">
+                <location x="126.488309566699826" y="-111.718493667912696" z="-863.976779452796563"/>
+            </instance>
+        </population>
+        <population id="HL23VIP_pop" component="HL23VIP_sim" type="populationList">
+            <property tag="color" value="0.5 0.5 0.5"/>
+            <property tag="region" value="L23"/>
+            <instance id="0">
+                <location x="107.220515394643002" y="-133.086804324342381" z="-1204.071243995782879"/>
+            </instance>
+            <instance id="1">
+                <location x="-216.680693083436012" y="13.258918046615387" z="-600.794674206274635"/>
+            </instance>
+        </population>
+        <explicitInput target="../HL23PYR_pop[0]" input="pg_0"/>
+        <explicitInput target="../HL23PYR_pop[1]" input="pg_0"/>
+        <explicitInput target="../HL23SST_pop[0]" input="pg_0"/>
+        <explicitInput target="../HL23SST_pop[1]" input="pg_0"/>
+        <explicitInput target="../HL23PV_pop[0]" input="pg_0"/>
+        <explicitInput target="../HL23PV_pop[1]" input="pg_0"/>
+        <explicitInput target="../HL23VIP_pop[0]" input="pg_0"/>
+        <explicitInput target="../HL23VIP_pop[1]" input="pg_0"/>
+    </network>
+</neuroml>

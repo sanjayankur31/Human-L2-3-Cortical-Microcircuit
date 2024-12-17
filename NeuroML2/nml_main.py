@@ -18,7 +18,6 @@ import logging
 import math
 import pathlib
 import random
-import sys
 import textwrap
 import time
 import typing
@@ -118,6 +117,8 @@ class HL23Net(object):
         self.max_memory = max_memory
         self.hdf5 = hdf5
         self.rotate_cells = rotate_cells
+        # true by default
+        self.create = True
 
         # data dumped from the simulation
         try:
@@ -294,7 +295,7 @@ class HL23Net(object):
                     ctype
                 ].biophysical_properties = neuroml.BiophysicalProperties(id="biophys")
                 self.nml_cell[ctype].biophysical_properties.add(
-                    neuroml.MembraneProperties
+                    neuroml.MembraneProperties, validate=False
                 )
                 self.nml_cell[ctype].biophysical_properties.add(
                     neuroml.IntracellularProperties
@@ -1168,6 +1169,19 @@ class HL23Net(object):
             simulation_seed=seed,
         )
         simulation.assign_simulation_target(self.network_id)
+        network_file = pathlib.Path(f"HL23Net_{self.network_scale}.net.nml")
+        if not network_file.is_file():
+            logger.error(
+                f"Network file not found at HL23Net_{self.network_scale}.net.nml."
+            )
+            logger.error("Please use the --create_network flag to create a network")
+            return
+
+        self.network_doc = read_neuroml2_file(
+            f"HL23Net_{self.network_scale}.net.nml", include_includes=False
+        )
+        self.network = self.network_doc.networks[0]
+
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
         simulation.include_lems_file(self.lems_components_file_name)
 
@@ -1321,7 +1335,10 @@ class HL23Net(object):
             amplitude="0.2nA",
         )
         for pop in self.network.populations:
-            self.network.add(neuroml.ExplicitInput, target=f"{pop.id}[0]", input=pg.id)
+            for inst in pop.instances:
+                self.network.add(
+                    "ExplicitInput", target=f"../{pop.id}[{inst.id}]", input=pg.id
+                )
 
 
 if __name__ == "__main__":
@@ -1344,28 +1361,28 @@ if __name__ == "__main__":
         "-n",
         "--new_cells",
         action="store_true",
-        help="Toggle creation of new cells or re-use of existing ones",
+        help="Create and use new cells instead of re-using existing cells",
         default=False,
     )
     general_args.add_argument(
         "-b",
         "--biophysics",
-        action="store_true",
-        help="Toggle inclusion of biophysics",
+        action="store_false",
+        help="Disable inclusion of biophysics",
         default=True,
     )
     general_args.add_argument(
         "-t",
         "--tonic_inhibition",
         action="store_true",
-        help="Toggle tonic inhibition in the network",
-        default=True,
+        help="Enable tonic inhibition in the network",
+        default=False,
     )
     general_args.add_argument(
         "-c",
         "--connections",
-        action="store_true",
-        help="Toggle creation of network connections",
+        action="store_false",
+        help="Disable creation of network connections",
         default=True,
     )
     general_args.add_argument(
@@ -1388,6 +1405,7 @@ if __name__ == "__main__":
         "--hdf5",
         action="store_true",
         help="Enable exporting as HDF5",
+        default=False,
     )
     general_args.add_argument(
         "-r",
