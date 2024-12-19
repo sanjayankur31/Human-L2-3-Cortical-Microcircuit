@@ -1334,11 +1334,19 @@ class HL23Net(object):
             duration=self.sim_length,
             amplitude="0.2nA",
         )
+        input_ctr = 0
         for pop in self.network.populations:
+            input_list = self.network.add(
+                "InputList", id=f"input_{pop.id}", component=pg.id, populations=pop.id
+            )
             for inst in pop.instances:
-                self.network.add(
-                    "ExplicitInput", target=f"../{pop.id}[{inst.id}]", input=pg.id
+                input_list.add(
+                    "Input",
+                    id=input_ctr,
+                    target=f"../{pop.id}/{inst.id}/{pop.component}",
+                    destination="synapses",
                 )
+                input_ctr += 1
 
 
 if __name__ == "__main__":

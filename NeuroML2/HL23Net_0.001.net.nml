@@ -46,13 +46,21 @@
                 <location x="-216.680693083436012" y="13.258918046615387" z="-600.794674206274635"/>
             </instance>
         </population>
-        <explicitInput target="../HL23PYR_pop[0]" input="pg_0"/>
-        <explicitInput target="../HL23PYR_pop[1]" input="pg_0"/>
-        <explicitInput target="../HL23SST_pop[0]" input="pg_0"/>
-        <explicitInput target="../HL23SST_pop[1]" input="pg_0"/>
-        <explicitInput target="../HL23PV_pop[0]" input="pg_0"/>
-        <explicitInput target="../HL23PV_pop[1]" input="pg_0"/>
-        <explicitInput target="../HL23VIP_pop[0]" input="pg_0"/>
-        <explicitInput target="../HL23VIP_pop[1]" input="pg_0"/>
+        <inputList id="input_HL23PYR_pop" population="HL23PYR_pop" component="pg_0">
+            <input id="0" target="../HL23PYR_pop/0/HL23PYR_sim" destination="synapses"/>
+            <input id="1" target="../HL23PYR_pop/1/HL23PYR_sim" destination="synapses"/>
+        </inputList>
+        <inputList id="input_HL23SST_pop" population="HL23SST_pop" component="pg_0">
+            <input id="2" target="../HL23SST_pop/0/HL23SST_sim" destination="synapses"/>
+            <input id="3" target="../HL23SST_pop/1/HL23SST_sim" destination="synapses"/>
+        </inputList>
+        <inputList id="input_HL23PV_pop" population="HL23PV_pop" component="pg_0">
+            <input id="4" target="../HL23PV_pop/0/HL23PV_sim" destination="synapses"/>
+            <input id="5" target="../HL23PV_pop/1/HL23PV_sim" destination="synapses"/>
+        </inputList>
+        <inputList id="input_HL23VIP_pop" population="HL23VIP_pop" component="pg_0">
+            <input id="6" target="../HL23VIP_pop/0/HL23VIP_sim" destination="synapses"/>
+            <input id="7" target="../HL23VIP_pop/1/HL23VIP_sim" destination="synapses"/>
+        </inputList>
     </network>
 </neuroml>
