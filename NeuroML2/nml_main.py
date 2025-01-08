@@ -1497,6 +1497,10 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.scale < 0.01:
+        logger.warning("A scale < 0.01 is not recommended because the small number of neurons will result in no connections between populations at all.")
+        logger.warning("Please `pynml -graph 4d <network file>` or `pynml -matrix 1 <network file>` to see connectivity information")
+
     model = HL23Net(
         scale=args.scale,
         new_cells=args.new_cells,
