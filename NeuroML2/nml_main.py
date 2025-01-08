@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
 """
-Parse population and connectivity information exported from circuit.py to
+Main script for creating scaled versions of NeuroML network and simulating it.
+
+This parses population and connectivity information exported from circuit.py to
 create a NeuroML representation of the network.
 
-File: create_simulate.py
+File: nml_main.py
 
 Copyright 2023 Ankur Sinha
 """
+
+import argparse
+import bisect
 import copy
+import inspect
 import logging
 import math
 import pathlib
 import random
-import sys
+import textwrap
 import time
 import typing
-import bisect
-import textwrap
-import inspect
 
 import h5py
 import lems.api as lems
@@ -25,7 +28,6 @@ import neuroml
 import numpy
 import pandas
 import progressbar
-import pyneuroml
 from neuroml.loaders import read_neuroml2_file
 from neuroml.utils import component_factory
 from neuroml.writers import NeuroMLHdf5Writer
@@ -35,11 +37,14 @@ from pyneuroml.nsgr import run_on_nsg
 from pyneuroml.plot.Plot import generate_plot
 from pyneuroml.plot.PlotMorphology import plot_2D
 from pyneuroml.plot.PlotMorphologyVispy import plot_interactive_3D
-from pyneuroml.pynml import (reload_saved_data, run_lems_with,
-                             write_neuroml2_file,
-                             generate_sim_scripts_in_folder)
+from pyneuroml.pynml import (
+    generate_sim_scripts_in_folder,
+    reload_saved_data,
+    run_lems_with,
+    write_neuroml2_file,
+)
 from pyneuroml.utils import rotate_cell
-from pyneuroml.utils.units import get_value_in_si, convert_to_units
+from pyneuroml.utils.units import convert_to_units, get_value_in_si
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -53,7 +58,6 @@ def round_to_sig(x):
 
 
 class HL23Net(object):
-
     """HL23 network"""
 
     def __init__(
@@ -113,6 +117,8 @@ class HL23Net(object):
         self.max_memory = max_memory
         self.hdf5 = hdf5
         self.rotate_cells = rotate_cells
+        # true by default
+        self.create = True
 
         # data dumped from the simulation
         try:
@@ -145,7 +151,9 @@ class HL23Net(object):
             # confirmed from self.cell_data.keys()
             self.cell_types = [i for i in self.circuit_params["conn_probs"].axes[0]]
         except FileNotFoundError:
-            print("Files not found")
+            print(
+                "Original simulation data files not found. Will not be able to re-create model."
+            )
             self.create = False
 
         self.pop_colors = {
@@ -156,7 +164,9 @@ class HL23Net(object):
         }
         self.simulation_id = f"HL23Sim_{self.network_scale}"
         if self.rotate_cells is True:
-            self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.rotated.xml"
+            self.lems_simulation_file = (
+                f"LEMS_HL23_{self.network_scale}_Sim.rotated.xml"
+            )
         else:
             self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
         self.netdoc = None
@@ -170,7 +180,10 @@ class HL23Net(object):
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.stim_start = "200ms"
         self.sim_length = "1000ms"
-        self.sim_end = convert_to_units(f"{get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length)} s", "ms")
+        self.sim_end = convert_to_units(
+            f"{get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length)} s",
+            "ms",
+        )
         self.dt = "0.025ms"
         self.seed = 4587
 
@@ -230,8 +243,9 @@ class HL23Net(object):
 
         print(f"Writing {self.netdoc_file_name} ")
         if self.hdf5:
-            NeuroMLHdf5Writer.write(self.netdoc, self.netdoc_file_name,
-                                    embed_xml=False, compress=True)
+            NeuroMLHdf5Writer.write(
+                self.netdoc, self.netdoc_file_name, embed_xml=False, compress=True
+            )
         else:
             write_neuroml2_file(self.netdoc, self.netdoc_file_name, validate=False)
 
@@ -274,16 +288,14 @@ class HL23Net(object):
 
             self.nml_cell[ctype] = neuroml.loaders.read_neuroml2_file(
                 f"{ctype}.cell.nml"
-            ).cells[
-                0
-            ]  # type: neuroml.Cell
+            ).cells[0]  # type: neuroml.Cell
             # replace biophys with empty object
             if self.biophysics is False:
                 self.nml_cell[
                     ctype
                 ].biophysical_properties = neuroml.BiophysicalProperties(id="biophys")
                 self.nml_cell[ctype].biophysical_properties.add(
-                    neuroml.MembraneProperties
+                    neuroml.MembraneProperties, validate=False
                 )
                 self.nml_cell[ctype].biophysical_properties.add(
                     neuroml.IntracellularProperties
@@ -306,8 +318,9 @@ class HL23Net(object):
                 )
                 unrotated_cell_doc.add(unrotated_cell)
                 if self.biophysics is True:
-                    self.__add_tonic_inhibition(ctype, unrotated_cell,
-                                                unrotated_cell_doc)
+                    self.__add_tonic_inhibition(
+                        ctype, unrotated_cell, unrotated_cell_doc
+                    )
                 write_neuroml2_file(
                     unrotated_cell_doc, unrotated_cell_file, validate=False
                 )
@@ -346,7 +359,10 @@ class HL23Net(object):
                         f"{self.temp_cell_dir}/{self.nml_cell[ctype].id}_{gid}.cell.nml"
                     )
                     rotated_cell_id = self.nml_cell[ctype].id + f"_{gid}"
-                    if self.new_cells is False and pathlib.Path(rotated_cell_file).exists():
+                    if (
+                        self.new_cells is False
+                        and pathlib.Path(rotated_cell_file).exists()
+                    ):
                         print(f"{rotated_cell_file} already exists, not overwriting.")
                         print("Set new_cells=True to regenerate all rotated cell files")
                     else:
@@ -364,8 +380,9 @@ class HL23Net(object):
                         )
 
                         if self.biophysics is True:
-                            self.__add_tonic_inhibition(ctype, rotated_cell,
-                                                        rotated_cell_doc)
+                            self.__add_tonic_inhibition(
+                                ctype, rotated_cell, rotated_cell_doc
+                            )
 
                         rotated_cell_doc.add(rotated_cell)
                         write_neuroml2_file(
@@ -564,7 +581,9 @@ class HL23Net(object):
                 # show a progress bar so we have some idea of what's going on
                 max_value_possible = int(conndataset.shape[0])
                 # rounded = round_to_sig(approx_max_value)
-                bar = progressbar.ProgressBar(max_val=max_value_possible, poll_interval=30)
+                bar = progressbar.ProgressBar(
+                    max_val=max_value_possible, poll_interval=30
+                )
                 bar_count = 0
                 for conn in conndataset:
                     precell = conn[0]
@@ -575,7 +594,10 @@ class HL23Net(object):
                     sectionx = conn[5]
 
                     # if both cells are not in our population, skip this connection
-                    if precell not in self.cell_list.keys() or postcell not in self.cell_list.keys():
+                    if (
+                        precell not in self.cell_list.keys()
+                        or postcell not in self.cell_list.keys()
+                    ):
                         logger.debug(
                             f"{precell} or {postcell} are not included in the network. Skipping"
                         )
@@ -591,16 +613,21 @@ class HL23Net(object):
                     # it
                     try:
                         ord_segs = ordered_segments[f"{posttype}"][neuroml_seggrp_id]
-                        cumul_lengths = cumulative_lengths[f"{posttype}"][neuroml_seggrp_id]
+                        cumul_lengths = cumulative_lengths[f"{posttype}"][
+                            neuroml_seggrp_id
+                        ]
                     except KeyError:
                         [
                             ord_segs,
                             cumul_lengths,
                         ] = anml_cell.get_ordered_segments_in_groups(
-                            group_list=[neuroml_seggrp_id], include_cumulative_lengths=True
+                            group_list=[neuroml_seggrp_id],
+                            include_cumulative_lengths=True,
                         )
                         ordered_segments[f"{posttype}"][neuroml_seggrp_id] = ord_segs
-                        cumulative_lengths[f"{posttype}"][neuroml_seggrp_id] = cumul_lengths
+                        cumulative_lengths[f"{posttype}"][neuroml_seggrp_id] = (
+                            cumul_lengths
+                        )
 
                     list_ord_segs = ord_segs[neuroml_seggrp_id]
                     list_cumul_lengths = cumul_lengths[neuroml_seggrp_id]
@@ -740,14 +767,21 @@ class HL23Net(object):
 
             # create input component for 0.5
             g_e0 = cell_type_ge0[cell_type] * math.exp(0.5)
-            gfluct_component = lems.Component(id_=f"Gfluct_{cell_type}_0_5",
-                                              type_="Gfluct",
-                                              start=self.stim_start,
-                                              stop=self.sim_end, dt=self.dt,
-                                              E_e="0mV",
-                                              E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
-                                              tau_e="65ms", tau_i="20ms",
-                                              std_e=f"{g_e0} uS", std_i="0pS")
+            gfluct_component = lems.Component(
+                id_=f"Gfluct_{cell_type}_0_5",
+                type_="Gfluct",
+                start=self.stim_start,
+                stop=self.sim_end,
+                dt=self.dt,
+                E_e="0mV",
+                E_i="-80mV",
+                g_e0=f"{g_e0} uS",
+                g_i0="0pS",
+                tau_e="65ms",
+                tau_i="20ms",
+                std_e=f"{g_e0} uS",
+                std_i="0pS",
+            )
             self.lems_components.add(gfluct_component)
 
             # get segments to place input at
@@ -770,25 +804,38 @@ class HL23Net(object):
             # create the input component
             g_e0 = cell_type_ge0[cell_type] * math.exp(d)
             # create input component for use at each distance point
-            gfluct_component = lems.Component(id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
-                                              type_="Gfluct",
-                                              start=self.stim_start,
-                                              stop=self.sim_end, dt=self.dt,
-                                              E_e="0mV",
-                                              E_i="-80mV", g_e0=f"{g_e0} uS", g_i0="0pS",
-                                              tau_e="65ms", tau_i="20ms",
-                                              std_e=f"{g_e0} uS", std_i="0pS")
+            gfluct_component = lems.Component(
+                id_=f"Gfluct_HL23PYR_{str(d).replace('.', '_')}",
+                type_="Gfluct",
+                start=self.stim_start,
+                stop=self.sim_end,
+                dt=self.dt,
+                E_e="0mV",
+                E_i="-80mV",
+                g_e0=f"{g_e0} uS",
+                g_i0="0pS",
+                tau_e="65ms",
+                tau_i="20ms",
+                std_e=f"{g_e0} uS",
+                std_i="0pS",
+            )
             self.lems_components.add(gfluct_component)
 
             # get segments to place at
-            segs_apical = pyr_cell.get_segments_at_distance(d * longest_apical_branch_length)
+            segs_apical = pyr_cell.get_segments_at_distance(
+                d * longest_apical_branch_length
+            )
             for seg, frac_along in segs_apical.items():
                 if seg in pyr_apical_segs:
                     try:
-                        cell_type_input_locations["HL23PYR"][d].append((seg, frac_along))
+                        cell_type_input_locations["HL23PYR"][d].append(
+                            (seg, frac_along)
+                        )
                     except KeyError:
                         cell_type_input_locations["HL23PYR"][d] = []
-                        cell_type_input_locations["HL23PYR"][d].append((seg, frac_along))
+                        cell_type_input_locations["HL23PYR"][d].append(
+                            (seg, frac_along)
+                        )
 
         # create a new input list for each population, and each location
         # because input list takes a component as an argument, and a different
@@ -802,24 +849,35 @@ class HL23Net(object):
 
             for rel_dist, seginfos in input_segs.items():
                 # one input list per population per component
-                inputlist = self.network.add("InputList", id=f"Gfluct_{input_list_ctr}",
-                                             component=f"Gfluct_{cell_type}_{str(rel_dist).replace('.', '_')}",
-                                             populations=pop.id,
-                                             validate=False)
+                inputlist = self.network.add(
+                    "InputList",
+                    id=f"Gfluct_{input_list_ctr}",
+                    component=f"Gfluct_{cell_type}_{str(rel_dist).replace('.', '_')}",
+                    populations=pop.id,
+                    validate=False,
+                )
                 input_list_ctr += 1
-                for (seg, frac_along) in seginfos:
+                for seg, frac_along in seginfos:
                     if self.rotate_cells is True:
-                        inputlist.add("Input", id=f"{input_ctr}",
-                                      target=f"../{pop.id}/0/{pop.component}",
-                                      destination="synapses", segment_id=seg,
-                                      fraction_along=frac_along)
+                        inputlist.add(
+                            "Input",
+                            id=f"{input_ctr}",
+                            target=f"../{pop.id}/0/{pop.component}",
+                            destination="synapses",
+                            segment_id=seg,
+                            fraction_along=frac_along,
+                        )
                         input_ctr += 1
                     else:
                         for inst in pop.instances:
-                            inputlist.add("Input", id=f"{input_ctr}",
-                                          target=f"../{pop.id}/{inst.id}/{pop.component}",
-                                          destination="synapses", segment_id=seg,
-                                          fraction_along=frac_along)
+                            inputlist.add(
+                                "Input",
+                                id=f"{input_ctr}",
+                                target=f"../{pop.id}/{inst.id}/{pop.component}",
+                                destination="synapses",
+                                segment_id=seg,
+                                fraction_along=frac_along,
+                            )
                             input_ctr += 1
 
         end = time.time()
@@ -960,7 +1018,9 @@ class HL23Net(object):
 
     def visualize_network(self, min_cells=5):
         """Generate morph plots"""
-        print(f"Visualising network at scale {self.network_scale} with {min_cells} in full")
+        print(
+            f"Visualising network at scale {self.network_scale} with {min_cells} in full"
+        )
         # if the network has been constructed, copy over the populations and
         # include the cells
         if self.netdoc is not None:
@@ -1015,7 +1075,9 @@ class HL23Net(object):
             PV_point_cells = random.sample(PV_cells, len(PV_cells) - min_cells)
         if (len(VIP_cells) - min_cells) > 0:
             VIP_point_cells = random.sample(VIP_cells, len(VIP_cells) - min_cells)
-        print(f"Picked {len(PYR_point_cells) + len(SST_point_cells) + len(PV_point_cells) + len(VIP_point_cells)} point cells")
+        print(
+            f"Picked {len(PYR_point_cells) + len(SST_point_cells) + len(PV_point_cells) + len(VIP_point_cells)} point cells"
+        )
 
         """
         print("Removing axons from PYR cells")
@@ -1071,9 +1133,17 @@ class HL23Net(object):
                 }
             )
             """
-        plot_interactive_3D(self.netdoc_file_name, plot_type="detailed", plot_spec={
-            "point_cells": PYR_point_cells + SST_point_cells + VIP_point_cells + PV_point_cells
-        }, min_width=1.0)
+        plot_interactive_3D(
+            self.netdoc_file_name,
+            plot_type="detailed",
+            plot_spec={
+                "point_cells": PYR_point_cells
+                + SST_point_cells
+                + VIP_point_cells
+                + PV_point_cells
+            },
+            min_width=1.0,
+        )
 
     def create_simulation(self, dt=None, seed=123, record_data=True):
         """Create simulation, record data.
@@ -1096,19 +1166,36 @@ class HL23Net(object):
             sim_id=self.simulation_id,
             duration=float(self.sim_length.replace("ms", "")),
             dt=float(dt.replace("ms", "")),
-            simulation_seed=seed
+            simulation_seed=seed,
         )
         simulation.assign_simulation_target(self.network_id)
+        network_file = pathlib.Path(f"HL23Net_{self.network_scale}.net.nml")
+        if not network_file.is_file():
+            logger.error(
+                f"Network file not found at HL23Net_{self.network_scale}.net.nml."
+            )
+            logger.error("Please use the --create_network flag to create a network")
+            return
+
+        self.network_doc = read_neuroml2_file(
+            f"HL23Net_{self.network_scale}.net.nml", include_includes=False
+        )
+        self.network = self.network_doc.networks[0]
+
         simulation.include_neuroml2_file(f"HL23Net_{self.network_scale}.net.nml")
         simulation.include_lems_file(self.lems_components_file_name)
 
         if record_data is True:
-            simulation.create_output_file("output1", f"HL23Net_{self.network_scale}.v.dat")
+            simulation.create_output_file(
+                "output1", f"HL23Net_{self.network_scale}.v.dat"
+            )
             print(f"Saving data to: HL23Net_{self.network_scale}.v.dat")
             for apop in self.network.populations:
                 for inst in apop.instances:
                     simulation.add_column_to_output_file(
-                        "output1", f"{apop.id}_{inst.id}", f"{apop.id}/{inst.id}/{apop.component}/0/v"
+                        "output1",
+                        f"{apop.id}_{inst.id}",
+                        f"{apop.id}/{inst.id}/{apop.component}/0/v",
                     )
 
         simulation.save_to_file(self.lems_simulation_file)
@@ -1116,9 +1203,12 @@ class HL23Net(object):
         end = time.time()
         print(f"Creating simulation took: {(end - start)} seconds.")
 
-    def run_sim(self, engine: str = "jneuroml_neuron",
-                cluster: typing.Union[str, bool] = False,
-                **kwargs):
+    def run_sim(
+        self,
+        engine: str = "jneuroml_neuron",
+        cluster: typing.Union[str, bool] = False,
+        **kwargs,
+    ):
         """Run the sim
 
         :param engine: engine to use (jneuroml_neuron/jneuroml_netpyne)
@@ -1137,7 +1227,7 @@ class HL23Net(object):
                 max_memory=self.max_memory,
                 nogui=True,
                 show_plot_already=False,
-                **kwargs
+                **kwargs,
             )
         elif cluster == "qsub":
             print(f"Generating files but not running: {self.lems_simulation_file}")
@@ -1149,7 +1239,7 @@ class HL23Net(object):
                 max_memory=self.max_memory,
                 nogui=True,
                 show_plot_already=False,
-                **kwargs
+                **kwargs,
             )
             # remove trailing backslash
             if tdir[-1] == "/":
@@ -1157,41 +1247,55 @@ class HL23Net(object):
             qsub_fn = f"{tdir}/{tdir}_generated/{self.lems_simulation_file}.sh"
             netpyne_simfile = self.lems_simulation_file.replace(".xml", "_netpyne.py")
             print(f"Generating qsub script for use on cluster: {qsub_fn}")
-            with open(qsub_fn, 'w') as f:
+            with open(qsub_fn, "w") as f:
                 print(
                     inspect.cleandoc(
                         textwrap.dedent(
                             f"""
                             #!/bin/bash -l
-                            #$ -pe mpi 1024
+                            #$ -pe mpi 36
                             #$ -l mem=4G
                             #$ -l h_rt=6:00:00
                             #$ -cwd
                             #$ -m be
 
-                            source ~/.venv/bin/activate
+                            source ~/.venv311/bin/activate
                             nrnivmodl
                             gerun python3 {netpyne_simfile} -nogui
                             """
                         )
                     ),
-                    file=f
+                    file=f,
                 )
         elif cluster == "nsg_dry":
-            print(f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}")
-            run_on_nsg(engine, self.lems_simulation_file,
-                       dry_run=True, max_memory=self.max_memory, **kwargs)
+            print(
+                f"Preparing to run on NSG (but not submitting): {self.lems_simulation_file}"
+            )
+            run_on_nsg(
+                engine,
+                self.lems_simulation_file,
+                dry_run=True,
+                max_memory=self.max_memory,
+                **kwargs,
+            )
         elif cluster == "nsg":
             print(f"Running simulation on NSG: {self.lems_simulation_file}")
-            run_on_nsg(engine, self.lems_simulation_file,
-                       max_memory=self.max_memory, **kwargs)
+            run_on_nsg(
+                engine, self.lems_simulation_file, max_memory=self.max_memory, **kwargs
+            )
             print("Press Ctrl C to interrupt the waiting process")
-            print("You can use `nsg_job -l` to check the status of the job and download the simulation reults")
+            print(
+                "You can use `nsg_job -l` to check the status of the job and download the simulation reults"
+            )
 
     def plot_v_graphs(self):
         """Plot membrane potential graphs"""
-        data = reload_saved_data(self.lems_simulation_file, plot=True,
-                                 show_plot_already=True, reload_events=False)
+        data = reload_saved_data(
+            self.lems_simulation_file,
+            plot=True,
+            show_plot_already=True,
+            reload_events=False,
+        )
         """
         logger.debug(data.keys())
         xvals = [data["t"]]
@@ -1223,54 +1327,216 @@ class HL23Net(object):
         """
         print("Adding step current to each cell")
         # a single pulse generator
-        pg = self.netdoc.add(neuroml.PulseGenerator, id="pg_0",
-                             delay="100ms", duration=self.sim_length,
-                             amplitude="0.2nA")
+        pg = self.netdoc.add(
+            neuroml.PulseGenerator,
+            id="pg_0",
+            delay="100ms",
+            duration=self.sim_length,
+            amplitude="0.2nA",
+        )
+        input_ctr = 0
         for pop in self.network.populations:
-            self.network.add(neuroml.ExplicitInput, target=f"{pop.id}[0]",
-                             input=pg.id)
+            input_list = self.network.add(
+                "InputList", id=f"input_{pop.id}", component=pg.id, populations=pop.id
+            )
+            for inst in pop.instances:
+                input_list.add(
+                    "Input",
+                    id=input_ctr,
+                    target=f"../{pop.id}/{inst.id}/{pop.component}",
+                    destination="synapses",
+                )
+                input_ctr += 1
 
 
 if __name__ == "__main__":
-    scale = 0.02
-    if len(sys.argv) == 2:
-        scale = float(sys.argv[1])
-    elif len(sys.argv) > 2:
-        print("Only one argument accepted, using first as scale value")
-        scale = float(sys.argv[1])
+    parser = argparse.ArgumentParser(
+        prog="NeuroML_YaoEtAl2022",
+        description="Generate and simulate NeuroML version of Yao et al 2022",
+    )
+    # general options
+    general_args = parser.add_argument_group("General options")
+    general_args.add_argument(
+        "-s",
+        "--scale",
+        action="store",
+        help="Scale of network",
+        default="1",
+        required=True,
+        type=float,
+    )
+    general_args.add_argument(
+        "-n",
+        "--new_cells",
+        action="store_true",
+        help="Create and use new cells instead of re-using existing cells",
+        default=False,
+    )
+    general_args.add_argument(
+        "-b",
+        "--biophysics",
+        action="store_false",
+        help="Disable inclusion of biophysics",
+        default=True,
+    )
+    general_args.add_argument(
+        "-t",
+        "--tonic_inhibition",
+        action="store_true",
+        help="Enable tonic inhibition in the network",
+        default=False,
+    )
+    general_args.add_argument(
+        "-c",
+        "--connections",
+        action="store_false",
+        help="Disable creation of network connections",
+        default=True,
+    )
+    general_args.add_argument(
+        "-i",
+        "--network_input",
+        action="store",
+        help="Type of input to give to network",
+        choices=["background", "step", "none"],
+        default="background",
+    )
+    general_args.add_argument(
+        "-l",
+        "--stimulus",
+        action="store_true",
+        help="Enable external stimulus",
+        default=False,
+    )
+    general_args.add_argument(
+        "-5",
+        "--hdf5",
+        action="store_true",
+        help="Enable exporting as HDF5",
+        default=False,
+    )
+    general_args.add_argument(
+        "-r",
+        "--rotate_cells",
+        action="store_true",
+        help="Enable rotation of cells: not required for simulation since placements of cells in space does not affect it",
+        default=False,
+    )
+
+    # actions
+    action_args = parser.add_argument_group("Actions")
+    action_args.add_argument(
+        "--create_network",
+        action="store_true",
+        help="Create a new network",
+        default=False,
+    )
+    action_args.add_argument(
+        "--create_simulation",
+        action="store_true",
+        help="Create new simulation",
+        default=False,
+    )
+    action_args.add_argument(
+        "--visualize_network",
+        action="store",
+        metavar="<min number of cells to visualise with full morphology>",
+        help="Visualise network with provided minimum number of cells",
+        type=int,
+        default=-1,
+    )
+
+    run_parser = action_args.add_mutually_exclusive_group()
+    run_parser.add_argument(
+        "--simulate_neuron",
+        action="store_true",
+        help="Simulation using single threaded NEURON simulation",
+    )
+    run_parser.add_argument(
+        "--simulate_netpyne_nsg",
+        action="store_true",
+        help="Generate configuration to run using NetPyNE on NSG",
+    )
+    run_parser.add_argument(
+        "--simulate_netpyne_qsub",
+        action="store_true",
+        help="Generate configuration to run using NetPyNE on a cluster using qsub",
+    )
+
+    # NSG options
+    nsg_args = parser.add_argument_group("NSG options")
+
+    # parse
+    nsg_args.add_argument(
+        "--number_cores", action="store", default="64", help="Number of cores requested"
+    )
+    nsg_args.add_argument(
+        "--number_of_nodes", action="store", default="8", help="Number of nodes"
+    )
+    nsg_args.add_argument(
+        "--tasks_per_node",
+        action="store",
+        default="64",
+        help="Number of tasks per node (cores * number nodes?)",
+    )
+    nsg_args.add_argument(
+        "--memory_per_node",
+        action="store",
+        default="240",
+        help="Memory requested per node in GB",
+    )
+    nsg_args.add_argument(
+        "--runtime", action="store", default="5", help="Run time requested in hours"
+    )
+    nsg_args.add_argument(
+        "--environment",
+        action="store",
+        default="OSBv2_EXPANSE_0_7_3",
+        help="Environment to request",
+    )
+
+    args = parser.parse_args()
+
+    if args.scale < 0.01:
+        logger.warning("A scale < 0.01 is not recommended because the small number of neurons will result in no connections between populations at all.")
+        logger.warning("Please `pynml -graph 4d <network file>` or `pynml -matrix 1 <network file>` to see connectivity information")
 
     model = HL23Net(
-        scale=scale,
-        new_cells=False,
-        biophysics=True,
-        tonic_inhibition=True,
-        connections=True,
-        network_input="background",
-        stimulus=False,
-        hdf5=False,
-        rotate_cells=False,
+        scale=args.scale,
+        new_cells=args.new_cells,
+        biophysics=args.biophysics,
+        tonic_inhibition=args.tonic_inhibition,
+        connections=args.connections,
+        network_input=args.network_input,
+        stimulus=args.stimulus,
+        hdf5=args.hdf5,
+        rotate_cells=args.rotate_cells,
     )
-    """
-    model.create_network()
-    model.create_simulation()
-    # model.visualize_network(min_cells=25)
-    # For normal run
-    model.run_sim(engine="jneuroml_neuron", cluster=False,
-                  skip_run=False)
-    # for NSG
-    # with netpyne, use `-nogui` to prevent matplotlib import
-    model.run_sim(engine="jneuroml_netpyne", cluster="nsg",
-                  nsg_sim_config={
-                      "number_cores_": "64",
-                      "tasks_per_node_": "64",
-                      "number_nodes_": "8",
-                      "number_gbmemorypernode_": "240",
-                      "runtime_": "5",
-                      'toolId': "OSBv2_EXPANSE_0_7_3",
-                      'nrnivmodl_o_': "1",
-                      "cmdlineopts_": "-nogui"
-                  },
-                  nogui=True)
-    """
-    model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
-    # model.plot_v_graphs()
+    if args.create_network:
+        model.create_network()
+    if args.create_simulation:
+        model.create_simulation()
+    if args.visualize_network != -1:
+        model.visualize_network(min_cells=args.visualize_network)
+
+    # simulation
+    if args.simulate_neuron:
+        model.run_sim(engine="jneuroml_neuron", cluster=False, skip_run=False)
+    elif args.simulate_netpyne_nsg:
+        model.run_sim(
+            engine="jneuroml_netpyne",
+            cluster="nsg",
+            nsg_sim_config={
+                "number_cores_": args.number_cores,
+                "tasks_per_node_": args.tasks_per_node,
+                "number_nodes_": args.number_nodes,
+                "number_gbmemorypernode_": args.memory_per_node,
+                "runtime_": args.runtime,
+                "toolId": args.environment,
+                "nrnivmodl_o_": "1",
+                "cmdlineopts_": "-nogui",
+            },
+            nogui=True,
+        )
+    elif args.simulate_netpyne_qsub:
+        model.run_sim(engine="jneuroml_netpyne", cluster="qsub")
