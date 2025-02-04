@@ -1476,7 +1476,7 @@ if __name__ == "__main__":
         "--number_cores", action="store", default="64", help="Number of cores requested"
     )
     nsg_args.add_argument(
-        "--number_of_nodes", action="store", default="8", help="Number of nodes"
+        "--number_nodes", action="store", default="8", help="Number of nodes"
     )
     nsg_args.add_argument(
         "--tasks_per_node",
