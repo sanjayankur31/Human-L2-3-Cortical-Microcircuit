@@ -3,7 +3,6 @@
   <Include file="CaDynamics_E2_NML2.nml"/>
   <Include file="synapses/ProbAMPANMDA.synapse.nml"/>
   <Include file="synapses/ProbUDF.synapse.nml"/>
-  <Include file="channels/Tonic.nml"/>
   <Include file="channels/Ca_HVA.channel.nml"/>
   <Include file="channels/Ca_LVA.channel.nml"/>
   <Include file="channels/Ih.channel.nml"/>
@@ -32,12 +31,12 @@
   <Component id="HL23VIP_HL23SST_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.27" Dep="760 ms" Fac="22 ms" gbase="0.00036 uS" u0="0" erev="-80 mV"/>
   <Component id="HL23VIP_HL23PV_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.25" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
   <Component id="HL23VIP_HL23VIP_ProbUDFsyn" type="ProbUDFsyn" tau_r="1 ms" tau_d="10 ms" Use="0.26" Dep="720 ms" Fac="21 ms" gbase="0.00034 uS" u0="0" erev="-80 mV"/>
-  <Component id="Gfluct_HL23PYR_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="46.164195579603586 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="46.164195579603586 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23SST_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="49.461638121003844 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="49.461638121003844 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23PV_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="461.6419557960359 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="461.6419557960359 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23VIP_0_5" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="108.81560386620846 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="108.81560386620846 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23PYR_0_1" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="30.944785706118136 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="30.944785706118136 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23PYR_0_3" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="37.79604661212809 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="37.79604661212809 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23PYR_0_7" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="56.385075809173344 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="56.385075809173344 pS" std_i="0pS"/>
-  <Component id="Gfluct_HL23PYR_0_9" type="Gfluct" start="0ms" stop="1000ms" dt="0.01ms" E_e="0mV" E_i="-80mV" g_e0="68.86888711239459 pS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="68.86888711239459 pS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_5" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="0.00010881560386620847 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="0.00010881560386620847 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23SST_0_5" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="4.9461638121003845e-05 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="4.9461638121003845e-05 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PV_0_5" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="0.00046164195579603584 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="0.00046164195579603584 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23VIP_0_5" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="0.00010881560386620847 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="0.00010881560386620847 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_1" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="7.294128059299276e-05 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="7.294128059299276e-05 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_3" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="8.909068130001622e-05 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="8.909068130001622e-05 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_7" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="0.00013290767869305147 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="0.00013290767869305147 uS" std_i="0pS"/>
+  <Component id="Gfluct_HL23PYR_0_9" type="Gfluct" start="200ms" stop="1200.0ms" dt="0.025ms" E_e="0mV" E_i="-80mV" g_e0="0.0001623338053363587 uS" g_i0="0pS" tau_e="65ms" tau_i="20ms" std_e="0.0001623338053363587 uS" std_i="0pS"/>
 </Lems>
