@@ -890,38 +890,41 @@ class HL23Net(object):
         # create inputs and input lists for pyr apical
         input_segs = cell_type_input_locations[cell_type]
 
-        for rel_dist, seginfos in input_segs.items():
-            # one input list per population per component
-            inputlist = self.network.add(
-                "InputList",
-                id=f"Gfluct_{input_list_ctr}",
-                component=f"Gfluct_{cell_type}_apical_{str(rel_dist).replace('.', '_')}",
-                populations=pop.id,
-                validate=False,
-            )
-            input_list_ctr += 1
-            for seg, frac_along in seginfos:
-                if self.rotate_cells is True:
-                    inputlist.add(
-                        "Input",
-                        id=f"{input_ctr}",
-                        target=f"../{pop.id}/0/{pop.component}",
-                        destination="synapses",
-                        segment_id=seg,
-                        fraction_along=frac_along,
-                    )
-                    input_ctr += 1
-                else:
-                    for inst in pop.instances:
+        for pop in self.network.populations:
+            if not "PYR" in pop.id:
+                continue
+            for rel_dist, seginfos in input_segs.items():
+                # one input list per population per component
+                inputlist = self.network.add(
+                    "InputList",
+                    id=f"Gfluct_apical_{input_list_ctr}",
+                    component=f"Gfluct_{cell_type}_apical_{str(rel_dist).replace('.', '_')}",
+                    populations=pop.id,
+                    validate=False,
+                )
+                input_list_ctr += 1
+                for seg, frac_along in seginfos:
+                    if self.rotate_cells is True:
                         inputlist.add(
                             "Input",
                             id=f"{input_ctr}",
-                            target=f"../{pop.id}/{inst.id}/{pop.component}",
+                            target=f"../{pop.id}/0/{pop.component}",
                             destination="synapses",
                             segment_id=seg,
                             fraction_along=frac_along,
                         )
                         input_ctr += 1
+                    else:
+                        for inst in pop.instances:
+                            inputlist.add(
+                                "Input",
+                                id=f"{input_ctr}",
+                                target=f"../{pop.id}/{inst.id}/{pop.component}",
+                                destination="synapses",
+                                segment_id=seg,
+                                fraction_along=frac_along,
+                            )
+                            input_ctr += 1
 
         end = time.time()
         print(f"Adding background input took: {(end - start)} seconds.")
