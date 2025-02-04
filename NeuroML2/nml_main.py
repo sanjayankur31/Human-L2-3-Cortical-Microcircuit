@@ -216,8 +216,9 @@ class HL23Net(object):
         self.lems_components.add(lems.Include("CaDynamics_E2_NML2.nml"))
         self.lems_components.add(lems.Include("synapses/ProbAMPANMDA.synapse.nml"))
         self.lems_components.add(lems.Include("synapses/ProbUDF.synapse.nml"))
-        if self.tonic_inhibition:
-            self.lems_components.add(lems.Include("channels/Tonic.nml"))
+
+        # Always include, set conductance to 0 if not required
+        self.lems_components.add(lems.Include("channels/Tonic.nml"))
 
         # add all the channel definitions to
         channel_files = pathlib.Path("channels").glob("**/*.channel.nml")
@@ -438,31 +439,36 @@ class HL23Net(object):
         :type cell_doc: neuroml.NeuroMLDocument
         """
         if self.tonic_inhibition is True:
-            # add gaba tonic inhibition to cells
-            # definition file is included in the network, so we don't
-            # re-include it here.
-            if ctype == "HL23PYR" or ctype == "HL23SST":
-                cell.add_channel_density(
-                    nml_cell_doc=cell_doc,
-                    cd_id="TonicInhibition",
-                    ion_channel="TonicPavlov2009",
-                    cond_density="0.000938 S_per_cm2",
-                    erev="-75 mV",
-                    group_id="all_minus_myelin",
-                    ion="non_specific",
-                    ion_chan_def_file="",
-                )
-            elif ctype == "HL23PV" or ctype == "HL23VIP":
-                cell.add_channel_density(
-                    nml_cell_doc=cell_doc,
-                    cd_id="TonicInhibition",
-                    ion_channel="TonicPavlov2009",
-                    cond_density="0.000938 S_per_cm2",
-                    erev="-75 mV",
-                    group_id="all",
-                    ion="non_specific",
-                    ion_chan_def_file="",
-                )
+            cond_density = "0.000938 S_per_cm2"
+        else:
+            # add but deactivate
+            cond_density = "0.0 S_per_cm2"
+
+        # add gaba tonic inhibition to cells
+        # definition file is included in the network, so we don't
+        # re-include it here.
+        if ctype == "HL23PYR" or ctype == "HL23SST":
+            cell.add_channel_density(
+                nml_cell_doc=cell_doc,
+                cd_id="TonicInhibition",
+                ion_channel="TonicPavlov2009",
+                cond_density=cond_density,
+                erev="-75 mV",
+                group_id="all_minus_myelin",
+                ion="non_specific",
+                ion_chan_def_file="",
+            )
+        elif ctype == "HL23PV" or ctype == "HL23VIP":
+            cell.add_channel_density(
+                nml_cell_doc=cell_doc,
+                cd_id="TonicInhibition",
+                ion_channel="TonicPavlov2009",
+                cond_density=cond_density,
+                erev="-75 mV",
+                group_id="all",
+                ion="non_specific",
+                ion_chan_def_file="",
+            )
 
     def create_connections(self):
         start = time.time()
