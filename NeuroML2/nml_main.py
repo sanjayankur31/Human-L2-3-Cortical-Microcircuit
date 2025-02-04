@@ -180,9 +180,14 @@ class HL23Net(object):
         self.lems_components_file_name = f"lems_components_{self.network_scale}.xml"
         self.stim_start = "200ms"
         self.sim_length = "1000ms"
-        self.sim_end = convert_to_units(
-            f"{get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length)} s",
-            "ms",
+        self.sim_end = (
+            str(
+                convert_to_units(
+                    f"{get_value_in_si(self.stim_start) + get_value_in_si(self.sim_length)} s",
+                    "ms",
+                )
+            )
+            + "ms"
         )
         self.dt = "0.025ms"
         self.seed = 4587
@@ -1498,8 +1503,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.scale < 0.01:
-        logger.warning("A scale < 0.01 is not recommended because the small number of neurons will result in no connections between populations at all.")
-        logger.warning("Please `pynml -graph 4d <network file>` or `pynml -matrix 1 <network file>` to see connectivity information")
+        logger.warning(
+            "A scale < 0.01 is not recommended because the small number of neurons will result in no connections between populations at all."
+        )
+        logger.warning(
+            "Please `pynml -graph 4d <network file>` or `pynml -matrix 1 <network file>` to see connectivity information"
+        )
 
     model = HL23Net(
         scale=args.scale,
