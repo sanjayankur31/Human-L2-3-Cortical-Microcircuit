@@ -815,7 +815,7 @@ class HL23Net(object):
                 # one input list per population per component
                 inputlist = self.network.add(
                     "InputList",
-                    id=f"Gfluct_{input_list_ctr}",
+                    id=f"Gfluct_basal_{input_list_ctr}",
                     component=f"Gfluct_{cell_type}_basal_{str(rel_dist).replace('.', '_')}",
                     populations=pop.id,
                     validate=False,
