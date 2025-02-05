@@ -170,7 +170,7 @@ class HL23Net(object):
         else:
             self.lems_simulation_file = f"LEMS_HL23_{self.network_scale}_Sim.xml"
         self.netdoc = None
-        self.network_id = "HL23Network"
+        self.network_id = f"HL23Network_{str(self.network_scale).replace('.', '_')}"
         if self.rotate_cells is True:
             self.netdoc_file_name = f"HL23Net_{self.network_scale}.rotated.net.nml"
         else:
