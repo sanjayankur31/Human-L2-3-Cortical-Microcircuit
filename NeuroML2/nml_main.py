@@ -46,7 +46,7 @@ from pyneuroml.pynml import (
 from pyneuroml.utils import rotate_cell
 from pyneuroml.utils.units import convert_to_units, get_value_in_si
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("HL23-NeuroML2")
 logger.setLevel(logging.INFO)
 
 
