@@ -44,7 +44,7 @@ from pyneuroml.pynml import (
     write_neuroml2_file,
 )
 from pyneuroml.utils import rotate_cell
-from pyneuroml.utils.units import convert_to_units, get_value_in_si
+from pyneuroml.utils.units import convert_to_units, get_value_in_si, split_nml2_quantity
 
 logger = logging.getLogger("HL23-NeuroML2")
 logger.setLevel(logging.INFO)
@@ -742,18 +742,45 @@ class HL23Net(object):
         print(f"Creating connections took: {(end - start)} seconds.")
 
     def add_background_input(self):
-        """Add background input to cells."""
+        """Add background input to cells.
+
+        Note that this component was validated here:
+        https://github.com/OpenSourceBrain/StochasticityShowcase/pull/9
+        """
         start = time.time()
         # Component Type definition
         self.lems_components.add(lems.Include("synapses/Gfluct.nml"))
 
-        # base excitatory conductances (from paper, given here in uS)
-        cell_type_ge0 = {
-            "HL23PYR": 0.000028,
-            "HL23PV": 0.00028,
-            "HL23SST": 0.00003,
-            "HL23VIP": 0.000066,
-        }
+        # These conductances are for connected networks where the network
+        # receives sufficient recurrent inhibition. Without this inhibition,
+        # these values are too high, so we must scale them down.
+        if self.connections:
+            # base excitatory conductances (from paper, given here in uS)
+            cell_type_ge0 = {
+                "HL23PYR": "28 pS",
+                "HL23PV": "280 pS",
+                "HL23SST": "30 pS",
+                "HL23VIP": "66 pS",
+            }
+            std_e = None
+            g_i0 = "0 uS"
+            std_i = "0 uS"
+            tau_e = "65 ms"
+            tau_i = "20 ms"
+        else:
+            # from original Gfluct paper: Destexhe et al 2000
+            cell_type_ge0 = {
+                "HL23PYR": "0.0121 uS",
+                "HL23PV": "0.0121 uS",
+                "HL23SST": "0.0121 uS",
+                "HL23VIP": "0.0121 uS",
+            }
+            std_e = "0.0030 uS"
+            g_i0 = "0.0573 uS"
+            std_i = "0.0066uS"
+            tau_e = "2.728 ms"
+            tau_i = "10.49 ms"
+
         # store input locations per cell type and create input components for
         # each cell type also, since all cells are indentical
         # values: { 'rel distance' : [(seg id, frac along)] }
@@ -761,23 +788,40 @@ class HL23Net(object):
         for cell_type, cell in self.nml_cell.items():
             cell_type_input_locations[cell_type] = {}
             extremeties = cell.get_extremeties()
+            logger.debug(
+                f"Cell extremeties for {cell_type} cell are ({len(extremeties)}): {extremeties}"
+            )
             try:
                 basal_segs = cell.get_all_segments_in_group("basal_dendrite_group")
             except Exception:
                 # PV cell doesn't have basal, only a dendrite group
                 basal_segs = cell.get_all_segments_in_group("dendrite_group")
 
+            # Note that the paper says: "placed at halfway the length of each
+            # dendritic arbor to ensure similar levels of inputs along each
+            # dendritic path to the soma". However, the code in
+            # "net_functions.hoc" does not do that. It finds the length of the
+            # longest branch and places the processes at sites that are at half
+            # this length on all branches, not at the mid point of each branch.
+            # So, we follow the code, and not the paper here.
+
             # input points on basal dendrites
             longest_basal_branch_length = 0
             for segid, distance in extremeties.items():
                 if distance > longest_basal_branch_length and segid in basal_segs:
                     longest_basal_branch_length = distance
+            logger.info(
+                f"Longest basal branch for {cell_type} cell is {longest_basal_branch_length}"
+            )
 
             half_way_basal = longest_basal_branch_length / 2
             segs_basal = cell.get_segments_at_distance(half_way_basal)
+            logger.debug(
+                f"Basal input sites for {cell_type} cell are ({len(segs_basal)}): {segs_basal}"
+            )
 
             # create input component for 0.5
-            g_e0 = cell_type_ge0[cell_type] * math.exp(0.5)
+            g_e0, unit = split_nml2_quantity(cell_type_ge0[cell_type])
             gfluct_component = lems.Component(
                 id_=f"Gfluct_{cell_type}_basal_0_5",
                 type_="Gfluct",
@@ -786,12 +830,12 @@ class HL23Net(object):
                 dt=self.dt,
                 E_e="0mV",
                 E_i="-80mV",
-                g_e0=f"{g_e0} uS",
-                g_i0="0pS",
-                tau_e="65ms",
-                tau_i="20ms",
-                std_e=f"{g_e0} uS",
-                std_i="0pS",
+                g_e0=f"{g_e0 * math.exp(0.5)} {unit}",
+                g_i0=g_i0,
+                tau_e=tau_e,
+                tau_i=tau_i,
+                std_e=std_e if std_e else f"{g_e0 * math.exp(0.5)} {unit}",
+                std_i=std_i,
             )
             self.lems_components.add(gfluct_component)
 
@@ -845,6 +889,7 @@ class HL23Net(object):
                             input_ctr += 1
 
         # additional for pyr apical
+        """
         cell_type = "HL23PYR"
         cell_type_input_locations = {}  # type: typing.Dict[str, typing.Dict[float, typing.Tuple[int, float]]]
         cell_type_input_locations[cell_type] = {}
@@ -859,7 +904,7 @@ class HL23Net(object):
         apical_input_distances = [0.1, 0.3, 0.5, 0.7, 0.9]
         for d in apical_input_distances:
             # create the input component:
-            g_e0 = cell_type_ge0[cell_type] * math.exp(d)
+            g_e0, unit = split_nml2_quantity(cell_type_ge0[cell_type])
             # create input component for use at each distance point
             gfluct_component = lems.Component(
                 id_=f"Gfluct_HL23PYR_apical_{str(d).replace('.', '_')}",
@@ -869,12 +914,12 @@ class HL23Net(object):
                 dt=self.dt,
                 E_e="0mV",
                 E_i="-80mV",
-                g_e0=f"{g_e0} uS",
-                g_i0="0pS",
-                tau_e="65ms",
-                tau_i="20ms",
-                std_e=f"{g_e0} uS",
-                std_i="0pS",
+                g_e0=f"{g_e0 * math.exp(d)} {unit}",
+                g_i0=g_i0,
+                tau_e=tau_e,
+                tau_i=tau_i,
+                std_e=std_e if std_e else f"{g_e0 * math.exp(d)} {unit}",
+                std_i=std_i,
             )
             self.lems_components.add(gfluct_component)
 
@@ -926,6 +971,7 @@ class HL23Net(object):
                             )
                             input_ctr += 1
 
+        """
         end = time.time()
         print(f"Adding background input took: {(end - start)} seconds.")
 
@@ -1371,17 +1417,29 @@ class HL23Net(object):
         in an unconnected network, for example
 
         """
-        print("Adding step current to each cell")
+        if self.connections:
+            print("Adding step current to Pyramidal cells only to drive the network")
+            amplitude = "0.2nA"
+        else:
+            print("Adding step current to each cell")
+            amplitude = "0.2nA"
+
         # a single pulse generator
         pg = self.netdoc.add(
             neuroml.PulseGenerator,
             id="pg_0",
             delay="100ms",
             duration=self.sim_length,
-            amplitude="0.2nA",
+            amplitude=amplitude,
         )
         input_ctr = 0
         for pop in self.network.populations:
+            # for connected networks, only drive the pyramidal cell network
+
+            if self.connections:
+                if "PYR" not in pop.id:
+                    continue
+
             input_list = self.network.add(
                 "InputList", id=f"input_{pop.id}", component=pg.id, populations=pop.id
             )
