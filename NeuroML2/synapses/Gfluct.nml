@@ -140,7 +140,12 @@
 
             <StateVariable name="r1" dimension="none" />
             <StateVariable name="r2" dimension="none" />
-            <StateVariable name="randn" dimension="none" />
+            <StateVariable name="r3" dimension="none" />
+            <StateVariable name="r4" dimension="none" />
+            <StateVariable name="randn_e" dimension="none" />
+            <StateVariable name="randn_i" dimension="none" />
+            <StateVariable name="randn_e1" dimension="none" />
+            <StateVariable name="randn_i1" dimension="none" />
 
             <OnEvent port="in"><!--TODO: remove, see above...
             <StateAssignment variable="i" value="0"/>-->
@@ -152,6 +157,7 @@
                 <StateAssignment variable="g_e" value="0"/>
                 <StateAssignment variable="g_i" value="0"/>
                 <StateAssignment variable="g_e1" value="0" />
+                <StateAssignment variable="g_i1" value="0" />
                 <StateAssignment variable="g_e1_old" value="0" />
                 <StateAssignment variable="g_i1_old" value="0" />
             </OnStart>
@@ -167,29 +173,33 @@
                 <StateAssignment variable="g_i1_old" value="0" />
             </OnCondition>
 
-            <!-- generate gaussian random number -->
+            <!-- generate gaussian random numbers -->
             <OnCondition test="t .geq. start .and. t.lt. stop">
                 <StateAssignment variable="r1" value="random(1)"/>
                 <StateAssignment variable="r2" value="random(1)"/>
-                <StateAssignment variable="randn" value="sqrt(-2*log(r1))*cos(2*3.14159265359*r2)"/>
+                <StateAssignment variable="randn_e" value="sqrt(-2*log(r1))*sin(2*3.14159265359*r2)"/>
+                <StateAssignment variable="randn_i" value="sqrt(-2*log(r1))*cos(2*3.14159265359*r2)"/>
+                <StateAssignment variable="r3" value="random(1)"/>
+                <StateAssignment variable="r4" value="random(1)"/>
+                <StateAssignment variable="randn_e1" value="sqrt(-2*log(r3))*sin(2*3.14159265359*r4)"/>
+                <StateAssignment variable="randn_i1" value="sqrt(-2*log(r3))*cos(2*3.14159265359*r4)"/>
             </OnCondition>
 
             <!-- oup()-->
             <OnCondition test="(t .geq. start .and. t .lt. stop) .and. (tau_e .neq. zeroms)" >
-                <StateAssignment variable="g_e1" value="(exp_e * g_e1_old) + (amp_e * randn)" />
-                <StateAssignment variable="g_e1_old" value="g_e1" />
+                <StateAssignment variable="g_e1" value="(exp_e * g_e1_old) + (amp_e * randn_e)" />
             </OnCondition>
 
             <OnCondition test="(t .geq. start .and. t .lt. stop) .and. (tau_i .neq. zeroms)" >
-                <StateAssignment variable="g_i1" value="(exp_i * g_i1_old) + (amp_i * randn)" />
-                <StateAssignment variable="g_i1_old" value="g_i1" />
+                <StateAssignment variable="g_i1" value="(exp_i * g_i1_old) + (amp_i * randn_i)" />
             </OnCondition>
 
+            <!-- no op since g_e and g_i get assigned again next: bug in mod file? -->
             <OnCondition test="(t .geq. start .and. t .lt. stop) .and. (tau_e .eq. zeroms)" >
-                <StateAssignment variable="g_e1" value="std_e * randn" />
+                <StateAssignment variable="g_e" value="std_e * randn_e1" />
             </OnCondition>
             <OnCondition test="(t .geq. start .and. t .lt. stop) .and. (tau_i .eq. zeroms)" >
-                <StateAssignment variable="g_i1" value="std_i * randn" />
+                <StateAssignment variable="g_i" value="std_i * randn_i1" />
             </OnCondition>
 
             <OnCondition test="t .geq. start .and. t .lt. stop">
@@ -205,6 +215,8 @@
             </OnCondition>
 
             <OnCondition test="t .geq. start .and. t .lt. stop">
+                <StateAssignment variable="g_e1_old" value="g_e1" />
+                <StateAssignment variable="g_i1_old" value="g_i1" />
                 <StateAssignment variable="i" value="-1 * g_e * (v - E_e) - g_i * (v - E_i)" />
             </OnCondition>
 
@@ -215,6 +227,8 @@
                 <StateAssignment variable="g_i" value="0"/>
                 <StateAssignment variable="g_e1" value="0" />
                 <StateAssignment variable="g_i1" value="0" />
+                <StateAssignment variable="g_e1_old" value="0" />
+                <StateAssignment variable="g_i1_old" value="0" />
             </OnCondition>
         </Dynamics>
 
