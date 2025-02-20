@@ -815,9 +815,16 @@ class HL23Net(object):
             )
 
             half_way_basal = longest_basal_branch_length / 2
-            segs_basal = cell.get_segments_at_distance(half_way_basal)
+            segs_halfway = cell.get_segments_at_distance(half_way_basal)
+
+            input_segs = {}
+
+            for sg, frac in segs_halfway.items():
+                if sg in basal_segs:
+                    input_segs[sg] = frac
+
             logger.debug(
-                f"Basal input sites for {cell_type} cell are ({len(segs_basal)}): {segs_basal}"
+                f"Basal input sites for {cell_type} cell are ({len(input_segs)}): {input_segs}"
             )
 
             # create input component for 0.5
@@ -841,9 +848,8 @@ class HL23Net(object):
 
             # get segments to place input at
             cell_type_input_locations[cell_type][0.5] = []
-            for seg, frac_along in segs_basal.items():
-                if seg in basal_segs:
-                    cell_type_input_locations[cell_type][0.5].append((seg, frac_along))
+            for seg, frac_along in input_segs.items():
+                cell_type_input_locations[cell_type][0.5].append((seg, frac_along))
 
         # create a new input list for each population, and each location
         # because input list takes a component as an argument, and a different
@@ -853,9 +859,9 @@ class HL23Net(object):
         for pop in self.network.populations:
             # cell name
             cell_type = pop.component.split("_")[0]
-            input_segs = cell_type_input_locations[cell_type]
+            cell_input_segs = cell_type_input_locations[cell_type]
 
-            for rel_dist, seginfos in input_segs.items():
+            for rel_dist, seginfos in cell_input_segs.items():
                 # one input list per population per component
                 inputlist = self.network.add(
                     "InputList",
@@ -865,7 +871,8 @@ class HL23Net(object):
                     validate=False,
                 )
                 input_list_ctr += 1
-                for seg, frac_along in seginfos:
+                for aseg in seginfos:
+                    seg, frac_along = aseg
                     if self.rotate_cells is True:
                         inputlist.add(
                             "Input",
