@@ -13,10 +13,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # engine: [ jNeuroML_validate, "NEURON:7.6", "NEURON:8.0", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN ]
-        engine: [ jNeuroML_validate, "NEURON:7.6", "NEURON:8.0", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN]
+        # engine: [ jNeuroML_validate, "NEURON:8.2.7", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN]
+        engine: [ jNeuroML_validate, "NEURON:8.2.7", jNeuroML_NEURON, jNeuroML_NetPyNE]
         runs-on: [ ubuntu-latest, macos-latest ]
-        python-version: [ 3.9 ]
+        python-version: [ 3.12 ]
 
     steps:
     - uses: actions/checkout@v4
@@ -35,8 +35,6 @@ jobs:
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation
         pip install scipy sympy matplotlib cython pandas tables
-
-        pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
 
     - name: Compile some mod files, required for NEURON tests
       run: |
