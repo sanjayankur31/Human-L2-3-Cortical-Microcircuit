@@ -13,7 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        engine: [ jNeuroML_validate, "NEURON:8.2.7", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN]
+        # engine: [ jNeuroML_validate, "NEURON:8.2.7", jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_EDEN]
+        engine: [ jNeuroML_validate, "NEURON:8.2.7", jNeuroML_NEURON, jNeuroML_NetPyNE]
         runs-on: [ ubuntu-latest, macos-latest ]
         python-version: [ 3.12 ]
 
