@@ -217,7 +217,7 @@
             <OnCondition test="t .geq. start .and. t .lt. stop">
                 <StateAssignment variable="g_e1_old" value="g_e1" />
                 <StateAssignment variable="g_i1_old" value="g_i1" />
-                <StateAssignment variable="i" value="-1 * g_e * (v - E_e) - g_i * (v - E_i)" />
+                <StateAssignment variable="i" value="-1 * (g_e * (v - E_e) + g_i * (v - E_i))" />
             </OnCondition>
 
             <!-- after end -->
